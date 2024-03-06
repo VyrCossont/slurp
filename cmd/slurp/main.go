@@ -26,7 +26,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/VyrCossont/slurp/client/filters"
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
@@ -34,6 +33,7 @@ import (
 	"github.com/pkg/errors"
 
 	apiclient "github.com/VyrCossont/slurp/client"
+	"github.com/VyrCossont/slurp/client/filters"
 	"github.com/VyrCossont/slurp/client/search"
 	"github.com/VyrCossont/slurp/client/timelines"
 	"github.com/VyrCossont/slurp/models"
