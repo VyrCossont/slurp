@@ -79,7 +79,8 @@ type ListUpdateParams struct {
 
 	/* Title.
 
-	   Title of this list. Sample: Cool People
+	     Title of this list.
+	Sample: Cool People
 	*/
 	Title *string
 

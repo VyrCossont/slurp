@@ -6,7 +6,6 @@ package favourites
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,13 +114,11 @@ func (o *FavouritesGetOK) Code() int {
 }
 
 func (o *FavouritesGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetOK  %+v", 200, o.Payload)
 }
 
 func (o *FavouritesGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetOK  %+v", 200, o.Payload)
 }
 
 func (o *FavouritesGetOK) GetPayload() []*models.Status {
@@ -189,11 +186,11 @@ func (o *FavouritesGetBadRequest) Code() int {
 }
 
 func (o *FavouritesGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetBadRequest ", 400)
 }
 
 func (o *FavouritesGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetBadRequest ", 400)
 }
 
 func (o *FavouritesGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -245,11 +242,11 @@ func (o *FavouritesGetUnauthorized) Code() int {
 }
 
 func (o *FavouritesGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetUnauthorized ", 401)
 }
 
 func (o *FavouritesGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetUnauthorized ", 401)
 }
 
 func (o *FavouritesGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -301,11 +298,11 @@ func (o *FavouritesGetNotFound) Code() int {
 }
 
 func (o *FavouritesGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetNotFound ", 404)
 }
 
 func (o *FavouritesGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetNotFound ", 404)
 }
 
 func (o *FavouritesGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -357,11 +354,11 @@ func (o *FavouritesGetNotAcceptable) Code() int {
 }
 
 func (o *FavouritesGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetNotAcceptable ", 406)
 }
 
 func (o *FavouritesGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetNotAcceptable ", 406)
 }
 
 func (o *FavouritesGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -413,11 +410,11 @@ func (o *FavouritesGetInternalServerError) Code() int {
 }
 
 func (o *FavouritesGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetInternalServerError ", 500)
 }
 
 func (o *FavouritesGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/favourites][%d] favouritesGetInternalServerError ", 500)
 }
 
 func (o *FavouritesGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

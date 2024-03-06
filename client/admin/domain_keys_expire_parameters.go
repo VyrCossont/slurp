@@ -63,7 +63,8 @@ type DomainKeysExpireParams struct {
 
 	/* Domain.
 
-	   Domain to expire keys for. Sample: example.org
+	     Domain to expire keys for.
+	Sample: example.org
 	*/
 	Domain *string
 

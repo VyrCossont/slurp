@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusPinOK) Code() int {
 }
 
 func (o *StatusPinOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusPinOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusPinOK) GetPayload() *models.Status {
@@ -185,11 +182,11 @@ func (o *StatusPinBadRequest) Code() int {
 }
 
 func (o *StatusPinBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinBadRequest ", 400)
 }
 
 func (o *StatusPinBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinBadRequest ", 400)
 }
 
 func (o *StatusPinBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusPinUnauthorized) Code() int {
 }
 
 func (o *StatusPinUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinUnauthorized ", 401)
 }
 
 func (o *StatusPinUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinUnauthorized ", 401)
 }
 
 func (o *StatusPinUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusPinForbidden) Code() int {
 }
 
 func (o *StatusPinForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinForbidden ", 403)
 }
 
 func (o *StatusPinForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinForbidden ", 403)
 }
 
 func (o *StatusPinForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusPinNotFound) Code() int {
 }
 
 func (o *StatusPinNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinNotFound ", 404)
 }
 
 func (o *StatusPinNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinNotFound ", 404)
 }
 
 func (o *StatusPinNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusPinNotAcceptable) Code() int {
 }
 
 func (o *StatusPinNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinNotAcceptable ", 406)
 }
 
 func (o *StatusPinNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinNotAcceptable ", 406)
 }
 
 func (o *StatusPinNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusPinInternalServerError) Code() int {
 }
 
 func (o *StatusPinInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinInternalServerError ", 500)
 }
 
 func (o *StatusPinInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/pin][%d] statusPinInternalServerError ", 500)
 }
 
 func (o *StatusPinInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

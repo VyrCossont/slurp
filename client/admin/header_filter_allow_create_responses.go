@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -104,13 +103,11 @@ func (o *HeaderFilterAllowCreateOK) Code() int {
 }
 
 func (o *HeaderFilterAllowCreateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *HeaderFilterAllowCreateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *HeaderFilterAllowCreateOK) GetPayload() *models.HeaderFilter {
@@ -173,11 +170,11 @@ func (o *HeaderFilterAllowCreateBadRequest) Code() int {
 }
 
 func (o *HeaderFilterAllowCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateBadRequest ", 400)
 }
 
 func (o *HeaderFilterAllowCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateBadRequest ", 400)
 }
 
 func (o *HeaderFilterAllowCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -229,11 +226,11 @@ func (o *HeaderFilterAllowCreateUnauthorized) Code() int {
 }
 
 func (o *HeaderFilterAllowCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateUnauthorized ", 401)
 }
 
 func (o *HeaderFilterAllowCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateUnauthorized ", 401)
 }
 
 func (o *HeaderFilterAllowCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -285,11 +282,11 @@ func (o *HeaderFilterAllowCreateForbidden) Code() int {
 }
 
 func (o *HeaderFilterAllowCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateForbidden ", 403)
 }
 
 func (o *HeaderFilterAllowCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateForbidden ", 403)
 }
 
 func (o *HeaderFilterAllowCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -341,11 +338,11 @@ func (o *HeaderFilterAllowCreateInternalServerError) Code() int {
 }
 
 func (o *HeaderFilterAllowCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateInternalServerError ", 500)
 }
 
 func (o *HeaderFilterAllowCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/header_allows][%d] headerFilterAllowCreateInternalServerError ", 500)
 }
 
 func (o *HeaderFilterAllowCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusGetOK) Code() int {
 }
 
 func (o *StatusGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusGetOK) GetPayload() *models.Status {
@@ -185,11 +182,11 @@ func (o *StatusGetBadRequest) Code() int {
 }
 
 func (o *StatusGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetBadRequest ", 400)
 }
 
 func (o *StatusGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetBadRequest ", 400)
 }
 
 func (o *StatusGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusGetUnauthorized) Code() int {
 }
 
 func (o *StatusGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetUnauthorized ", 401)
 }
 
 func (o *StatusGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetUnauthorized ", 401)
 }
 
 func (o *StatusGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusGetForbidden) Code() int {
 }
 
 func (o *StatusGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetForbidden", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetForbidden ", 403)
 }
 
 func (o *StatusGetForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetForbidden", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetForbidden ", 403)
 }
 
 func (o *StatusGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusGetNotFound) Code() int {
 }
 
 func (o *StatusGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetNotFound ", 404)
 }
 
 func (o *StatusGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetNotFound ", 404)
 }
 
 func (o *StatusGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusGetNotAcceptable) Code() int {
 }
 
 func (o *StatusGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetNotAcceptable ", 406)
 }
 
 func (o *StatusGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetNotAcceptable ", 406)
 }
 
 func (o *StatusGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusGetInternalServerError) Code() int {
 }
 
 func (o *StatusGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetInternalServerError ", 500)
 }
 
 func (o *StatusGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}][%d] statusGetInternalServerError ", 500)
 }
 
 func (o *StatusGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

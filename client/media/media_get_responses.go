@@ -6,7 +6,6 @@ package media
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *MediaGetOK) Code() int {
 }
 
 func (o *MediaGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetOK  %+v", 200, o.Payload)
 }
 
 func (o *MediaGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetOK  %+v", 200, o.Payload)
 }
 
 func (o *MediaGetOK) GetPayload() *models.Attachment {
@@ -179,11 +176,11 @@ func (o *MediaGetBadRequest) Code() int {
 }
 
 func (o *MediaGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetBadRequest ", 400)
 }
 
 func (o *MediaGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetBadRequest ", 400)
 }
 
 func (o *MediaGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *MediaGetUnauthorized) Code() int {
 }
 
 func (o *MediaGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetUnauthorized ", 401)
 }
 
 func (o *MediaGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetUnauthorized ", 401)
 }
 
 func (o *MediaGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *MediaGetNotFound) Code() int {
 }
 
 func (o *MediaGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetNotFound ", 404)
 }
 
 func (o *MediaGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetNotFound ", 404)
 }
 
 func (o *MediaGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *MediaGetNotAcceptable) Code() int {
 }
 
 func (o *MediaGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetNotAcceptable ", 406)
 }
 
 func (o *MediaGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetNotAcceptable ", 406)
 }
 
 func (o *MediaGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *MediaGetInternalServerError) Code() int {
 }
 
 func (o *MediaGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetInternalServerError ", 500)
 }
 
 func (o *MediaGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/media/{id}][%d] mediaGetInternalServerError ", 500)
 }
 
 func (o *MediaGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

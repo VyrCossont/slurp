@@ -34,6 +34,7 @@ Do this when the GotoSocial API changes. This will use the Swagger spec on GotoS
 
 ```bash
 go get github.com/go-swagger/go-swagger/cmd/swagger
+rm -rf client models
 go generate ./...
 ```
 

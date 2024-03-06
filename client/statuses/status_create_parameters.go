@@ -115,7 +115,7 @@ type StatusCreateParams struct {
 
 	     Format: int64
 	*/
-	SwaggerPollExpiresIn *int64
+	PollExpiresIn *int64
 
 	/* PollHideTotals.
 
@@ -123,20 +123,20 @@ type StatusCreateParams struct {
 
 	   Default: true
 	*/
-	SwaggerPollHideTotals *bool
+	PollHideTotals *bool
 
 	/* PollMultiple.
 
 	   Allow multiple choices on this poll.
 	*/
-	SwaggerPollMultiple *bool
+	PollMultiple *bool
 
 	/* PollOptions.
 
-	     Array of possible answers.
+	     Array of possible poll answers.
 	If provided, media_ids cannot be used, and poll[expires_in] must be provided.
 	*/
-	SwaggerPollOptions []string
+	PollOptions []string
 
 	/* Replyable.
 
@@ -149,6 +149,8 @@ type StatusCreateParams struct {
 	     ISO 8601 Datetime at which to schedule a status.
 	Providing this parameter will cause ScheduledStatus to be returned instead of Status.
 	Must be at least 5 minutes in the future.
+
+	This feature isn't implemented yet.
 	*/
 	ScheduledAt *string
 
@@ -197,14 +199,14 @@ func (o *StatusCreateParams) WithDefaults() *StatusCreateParams {
 // All values with no default are reset to their zero value.
 func (o *StatusCreateParams) SetDefaults() {
 	var (
-		swaggerPollHideTotalsDefault = bool(true)
+		pollHideTotalsDefault = bool(true)
 
-		swaggerPollMultipleDefault = bool(false)
+		pollMultipleDefault = bool(false)
 	)
 
 	val := StatusCreateParams{
-		SwaggerPollHideTotals: &swaggerPollHideTotalsDefault,
-		SwaggerPollMultiple:   &swaggerPollMultipleDefault,
+		PollHideTotals: &pollHideTotalsDefault,
+		PollMultiple:   &pollMultipleDefault,
 	}
 
 	val.timeout = o.timeout
@@ -323,48 +325,48 @@ func (o *StatusCreateParams) SetMediaIDs(mediaIds []string) {
 	o.MediaIDs = mediaIds
 }
 
-// WithSwaggerPollExpiresIn adds the pollExpiresIn to the status create params
-func (o *StatusCreateParams) WithSwaggerPollExpiresIn(pollExpiresIn *int64) *StatusCreateParams {
-	o.SetSwaggerPollExpiresIn(pollExpiresIn)
+// WithPollExpiresIn adds the pollExpiresIn to the status create params
+func (o *StatusCreateParams) WithPollExpiresIn(pollExpiresIn *int64) *StatusCreateParams {
+	o.SetPollExpiresIn(pollExpiresIn)
 	return o
 }
 
-// SetSwaggerPollExpiresIn adds the pollExpiresIn to the status create params
-func (o *StatusCreateParams) SetSwaggerPollExpiresIn(pollExpiresIn *int64) {
-	o.SwaggerPollExpiresIn = pollExpiresIn
+// SetPollExpiresIn adds the pollExpiresIn to the status create params
+func (o *StatusCreateParams) SetPollExpiresIn(pollExpiresIn *int64) {
+	o.PollExpiresIn = pollExpiresIn
 }
 
-// WithSwaggerPollHideTotals adds the pollHideTotals to the status create params
-func (o *StatusCreateParams) WithSwaggerPollHideTotals(pollHideTotals *bool) *StatusCreateParams {
-	o.SetSwaggerPollHideTotals(pollHideTotals)
+// WithPollHideTotals adds the pollHideTotals to the status create params
+func (o *StatusCreateParams) WithPollHideTotals(pollHideTotals *bool) *StatusCreateParams {
+	o.SetPollHideTotals(pollHideTotals)
 	return o
 }
 
-// SetSwaggerPollHideTotals adds the pollHideTotals to the status create params
-func (o *StatusCreateParams) SetSwaggerPollHideTotals(pollHideTotals *bool) {
-	o.SwaggerPollHideTotals = pollHideTotals
+// SetPollHideTotals adds the pollHideTotals to the status create params
+func (o *StatusCreateParams) SetPollHideTotals(pollHideTotals *bool) {
+	o.PollHideTotals = pollHideTotals
 }
 
-// WithSwaggerPollMultiple adds the pollMultiple to the status create params
-func (o *StatusCreateParams) WithSwaggerPollMultiple(pollMultiple *bool) *StatusCreateParams {
-	o.SetSwaggerPollMultiple(pollMultiple)
+// WithPollMultiple adds the pollMultiple to the status create params
+func (o *StatusCreateParams) WithPollMultiple(pollMultiple *bool) *StatusCreateParams {
+	o.SetPollMultiple(pollMultiple)
 	return o
 }
 
-// SetSwaggerPollMultiple adds the pollMultiple to the status create params
-func (o *StatusCreateParams) SetSwaggerPollMultiple(pollMultiple *bool) {
-	o.SwaggerPollMultiple = pollMultiple
+// SetPollMultiple adds the pollMultiple to the status create params
+func (o *StatusCreateParams) SetPollMultiple(pollMultiple *bool) {
+	o.PollMultiple = pollMultiple
 }
 
-// WithSwaggerPollOptions adds the pollOptions to the status create params
-func (o *StatusCreateParams) WithSwaggerPollOptions(pollOptions []string) *StatusCreateParams {
-	o.SetSwaggerPollOptions(pollOptions)
+// WithPollOptions adds the pollOptions to the status create params
+func (o *StatusCreateParams) WithPollOptions(pollOptions []string) *StatusCreateParams {
+	o.SetPollOptions(pollOptions)
 	return o
 }
 
-// SetSwaggerPollOptions adds the pollOptions to the status create params
-func (o *StatusCreateParams) SetSwaggerPollOptions(pollOptions []string) {
-	o.SwaggerPollOptions = pollOptions
+// SetPollOptions adds the pollOptions to the status create params
+func (o *StatusCreateParams) SetPollOptions(pollOptions []string) {
+	o.PollOptions = pollOptions
 }
 
 // WithReplyable adds the replyable to the status create params
@@ -443,16 +445,14 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 	if o.Boostable != nil {
 
-		// query param boostable
-		var qrBoostable bool
-
+		// form param boostable
+		var frBoostable bool
 		if o.Boostable != nil {
-			qrBoostable = *o.Boostable
+			frBoostable = *o.Boostable
 		}
-		qBoostable := swag.FormatBool(qrBoostable)
-		if qBoostable != "" {
-
-			if err := r.SetQueryParam("boostable", qBoostable); err != nil {
+		fBoostable := swag.FormatBool(frBoostable)
+		if fBoostable != "" {
+			if err := r.SetFormParam("boostable", fBoostable); err != nil {
 				return err
 			}
 		}
@@ -475,16 +475,14 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 	if o.Federated != nil {
 
-		// query param federated
-		var qrFederated bool
-
+		// form param federated
+		var frFederated bool
 		if o.Federated != nil {
-			qrFederated = *o.Federated
+			frFederated = *o.Federated
 		}
-		qFederated := swag.FormatBool(qrFederated)
-		if qFederated != "" {
-
-			if err := r.SetQueryParam("federated", qFederated); err != nil {
+		fFederated := swag.FormatBool(frFederated)
+		if fFederated != "" {
+			if err := r.SetFormParam("federated", fFederated); err != nil {
 				return err
 			}
 		}
@@ -522,16 +520,14 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 	if o.Likeable != nil {
 
-		// query param likeable
-		var qrLikeable bool
-
+		// form param likeable
+		var frLikeable bool
 		if o.Likeable != nil {
-			qrLikeable = *o.Likeable
+			frLikeable = *o.Likeable
 		}
-		qLikeable := swag.FormatBool(qrLikeable)
-		if qLikeable != "" {
-
-			if err := r.SetQueryParam("likeable", qLikeable); err != nil {
+		fLikeable := swag.FormatBool(frLikeable)
+		if fLikeable != "" {
+			if err := r.SetFormParam("likeable", fLikeable); err != nil {
 				return err
 			}
 		}
@@ -548,12 +544,12 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.SwaggerPollExpiresIn != nil {
+	if o.PollExpiresIn != nil {
 
 		// form param poll[expires_in]
 		var frPollExpiresIn int64
-		if o.SwaggerPollExpiresIn != nil {
-			frPollExpiresIn = *o.SwaggerPollExpiresIn
+		if o.PollExpiresIn != nil {
+			frPollExpiresIn = *o.PollExpiresIn
 		}
 		fPollExpiresIn := swag.FormatInt64(frPollExpiresIn)
 		if fPollExpiresIn != "" {
@@ -563,12 +559,12 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.SwaggerPollHideTotals != nil {
+	if o.PollHideTotals != nil {
 
 		// form param poll[hide_totals]
 		var frPollHideTotals bool
-		if o.SwaggerPollHideTotals != nil {
-			frPollHideTotals = *o.SwaggerPollHideTotals
+		if o.PollHideTotals != nil {
+			frPollHideTotals = *o.PollHideTotals
 		}
 		fPollHideTotals := swag.FormatBool(frPollHideTotals)
 		if fPollHideTotals != "" {
@@ -578,12 +574,12 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.SwaggerPollMultiple != nil {
+	if o.PollMultiple != nil {
 
 		// form param poll[multiple]
 		var frPollMultiple bool
-		if o.SwaggerPollMultiple != nil {
-			frPollMultiple = *o.SwaggerPollMultiple
+		if o.PollMultiple != nil {
+			frPollMultiple = *o.PollMultiple
 		}
 		fPollMultiple := swag.FormatBool(frPollMultiple)
 		if fPollMultiple != "" {
@@ -593,7 +589,7 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.SwaggerPollOptions != nil {
+	if o.PollOptions != nil {
 
 		// binding items for poll[options][]
 		joinedPollOptions := o.bindParamPollOptions(reg)
@@ -606,16 +602,14 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 	if o.Replyable != nil {
 
-		// query param replyable
-		var qrReplyable bool
-
+		// form param replyable
+		var frReplyable bool
 		if o.Replyable != nil {
-			qrReplyable = *o.Replyable
+			frReplyable = *o.Replyable
 		}
-		qReplyable := swag.FormatBool(qrReplyable)
-		if qReplyable != "" {
-
-			if err := r.SetQueryParam("replyable", qReplyable); err != nil {
+		fReplyable := swag.FormatBool(frReplyable)
+		if fReplyable != "" {
+			if err := r.SetFormParam("replyable", fReplyable); err != nil {
 				return err
 			}
 		}
@@ -721,7 +715,7 @@ func (o *StatusCreateParams) bindParamMediaIds(formats strfmt.Registry) []string
 
 // bindParamStatusCreate binds the parameter poll[options][]
 func (o *StatusCreateParams) bindParamPollOptions(formats strfmt.Registry) []string {
-	pollOptionsIR := o.SwaggerPollOptions
+	pollOptionsIR := o.PollOptions
 
 	var pollOptionsIC []string
 	for _, pollOptionsIIR := range pollOptionsIR { // explode []string

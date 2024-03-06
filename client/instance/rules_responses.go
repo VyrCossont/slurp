@@ -6,7 +6,6 @@ package instance
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -104,13 +103,11 @@ func (o *RulesOK) Code() int {
 }
 
 func (o *RulesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesOK  %+v", 200, o.Payload)
 }
 
 func (o *RulesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesOK  %+v", 200, o.Payload)
 }
 
 func (o *RulesOK) GetPayload() []*models.InstanceRule {
@@ -171,11 +168,11 @@ func (o *RulesBadRequest) Code() int {
 }
 
 func (o *RulesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesBadRequest ", 400)
 }
 
 func (o *RulesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesBadRequest ", 400)
 }
 
 func (o *RulesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -227,11 +224,11 @@ func (o *RulesNotFound) Code() int {
 }
 
 func (o *RulesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesNotFound ", 404)
 }
 
 func (o *RulesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesNotFound ", 404)
 }
 
 func (o *RulesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -283,11 +280,11 @@ func (o *RulesNotAcceptable) Code() int {
 }
 
 func (o *RulesNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesNotAcceptable ", 406)
 }
 
 func (o *RulesNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesNotAcceptable ", 406)
 }
 
 func (o *RulesNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -339,11 +336,11 @@ func (o *RulesInternalServerError) Code() int {
 }
 
 func (o *RulesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesInternalServerError ", 500)
 }
 
 func (o *RulesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/instance/rules][%d] rulesInternalServerError ", 500)
 }
 
 func (o *RulesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

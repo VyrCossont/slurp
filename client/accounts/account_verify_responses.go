@@ -6,7 +6,6 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *AccountVerifyOK) Code() int {
 }
 
 func (o *AccountVerifyOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountVerifyOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountVerifyOK) GetPayload() *models.Account {
@@ -179,11 +176,11 @@ func (o *AccountVerifyBadRequest) Code() int {
 }
 
 func (o *AccountVerifyBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyBadRequest ", 400)
 }
 
 func (o *AccountVerifyBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyBadRequest ", 400)
 }
 
 func (o *AccountVerifyBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *AccountVerifyUnauthorized) Code() int {
 }
 
 func (o *AccountVerifyUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyUnauthorized ", 401)
 }
 
 func (o *AccountVerifyUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyUnauthorized ", 401)
 }
 
 func (o *AccountVerifyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *AccountVerifyNotFound) Code() int {
 }
 
 func (o *AccountVerifyNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyNotFound ", 404)
 }
 
 func (o *AccountVerifyNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyNotFound ", 404)
 }
 
 func (o *AccountVerifyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *AccountVerifyNotAcceptable) Code() int {
 }
 
 func (o *AccountVerifyNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyNotAcceptable ", 406)
 }
 
 func (o *AccountVerifyNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyNotAcceptable ", 406)
 }
 
 func (o *AccountVerifyNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *AccountVerifyInternalServerError) Code() int {
 }
 
 func (o *AccountVerifyInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyInternalServerError ", 500)
 }
 
 func (o *AccountVerifyInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/verify_credentials][%d] accountVerifyInternalServerError ", 500)
 }
 
 func (o *AccountVerifyInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

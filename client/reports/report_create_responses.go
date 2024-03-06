@@ -6,7 +6,6 @@ package reports
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *ReportCreateOK) Code() int {
 }
 
 func (o *ReportCreateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *ReportCreateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *ReportCreateOK) GetPayload() *models.Report {
@@ -179,11 +176,11 @@ func (o *ReportCreateBadRequest) Code() int {
 }
 
 func (o *ReportCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateBadRequest ", 400)
 }
 
 func (o *ReportCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateBadRequest ", 400)
 }
 
 func (o *ReportCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *ReportCreateUnauthorized) Code() int {
 }
 
 func (o *ReportCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateUnauthorized ", 401)
 }
 
 func (o *ReportCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateUnauthorized ", 401)
 }
 
 func (o *ReportCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *ReportCreateNotFound) Code() int {
 }
 
 func (o *ReportCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateNotFound ", 404)
 }
 
 func (o *ReportCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateNotFound ", 404)
 }
 
 func (o *ReportCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *ReportCreateNotAcceptable) Code() int {
 }
 
 func (o *ReportCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateNotAcceptable ", 406)
 }
 
 func (o *ReportCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateNotAcceptable ", 406)
 }
 
 func (o *ReportCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *ReportCreateInternalServerError) Code() int {
 }
 
 func (o *ReportCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateInternalServerError ", 500)
 }
 
 func (o *ReportCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/reports][%d] reportCreateInternalServerError ", 500)
 }
 
 func (o *ReportCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

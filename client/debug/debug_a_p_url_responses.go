@@ -6,7 +6,6 @@ package debug
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *DebugAPURLOK) Code() int {
 }
 
 func (o *DebugAPURLOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlOK  %+v", 200, o.Payload)
 }
 
 func (o *DebugAPURLOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlOK  %+v", 200, o.Payload)
 }
 
 func (o *DebugAPURLOK) GetPayload() *models.DebugAPURLResponse {
@@ -179,11 +176,11 @@ func (o *DebugAPURLBadRequest) Code() int {
 }
 
 func (o *DebugAPURLBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlBadRequest ", 400)
 }
 
 func (o *DebugAPURLBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlBadRequest ", 400)
 }
 
 func (o *DebugAPURLBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *DebugAPURLUnauthorized) Code() int {
 }
 
 func (o *DebugAPURLUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlUnauthorized ", 401)
 }
 
 func (o *DebugAPURLUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlUnauthorized ", 401)
 }
 
 func (o *DebugAPURLUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *DebugAPURLNotFound) Code() int {
 }
 
 func (o *DebugAPURLNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlNotFound ", 404)
 }
 
 func (o *DebugAPURLNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlNotFound ", 404)
 }
 
 func (o *DebugAPURLNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *DebugAPURLNotAcceptable) Code() int {
 }
 
 func (o *DebugAPURLNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlNotAcceptable ", 406)
 }
 
 func (o *DebugAPURLNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlNotAcceptable ", 406)
 }
 
 func (o *DebugAPURLNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *DebugAPURLInternalServerError) Code() int {
 }
 
 func (o *DebugAPURLInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlInternalServerError ", 500)
 }
 
 func (o *DebugAPURLInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/debug/apurl][%d] debugAPUrlInternalServerError ", 500)
 }
 
 func (o *DebugAPURLInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

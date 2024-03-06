@@ -6,7 +6,6 @@ package media
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *MediaUpdateOK) Code() int {
 }
 
 func (o *MediaUpdateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *MediaUpdateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *MediaUpdateOK) GetPayload() *models.Attachment {
@@ -179,11 +176,11 @@ func (o *MediaUpdateBadRequest) Code() int {
 }
 
 func (o *MediaUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateBadRequest", 400)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateBadRequest ", 400)
 }
 
 func (o *MediaUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateBadRequest", 400)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateBadRequest ", 400)
 }
 
 func (o *MediaUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *MediaUpdateUnauthorized) Code() int {
 }
 
 func (o *MediaUpdateUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateUnauthorized", 401)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateUnauthorized ", 401)
 }
 
 func (o *MediaUpdateUnauthorized) String() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateUnauthorized", 401)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateUnauthorized ", 401)
 }
 
 func (o *MediaUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *MediaUpdateNotFound) Code() int {
 }
 
 func (o *MediaUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateNotFound", 404)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateNotFound ", 404)
 }
 
 func (o *MediaUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateNotFound", 404)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateNotFound ", 404)
 }
 
 func (o *MediaUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *MediaUpdateNotAcceptable) Code() int {
 }
 
 func (o *MediaUpdateNotAcceptable) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateNotAcceptable", 406)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateNotAcceptable ", 406)
 }
 
 func (o *MediaUpdateNotAcceptable) String() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateNotAcceptable", 406)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateNotAcceptable ", 406)
 }
 
 func (o *MediaUpdateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *MediaUpdateInternalServerError) Code() int {
 }
 
 func (o *MediaUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateInternalServerError", 500)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateInternalServerError ", 500)
 }
 
 func (o *MediaUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateInternalServerError", 500)
+	return fmt.Sprintf("[PUT /api/v1/media/{id}][%d] mediaUpdateInternalServerError ", 500)
 }
 
 func (o *MediaUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

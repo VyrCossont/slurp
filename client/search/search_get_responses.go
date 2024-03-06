@@ -6,7 +6,6 @@ package search
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *SearchGetOK) Code() int {
 }
 
 func (o *SearchGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetOK  %+v", 200, o.Payload)
 }
 
 func (o *SearchGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetOK  %+v", 200, o.Payload)
 }
 
 func (o *SearchGetOK) GetPayload() *models.SearchResult {
@@ -179,11 +176,11 @@ func (o *SearchGetBadRequest) Code() int {
 }
 
 func (o *SearchGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetBadRequest ", 400)
 }
 
 func (o *SearchGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetBadRequest ", 400)
 }
 
 func (o *SearchGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *SearchGetUnauthorized) Code() int {
 }
 
 func (o *SearchGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetUnauthorized ", 401)
 }
 
 func (o *SearchGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetUnauthorized ", 401)
 }
 
 func (o *SearchGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *SearchGetNotFound) Code() int {
 }
 
 func (o *SearchGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetNotFound ", 404)
 }
 
 func (o *SearchGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetNotFound ", 404)
 }
 
 func (o *SearchGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *SearchGetNotAcceptable) Code() int {
 }
 
 func (o *SearchGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetNotAcceptable ", 406)
 }
 
 func (o *SearchGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetNotAcceptable ", 406)
 }
 
 func (o *SearchGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *SearchGetInternalServerError) Code() int {
 }
 
 func (o *SearchGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetInternalServerError ", 500)
 }
 
 func (o *SearchGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/{api_version}/search][%d] searchGetInternalServerError ", 500)
 }
 
 func (o *SearchGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -105,11 +105,11 @@ func (o *UserPasswordChangeOK) Code() int {
 }
 
 func (o *UserPasswordChangeOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeOK", 200)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeOK ", 200)
 }
 
 func (o *UserPasswordChangeOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeOK", 200)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeOK ", 200)
 }
 
 func (o *UserPasswordChangeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *UserPasswordChangeBadRequest) Code() int {
 }
 
 func (o *UserPasswordChangeBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeBadRequest ", 400)
 }
 
 func (o *UserPasswordChangeBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeBadRequest ", 400)
 }
 
 func (o *UserPasswordChangeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *UserPasswordChangeUnauthorized) Code() int {
 }
 
 func (o *UserPasswordChangeUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeUnauthorized ", 401)
 }
 
 func (o *UserPasswordChangeUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeUnauthorized ", 401)
 }
 
 func (o *UserPasswordChangeUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *UserPasswordChangeForbidden) Code() int {
 }
 
 func (o *UserPasswordChangeForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeForbidden ", 403)
 }
 
 func (o *UserPasswordChangeForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeForbidden ", 403)
 }
 
 func (o *UserPasswordChangeForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *UserPasswordChangeNotAcceptable) Code() int {
 }
 
 func (o *UserPasswordChangeNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeNotAcceptable ", 406)
 }
 
 func (o *UserPasswordChangeNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeNotAcceptable ", 406)
 }
 
 func (o *UserPasswordChangeNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *UserPasswordChangeInternalServerError) Code() int {
 }
 
 func (o *UserPasswordChangeInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeInternalServerError ", 500)
 }
 
 func (o *UserPasswordChangeInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/user/password_change][%d] userPasswordChangeInternalServerError ", 500)
 }
 
 func (o *UserPasswordChangeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

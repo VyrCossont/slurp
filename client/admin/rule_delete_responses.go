@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *RuleDeleteOK) Code() int {
 }
 
 func (o *RuleDeleteOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteOK  %+v", 200, o.Payload)
 }
 
 func (o *RuleDeleteOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteOK  %+v", 200, o.Payload)
 }
 
 func (o *RuleDeleteOK) GetPayload() *models.InstanceRule {
@@ -185,11 +182,11 @@ func (o *RuleDeleteBadRequest) Code() int {
 }
 
 func (o *RuleDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteBadRequest ", 400)
 }
 
 func (o *RuleDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteBadRequest ", 400)
 }
 
 func (o *RuleDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *RuleDeleteUnauthorized) Code() int {
 }
 
 func (o *RuleDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteUnauthorized ", 401)
 }
 
 func (o *RuleDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteUnauthorized ", 401)
 }
 
 func (o *RuleDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *RuleDeleteForbidden) Code() int {
 }
 
 func (o *RuleDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteForbidden ", 403)
 }
 
 func (o *RuleDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteForbidden ", 403)
 }
 
 func (o *RuleDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *RuleDeleteNotFound) Code() int {
 }
 
 func (o *RuleDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteNotFound ", 404)
 }
 
 func (o *RuleDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteNotFound ", 404)
 }
 
 func (o *RuleDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *RuleDeleteNotAcceptable) Code() int {
 }
 
 func (o *RuleDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteNotAcceptable ", 406)
 }
 
 func (o *RuleDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteNotAcceptable ", 406)
 }
 
 func (o *RuleDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *RuleDeleteInternalServerError) Code() int {
 }
 
 func (o *RuleDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteInternalServerError ", 500)
 }
 
 func (o *RuleDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/instance/rules/{id}][%d] ruleDeleteInternalServerError ", 500)
 }
 
 func (o *RuleDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

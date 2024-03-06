@@ -6,7 +6,6 @@ package polls
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -122,13 +121,11 @@ func (o *PollVoteOK) Code() int {
 }
 
 func (o *PollVoteOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteOK  %+v", 200, o.Payload)
 }
 
 func (o *PollVoteOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteOK  %+v", 200, o.Payload)
 }
 
 func (o *PollVoteOK) GetPayload() *models.Poll {
@@ -191,11 +188,11 @@ func (o *PollVoteBadRequest) Code() int {
 }
 
 func (o *PollVoteBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteBadRequest ", 400)
 }
 
 func (o *PollVoteBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteBadRequest ", 400)
 }
 
 func (o *PollVoteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -247,11 +244,11 @@ func (o *PollVoteUnauthorized) Code() int {
 }
 
 func (o *PollVoteUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteUnauthorized ", 401)
 }
 
 func (o *PollVoteUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteUnauthorized ", 401)
 }
 
 func (o *PollVoteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -303,11 +300,11 @@ func (o *PollVoteForbidden) Code() int {
 }
 
 func (o *PollVoteForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteForbidden ", 403)
 }
 
 func (o *PollVoteForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteForbidden ", 403)
 }
 
 func (o *PollVoteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -359,11 +356,11 @@ func (o *PollVoteNotFound) Code() int {
 }
 
 func (o *PollVoteNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteNotFound ", 404)
 }
 
 func (o *PollVoteNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteNotFound ", 404)
 }
 
 func (o *PollVoteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -415,11 +412,11 @@ func (o *PollVoteNotAcceptable) Code() int {
 }
 
 func (o *PollVoteNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteNotAcceptable ", 406)
 }
 
 func (o *PollVoteNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteNotAcceptable ", 406)
 }
 
 func (o *PollVoteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -471,11 +468,11 @@ func (o *PollVoteUnprocessableEntity) Code() int {
 }
 
 func (o *PollVoteUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteUnprocessableEntity", 422)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteUnprocessableEntity ", 422)
 }
 
 func (o *PollVoteUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteUnprocessableEntity", 422)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteUnprocessableEntity ", 422)
 }
 
 func (o *PollVoteUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -527,11 +524,11 @@ func (o *PollVoteInternalServerError) Code() int {
 }
 
 func (o *PollVoteInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteInternalServerError ", 500)
 }
 
 func (o *PollVoteInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/polls/{id}/vote][%d] pollVoteInternalServerError ", 500)
 }
 
 func (o *PollVoteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

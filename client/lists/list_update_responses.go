@@ -6,7 +6,6 @@ package lists
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *ListUpdateOK) Code() int {
 }
 
 func (o *ListUpdateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *ListUpdateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *ListUpdateOK) GetPayload() *models.List {
@@ -185,11 +182,11 @@ func (o *ListUpdateBadRequest) Code() int {
 }
 
 func (o *ListUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateBadRequest", 400)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateBadRequest ", 400)
 }
 
 func (o *ListUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateBadRequest", 400)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateBadRequest ", 400)
 }
 
 func (o *ListUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *ListUpdateUnauthorized) Code() int {
 }
 
 func (o *ListUpdateUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateUnauthorized", 401)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateUnauthorized ", 401)
 }
 
 func (o *ListUpdateUnauthorized) String() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateUnauthorized", 401)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateUnauthorized ", 401)
 }
 
 func (o *ListUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *ListUpdateForbidden) Code() int {
 }
 
 func (o *ListUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateForbidden", 403)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateForbidden ", 403)
 }
 
 func (o *ListUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateForbidden", 403)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateForbidden ", 403)
 }
 
 func (o *ListUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *ListUpdateNotFound) Code() int {
 }
 
 func (o *ListUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateNotFound", 404)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateNotFound ", 404)
 }
 
 func (o *ListUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateNotFound", 404)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateNotFound ", 404)
 }
 
 func (o *ListUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *ListUpdateNotAcceptable) Code() int {
 }
 
 func (o *ListUpdateNotAcceptable) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateNotAcceptable", 406)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateNotAcceptable ", 406)
 }
 
 func (o *ListUpdateNotAcceptable) String() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateNotAcceptable", 406)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateNotAcceptable ", 406)
 }
 
 func (o *ListUpdateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *ListUpdateInternalServerError) Code() int {
 }
 
 func (o *ListUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateInternalServerError", 500)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateInternalServerError ", 500)
 }
 
 func (o *ListUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateInternalServerError", 500)
+	return fmt.Sprintf("[PUT /api/v1/lists/{id}][%d] listUpdateInternalServerError ", 500)
 }
 
 func (o *ListUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

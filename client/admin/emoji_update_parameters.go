@@ -63,7 +63,7 @@ type EmojiUpdateParams struct {
 
 	/* Category.
 
-	   Category in which to place the emoji. 64 characters or less. If a category with the given name doesn't exist yet, it will be created.
+	   Category in which to place the emoji. If a category with the given name doesn't exist yet, it will be created.
 	*/
 	Category *string
 

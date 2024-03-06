@@ -105,11 +105,11 @@ func (o *HeaderFilterBlockDeleteAccepted) Code() int {
 }
 
 func (o *HeaderFilterBlockDeleteAccepted) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteAccepted", 202)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteAccepted ", 202)
 }
 
 func (o *HeaderFilterBlockDeleteAccepted) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteAccepted", 202)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteAccepted ", 202)
 }
 
 func (o *HeaderFilterBlockDeleteAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *HeaderFilterBlockDeleteBadRequest) Code() int {
 }
 
 func (o *HeaderFilterBlockDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteBadRequest ", 400)
 }
 
 func (o *HeaderFilterBlockDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteBadRequest ", 400)
 }
 
 func (o *HeaderFilterBlockDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *HeaderFilterBlockDeleteUnauthorized) Code() int {
 }
 
 func (o *HeaderFilterBlockDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteUnauthorized ", 401)
 }
 
 func (o *HeaderFilterBlockDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteUnauthorized ", 401)
 }
 
 func (o *HeaderFilterBlockDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *HeaderFilterBlockDeleteForbidden) Code() int {
 }
 
 func (o *HeaderFilterBlockDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteForbidden ", 403)
 }
 
 func (o *HeaderFilterBlockDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteForbidden ", 403)
 }
 
 func (o *HeaderFilterBlockDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *HeaderFilterBlockDeleteNotFound) Code() int {
 }
 
 func (o *HeaderFilterBlockDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteNotFound ", 404)
 }
 
 func (o *HeaderFilterBlockDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteNotFound ", 404)
 }
 
 func (o *HeaderFilterBlockDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *HeaderFilterBlockDeleteInternalServerError) Code() int {
 }
 
 func (o *HeaderFilterBlockDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteInternalServerError ", 500)
 }
 
 func (o *HeaderFilterBlockDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_blocks/{id}][%d] headerFilterBlockDeleteInternalServerError ", 500)
 }
 
 func (o *HeaderFilterBlockDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,7 +6,6 @@ package featured_tags
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -108,13 +107,11 @@ func (o *GetFeaturedTagsOK) Code() int {
 }
 
 func (o *GetFeaturedTagsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetFeaturedTagsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetFeaturedTagsOK) GetPayload() []interface{} {
@@ -175,11 +172,11 @@ func (o *GetFeaturedTagsBadRequest) Code() int {
 }
 
 func (o *GetFeaturedTagsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsBadRequest ", 400)
 }
 
 func (o *GetFeaturedTagsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsBadRequest ", 400)
 }
 
 func (o *GetFeaturedTagsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -231,11 +228,11 @@ func (o *GetFeaturedTagsUnauthorized) Code() int {
 }
 
 func (o *GetFeaturedTagsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsUnauthorized ", 401)
 }
 
 func (o *GetFeaturedTagsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsUnauthorized ", 401)
 }
 
 func (o *GetFeaturedTagsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -287,11 +284,11 @@ func (o *GetFeaturedTagsNotFound) Code() int {
 }
 
 func (o *GetFeaturedTagsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsNotFound ", 404)
 }
 
 func (o *GetFeaturedTagsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsNotFound ", 404)
 }
 
 func (o *GetFeaturedTagsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -343,11 +340,11 @@ func (o *GetFeaturedTagsNotAcceptable) Code() int {
 }
 
 func (o *GetFeaturedTagsNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsNotAcceptable ", 406)
 }
 
 func (o *GetFeaturedTagsNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsNotAcceptable ", 406)
 }
 
 func (o *GetFeaturedTagsNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -399,11 +396,11 @@ func (o *GetFeaturedTagsInternalServerError) Code() int {
 }
 
 func (o *GetFeaturedTagsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsInternalServerError ", 500)
 }
 
 func (o *GetFeaturedTagsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/featured_tags][%d] getFeaturedTagsInternalServerError ", 500)
 }
 
 func (o *GetFeaturedTagsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,7 +6,6 @@ package blocks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,13 +114,11 @@ func (o *BlocksGetOK) Code() int {
 }
 
 func (o *BlocksGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetOK  %+v", 200, o.Payload)
 }
 
 func (o *BlocksGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetOK  %+v", 200, o.Payload)
 }
 
 func (o *BlocksGetOK) GetPayload() []*models.Account {
@@ -189,11 +186,11 @@ func (o *BlocksGetBadRequest) Code() int {
 }
 
 func (o *BlocksGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetBadRequest ", 400)
 }
 
 func (o *BlocksGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetBadRequest ", 400)
 }
 
 func (o *BlocksGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -245,11 +242,11 @@ func (o *BlocksGetUnauthorized) Code() int {
 }
 
 func (o *BlocksGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetUnauthorized ", 401)
 }
 
 func (o *BlocksGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetUnauthorized ", 401)
 }
 
 func (o *BlocksGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -301,11 +298,11 @@ func (o *BlocksGetNotFound) Code() int {
 }
 
 func (o *BlocksGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetNotFound ", 404)
 }
 
 func (o *BlocksGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetNotFound ", 404)
 }
 
 func (o *BlocksGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -357,11 +354,11 @@ func (o *BlocksGetNotAcceptable) Code() int {
 }
 
 func (o *BlocksGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetNotAcceptable ", 406)
 }
 
 func (o *BlocksGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetNotAcceptable ", 406)
 }
 
 func (o *BlocksGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -413,11 +410,11 @@ func (o *BlocksGetInternalServerError) Code() int {
 }
 
 func (o *BlocksGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetInternalServerError ", 500)
 }
 
 func (o *BlocksGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/blocks][%d] blocksGetInternalServerError ", 500)
 }
 
 func (o *BlocksGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

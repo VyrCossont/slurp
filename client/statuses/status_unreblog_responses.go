@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusUnreblogOK) Code() int {
 }
 
 func (o *StatusUnreblogOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusUnreblogOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusUnreblogOK) GetPayload() *models.Status {
@@ -185,11 +182,11 @@ func (o *StatusUnreblogBadRequest) Code() int {
 }
 
 func (o *StatusUnreblogBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogBadRequest ", 400)
 }
 
 func (o *StatusUnreblogBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogBadRequest ", 400)
 }
 
 func (o *StatusUnreblogBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusUnreblogUnauthorized) Code() int {
 }
 
 func (o *StatusUnreblogUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogUnauthorized ", 401)
 }
 
 func (o *StatusUnreblogUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogUnauthorized ", 401)
 }
 
 func (o *StatusUnreblogUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusUnreblogForbidden) Code() int {
 }
 
 func (o *StatusUnreblogForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogForbidden ", 403)
 }
 
 func (o *StatusUnreblogForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogForbidden ", 403)
 }
 
 func (o *StatusUnreblogForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusUnreblogNotFound) Code() int {
 }
 
 func (o *StatusUnreblogNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogNotFound ", 404)
 }
 
 func (o *StatusUnreblogNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogNotFound ", 404)
 }
 
 func (o *StatusUnreblogNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusUnreblogNotAcceptable) Code() int {
 }
 
 func (o *StatusUnreblogNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogNotAcceptable ", 406)
 }
 
 func (o *StatusUnreblogNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogNotAcceptable ", 406)
 }
 
 func (o *StatusUnreblogNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusUnreblogInternalServerError) Code() int {
 }
 
 func (o *StatusUnreblogInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogInternalServerError ", 500)
 }
 
 func (o *StatusUnreblogInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unreblog][%d] statusUnreblogInternalServerError ", 500)
 }
 
 func (o *StatusUnreblogInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

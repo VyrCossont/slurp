@@ -6,7 +6,6 @@ package lists
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,13 +114,11 @@ func (o *ListAccountsOK) Code() int {
 }
 
 func (o *ListAccountsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsOK  %+v", 200, o.Payload)
 }
 
 func (o *ListAccountsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsOK  %+v", 200, o.Payload)
 }
 
 func (o *ListAccountsOK) GetPayload() []*models.Account {
@@ -189,11 +186,11 @@ func (o *ListAccountsBadRequest) Code() int {
 }
 
 func (o *ListAccountsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsBadRequest ", 400)
 }
 
 func (o *ListAccountsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsBadRequest ", 400)
 }
 
 func (o *ListAccountsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -245,11 +242,11 @@ func (o *ListAccountsUnauthorized) Code() int {
 }
 
 func (o *ListAccountsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsUnauthorized ", 401)
 }
 
 func (o *ListAccountsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsUnauthorized ", 401)
 }
 
 func (o *ListAccountsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -301,11 +298,11 @@ func (o *ListAccountsNotFound) Code() int {
 }
 
 func (o *ListAccountsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsNotFound ", 404)
 }
 
 func (o *ListAccountsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsNotFound ", 404)
 }
 
 func (o *ListAccountsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -357,11 +354,11 @@ func (o *ListAccountsNotAcceptable) Code() int {
 }
 
 func (o *ListAccountsNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsNotAcceptable ", 406)
 }
 
 func (o *ListAccountsNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsNotAcceptable ", 406)
 }
 
 func (o *ListAccountsNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -413,11 +410,11 @@ func (o *ListAccountsInternalServerError) Code() int {
 }
 
 func (o *ListAccountsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsInternalServerError ", 500)
 }
 
 func (o *ListAccountsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/lists/{id}/accounts][%d] listAccountsInternalServerError ", 500)
 }
 
 func (o *ListAccountsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

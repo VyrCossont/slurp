@@ -60,13 +60,6 @@ EmojiCategoriesGetParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type EmojiCategoriesGetParams struct {
-
-	/* ID.
-
-	   The id of the emoji.
-	*/
-	ID string
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -120,17 +113,6 @@ func (o *EmojiCategoriesGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the emoji categories get params
-func (o *EmojiCategoriesGetParams) WithID(id string) *EmojiCategoriesGetParams {
-	o.SetID(id)
-	return o
-}
-
-// SetID adds the id to the emoji categories get params
-func (o *EmojiCategoriesGetParams) SetID(id string) {
-	o.ID = id
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *EmojiCategoriesGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -138,11 +120,6 @@ func (o *EmojiCategoriesGetParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
-
-	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
-		return err
-	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

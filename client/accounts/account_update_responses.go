@@ -6,7 +6,6 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *AccountUpdateOK) Code() int {
 }
 
 func (o *AccountUpdateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountUpdateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountUpdateOK) GetPayload() *models.Account {
@@ -179,11 +176,11 @@ func (o *AccountUpdateBadRequest) Code() int {
 }
 
 func (o *AccountUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateBadRequest", 400)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateBadRequest ", 400)
 }
 
 func (o *AccountUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateBadRequest", 400)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateBadRequest ", 400)
 }
 
 func (o *AccountUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *AccountUpdateUnauthorized) Code() int {
 }
 
 func (o *AccountUpdateUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateUnauthorized", 401)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateUnauthorized ", 401)
 }
 
 func (o *AccountUpdateUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateUnauthorized", 401)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateUnauthorized ", 401)
 }
 
 func (o *AccountUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *AccountUpdateNotFound) Code() int {
 }
 
 func (o *AccountUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateNotFound", 404)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateNotFound ", 404)
 }
 
 func (o *AccountUpdateNotFound) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateNotFound", 404)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateNotFound ", 404)
 }
 
 func (o *AccountUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *AccountUpdateNotAcceptable) Code() int {
 }
 
 func (o *AccountUpdateNotAcceptable) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateNotAcceptable", 406)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateNotAcceptable ", 406)
 }
 
 func (o *AccountUpdateNotAcceptable) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateNotAcceptable", 406)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateNotAcceptable ", 406)
 }
 
 func (o *AccountUpdateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *AccountUpdateInternalServerError) Code() int {
 }
 
 func (o *AccountUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateInternalServerError", 500)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateInternalServerError ", 500)
 }
 
 func (o *AccountUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateInternalServerError", 500)
+	return fmt.Sprintf("[PATCH /api/v1/accounts/update_credentials][%d] accountUpdateInternalServerError ", 500)
 }
 
 func (o *AccountUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

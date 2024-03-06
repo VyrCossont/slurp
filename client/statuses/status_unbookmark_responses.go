@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusUnbookmarkOK) Code() int {
 }
 
 func (o *StatusUnbookmarkOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusUnbookmarkOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusUnbookmarkOK) GetPayload() *models.Status {
@@ -185,11 +182,11 @@ func (o *StatusUnbookmarkBadRequest) Code() int {
 }
 
 func (o *StatusUnbookmarkBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkBadRequest ", 400)
 }
 
 func (o *StatusUnbookmarkBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkBadRequest ", 400)
 }
 
 func (o *StatusUnbookmarkBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusUnbookmarkUnauthorized) Code() int {
 }
 
 func (o *StatusUnbookmarkUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkUnauthorized ", 401)
 }
 
 func (o *StatusUnbookmarkUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkUnauthorized ", 401)
 }
 
 func (o *StatusUnbookmarkUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusUnbookmarkForbidden) Code() int {
 }
 
 func (o *StatusUnbookmarkForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkForbidden ", 403)
 }
 
 func (o *StatusUnbookmarkForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkForbidden ", 403)
 }
 
 func (o *StatusUnbookmarkForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusUnbookmarkNotFound) Code() int {
 }
 
 func (o *StatusUnbookmarkNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkNotFound ", 404)
 }
 
 func (o *StatusUnbookmarkNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkNotFound ", 404)
 }
 
 func (o *StatusUnbookmarkNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusUnbookmarkNotAcceptable) Code() int {
 }
 
 func (o *StatusUnbookmarkNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkNotAcceptable ", 406)
 }
 
 func (o *StatusUnbookmarkNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkNotAcceptable ", 406)
 }
 
 func (o *StatusUnbookmarkNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusUnbookmarkInternalServerError) Code() int {
 }
 
 func (o *StatusUnbookmarkInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkInternalServerError ", 500)
 }
 
 func (o *StatusUnbookmarkInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unbookmark][%d] statusUnbookmarkInternalServerError ", 500)
 }
 
 func (o *StatusUnbookmarkInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

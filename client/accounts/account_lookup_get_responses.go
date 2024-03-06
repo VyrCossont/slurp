@@ -6,7 +6,6 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *AccountLookupGetOK) Code() int {
 }
 
 func (o *AccountLookupGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountLookupGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountLookupGetOK) GetPayload() *models.Account {
@@ -179,11 +176,11 @@ func (o *AccountLookupGetBadRequest) Code() int {
 }
 
 func (o *AccountLookupGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetBadRequest ", 400)
 }
 
 func (o *AccountLookupGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetBadRequest ", 400)
 }
 
 func (o *AccountLookupGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *AccountLookupGetUnauthorized) Code() int {
 }
 
 func (o *AccountLookupGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetUnauthorized ", 401)
 }
 
 func (o *AccountLookupGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetUnauthorized ", 401)
 }
 
 func (o *AccountLookupGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *AccountLookupGetNotFound) Code() int {
 }
 
 func (o *AccountLookupGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetNotFound ", 404)
 }
 
 func (o *AccountLookupGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetNotFound ", 404)
 }
 
 func (o *AccountLookupGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *AccountLookupGetNotAcceptable) Code() int {
 }
 
 func (o *AccountLookupGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetNotAcceptable ", 406)
 }
 
 func (o *AccountLookupGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetNotAcceptable ", 406)
 }
 
 func (o *AccountLookupGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *AccountLookupGetInternalServerError) Code() int {
 }
 
 func (o *AccountLookupGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetInternalServerError ", 500)
 }
 
 func (o *AccountLookupGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/lookup][%d] accountLookupGetInternalServerError ", 500)
 }
 
 func (o *AccountLookupGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

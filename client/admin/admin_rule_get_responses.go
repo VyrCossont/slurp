@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *AdminRuleGetOK) Code() int {
 }
 
 func (o *AdminRuleGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetOK  %+v", 200, o.Payload)
 }
 
 func (o *AdminRuleGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetOK  %+v", 200, o.Payload)
 }
 
 func (o *AdminRuleGetOK) GetPayload() *models.InstanceRule {
@@ -179,11 +176,11 @@ func (o *AdminRuleGetBadRequest) Code() int {
 }
 
 func (o *AdminRuleGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetBadRequest ", 400)
 }
 
 func (o *AdminRuleGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetBadRequest ", 400)
 }
 
 func (o *AdminRuleGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *AdminRuleGetUnauthorized) Code() int {
 }
 
 func (o *AdminRuleGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetUnauthorized ", 401)
 }
 
 func (o *AdminRuleGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetUnauthorized ", 401)
 }
 
 func (o *AdminRuleGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *AdminRuleGetNotFound) Code() int {
 }
 
 func (o *AdminRuleGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetNotFound ", 404)
 }
 
 func (o *AdminRuleGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetNotFound ", 404)
 }
 
 func (o *AdminRuleGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *AdminRuleGetNotAcceptable) Code() int {
 }
 
 func (o *AdminRuleGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetNotAcceptable ", 406)
 }
 
 func (o *AdminRuleGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetNotAcceptable ", 406)
 }
 
 func (o *AdminRuleGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *AdminRuleGetInternalServerError) Code() int {
 }
 
 func (o *AdminRuleGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetInternalServerError ", 500)
 }
 
 func (o *AdminRuleGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/rules/{id}][%d] adminRuleGetInternalServerError ", 500)
 }
 
 func (o *AdminRuleGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -122,13 +121,11 @@ func (o *EmojiCreateOK) Code() int {
 }
 
 func (o *EmojiCreateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *EmojiCreateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *EmojiCreateOK) GetPayload() *models.Emoji {
@@ -191,11 +188,11 @@ func (o *EmojiCreateBadRequest) Code() int {
 }
 
 func (o *EmojiCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateBadRequest ", 400)
 }
 
 func (o *EmojiCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateBadRequest ", 400)
 }
 
 func (o *EmojiCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -247,11 +244,11 @@ func (o *EmojiCreateUnauthorized) Code() int {
 }
 
 func (o *EmojiCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateUnauthorized ", 401)
 }
 
 func (o *EmojiCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateUnauthorized ", 401)
 }
 
 func (o *EmojiCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -303,11 +300,11 @@ func (o *EmojiCreateForbidden) Code() int {
 }
 
 func (o *EmojiCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateForbidden ", 403)
 }
 
 func (o *EmojiCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateForbidden ", 403)
 }
 
 func (o *EmojiCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -359,11 +356,11 @@ func (o *EmojiCreateNotFound) Code() int {
 }
 
 func (o *EmojiCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateNotFound ", 404)
 }
 
 func (o *EmojiCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateNotFound ", 404)
 }
 
 func (o *EmojiCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -415,11 +412,11 @@ func (o *EmojiCreateNotAcceptable) Code() int {
 }
 
 func (o *EmojiCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateNotAcceptable ", 406)
 }
 
 func (o *EmojiCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateNotAcceptable ", 406)
 }
 
 func (o *EmojiCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -471,11 +468,11 @@ func (o *EmojiCreateConflict) Code() int {
 }
 
 func (o *EmojiCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateConflict", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateConflict ", 409)
 }
 
 func (o *EmojiCreateConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateConflict", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateConflict ", 409)
 }
 
 func (o *EmojiCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -527,11 +524,11 @@ func (o *EmojiCreateInternalServerError) Code() int {
 }
 
 func (o *EmojiCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateInternalServerError ", 500)
 }
 
 func (o *EmojiCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/custom_emojis][%d] emojiCreateInternalServerError ", 500)
 }
 
 func (o *EmojiCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

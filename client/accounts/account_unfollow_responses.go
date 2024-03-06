@@ -6,7 +6,6 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *AccountUnfollowOK) Code() int {
 }
 
 func (o *AccountUnfollowOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountUnfollowOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountUnfollowOK) GetPayload() *models.Relationship {
@@ -179,11 +176,11 @@ func (o *AccountUnfollowBadRequest) Code() int {
 }
 
 func (o *AccountUnfollowBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowBadRequest ", 400)
 }
 
 func (o *AccountUnfollowBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowBadRequest ", 400)
 }
 
 func (o *AccountUnfollowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *AccountUnfollowUnauthorized) Code() int {
 }
 
 func (o *AccountUnfollowUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowUnauthorized ", 401)
 }
 
 func (o *AccountUnfollowUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowUnauthorized ", 401)
 }
 
 func (o *AccountUnfollowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *AccountUnfollowNotFound) Code() int {
 }
 
 func (o *AccountUnfollowNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowNotFound ", 404)
 }
 
 func (o *AccountUnfollowNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowNotFound ", 404)
 }
 
 func (o *AccountUnfollowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *AccountUnfollowNotAcceptable) Code() int {
 }
 
 func (o *AccountUnfollowNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowNotAcceptable ", 406)
 }
 
 func (o *AccountUnfollowNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowNotAcceptable ", 406)
 }
 
 func (o *AccountUnfollowNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *AccountUnfollowInternalServerError) Code() int {
 }
 
 func (o *AccountUnfollowInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowInternalServerError ", 500)
 }
 
 func (o *AccountUnfollowInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unfollow][%d] accountUnfollowInternalServerError ", 500)
 }
 
 func (o *AccountUnfollowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

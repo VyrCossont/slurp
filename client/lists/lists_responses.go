@@ -6,7 +6,6 @@ package lists
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *ListsOK) Code() int {
 }
 
 func (o *ListsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsOK  %+v", 200, o.Payload)
 }
 
 func (o *ListsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsOK  %+v", 200, o.Payload)
 }
 
 func (o *ListsOK) GetPayload() []*models.List {
@@ -177,11 +174,11 @@ func (o *ListsBadRequest) Code() int {
 }
 
 func (o *ListsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsBadRequest ", 400)
 }
 
 func (o *ListsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsBadRequest ", 400)
 }
 
 func (o *ListsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -233,11 +230,11 @@ func (o *ListsUnauthorized) Code() int {
 }
 
 func (o *ListsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsUnauthorized ", 401)
 }
 
 func (o *ListsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsUnauthorized ", 401)
 }
 
 func (o *ListsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -289,11 +286,11 @@ func (o *ListsNotFound) Code() int {
 }
 
 func (o *ListsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsNotFound ", 404)
 }
 
 func (o *ListsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsNotFound ", 404)
 }
 
 func (o *ListsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -345,11 +342,11 @@ func (o *ListsNotAcceptable) Code() int {
 }
 
 func (o *ListsNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsNotAcceptable ", 406)
 }
 
 func (o *ListsNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsNotAcceptable ", 406)
 }
 
 func (o *ListsNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -401,11 +398,11 @@ func (o *ListsInternalServerError) Code() int {
 }
 
 func (o *ListsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsInternalServerError ", 500)
 }
 
 func (o *ListsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/lists][%d] listsInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/lists][%d] listsInternalServerError ", 500)
 }
 
 func (o *ListsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

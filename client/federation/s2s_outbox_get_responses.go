@@ -6,7 +6,6 @@ package federation
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -104,13 +103,11 @@ func (o *S2sOutboxGetOK) Code() int {
 }
 
 func (o *S2sOutboxGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetOK  %+v", 200, o.Payload)
 }
 
 func (o *S2sOutboxGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetOK  %+v", 200, o.Payload)
 }
 
 func (o *S2sOutboxGetOK) GetPayload() *models.SwaggerCollection {
@@ -173,11 +170,11 @@ func (o *S2sOutboxGetBadRequest) Code() int {
 }
 
 func (o *S2sOutboxGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetBadRequest", 400)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetBadRequest ", 400)
 }
 
 func (o *S2sOutboxGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetBadRequest", 400)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetBadRequest ", 400)
 }
 
 func (o *S2sOutboxGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -229,11 +226,11 @@ func (o *S2sOutboxGetUnauthorized) Code() int {
 }
 
 func (o *S2sOutboxGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetUnauthorized ", 401)
 }
 
 func (o *S2sOutboxGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetUnauthorized ", 401)
 }
 
 func (o *S2sOutboxGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -285,11 +282,11 @@ func (o *S2sOutboxGetForbidden) Code() int {
 }
 
 func (o *S2sOutboxGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetForbidden", 403)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetForbidden ", 403)
 }
 
 func (o *S2sOutboxGetForbidden) String() string {
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetForbidden", 403)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetForbidden ", 403)
 }
 
 func (o *S2sOutboxGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -341,11 +338,11 @@ func (o *S2sOutboxGetNotFound) Code() int {
 }
 
 func (o *S2sOutboxGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetNotFound", 404)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetNotFound ", 404)
 }
 
 func (o *S2sOutboxGetNotFound) String() string {
-	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetNotFound", 404)
+	return fmt.Sprintf("[GET /users/{username}/outbox][%d] s2sOutboxGetNotFound ", 404)
 }
 
 func (o *S2sOutboxGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

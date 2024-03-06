@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusDeleteOK) Code() int {
 }
 
 func (o *StatusDeleteOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusDeleteOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusDeleteOK) GetPayload() *models.Status {
@@ -185,11 +182,11 @@ func (o *StatusDeleteBadRequest) Code() int {
 }
 
 func (o *StatusDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteBadRequest ", 400)
 }
 
 func (o *StatusDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteBadRequest ", 400)
 }
 
 func (o *StatusDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusDeleteUnauthorized) Code() int {
 }
 
 func (o *StatusDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteUnauthorized ", 401)
 }
 
 func (o *StatusDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteUnauthorized ", 401)
 }
 
 func (o *StatusDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusDeleteForbidden) Code() int {
 }
 
 func (o *StatusDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteForbidden ", 403)
 }
 
 func (o *StatusDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteForbidden ", 403)
 }
 
 func (o *StatusDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusDeleteNotFound) Code() int {
 }
 
 func (o *StatusDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteNotFound ", 404)
 }
 
 func (o *StatusDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteNotFound ", 404)
 }
 
 func (o *StatusDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusDeleteNotAcceptable) Code() int {
 }
 
 func (o *StatusDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteNotAcceptable ", 406)
 }
 
 func (o *StatusDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteNotAcceptable ", 406)
 }
 
 func (o *StatusDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusDeleteInternalServerError) Code() int {
 }
 
 func (o *StatusDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteInternalServerError ", 500)
 }
 
 func (o *StatusDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/statuses/{id}][%d] statusDeleteInternalServerError ", 500)
 }
 
 func (o *StatusDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

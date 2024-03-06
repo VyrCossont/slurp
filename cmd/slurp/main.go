@@ -1,4 +1,4 @@
-// GoToSocial
+// Slurp
 // Copyright (C) Vyr Cossont
 // SPDX-License-Identifier: AGPL-3.0-or-later
 //
@@ -16,8 +16,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package main
-
-//go:generate go run github.com/go-swagger/go-swagger/cmd/swagger generate client --spec https://raw.githubusercontent.com/superseriousbusiness/gotosocial/main/docs/api/swagger.yaml
 
 import (
 	"log/slog"

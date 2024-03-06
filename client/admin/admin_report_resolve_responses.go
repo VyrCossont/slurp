@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *AdminReportResolveOK) Code() int {
 }
 
 func (o *AdminReportResolveOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveOK  %+v", 200, o.Payload)
 }
 
 func (o *AdminReportResolveOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveOK  %+v", 200, o.Payload)
 }
 
 func (o *AdminReportResolveOK) GetPayload() *models.AdminReport {
@@ -179,11 +176,11 @@ func (o *AdminReportResolveBadRequest) Code() int {
 }
 
 func (o *AdminReportResolveBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveBadRequest ", 400)
 }
 
 func (o *AdminReportResolveBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveBadRequest ", 400)
 }
 
 func (o *AdminReportResolveBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *AdminReportResolveUnauthorized) Code() int {
 }
 
 func (o *AdminReportResolveUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveUnauthorized ", 401)
 }
 
 func (o *AdminReportResolveUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveUnauthorized ", 401)
 }
 
 func (o *AdminReportResolveUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *AdminReportResolveNotFound) Code() int {
 }
 
 func (o *AdminReportResolveNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveNotFound ", 404)
 }
 
 func (o *AdminReportResolveNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveNotFound ", 404)
 }
 
 func (o *AdminReportResolveNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *AdminReportResolveNotAcceptable) Code() int {
 }
 
 func (o *AdminReportResolveNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveNotAcceptable ", 406)
 }
 
 func (o *AdminReportResolveNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveNotAcceptable ", 406)
 }
 
 func (o *AdminReportResolveNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *AdminReportResolveInternalServerError) Code() int {
 }
 
 func (o *AdminReportResolveInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveInternalServerError ", 500)
 }
 
 func (o *AdminReportResolveInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/reports/{id}/resolve][%d] adminReportResolveInternalServerError ", 500)
 }
 
 func (o *AdminReportResolveInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,7 +6,6 @@ package timelines
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,13 +96,11 @@ func (o *ListTimelineOK) Code() int {
 }
 
 func (o *ListTimelineOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineOK  %+v", 200, o.Payload)
 }
 
 func (o *ListTimelineOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineOK  %+v", 200, o.Payload)
 }
 
 func (o *ListTimelineOK) GetPayload() []*models.Status {
@@ -171,11 +168,11 @@ func (o *ListTimelineBadRequest) Code() int {
 }
 
 func (o *ListTimelineBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineBadRequest ", 400)
 }
 
 func (o *ListTimelineBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineBadRequest ", 400)
 }
 
 func (o *ListTimelineBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -227,11 +224,11 @@ func (o *ListTimelineUnauthorized) Code() int {
 }
 
 func (o *ListTimelineUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineUnauthorized ", 401)
 }
 
 func (o *ListTimelineUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/timelines/list/{id}][%d] listTimelineUnauthorized ", 401)
 }
 
 func (o *ListTimelineUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

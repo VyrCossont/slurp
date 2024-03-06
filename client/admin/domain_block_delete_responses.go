@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -122,13 +121,11 @@ func (o *DomainBlockDeleteOK) Code() int {
 }
 
 func (o *DomainBlockDeleteOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteOK  %+v", 200, o.Payload)
 }
 
 func (o *DomainBlockDeleteOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteOK  %+v", 200, o.Payload)
 }
 
 func (o *DomainBlockDeleteOK) GetPayload() *models.DomainPermission {
@@ -191,11 +188,11 @@ func (o *DomainBlockDeleteBadRequest) Code() int {
 }
 
 func (o *DomainBlockDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteBadRequest ", 400)
 }
 
 func (o *DomainBlockDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteBadRequest ", 400)
 }
 
 func (o *DomainBlockDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -247,11 +244,11 @@ func (o *DomainBlockDeleteUnauthorized) Code() int {
 }
 
 func (o *DomainBlockDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteUnauthorized ", 401)
 }
 
 func (o *DomainBlockDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteUnauthorized ", 401)
 }
 
 func (o *DomainBlockDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -303,11 +300,11 @@ func (o *DomainBlockDeleteForbidden) Code() int {
 }
 
 func (o *DomainBlockDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteForbidden ", 403)
 }
 
 func (o *DomainBlockDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteForbidden ", 403)
 }
 
 func (o *DomainBlockDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -359,11 +356,11 @@ func (o *DomainBlockDeleteNotFound) Code() int {
 }
 
 func (o *DomainBlockDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteNotFound ", 404)
 }
 
 func (o *DomainBlockDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteNotFound ", 404)
 }
 
 func (o *DomainBlockDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -415,11 +412,11 @@ func (o *DomainBlockDeleteNotAcceptable) Code() int {
 }
 
 func (o *DomainBlockDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteNotAcceptable ", 406)
 }
 
 func (o *DomainBlockDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteNotAcceptable ", 406)
 }
 
 func (o *DomainBlockDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -471,11 +468,11 @@ func (o *DomainBlockDeleteConflict) Code() int {
 }
 
 func (o *DomainBlockDeleteConflict) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteConflict", 409)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteConflict ", 409)
 }
 
 func (o *DomainBlockDeleteConflict) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteConflict", 409)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteConflict ", 409)
 }
 
 func (o *DomainBlockDeleteConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -527,11 +524,11 @@ func (o *DomainBlockDeleteInternalServerError) Code() int {
 }
 
 func (o *DomainBlockDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteInternalServerError ", 500)
 }
 
 func (o *DomainBlockDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_blocks/{id}][%d] domainBlockDeleteInternalServerError ", 500)
 }
 
 func (o *DomainBlockDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

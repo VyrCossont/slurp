@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusUnfaveOK) Code() int {
 }
 
 func (o *StatusUnfaveOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusUnfaveOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusUnfaveOK) GetPayload() *models.Status {
@@ -185,11 +182,11 @@ func (o *StatusUnfaveBadRequest) Code() int {
 }
 
 func (o *StatusUnfaveBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveBadRequest ", 400)
 }
 
 func (o *StatusUnfaveBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveBadRequest ", 400)
 }
 
 func (o *StatusUnfaveBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusUnfaveUnauthorized) Code() int {
 }
 
 func (o *StatusUnfaveUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveUnauthorized ", 401)
 }
 
 func (o *StatusUnfaveUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveUnauthorized ", 401)
 }
 
 func (o *StatusUnfaveUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusUnfaveForbidden) Code() int {
 }
 
 func (o *StatusUnfaveForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveForbidden ", 403)
 }
 
 func (o *StatusUnfaveForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveForbidden ", 403)
 }
 
 func (o *StatusUnfaveForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusUnfaveNotFound) Code() int {
 }
 
 func (o *StatusUnfaveNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveNotFound ", 404)
 }
 
 func (o *StatusUnfaveNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveNotFound ", 404)
 }
 
 func (o *StatusUnfaveNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusUnfaveNotAcceptable) Code() int {
 }
 
 func (o *StatusUnfaveNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveNotAcceptable ", 406)
 }
 
 func (o *StatusUnfaveNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveNotAcceptable ", 406)
 }
 
 func (o *StatusUnfaveNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusUnfaveInternalServerError) Code() int {
 }
 
 func (o *StatusUnfaveInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveInternalServerError ", 500)
 }
 
 func (o *StatusUnfaveInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unfavourite][%d] statusUnfaveInternalServerError ", 500)
 }
 
 func (o *StatusUnfaveInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

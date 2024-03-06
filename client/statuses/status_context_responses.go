@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusContextOK) Code() int {
 }
 
 func (o *StatusContextOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusContextOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusContextOK) GetPayload() *models.Context {
@@ -185,11 +182,11 @@ func (o *StatusContextBadRequest) Code() int {
 }
 
 func (o *StatusContextBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextBadRequest ", 400)
 }
 
 func (o *StatusContextBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextBadRequest ", 400)
 }
 
 func (o *StatusContextBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusContextUnauthorized) Code() int {
 }
 
 func (o *StatusContextUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextUnauthorized ", 401)
 }
 
 func (o *StatusContextUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextUnauthorized ", 401)
 }
 
 func (o *StatusContextUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusContextForbidden) Code() int {
 }
 
 func (o *StatusContextForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextForbidden", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextForbidden ", 403)
 }
 
 func (o *StatusContextForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextForbidden", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextForbidden ", 403)
 }
 
 func (o *StatusContextForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusContextNotFound) Code() int {
 }
 
 func (o *StatusContextNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextNotFound ", 404)
 }
 
 func (o *StatusContextNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextNotFound ", 404)
 }
 
 func (o *StatusContextNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusContextNotAcceptable) Code() int {
 }
 
 func (o *StatusContextNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextNotAcceptable ", 406)
 }
 
 func (o *StatusContextNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextNotAcceptable ", 406)
 }
 
 func (o *StatusContextNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusContextInternalServerError) Code() int {
 }
 
 func (o *StatusContextInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextInternalServerError ", 500)
 }
 
 func (o *StatusContextInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/context][%d] statusContextInternalServerError ", 500)
 }
 
 func (o *StatusContextInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

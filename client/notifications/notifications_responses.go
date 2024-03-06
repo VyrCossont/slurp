@@ -6,7 +6,6 @@ package notifications
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,13 +114,11 @@ func (o *NotificationsOK) Code() int {
 }
 
 func (o *NotificationsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsOK  %+v", 200, o.Payload)
 }
 
 func (o *NotificationsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsOK  %+v", 200, o.Payload)
 }
 
 func (o *NotificationsOK) GetPayload() []*models.Notification {
@@ -189,11 +186,11 @@ func (o *NotificationsBadRequest) Code() int {
 }
 
 func (o *NotificationsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsBadRequest ", 400)
 }
 
 func (o *NotificationsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsBadRequest ", 400)
 }
 
 func (o *NotificationsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -245,11 +242,11 @@ func (o *NotificationsUnauthorized) Code() int {
 }
 
 func (o *NotificationsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsUnauthorized ", 401)
 }
 
 func (o *NotificationsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsUnauthorized ", 401)
 }
 
 func (o *NotificationsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -301,11 +298,11 @@ func (o *NotificationsNotFound) Code() int {
 }
 
 func (o *NotificationsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsNotFound ", 404)
 }
 
 func (o *NotificationsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsNotFound ", 404)
 }
 
 func (o *NotificationsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -357,11 +354,11 @@ func (o *NotificationsNotAcceptable) Code() int {
 }
 
 func (o *NotificationsNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsNotAcceptable ", 406)
 }
 
 func (o *NotificationsNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsNotAcceptable ", 406)
 }
 
 func (o *NotificationsNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -413,11 +410,11 @@ func (o *NotificationsInternalServerError) Code() int {
 }
 
 func (o *NotificationsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsInternalServerError ", 500)
 }
 
 func (o *NotificationsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/notifications][%d] notificationsInternalServerError ", 500)
 }
 
 func (o *NotificationsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

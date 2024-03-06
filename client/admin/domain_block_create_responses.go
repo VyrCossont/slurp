@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -122,13 +121,11 @@ func (o *DomainBlockCreateOK) Code() int {
 }
 
 func (o *DomainBlockCreateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *DomainBlockCreateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *DomainBlockCreateOK) GetPayload() *models.DomainPermission {
@@ -191,11 +188,11 @@ func (o *DomainBlockCreateBadRequest) Code() int {
 }
 
 func (o *DomainBlockCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateBadRequest ", 400)
 }
 
 func (o *DomainBlockCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateBadRequest ", 400)
 }
 
 func (o *DomainBlockCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -247,11 +244,11 @@ func (o *DomainBlockCreateUnauthorized) Code() int {
 }
 
 func (o *DomainBlockCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateUnauthorized ", 401)
 }
 
 func (o *DomainBlockCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateUnauthorized ", 401)
 }
 
 func (o *DomainBlockCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -303,11 +300,11 @@ func (o *DomainBlockCreateForbidden) Code() int {
 }
 
 func (o *DomainBlockCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateForbidden ", 403)
 }
 
 func (o *DomainBlockCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateForbidden ", 403)
 }
 
 func (o *DomainBlockCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -359,11 +356,11 @@ func (o *DomainBlockCreateNotFound) Code() int {
 }
 
 func (o *DomainBlockCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateNotFound ", 404)
 }
 
 func (o *DomainBlockCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateNotFound ", 404)
 }
 
 func (o *DomainBlockCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -415,11 +412,11 @@ func (o *DomainBlockCreateNotAcceptable) Code() int {
 }
 
 func (o *DomainBlockCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateNotAcceptable ", 406)
 }
 
 func (o *DomainBlockCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateNotAcceptable ", 406)
 }
 
 func (o *DomainBlockCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -471,11 +468,11 @@ func (o *DomainBlockCreateConflict) Code() int {
 }
 
 func (o *DomainBlockCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateConflict", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateConflict ", 409)
 }
 
 func (o *DomainBlockCreateConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateConflict", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateConflict ", 409)
 }
 
 func (o *DomainBlockCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -527,11 +524,11 @@ func (o *DomainBlockCreateInternalServerError) Code() int {
 }
 
 func (o *DomainBlockCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateInternalServerError ", 500)
 }
 
 func (o *DomainBlockCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_blocks][%d] domainBlockCreateInternalServerError ", 500)
 }
 
 func (o *DomainBlockCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

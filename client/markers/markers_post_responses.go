@@ -6,7 +6,6 @@ package markers
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -104,13 +103,11 @@ func (o *MarkersPostOK) Code() int {
 }
 
 func (o *MarkersPostOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostOK  %+v", 200, o.Payload)
 }
 
 func (o *MarkersPostOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostOK  %+v", 200, o.Payload)
 }
 
 func (o *MarkersPostOK) GetPayload() *models.Marker {
@@ -173,11 +170,11 @@ func (o *MarkersPostBadRequest) Code() int {
 }
 
 func (o *MarkersPostBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostBadRequest ", 400)
 }
 
 func (o *MarkersPostBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostBadRequest ", 400)
 }
 
 func (o *MarkersPostBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -229,11 +226,11 @@ func (o *MarkersPostUnauthorized) Code() int {
 }
 
 func (o *MarkersPostUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostUnauthorized ", 401)
 }
 
 func (o *MarkersPostUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostUnauthorized ", 401)
 }
 
 func (o *MarkersPostUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -285,11 +282,11 @@ func (o *MarkersPostConflict) Code() int {
 }
 
 func (o *MarkersPostConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostConflict", 409)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostConflict ", 409)
 }
 
 func (o *MarkersPostConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostConflict", 409)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostConflict ", 409)
 }
 
 func (o *MarkersPostConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -341,11 +338,11 @@ func (o *MarkersPostInternalServerError) Code() int {
 }
 
 func (o *MarkersPostInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostInternalServerError ", 500)
 }
 
 func (o *MarkersPostInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/markers][%d] markersPostInternalServerError ", 500)
 }
 
 func (o *MarkersPostInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -20,6 +20,7 @@ import (
 	"github.com/VyrCossont/slurp/client/favourites"
 	"github.com/VyrCossont/slurp/client/featured_tags"
 	"github.com/VyrCossont/slurp/client/federation"
+	"github.com/VyrCossont/slurp/client/filters"
 	"github.com/VyrCossont/slurp/client/follow_requests"
 	"github.com/VyrCossont/slurp/client/instance"
 	"github.com/VyrCossont/slurp/client/lists"
@@ -90,6 +91,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GoToSocial
 	cli.Favourites = favourites.New(transport, formats)
 	cli.FeaturedTags = featured_tags.New(transport, formats)
 	cli.Federation = federation.New(transport, formats)
+	cli.Filters = filters.New(transport, formats)
 	cli.FollowRequests = follow_requests.New(transport, formats)
 	cli.Instance = instance.New(transport, formats)
 	cli.Lists = lists.New(transport, formats)
@@ -170,6 +172,8 @@ type GoToSocialSwaggerDocumentation struct {
 
 	Federation federation.ClientService
 
+	Filters filters.ClientService
+
 	FollowRequests follow_requests.ClientService
 
 	Instance instance.ClientService
@@ -218,6 +222,7 @@ func (c *GoToSocialSwaggerDocumentation) SetTransport(transport runtime.ClientTr
 	c.Favourites.SetTransport(transport)
 	c.FeaturedTags.SetTransport(transport)
 	c.Federation.SetTransport(transport)
+	c.Filters.SetTransport(transport)
 	c.FollowRequests.SetTransport(transport)
 	c.Instance.SetTransport(transport)
 	c.Lists.SetTransport(transport)

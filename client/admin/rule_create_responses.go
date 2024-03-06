@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *RuleCreateOK) Code() int {
 }
 
 func (o *RuleCreateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *RuleCreateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *RuleCreateOK) GetPayload() *models.InstanceRule {
@@ -185,11 +182,11 @@ func (o *RuleCreateBadRequest) Code() int {
 }
 
 func (o *RuleCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateBadRequest ", 400)
 }
 
 func (o *RuleCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateBadRequest ", 400)
 }
 
 func (o *RuleCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *RuleCreateUnauthorized) Code() int {
 }
 
 func (o *RuleCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateUnauthorized ", 401)
 }
 
 func (o *RuleCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateUnauthorized ", 401)
 }
 
 func (o *RuleCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *RuleCreateForbidden) Code() int {
 }
 
 func (o *RuleCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateForbidden ", 403)
 }
 
 func (o *RuleCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateForbidden ", 403)
 }
 
 func (o *RuleCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *RuleCreateNotFound) Code() int {
 }
 
 func (o *RuleCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateNotFound ", 404)
 }
 
 func (o *RuleCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateNotFound ", 404)
 }
 
 func (o *RuleCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *RuleCreateNotAcceptable) Code() int {
 }
 
 func (o *RuleCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateNotAcceptable ", 406)
 }
 
 func (o *RuleCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateNotAcceptable ", 406)
 }
 
 func (o *RuleCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *RuleCreateInternalServerError) Code() int {
 }
 
 func (o *RuleCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateInternalServerError ", 500)
 }
 
 func (o *RuleCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/instance/rules][%d] ruleCreateInternalServerError ", 500)
 }
 
 func (o *RuleCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

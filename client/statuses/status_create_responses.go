@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusCreateOK) Code() int {
 }
 
 func (o *StatusCreateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusCreateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusCreateOK) GetPayload() *models.Status {
@@ -185,11 +182,11 @@ func (o *StatusCreateBadRequest) Code() int {
 }
 
 func (o *StatusCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateBadRequest ", 400)
 }
 
 func (o *StatusCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateBadRequest ", 400)
 }
 
 func (o *StatusCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusCreateUnauthorized) Code() int {
 }
 
 func (o *StatusCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateUnauthorized ", 401)
 }
 
 func (o *StatusCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateUnauthorized ", 401)
 }
 
 func (o *StatusCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusCreateForbidden) Code() int {
 }
 
 func (o *StatusCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateForbidden ", 403)
 }
 
 func (o *StatusCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateForbidden ", 403)
 }
 
 func (o *StatusCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusCreateNotFound) Code() int {
 }
 
 func (o *StatusCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotFound ", 404)
 }
 
 func (o *StatusCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotFound ", 404)
 }
 
 func (o *StatusCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusCreateNotAcceptable) Code() int {
 }
 
 func (o *StatusCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotAcceptable ", 406)
 }
 
 func (o *StatusCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotAcceptable ", 406)
 }
 
 func (o *StatusCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusCreateInternalServerError) Code() int {
 }
 
 func (o *StatusCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateInternalServerError ", 500)
 }
 
 func (o *StatusCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateInternalServerError ", 500)
 }
 
 func (o *StatusCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

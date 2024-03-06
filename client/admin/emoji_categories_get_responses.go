@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *EmojiCategoriesGetReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /api/v1/admin/custom_emojis/categories/{id}] emojiCategoriesGet", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v1/admin/custom_emojis/categories] emojiCategoriesGet", response, response.Code())
 	}
 }
 
@@ -116,13 +115,11 @@ func (o *EmojiCategoriesGetOK) Code() int {
 }
 
 func (o *EmojiCategoriesGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetOK  %+v", 200, o.Payload)
 }
 
 func (o *EmojiCategoriesGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetOK  %+v", 200, o.Payload)
 }
 
 func (o *EmojiCategoriesGetOK) GetPayload() []*models.EmojiCategory {
@@ -183,11 +180,11 @@ func (o *EmojiCategoriesGetBadRequest) Code() int {
 }
 
 func (o *EmojiCategoriesGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetBadRequest ", 400)
 }
 
 func (o *EmojiCategoriesGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetBadRequest ", 400)
 }
 
 func (o *EmojiCategoriesGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -239,11 +236,11 @@ func (o *EmojiCategoriesGetUnauthorized) Code() int {
 }
 
 func (o *EmojiCategoriesGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetUnauthorized ", 401)
 }
 
 func (o *EmojiCategoriesGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetUnauthorized ", 401)
 }
 
 func (o *EmojiCategoriesGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -295,11 +292,11 @@ func (o *EmojiCategoriesGetForbidden) Code() int {
 }
 
 func (o *EmojiCategoriesGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetForbidden", 403)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetForbidden ", 403)
 }
 
 func (o *EmojiCategoriesGetForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetForbidden", 403)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetForbidden ", 403)
 }
 
 func (o *EmojiCategoriesGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -351,11 +348,11 @@ func (o *EmojiCategoriesGetNotFound) Code() int {
 }
 
 func (o *EmojiCategoriesGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetNotFound ", 404)
 }
 
 func (o *EmojiCategoriesGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetNotFound ", 404)
 }
 
 func (o *EmojiCategoriesGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -407,11 +404,11 @@ func (o *EmojiCategoriesGetNotAcceptable) Code() int {
 }
 
 func (o *EmojiCategoriesGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetNotAcceptable ", 406)
 }
 
 func (o *EmojiCategoriesGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetNotAcceptable ", 406)
 }
 
 func (o *EmojiCategoriesGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -463,11 +460,11 @@ func (o *EmojiCategoriesGetInternalServerError) Code() int {
 }
 
 func (o *EmojiCategoriesGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetInternalServerError ", 500)
 }
 
 func (o *EmojiCategoriesGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories/{id}][%d] emojiCategoriesGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis/categories][%d] emojiCategoriesGetInternalServerError ", 500)
 }
 
 func (o *EmojiCategoriesGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

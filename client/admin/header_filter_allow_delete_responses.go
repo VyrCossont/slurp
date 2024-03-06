@@ -105,11 +105,11 @@ func (o *HeaderFilterAllowDeleteAccepted) Code() int {
 }
 
 func (o *HeaderFilterAllowDeleteAccepted) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteAccepted", 202)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteAccepted ", 202)
 }
 
 func (o *HeaderFilterAllowDeleteAccepted) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteAccepted", 202)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteAccepted ", 202)
 }
 
 func (o *HeaderFilterAllowDeleteAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *HeaderFilterAllowDeleteBadRequest) Code() int {
 }
 
 func (o *HeaderFilterAllowDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteBadRequest ", 400)
 }
 
 func (o *HeaderFilterAllowDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteBadRequest ", 400)
 }
 
 func (o *HeaderFilterAllowDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *HeaderFilterAllowDeleteUnauthorized) Code() int {
 }
 
 func (o *HeaderFilterAllowDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteUnauthorized ", 401)
 }
 
 func (o *HeaderFilterAllowDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteUnauthorized ", 401)
 }
 
 func (o *HeaderFilterAllowDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *HeaderFilterAllowDeleteForbidden) Code() int {
 }
 
 func (o *HeaderFilterAllowDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteForbidden ", 403)
 }
 
 func (o *HeaderFilterAllowDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteForbidden ", 403)
 }
 
 func (o *HeaderFilterAllowDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *HeaderFilterAllowDeleteNotFound) Code() int {
 }
 
 func (o *HeaderFilterAllowDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteNotFound ", 404)
 }
 
 func (o *HeaderFilterAllowDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteNotFound ", 404)
 }
 
 func (o *HeaderFilterAllowDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *HeaderFilterAllowDeleteInternalServerError) Code() int {
 }
 
 func (o *HeaderFilterAllowDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteInternalServerError ", 500)
 }
 
 func (o *HeaderFilterAllowDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/header_allows/{id}][%d] headerFilterAllowDeleteInternalServerError ", 500)
 }
 
 func (o *HeaderFilterAllowDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

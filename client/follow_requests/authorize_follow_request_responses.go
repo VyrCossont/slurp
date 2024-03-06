@@ -6,7 +6,6 @@ package follow_requests
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *AuthorizeFollowRequestOK) Code() int {
 }
 
 func (o *AuthorizeFollowRequestOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestOK  %+v", 200, o.Payload)
 }
 
 func (o *AuthorizeFollowRequestOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestOK  %+v", 200, o.Payload)
 }
 
 func (o *AuthorizeFollowRequestOK) GetPayload() *models.Relationship {
@@ -179,11 +176,11 @@ func (o *AuthorizeFollowRequestBadRequest) Code() int {
 }
 
 func (o *AuthorizeFollowRequestBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestBadRequest ", 400)
 }
 
 func (o *AuthorizeFollowRequestBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestBadRequest ", 400)
 }
 
 func (o *AuthorizeFollowRequestBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -235,11 +232,11 @@ func (o *AuthorizeFollowRequestUnauthorized) Code() int {
 }
 
 func (o *AuthorizeFollowRequestUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestUnauthorized ", 401)
 }
 
 func (o *AuthorizeFollowRequestUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestUnauthorized ", 401)
 }
 
 func (o *AuthorizeFollowRequestUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -291,11 +288,11 @@ func (o *AuthorizeFollowRequestNotFound) Code() int {
 }
 
 func (o *AuthorizeFollowRequestNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestNotFound ", 404)
 }
 
 func (o *AuthorizeFollowRequestNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestNotFound ", 404)
 }
 
 func (o *AuthorizeFollowRequestNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -347,11 +344,11 @@ func (o *AuthorizeFollowRequestNotAcceptable) Code() int {
 }
 
 func (o *AuthorizeFollowRequestNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestNotAcceptable ", 406)
 }
 
 func (o *AuthorizeFollowRequestNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestNotAcceptable ", 406)
 }
 
 func (o *AuthorizeFollowRequestNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -403,11 +400,11 @@ func (o *AuthorizeFollowRequestInternalServerError) Code() int {
 }
 
 func (o *AuthorizeFollowRequestInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestInternalServerError ", 500)
 }
 
 func (o *AuthorizeFollowRequestInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/authorize][%d] authorizeFollowRequestInternalServerError ", 500)
 }
 
 func (o *AuthorizeFollowRequestInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

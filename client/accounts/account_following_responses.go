@@ -105,11 +105,11 @@ func (o *AccountFollowingOK) Code() int {
 }
 
 func (o *AccountFollowingOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingOK", 200)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingOK ", 200)
 }
 
 func (o *AccountFollowingOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingOK", 200)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingOK ", 200)
 }
 
 func (o *AccountFollowingOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *AccountFollowingBadRequest) Code() int {
 }
 
 func (o *AccountFollowingBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingBadRequest ", 400)
 }
 
 func (o *AccountFollowingBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingBadRequest ", 400)
 }
 
 func (o *AccountFollowingBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *AccountFollowingUnauthorized) Code() int {
 }
 
 func (o *AccountFollowingUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingUnauthorized ", 401)
 }
 
 func (o *AccountFollowingUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingUnauthorized ", 401)
 }
 
 func (o *AccountFollowingUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *AccountFollowingNotFound) Code() int {
 }
 
 func (o *AccountFollowingNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingNotFound ", 404)
 }
 
 func (o *AccountFollowingNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingNotFound ", 404)
 }
 
 func (o *AccountFollowingNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *AccountFollowingNotAcceptable) Code() int {
 }
 
 func (o *AccountFollowingNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingNotAcceptable ", 406)
 }
 
 func (o *AccountFollowingNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingNotAcceptable ", 406)
 }
 
 func (o *AccountFollowingNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *AccountFollowingInternalServerError) Code() int {
 }
 
 func (o *AccountFollowingInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingInternalServerError ", 500)
 }
 
 func (o *AccountFollowingInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingInternalServerError ", 500)
 }
 
 func (o *AccountFollowingInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

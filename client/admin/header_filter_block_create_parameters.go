@@ -60,6 +60,19 @@ HeaderFilterBlockCreateParams contains all the parameters to send to the API end
 	Typically these are written to a http.Request.
 */
 type HeaderFilterBlockCreateParams struct {
+
+	/* Header.
+
+	   The HTTP header to match against (e.g. User-Agent).
+	*/
+	Header string
+
+	/* Regex.
+
+	   The header value matching regular expression.
+	*/
+	Regex string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +126,28 @@ func (o *HeaderFilterBlockCreateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithHeader adds the header to the header filter block create params
+func (o *HeaderFilterBlockCreateParams) WithHeader(header string) *HeaderFilterBlockCreateParams {
+	o.SetHeader(header)
+	return o
+}
+
+// SetHeader adds the header to the header filter block create params
+func (o *HeaderFilterBlockCreateParams) SetHeader(header string) {
+	o.Header = header
+}
+
+// WithRegex adds the regex to the header filter block create params
+func (o *HeaderFilterBlockCreateParams) WithRegex(regex string) *HeaderFilterBlockCreateParams {
+	o.SetRegex(regex)
+	return o
+}
+
+// SetRegex adds the regex to the header filter block create params
+func (o *HeaderFilterBlockCreateParams) SetRegex(regex string) {
+	o.Regex = regex
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *HeaderFilterBlockCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +155,24 @@ func (o *HeaderFilterBlockCreateParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	// form param header
+	frHeader := o.Header
+	fHeader := frHeader
+	if fHeader != "" {
+		if err := r.SetFormParam("header", fHeader); err != nil {
+			return err
+		}
+	}
+
+	// form param regex
+	frRegex := o.Regex
+	fRegex := frRegex
+	if fRegex != "" {
+		if err := r.SetFormParam("regex", fRegex); err != nil {
+			return err
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

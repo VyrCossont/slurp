@@ -6,7 +6,6 @@ package markers
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -98,13 +97,11 @@ func (o *MarkersGetOK) Code() int {
 }
 
 func (o *MarkersGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetOK  %+v", 200, o.Payload)
 }
 
 func (o *MarkersGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetOK  %+v", 200, o.Payload)
 }
 
 func (o *MarkersGetOK) GetPayload() *models.Marker {
@@ -167,11 +164,11 @@ func (o *MarkersGetBadRequest) Code() int {
 }
 
 func (o *MarkersGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetBadRequest ", 400)
 }
 
 func (o *MarkersGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetBadRequest ", 400)
 }
 
 func (o *MarkersGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -223,11 +220,11 @@ func (o *MarkersGetUnauthorized) Code() int {
 }
 
 func (o *MarkersGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetUnauthorized ", 401)
 }
 
 func (o *MarkersGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetUnauthorized ", 401)
 }
 
 func (o *MarkersGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -279,11 +276,11 @@ func (o *MarkersGetInternalServerError) Code() int {
 }
 
 func (o *MarkersGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetInternalServerError ", 500)
 }
 
 func (o *MarkersGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/markers][%d] markersGetInternalServerError ", 500)
 }
 
 func (o *MarkersGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

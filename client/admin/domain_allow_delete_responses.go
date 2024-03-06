@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -122,13 +121,11 @@ func (o *DomainAllowDeleteOK) Code() int {
 }
 
 func (o *DomainAllowDeleteOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteOK  %+v", 200, o.Payload)
 }
 
 func (o *DomainAllowDeleteOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteOK  %+v", 200, o.Payload)
 }
 
 func (o *DomainAllowDeleteOK) GetPayload() *models.DomainPermission {
@@ -191,11 +188,11 @@ func (o *DomainAllowDeleteBadRequest) Code() int {
 }
 
 func (o *DomainAllowDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteBadRequest ", 400)
 }
 
 func (o *DomainAllowDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteBadRequest ", 400)
 }
 
 func (o *DomainAllowDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -247,11 +244,11 @@ func (o *DomainAllowDeleteUnauthorized) Code() int {
 }
 
 func (o *DomainAllowDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteUnauthorized ", 401)
 }
 
 func (o *DomainAllowDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteUnauthorized ", 401)
 }
 
 func (o *DomainAllowDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -303,11 +300,11 @@ func (o *DomainAllowDeleteForbidden) Code() int {
 }
 
 func (o *DomainAllowDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteForbidden ", 403)
 }
 
 func (o *DomainAllowDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteForbidden", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteForbidden ", 403)
 }
 
 func (o *DomainAllowDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -359,11 +356,11 @@ func (o *DomainAllowDeleteNotFound) Code() int {
 }
 
 func (o *DomainAllowDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteNotFound ", 404)
 }
 
 func (o *DomainAllowDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteNotFound ", 404)
 }
 
 func (o *DomainAllowDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -415,11 +412,11 @@ func (o *DomainAllowDeleteNotAcceptable) Code() int {
 }
 
 func (o *DomainAllowDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteNotAcceptable ", 406)
 }
 
 func (o *DomainAllowDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteNotAcceptable ", 406)
 }
 
 func (o *DomainAllowDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -471,11 +468,11 @@ func (o *DomainAllowDeleteConflict) Code() int {
 }
 
 func (o *DomainAllowDeleteConflict) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteConflict", 409)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteConflict ", 409)
 }
 
 func (o *DomainAllowDeleteConflict) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteConflict", 409)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteConflict ", 409)
 }
 
 func (o *DomainAllowDeleteConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -527,11 +524,11 @@ func (o *DomainAllowDeleteInternalServerError) Code() int {
 }
 
 func (o *DomainAllowDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteInternalServerError ", 500)
 }
 
 func (o *DomainAllowDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/domain_allows/{id}][%d] domainAllowDeleteInternalServerError ", 500)
 }
 
 func (o *DomainAllowDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

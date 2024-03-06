@@ -6,7 +6,6 @@ package timelines
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,13 +96,11 @@ func (o *TagTimelineOK) Code() int {
 }
 
 func (o *TagTimelineOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineOK  %+v", 200, o.Payload)
 }
 
 func (o *TagTimelineOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineOK  %+v", 200, o.Payload)
 }
 
 func (o *TagTimelineOK) GetPayload() []*models.Status {
@@ -171,11 +168,11 @@ func (o *TagTimelineBadRequest) Code() int {
 }
 
 func (o *TagTimelineBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineBadRequest ", 400)
 }
 
 func (o *TagTimelineBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineBadRequest ", 400)
 }
 
 func (o *TagTimelineBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -227,11 +224,11 @@ func (o *TagTimelineUnauthorized) Code() int {
 }
 
 func (o *TagTimelineUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineUnauthorized ", 401)
 }
 
 func (o *TagTimelineUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/timelines/tag/{tag_name}][%d] tagTimelineUnauthorized ", 401)
 }
 
 func (o *TagTimelineUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

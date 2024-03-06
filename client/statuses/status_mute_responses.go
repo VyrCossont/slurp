@@ -6,7 +6,6 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *StatusMuteOK) Code() int {
 }
 
 func (o *StatusMuteOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusMuteOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteOK  %+v", 200, o.Payload)
 }
 
 func (o *StatusMuteOK) GetPayload() *models.Status {
@@ -185,11 +182,11 @@ func (o *StatusMuteBadRequest) Code() int {
 }
 
 func (o *StatusMuteBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteBadRequest ", 400)
 }
 
 func (o *StatusMuteBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteBadRequest", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteBadRequest ", 400)
 }
 
 func (o *StatusMuteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *StatusMuteUnauthorized) Code() int {
 }
 
 func (o *StatusMuteUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteUnauthorized ", 401)
 }
 
 func (o *StatusMuteUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteUnauthorized ", 401)
 }
 
 func (o *StatusMuteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *StatusMuteForbidden) Code() int {
 }
 
 func (o *StatusMuteForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteForbidden ", 403)
 }
 
 func (o *StatusMuteForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteForbidden", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteForbidden ", 403)
 }
 
 func (o *StatusMuteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *StatusMuteNotFound) Code() int {
 }
 
 func (o *StatusMuteNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteNotFound ", 404)
 }
 
 func (o *StatusMuteNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteNotFound", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteNotFound ", 404)
 }
 
 func (o *StatusMuteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *StatusMuteNotAcceptable) Code() int {
 }
 
 func (o *StatusMuteNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteNotAcceptable ", 406)
 }
 
 func (o *StatusMuteNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteNotAcceptable", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteNotAcceptable ", 406)
 }
 
 func (o *StatusMuteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *StatusMuteInternalServerError) Code() int {
 }
 
 func (o *StatusMuteInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteInternalServerError ", 500)
 }
 
 func (o *StatusMuteInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteInternalServerError", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/mute][%d] statusMuteInternalServerError ", 500)
 }
 
 func (o *StatusMuteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

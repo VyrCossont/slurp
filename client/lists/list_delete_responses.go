@@ -105,11 +105,11 @@ func (o *ListDeleteOK) Code() int {
 }
 
 func (o *ListDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteOK", 200)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteOK ", 200)
 }
 
 func (o *ListDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteOK", 200)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteOK ", 200)
 }
 
 func (o *ListDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *ListDeleteBadRequest) Code() int {
 }
 
 func (o *ListDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteBadRequest ", 400)
 }
 
 func (o *ListDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteBadRequest", 400)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteBadRequest ", 400)
 }
 
 func (o *ListDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *ListDeleteUnauthorized) Code() int {
 }
 
 func (o *ListDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteUnauthorized ", 401)
 }
 
 func (o *ListDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteUnauthorized", 401)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteUnauthorized ", 401)
 }
 
 func (o *ListDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *ListDeleteNotFound) Code() int {
 }
 
 func (o *ListDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteNotFound ", 404)
 }
 
 func (o *ListDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteNotFound", 404)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteNotFound ", 404)
 }
 
 func (o *ListDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *ListDeleteNotAcceptable) Code() int {
 }
 
 func (o *ListDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteNotAcceptable ", 406)
 }
 
 func (o *ListDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteNotAcceptable", 406)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteNotAcceptable ", 406)
 }
 
 func (o *ListDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *ListDeleteInternalServerError) Code() int {
 }
 
 func (o *ListDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteInternalServerError ", 500)
 }
 
 func (o *ListDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteInternalServerError", 500)
+	return fmt.Sprintf("[DELETE /api/v1/lists/{id}][%d] listDeleteInternalServerError ", 500)
 }
 
 func (o *ListDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

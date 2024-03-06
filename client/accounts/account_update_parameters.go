@@ -100,15 +100,75 @@ type AccountUpdateParams struct {
 
 	/* FieldsAttributes0Name.
 
-	   Name of profile field to be added to this account's profile. (The index may be any string; add more indexes to send more fields.)
+	   Name of 1st profile field to be added to this account's profile. (The index may be any string; add more indexes to send more fields.)
 	*/
 	FieldsAttributes0Name *string
 
 	/* FieldsAttributes0Value.
 
-	   Value of profile field to be added to this account's profile. (The index may be any string; add more indexes to send more fields.)
+	   Value of 1st profile field to be added to this account's profile. (The index may be any string; add more indexes to send more fields.)
 	*/
 	FieldsAttributes0Value *string
+
+	/* FieldsAttributes1Name.
+
+	   Name of 2nd profile field to be added to this account's profile.
+	*/
+	FieldsAttributes1Name *string
+
+	/* FieldsAttributes1Value.
+
+	   Value of 2nd profile field to be added to this account's profile.
+	*/
+	FieldsAttributes1Value *string
+
+	/* FieldsAttributes2Name.
+
+	   Name of 3rd profile field to be added to this account's profile.
+	*/
+	FieldsAttributes2Name *string
+
+	/* FieldsAttributes2Value.
+
+	   Value of 3rd profile field to be added to this account's profile.
+	*/
+	FieldsAttributes2Value *string
+
+	/* FieldsAttributes3Name.
+
+	   Name of 4th profile field to be added to this account's profile.
+	*/
+	FieldsAttributes3Name *string
+
+	/* FieldsAttributes3Value.
+
+	   Value of 4th profile field to be added to this account's profile.
+	*/
+	FieldsAttributes3Value *string
+
+	/* FieldsAttributes4Name.
+
+	   Name of 5th profile field to be added to this account's profile.
+	*/
+	FieldsAttributes4Name *string
+
+	/* FieldsAttributes4Value.
+
+	   Value of 5th profile field to be added to this account's profile.
+	*/
+	FieldsAttributes4Value *string
+
+	/* FieldsAttributes5Name.
+
+	   Name of 6th profile field to be added to this account's profile.
+	*/
+	FieldsAttributes5Name *string
+
+	/* FieldsAttributes5Value.
+
+	   Value of 6th profile field to be added to this account's profile.
+	*/
+	FieldsAttributes5Value *string
 
 	/* Header.
 
@@ -291,6 +351,116 @@ func (o *AccountUpdateParams) WithFieldsAttributes0Value(fieldsAttributes0Value 
 // SetFieldsAttributes0Value adds the fieldsAttributes0Value to the account update params
 func (o *AccountUpdateParams) SetFieldsAttributes0Value(fieldsAttributes0Value *string) {
 	o.FieldsAttributes0Value = fieldsAttributes0Value
+}
+
+// WithFieldsAttributes1Name adds the fieldsAttributes1Name to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes1Name(fieldsAttributes1Name *string) *AccountUpdateParams {
+	o.SetFieldsAttributes1Name(fieldsAttributes1Name)
+	return o
+}
+
+// SetFieldsAttributes1Name adds the fieldsAttributes1Name to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes1Name(fieldsAttributes1Name *string) {
+	o.FieldsAttributes1Name = fieldsAttributes1Name
+}
+
+// WithFieldsAttributes1Value adds the fieldsAttributes1Value to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes1Value(fieldsAttributes1Value *string) *AccountUpdateParams {
+	o.SetFieldsAttributes1Value(fieldsAttributes1Value)
+	return o
+}
+
+// SetFieldsAttributes1Value adds the fieldsAttributes1Value to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes1Value(fieldsAttributes1Value *string) {
+	o.FieldsAttributes1Value = fieldsAttributes1Value
+}
+
+// WithFieldsAttributes2Name adds the fieldsAttributes2Name to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes2Name(fieldsAttributes2Name *string) *AccountUpdateParams {
+	o.SetFieldsAttributes2Name(fieldsAttributes2Name)
+	return o
+}
+
+// SetFieldsAttributes2Name adds the fieldsAttributes2Name to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes2Name(fieldsAttributes2Name *string) {
+	o.FieldsAttributes2Name = fieldsAttributes2Name
+}
+
+// WithFieldsAttributes2Value adds the fieldsAttributes2Value to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes2Value(fieldsAttributes2Value *string) *AccountUpdateParams {
+	o.SetFieldsAttributes2Value(fieldsAttributes2Value)
+	return o
+}
+
+// SetFieldsAttributes2Value adds the fieldsAttributes2Value to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes2Value(fieldsAttributes2Value *string) {
+	o.FieldsAttributes2Value = fieldsAttributes2Value
+}
+
+// WithFieldsAttributes3Name adds the fieldsAttributes3Name to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes3Name(fieldsAttributes3Name *string) *AccountUpdateParams {
+	o.SetFieldsAttributes3Name(fieldsAttributes3Name)
+	return o
+}
+
+// SetFieldsAttributes3Name adds the fieldsAttributes3Name to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes3Name(fieldsAttributes3Name *string) {
+	o.FieldsAttributes3Name = fieldsAttributes3Name
+}
+
+// WithFieldsAttributes3Value adds the fieldsAttributes3Value to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes3Value(fieldsAttributes3Value *string) *AccountUpdateParams {
+	o.SetFieldsAttributes3Value(fieldsAttributes3Value)
+	return o
+}
+
+// SetFieldsAttributes3Value adds the fieldsAttributes3Value to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes3Value(fieldsAttributes3Value *string) {
+	o.FieldsAttributes3Value = fieldsAttributes3Value
+}
+
+// WithFieldsAttributes4Name adds the fieldsAttributes4Name to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes4Name(fieldsAttributes4Name *string) *AccountUpdateParams {
+	o.SetFieldsAttributes4Name(fieldsAttributes4Name)
+	return o
+}
+
+// SetFieldsAttributes4Name adds the fieldsAttributes4Name to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes4Name(fieldsAttributes4Name *string) {
+	o.FieldsAttributes4Name = fieldsAttributes4Name
+}
+
+// WithFieldsAttributes4Value adds the fieldsAttributes4Value to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes4Value(fieldsAttributes4Value *string) *AccountUpdateParams {
+	o.SetFieldsAttributes4Value(fieldsAttributes4Value)
+	return o
+}
+
+// SetFieldsAttributes4Value adds the fieldsAttributes4Value to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes4Value(fieldsAttributes4Value *string) {
+	o.FieldsAttributes4Value = fieldsAttributes4Value
+}
+
+// WithFieldsAttributes5Name adds the fieldsAttributes5Name to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes5Name(fieldsAttributes5Name *string) *AccountUpdateParams {
+	o.SetFieldsAttributes5Name(fieldsAttributes5Name)
+	return o
+}
+
+// SetFieldsAttributes5Name adds the fieldsAttributes5Name to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes5Name(fieldsAttributes5Name *string) {
+	o.FieldsAttributes5Name = fieldsAttributes5Name
+}
+
+// WithFieldsAttributes5Value adds the fieldsAttributes5Value to the account update params
+func (o *AccountUpdateParams) WithFieldsAttributes5Value(fieldsAttributes5Value *string) *AccountUpdateParams {
+	o.SetFieldsAttributes5Value(fieldsAttributes5Value)
+	return o
+}
+
+// SetFieldsAttributes5Value adds the fieldsAttributes5Value to the account update params
+func (o *AccountUpdateParams) SetFieldsAttributes5Value(fieldsAttributes5Value *string) {
+	o.FieldsAttributes5Value = fieldsAttributes5Value
 }
 
 // WithHeader adds the header to the account update params
@@ -480,6 +650,156 @@ func (o *AccountUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		fFieldsAttributes0Value := frFieldsAttributes0Value
 		if fFieldsAttributes0Value != "" {
 			if err := r.SetFormParam("fields_attributes[0][value]", fFieldsAttributes0Value); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes1Name != nil {
+
+		// form param fields_attributes[1][name]
+		var frFieldsAttributes1Name string
+		if o.FieldsAttributes1Name != nil {
+			frFieldsAttributes1Name = *o.FieldsAttributes1Name
+		}
+		fFieldsAttributes1Name := frFieldsAttributes1Name
+		if fFieldsAttributes1Name != "" {
+			if err := r.SetFormParam("fields_attributes[1][name]", fFieldsAttributes1Name); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes1Value != nil {
+
+		// form param fields_attributes[1][value]
+		var frFieldsAttributes1Value string
+		if o.FieldsAttributes1Value != nil {
+			frFieldsAttributes1Value = *o.FieldsAttributes1Value
+		}
+		fFieldsAttributes1Value := frFieldsAttributes1Value
+		if fFieldsAttributes1Value != "" {
+			if err := r.SetFormParam("fields_attributes[1][value]", fFieldsAttributes1Value); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes2Name != nil {
+
+		// form param fields_attributes[2][name]
+		var frFieldsAttributes2Name string
+		if o.FieldsAttributes2Name != nil {
+			frFieldsAttributes2Name = *o.FieldsAttributes2Name
+		}
+		fFieldsAttributes2Name := frFieldsAttributes2Name
+		if fFieldsAttributes2Name != "" {
+			if err := r.SetFormParam("fields_attributes[2][name]", fFieldsAttributes2Name); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes2Value != nil {
+
+		// form param fields_attributes[2][value]
+		var frFieldsAttributes2Value string
+		if o.FieldsAttributes2Value != nil {
+			frFieldsAttributes2Value = *o.FieldsAttributes2Value
+		}
+		fFieldsAttributes2Value := frFieldsAttributes2Value
+		if fFieldsAttributes2Value != "" {
+			if err := r.SetFormParam("fields_attributes[2][value]", fFieldsAttributes2Value); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes3Name != nil {
+
+		// form param fields_attributes[3][name]
+		var frFieldsAttributes3Name string
+		if o.FieldsAttributes3Name != nil {
+			frFieldsAttributes3Name = *o.FieldsAttributes3Name
+		}
+		fFieldsAttributes3Name := frFieldsAttributes3Name
+		if fFieldsAttributes3Name != "" {
+			if err := r.SetFormParam("fields_attributes[3][name]", fFieldsAttributes3Name); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes3Value != nil {
+
+		// form param fields_attributes[3][value]
+		var frFieldsAttributes3Value string
+		if o.FieldsAttributes3Value != nil {
+			frFieldsAttributes3Value = *o.FieldsAttributes3Value
+		}
+		fFieldsAttributes3Value := frFieldsAttributes3Value
+		if fFieldsAttributes3Value != "" {
+			if err := r.SetFormParam("fields_attributes[3][value]", fFieldsAttributes3Value); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes4Name != nil {
+
+		// form param fields_attributes[4][name]
+		var frFieldsAttributes4Name string
+		if o.FieldsAttributes4Name != nil {
+			frFieldsAttributes4Name = *o.FieldsAttributes4Name
+		}
+		fFieldsAttributes4Name := frFieldsAttributes4Name
+		if fFieldsAttributes4Name != "" {
+			if err := r.SetFormParam("fields_attributes[4][name]", fFieldsAttributes4Name); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes4Value != nil {
+
+		// form param fields_attributes[4][value]
+		var frFieldsAttributes4Value string
+		if o.FieldsAttributes4Value != nil {
+			frFieldsAttributes4Value = *o.FieldsAttributes4Value
+		}
+		fFieldsAttributes4Value := frFieldsAttributes4Value
+		if fFieldsAttributes4Value != "" {
+			if err := r.SetFormParam("fields_attributes[4][value]", fFieldsAttributes4Value); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes5Name != nil {
+
+		// form param fields_attributes[5][name]
+		var frFieldsAttributes5Name string
+		if o.FieldsAttributes5Name != nil {
+			frFieldsAttributes5Name = *o.FieldsAttributes5Name
+		}
+		fFieldsAttributes5Name := frFieldsAttributes5Name
+		if fFieldsAttributes5Name != "" {
+			if err := r.SetFormParam("fields_attributes[5][name]", fFieldsAttributes5Name); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.FieldsAttributes5Value != nil {
+
+		// form param fields_attributes[5][value]
+		var frFieldsAttributes5Value string
+		if o.FieldsAttributes5Value != nil {
+			frFieldsAttributes5Value = *o.FieldsAttributes5Value
+		}
+		fFieldsAttributes5Value := frFieldsAttributes5Value
+		if fFieldsAttributes5Value != "" {
+			if err := r.SetFormParam("fields_attributes[5][value]", fFieldsAttributes5Value); err != nil {
 				return err
 			}
 		}

@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *DomainBlocksGetOK) Code() int {
 }
 
 func (o *DomainBlocksGetOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetOK  %+v", 200, o.Payload)
 }
 
 func (o *DomainBlocksGetOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetOK  %+v", 200, o.Payload)
 }
 
 func (o *DomainBlocksGetOK) GetPayload() []*models.DomainPermission {
@@ -183,11 +180,11 @@ func (o *DomainBlocksGetBadRequest) Code() int {
 }
 
 func (o *DomainBlocksGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetBadRequest ", 400)
 }
 
 func (o *DomainBlocksGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetBadRequest ", 400)
 }
 
 func (o *DomainBlocksGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -239,11 +236,11 @@ func (o *DomainBlocksGetUnauthorized) Code() int {
 }
 
 func (o *DomainBlocksGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetUnauthorized ", 401)
 }
 
 func (o *DomainBlocksGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetUnauthorized ", 401)
 }
 
 func (o *DomainBlocksGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -295,11 +292,11 @@ func (o *DomainBlocksGetForbidden) Code() int {
 }
 
 func (o *DomainBlocksGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetForbidden", 403)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetForbidden ", 403)
 }
 
 func (o *DomainBlocksGetForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetForbidden", 403)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetForbidden ", 403)
 }
 
 func (o *DomainBlocksGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -351,11 +348,11 @@ func (o *DomainBlocksGetNotFound) Code() int {
 }
 
 func (o *DomainBlocksGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetNotFound ", 404)
 }
 
 func (o *DomainBlocksGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetNotFound", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetNotFound ", 404)
 }
 
 func (o *DomainBlocksGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -407,11 +404,11 @@ func (o *DomainBlocksGetNotAcceptable) Code() int {
 }
 
 func (o *DomainBlocksGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetNotAcceptable ", 406)
 }
 
 func (o *DomainBlocksGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetNotAcceptable", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetNotAcceptable ", 406)
 }
 
 func (o *DomainBlocksGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -463,11 +460,11 @@ func (o *DomainBlocksGetInternalServerError) Code() int {
 }
 
 func (o *DomainBlocksGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetInternalServerError ", 500)
 }
 
 func (o *DomainBlocksGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetInternalServerError", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/domain_blocks][%d] domainBlocksGetInternalServerError ", 500)
 }
 
 func (o *DomainBlocksGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

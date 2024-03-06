@@ -95,13 +95,11 @@ func (o *StreamGetSwitchingProtocols) Code() int {
 }
 
 func (o *StreamGetSwitchingProtocols) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetSwitchingProtocols %s", 101, payload)
+	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetSwitchingProtocols  %+v", 101, o.Payload)
 }
 
 func (o *StreamGetSwitchingProtocols) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetSwitchingProtocols %s", 101, payload)
+	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetSwitchingProtocols  %+v", 101, o.Payload)
 }
 
 func (o *StreamGetSwitchingProtocols) GetPayload() *StreamGetSwitchingProtocolsBody {
@@ -164,11 +162,11 @@ func (o *StreamGetBadRequest) Code() int {
 }
 
 func (o *StreamGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetBadRequest ", 400)
 }
 
 func (o *StreamGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetBadRequest", 400)
+	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetBadRequest ", 400)
 }
 
 func (o *StreamGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +218,11 @@ func (o *StreamGetUnauthorized) Code() int {
 }
 
 func (o *StreamGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetUnauthorized ", 401)
 }
 
 func (o *StreamGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetUnauthorized", 401)
+	return fmt.Sprintf("[GET /api/v1/streaming][%d] streamGetUnauthorized ", 401)
 }
 
 func (o *StreamGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -244,7 +242,7 @@ type StreamGetSwitchingProtocolsBody struct {
 	// `notification`: a new notification has been received.
 	// `delete`: a status has been deleted.
 	// `filters_changed`: not implemented.
-	// Enum: ["update","notification","delete","filters_changed"]
+	// Enum: [update notification delete filters_changed]
 	Event string `json:"event,omitempty"`
 
 	// The payload of the streamed message.

@@ -6,7 +6,6 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -116,13 +115,11 @@ func (o *EmojiUpdateOK) Code() int {
 }
 
 func (o *EmojiUpdateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *EmojiUpdateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *EmojiUpdateOK) GetPayload() *models.AdminEmoji {
@@ -185,11 +182,11 @@ func (o *EmojiUpdateBadRequest) Code() int {
 }
 
 func (o *EmojiUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateBadRequest", 400)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateBadRequest ", 400)
 }
 
 func (o *EmojiUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateBadRequest", 400)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateBadRequest ", 400)
 }
 
 func (o *EmojiUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +238,11 @@ func (o *EmojiUpdateUnauthorized) Code() int {
 }
 
 func (o *EmojiUpdateUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateUnauthorized", 401)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateUnauthorized ", 401)
 }
 
 func (o *EmojiUpdateUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateUnauthorized", 401)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateUnauthorized ", 401)
 }
 
 func (o *EmojiUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,11 +294,11 @@ func (o *EmojiUpdateForbidden) Code() int {
 }
 
 func (o *EmojiUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateForbidden", 403)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateForbidden ", 403)
 }
 
 func (o *EmojiUpdateForbidden) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateForbidden", 403)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateForbidden ", 403)
 }
 
 func (o *EmojiUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -353,11 +350,11 @@ func (o *EmojiUpdateNotFound) Code() int {
 }
 
 func (o *EmojiUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateNotFound", 404)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateNotFound ", 404)
 }
 
 func (o *EmojiUpdateNotFound) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateNotFound", 404)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateNotFound ", 404)
 }
 
 func (o *EmojiUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -409,11 +406,11 @@ func (o *EmojiUpdateNotAcceptable) Code() int {
 }
 
 func (o *EmojiUpdateNotAcceptable) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateNotAcceptable", 406)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateNotAcceptable ", 406)
 }
 
 func (o *EmojiUpdateNotAcceptable) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateNotAcceptable", 406)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateNotAcceptable ", 406)
 }
 
 func (o *EmojiUpdateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -465,11 +462,11 @@ func (o *EmojiUpdateInternalServerError) Code() int {
 }
 
 func (o *EmojiUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateInternalServerError", 500)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateInternalServerError ", 500)
 }
 
 func (o *EmojiUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateInternalServerError", 500)
+	return fmt.Sprintf("[PATCH /api/v1/admin/custom_emojis/{id}][%d] emojiUpdateInternalServerError ", 500)
 }
 
 func (o *EmojiUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
