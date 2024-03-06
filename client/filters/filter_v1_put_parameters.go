@@ -68,7 +68,7 @@ type FilterV1PutParams struct {
 
 	Sample: home, public
 	*/
-	Context []string
+	FContext []string
 
 	/* ExpiresIn.
 
@@ -176,14 +176,14 @@ func (o *FilterV1PutParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithContext adds the context to the filter v1 put params
-func (o *FilterV1PutParams) WithContext(context []string) *FilterV1PutParams {
-	o.SetContext(context)
+func (o *FilterV1PutParams) WithFContext(context []string) *FilterV1PutParams {
+	o.SetFContext(context)
 	return o
 }
 
 // SetContext adds the context to the filter v1 put params
-func (o *FilterV1PutParams) SetContext(context []string) {
-	o.Context = context
+func (o *FilterV1PutParams) SetFContext(context []string) {
+	o.FContext = context
 }
 
 // WithExpiresIn adds the expiresIn to the filter v1 put params
@@ -249,7 +249,7 @@ func (o *FilterV1PutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	}
 	var res []error
 
-	if o.Context != nil {
+	if o.FContext != nil {
 
 		// binding items for context
 		joinedContext := o.bindParamContext(reg)
@@ -327,7 +327,7 @@ func (o *FilterV1PutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 
 // bindParamFilterV1Put binds the parameter context
 func (o *FilterV1PutParams) bindParamContext(formats strfmt.Registry) []string {
-	contextIR := o.Context
+	contextIR := o.FContext
 
 	var contextIC []string
 	for _, contextIIR := range contextIR { // explode []string
@@ -336,8 +336,8 @@ func (o *FilterV1PutParams) bindParamContext(formats strfmt.Registry) []string {
 		contextIC = append(contextIC, contextIIV)
 	}
 
-	// items.CollectionFormat: ""
-	contextIS := swag.JoinByFormat(contextIC, "")
+	// items.CollectionFormat: "multi"
+	contextIS := swag.JoinByFormat(contextIC, "multi")
 
 	return contextIS
 }

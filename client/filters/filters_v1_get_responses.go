@@ -75,7 +75,7 @@ FiltersV1GetOK describes a response with status code 200, with default header va
 Requested filters.
 */
 type FiltersV1GetOK struct {
-	Payload *models.FilterV1
+	Payload []*models.FilterV1
 }
 
 // IsSuccess returns true when this filters v1 get o k response has a 2xx status code
@@ -116,16 +116,14 @@ func (o *FiltersV1GetOK) String() string {
 	return fmt.Sprintf("[GET /api/v1/filters][%d] filtersV1GetOK  %+v", 200, o.Payload)
 }
 
-func (o *FiltersV1GetOK) GetPayload() *models.FilterV1 {
+func (o *FiltersV1GetOK) GetPayload() []*models.FilterV1 {
 	return o.Payload
 }
 
 func (o *FiltersV1GetOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.FilterV1)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
