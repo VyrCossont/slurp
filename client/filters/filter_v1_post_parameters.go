@@ -67,6 +67,8 @@ type FilterV1PostParams struct {
 	     The contexts in which the filter should be applied.
 
 	Sample: home, public
+
+	     Format: multi
 	*/
 	FContext []string
 
@@ -234,11 +236,11 @@ func (o *FilterV1PostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 	if o.FContext != nil {
 
-		// binding items for context
+		// binding items for context[]
 		joinedContext := o.bindParamContext(reg)
 
-		// form array param context
-		if err := r.SetFormParam("context", joinedContext...); err != nil {
+		// form array param context[]
+		if err := r.SetFormParam("context[]", joinedContext...); err != nil {
 			return err
 		}
 	}
@@ -303,7 +305,7 @@ func (o *FilterV1PostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	return nil
 }
 
-// bindParamFilterV1Post binds the parameter context
+// bindParamFilterV1Post binds the parameter context[]
 func (o *FilterV1PostParams) bindParamContext(formats strfmt.Registry) []string {
 	contextIR := o.FContext
 

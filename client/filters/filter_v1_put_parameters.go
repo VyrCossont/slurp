@@ -67,6 +67,8 @@ type FilterV1PutParams struct {
 	     The contexts in which the filter should be applied.
 
 	Sample: home, public
+
+	     Format: multi
 	*/
 	FContext []string
 
@@ -251,11 +253,11 @@ func (o *FilterV1PutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 
 	if o.FContext != nil {
 
-		// binding items for context
+		// binding items for context[]
 		joinedContext := o.bindParamContext(reg)
 
-		// form array param context
-		if err := r.SetFormParam("context", joinedContext...); err != nil {
+		// form array param context[]
+		if err := r.SetFormParam("context[]", joinedContext...); err != nil {
 			return err
 		}
 	}
@@ -325,7 +327,7 @@ func (o *FilterV1PutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	return nil
 }
 
-// bindParamFilterV1Put binds the parameter context
+// bindParamFilterV1Put binds the parameter context[]
 func (o *FilterV1PutParams) bindParamContext(formats strfmt.Registry) []string {
 	contextIR := o.FContext
 
