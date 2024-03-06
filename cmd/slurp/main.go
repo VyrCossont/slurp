@@ -18,12 +18,15 @@
 package main
 
 import (
+	"encoding/json"
 	"log/slog"
 	"net/url"
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
+	"github.com/VyrCossont/slurp/client/filters"
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
@@ -145,6 +148,14 @@ func (c *config) dstAuth() runtime.ClientAuthInfoWriter {
 	return httptransport.BearerToken(c.dstToken)
 }
 
+type command string
+
+const (
+	commandCopyStatuses  command = "copy-statuses"
+	commandExportFilters command = "export-filters"
+	commandImportFilters command = "import-filters"
+)
+
 func main() {
 	slog.SetDefault(slog.New(slog.NewTextHandler(os.Stderr, nil)))
 
@@ -159,6 +170,27 @@ func main() {
 		})))
 	}
 
+	commandName := commandCopyStatuses
+	if len(os.Args) > 1 {
+		commandName = command(os.Args[1])
+	}
+	var err error
+	switch commandName {
+	case commandCopyStatuses:
+		err = copyStatuses(c)
+	case commandExportFilters:
+		err = exportFilters(c)
+	case commandImportFilters:
+		err = importFilters(c)
+	}
+	if err != nil {
+		os.Exit(1)
+	}
+}
+
+// region copyStatuses
+
+func copyStatuses(c *config) error {
 	urlsToResolve := make(chan string, c.count)
 	statusesRequested := make(chan int, c.count)
 
@@ -170,9 +202,14 @@ func main() {
 
 	srcError := <-srcDone
 	dstError := <-dstDone
-	if srcError != nil || dstError != nil {
-		os.Exit(1)
+
+	if srcError != nil {
+		return srcError
 	}
+	if dstError != nil {
+		return dstError
+	}
+	return nil
 }
 
 // srcTask uses the public timeline API to discover statuses.
@@ -337,3 +374,78 @@ func dstTask(c *config, urlsToResolve chan string, statusesRequested chan int, d
 	done <- err
 	slog.Debug("finished")
 }
+
+//endregion
+
+//region filters
+
+func exportFilters(c *config) error {
+	w := json.NewEncoder(os.Stdout)
+	w.SetEscapeHTML(false)
+	w.SetIndent("", "  ")
+
+	client := c.srcClient()
+	auth := c.srcAuth()
+
+	resp, err := client.Filters.FiltersV1Get(nil, auth)
+	if err != nil {
+		slog.Error("error getting filters", "error", err)
+		return err
+	}
+
+	err = w.Encode(resp.GetPayload())
+	if err != nil {
+		slog.Error("error encoding filters", "error", err)
+		return err
+	}
+
+	return nil
+}
+
+func importFilters(c *config) error {
+	r := json.NewDecoder(os.Stdin)
+	var filterList []*models.FilterV1
+	err := r.Decode(&filterList)
+	if err != nil {
+		slog.Error("error decoding filters", "error", err)
+		return err
+	}
+
+	client := c.dstClient()
+	auth := c.dstAuth()
+
+	for _, filter := range filterList {
+		params := &filters.FilterV1PostParams{
+			Phrase:       filter.Phrase,
+			Irreversible: &filter.Irreversible,
+			WholeWord:    &filter.WholeWord,
+		}
+		for _, context := range filter.Context {
+			params.FContext = append(params.FContext, string(context))
+		}
+		if filter.ExpiresAt != "" {
+			var expiresAt time.Time
+			expiresAt, err = time.Parse(time.RFC3339Nano, filter.ExpiresAt)
+			if err != nil {
+				expiresAt, err = time.Parse(time.RFC3339, filter.ExpiresAt)
+			}
+			if err != nil {
+				slog.Error("error parsing timestamp", "error", err, "timestamp", filter.ExpiresAt)
+				return err
+			}
+			expiresIn := expiresAt.Sub(time.Now()).Seconds()
+			params.ExpiresIn = &expiresIn
+		}
+		_, err = client.Filters.FilterV1Post(params, auth, func(op *runtime.ClientOperation) {
+			op.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
+		})
+		if err != nil {
+			slog.Error("error creating filter", "error", err, "id", filter.ID)
+			return err
+		}
+	}
+
+	return nil
+}
+
+//endregion
