@@ -26,6 +26,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/brianvoe/gofakeit/v7"
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
@@ -35,6 +36,7 @@ import (
 	apiclient "github.com/VyrCossont/slurp/client"
 	"github.com/VyrCossont/slurp/client/filters"
 	"github.com/VyrCossont/slurp/client/search"
+	"github.com/VyrCossont/slurp/client/statuses"
 	"github.com/VyrCossont/slurp/client/timelines"
 	"github.com/VyrCossont/slurp/models"
 )
@@ -154,6 +156,7 @@ const (
 	commandCopyStatuses  command = "copy-statuses"
 	commandExportFilters command = "export-filters"
 	commandImportFilters command = "import-filters"
+	commandGeneratePost  command = "generate-post"
 )
 
 func main() {
@@ -182,6 +185,8 @@ func main() {
 		err = exportFilters(c)
 	case commandImportFilters:
 		err = importFilters(c)
+	case commandGeneratePost:
+		err = generatePost(c)
 	}
 	if err != nil {
 		os.Exit(1)
@@ -444,6 +449,34 @@ func importFilters(c *config) error {
 			return err
 		}
 	}
+
+	return nil
+}
+
+//endregion
+
+//region generatePost
+
+func addr[T any](v T) *T { return &v }
+
+func generatePost(c *config) error {
+	client := c.dstClient()
+	auth := c.dstAuth()
+
+	params := &statuses.StatusCreateParams{
+		ContentType: addr("text/plain"),
+		Status:      addr(gofakeit.HipsterParagraph(2, 3, 10, "\n\n")),
+		Visibility:  addr("direct"),
+	}
+
+	resp, err := client.Statuses.StatusCreate(params, auth, func(op *runtime.ClientOperation) {
+		op.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
+	})
+	if err != nil {
+		slog.Error("error creating status", "error")
+		return err
+	}
+	slog.Info("posted status", "url", resp.GetPayload().URL)
 
 	return nil
 }
