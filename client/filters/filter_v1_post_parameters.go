@@ -67,8 +67,6 @@ type FilterV1PostParams struct {
 	     The contexts in which the filter should be applied.
 
 	Sample: home, public
-
-	     Format: multi
 	*/
 	FContext []string
 
