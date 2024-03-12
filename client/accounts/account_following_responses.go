@@ -7,9 +7,12 @@ package accounts
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/VyrCossont/slurp/models"
 )
 
 // AccountFollowingReader is a Reader for the AccountFollowing structure.
@@ -72,6 +75,12 @@ AccountFollowingOK describes a response with status code 200, with default heade
 Array of accounts that are followed by this account.
 */
 type AccountFollowingOK struct {
+
+	/* Links to the next and previous queries.
+	 */
+	Link string
+
+	Payload []*models.Account
 }
 
 // IsSuccess returns true when this account following o k response has a 2xx status code
@@ -105,14 +114,30 @@ func (o *AccountFollowingOK) Code() int {
 }
 
 func (o *AccountFollowingOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingOK ", 200)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingOK  %+v", 200, o.Payload)
 }
 
 func (o *AccountFollowingOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingOK ", 200)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}/following][%d] accountFollowingOK  %+v", 200, o.Payload)
+}
+
+func (o *AccountFollowingOK) GetPayload() []*models.Account {
+	return o.Payload
 }
 
 func (o *AccountFollowingOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
+
+	if hdrLink != "" {
+		o.Link = hdrLink
+	}
+
+	// response payload
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

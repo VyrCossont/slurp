@@ -75,6 +75,11 @@ AdminReportsOK describes a response with status code 200, with default header va
 Array of reports.
 */
 type AdminReportsOK struct {
+
+	/* Links to the next and previous queries.
+	 */
+	Link string
+
 	Payload []*models.AdminReport
 }
 
@@ -121,6 +126,13 @@ func (o *AdminReportsOK) GetPayload() []*models.AdminReport {
 }
 
 func (o *AdminReportsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
+
+	if hdrLink != "" {
+		o.Link = hdrLink
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {

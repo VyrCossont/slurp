@@ -44,5 +44,5 @@ patch -u -p1 -i fcontext.diff
 You can also use `go-swagger` directly instead of through `go generate`, which you'll want to do if using a different branch or tag, or a local copy of the GotoSocial codebase. In the latter case, don't forget to [update your copy's `swagger.yaml`](https://github.com/superseriousbusiness/gotosocial/blob/main/CONTRIBUTING.md#updating-swagger-docs) first.
 
 ```bash
-go run github.com/go-swagger/go-swagger/cmd/swagger --spec /path/to/gotosocial/docs/api/swagger.yaml
+go run github.com/go-swagger/go-swagger/cmd/swagger generate client --spec /path/to/gotosocial/docs/api/swagger.yaml
 ```

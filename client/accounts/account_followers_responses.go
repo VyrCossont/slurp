@@ -75,6 +75,11 @@ AccountFollowersOK describes a response with status code 200, with default heade
 Array of accounts that follow this account.
 */
 type AccountFollowersOK struct {
+
+	/* Links to the next and previous queries.
+	 */
+	Link string
+
 	Payload []*models.Account
 }
 
@@ -121,6 +126,13 @@ func (o *AccountFollowersOK) GetPayload() []*models.Account {
 }
 
 func (o *AccountFollowersOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
+
+	if hdrLink != "" {
+		o.Link = hdrLink
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
