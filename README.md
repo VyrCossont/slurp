@@ -2,6 +2,16 @@
 
 A tool for exporting data from and importing data to [Fediverse](https://en.wikipedia.org/wiki/Fediverse) instances. Requires that they support the [Mastodon API](https://docs.joinmastodon.org/) as implemented By [GotoSocial](https://gotosocial.org/). Intended for use with GotoSocial, but should work with other Mastodon-like instances, including Mastodon.
 
+## what
+
+`slurp` has commands for importing and exporting these API objects, in CSV formats compatible with the Mastodon import/export GUI where possible:
+
+- `blocks`
+- `bookmarks`
+- `filters` (note that Mastodon can't import or export filters yet, so the current format is `slurp`-specific)
+- `follows`
+- `lists`
+
 ## build
 
 ```bash
