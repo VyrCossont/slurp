@@ -62,4 +62,6 @@ func init() {
 	authCmd.AddCommand(authLoginCmd)
 
 	authCmd.AddCommand(authLogoutCmd)
+
+	authCmd.AddCommand(authWhoamiCmd)
 }

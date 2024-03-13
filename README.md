@@ -1,32 +1,47 @@
 # slurp
 
-A tool for copying posts between [Fediverse](https://en.wikipedia.org/wiki/Fediverse) instances for testing purposes. Requires that they support the [Mastodon API](https://docs.joinmastodon.org/). Intended for use with [GotoSocial](https://gotosocial.org/) but will probably work with other Mastodon-like instances.
+A tool for exporting data from and importing data to [Fediverse](https://en.wikipedia.org/wiki/Fediverse) instances. Requires that they support the [Mastodon API](https://docs.joinmastodon.org/) as implemented By [GotoSocial](https://gotosocial.org/). Intended for use with GotoSocial, but should work with other Mastodon-like instances, including Mastodon.
 
 ## build
 
 ```bash
 go mod download
-go build ./cmd/slurp
+go build .
 ```
 
 ## run
 
-`slurp` currently takes all of its configuration through environment variables:
-
-- `SRC_INSTANCE`: the source instance from which to read the public timeline (required)
-- `SRC_TOKEN`: OAuth bearer token for the source instance (optional: some instances still allow unauthenticated public timeline access)
-- `DST_INSTANCE`: the destination instance to which to copy posts (required)
-- `DST_TOKEN`: OAuth bearer token for the destination instance (required)
-- `COUNT`: copy this many posts (optional: defaults to 100)
-- `PAGE_SIZE`: fetch this many posts at a time (optional: defaults to 40, the Mastodon maximum)
-- `DEBUG`: set to `true` to enable verbose debug logging (optional: defaults to false)
-- `HTTPS_PROXY`: if you're using an HTTPS proxy for debugging, pass the URL to it here; for example, `http://localhost:9090` for [Proxyman](https://proxyman.io/)'s default configuration. (`HTTPS_PROXY` is common across most Go apps and not specific to `slurp`.)
+Show help for all commands.
 
 ```bash
-SRC_INSTANCE=mastodon.social DST_INSTANCE=instance.example DST_TOKEN=XXXXXX COUNT=10 go run ./cmd/slurp
+./slurp help
 ```
 
-By default, posts with media, bot posts, non-public posts, and non-English posts are skipped. You can change this by editing the `skip()` function and recompiling `slurp`.
+Before running other commands, log in.
+
+You'll be asked to log into your instance in your web browser, and paste the provided authorization code into the prompt. This will save your access token in the system keychain, and that user as the default user in slurp's preferences.
+
+```bash
+./slurp --user user@instance.tld auth login
+```
+
+Load follows from a previous instance. This will use your stored access token and default user.
+
+```bash
+./slurp follows import --file following_accounts.csv
+```
+
+Save follows from this instance.
+
+```bash
+./slurp follows export --file follows_backup.csv
+```
+
+`slurp` respects these environment variables:
+
+- `HTTPS_PROXY`: if you're using an HTTPS proxy for debugging, pass the URL to it here; for example, `http://localhost:9090` for [Proxyman](https://proxyman.io/)'s default configuration. (`HTTPS_PROXY` is common across most Go apps and not specific to `slurp`.)
+
+`slurp` stores its preferences in `~/Library/Application Support/codes.catgirl.slurp/prefs.json` or the equivalent for your OS (usually `~/.config/codes.catgirl.slurp/prefs.json` on Linux), respecting XDG environment variables and their equivalents.
 
 ## update Swagger client
 

@@ -47,7 +47,4 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&User, "user", "u", "", "username@domain of the account whose data we're working with")
-	if err := rootCmd.MarkPersistentFlagRequired("user"); err != nil {
-		panic(err)
-	}
 }

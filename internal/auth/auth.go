@@ -60,9 +60,19 @@ func (c *Client) Wait() error {
 }
 
 func NewAuthClient(user string) (*Client, error) {
-	instance, err := keyring.Get(keyringServiceInstance, user)
+	var err error
+
+	if user == "" {
+		user, err = util.GetDefaultUser()
+		if err != nil {
+			slog.Error("no user provided, couldn't get default user from prefs (did you log in first?)")
+			return nil, err
+		}
+	}
+
+	instance, err := util.GetUserInstance(user)
 	if err != nil {
-		slog.Error("couldn't get user's instance from keychain (did you log in first?)", "user", user)
+		slog.Error("couldn't get user's instance from prefs (did you log in first?)", "user", user)
 		return nil, err
 	}
 
@@ -82,8 +92,6 @@ func NewAuthClient(user string) (*Client, error) {
 
 const (
 	keyringServiceAccessToken  = "codes.catgirl.slurp.access-token"
-	keyringServiceInstance     = "codes.catgirl.slurp.instance"
-	keyringServiceClientID     = "codes.catgirl.slurp.client-id"
 	keyringServiceClientSecret = "codes.catgirl.slurp.client-secret"
 )
 
@@ -96,8 +104,14 @@ const (
 func Login(user string) error {
 	var err error
 
-	// TODO: store a default user in prefs after successful authentication
-	// TODO: try load it here if the user is empty
+	if user == "" {
+		user, err = util.GetDefaultUser()
+		if err != nil {
+			slog.Error("no user provided, couldn't get default user from prefs (have you logged in before?)")
+			return err
+		}
+	}
+
 	if user == "" {
 		return errors.WithStack(errors.New("a user is required"))
 	}
@@ -108,9 +122,8 @@ func Login(user string) error {
 		return errors.WithStack(errors.New("take the leading @ off the user and try again"))
 	}
 
-	if _, err = keyring.Get(keyringServiceAccessToken, user); err == nil {
-		slog.Warn("already logged in", "user", user)
-		return nil
+	if _, err := keyring.Get(keyringServiceAccessToken, user); err == nil {
+		slog.Warn("already logged in, will log in again", "user", user)
 	}
 
 	instance, err := ensureInstance(user)
@@ -120,7 +133,7 @@ func Login(user string) error {
 	}
 
 	client := clientForInstance(instance)
-	clientID, clientSecret, err := ensureAppCredentials(user, instance, client)
+	clientID, clientSecret, err := ensureAppCredentials(instance, client)
 	if err != nil {
 		slog.Error("OAuth2 app setup failed", "user", user, "instance", instance, "error", err)
 		return err
@@ -140,6 +153,12 @@ func Login(user string) error {
 		return err
 	}
 
+	err = util.SetDefaultUser(user)
+	if err != nil {
+		slog.Error("couldn't set default user in prefs", "user", user, "instance", instance, "error", err)
+		return err
+	}
+
 	slog.Info("login successful", "user", user, "instance", instance)
 
 	return nil
@@ -147,7 +166,7 @@ func Login(user string) error {
 
 // ensureInstance finds a user's instance or retrieves a previously cached instance for them.
 func ensureInstance(user string) (string, error) {
-	if instance, err := keyring.Get(keyringServiceInstance, user); err == nil {
+	if instance, err := util.GetUserInstance(user); err == nil {
 		return instance, nil
 	}
 
@@ -157,9 +176,9 @@ func ensureInstance(user string) (string, error) {
 		return "", err
 	}
 
-	err = keyring.Set(keyringServiceInstance, user, instance)
+	err = util.SetUserInstance(user, instance)
 	if err != nil {
-		slog.Error("couldn't set instance in keychain", "user", user, "instance", instance, "error", err)
+		slog.Error("couldn't set instance in prefs", "user", user, "instance", instance, "error", err)
 		return "", err
 	}
 
@@ -202,22 +221,22 @@ func clientForInstance(instance string) *apiclient.GoToSocialSwaggerDocumentatio
 }
 
 // ensureAppCredentials retrieves or creates and stores app credentials.
-func ensureAppCredentials(user string, instance string, client *apiclient.GoToSocialSwaggerDocumentation) (string, string, error) {
+func ensureAppCredentials(instance string, client *apiclient.GoToSocialSwaggerDocumentation) (string, string, error) {
 	shouldCreateNewApp := false
 
-	clientID, err := keyring.Get(keyringServiceClientID, user)
+	clientID, err := util.GetInstanceClientID(instance)
 	if clientID == "" || errors.Is(err, keyring.ErrNotFound) {
 		shouldCreateNewApp = true
 	} else if err != nil {
-		slog.Error("couldn't get client ID from keychain", "user", user, "error", err)
+		slog.Error("couldn't get client ID from prefs", "instance", instance, "error", err)
 		return "", "", err
 	}
 
-	clientSecret, err := keyring.Get(keyringServiceClientSecret, user)
+	clientSecret, err := keyring.Get(keyringServiceClientSecret, instance)
 	if clientSecret == "" || errors.Is(err, keyring.ErrNotFound) {
 		shouldCreateNewApp = true
 	} else if err != nil {
-		slog.Error("couldn't get client secret from keychain", "user", user, "error", err)
+		slog.Error("couldn't get client secret from keychain", "instance", instance, "error", err)
 		return "", "", err
 	}
 
@@ -227,20 +246,20 @@ func ensureAppCredentials(user string, instance string, client *apiclient.GoToSo
 
 	app, err := createApp(client)
 	if err != nil {
-		slog.Error("couldn't create OAuth2 app", "user", user, "instance", instance, "error", err)
+		slog.Error("couldn't create OAuth2 app", "instance", instance, "error", err)
 		return "", "", err
 	}
 	clientID = app.ClientID
 	clientSecret = app.ClientSecret
 
-	err = keyring.Set(keyringServiceClientID, user, clientID)
+	err = util.SetInstanceClientID(instance, clientID)
 	if err != nil {
-		slog.Error("couldn't set client ID in keychain", "user", user, "error", err)
+		slog.Error("couldn't set client ID in prefs", "instance", instance, "error", err)
 		return "", "", err
 	}
-	err = keyring.Set(keyringServiceClientSecret, user, clientSecret)
+	err = keyring.Set(keyringServiceClientSecret, instance, clientSecret)
 	if err != nil {
-		slog.Error("couldn't set client secret in keychain", "user", user, "error", err)
+		slog.Error("couldn't set client secret in keychain", "instance", instance, "error", err)
 		return "", "", err
 	}
 
@@ -367,6 +386,13 @@ func Logout(user string) error {
 }
 
 func Whoami() error {
-	// TODO: look up current user from prefs
-	return errors.New("NOT IMPLEMENTED")
+	user, err := util.GetDefaultUser()
+	if err != nil {
+		slog.Error("no user provided, couldn't get default user from prefs (have you logged in before?)")
+		return err
+	}
+
+	println(user)
+
+	return nil
 }
