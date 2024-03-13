@@ -32,6 +32,8 @@ import (
 	"github.com/VyrCossont/slurp/models"
 )
 
+// Note: Mastodon's bookmark list exports currently don't have a CSV header.
+
 func Export(authClient *auth.Client, file string) error {
 	pagedRequester := &bookmarksPagedRequester{}
 	bookmarkedStatuses, err := api.ReadAllPaged(authClient, pagedRequester)
