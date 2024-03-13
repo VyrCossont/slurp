@@ -76,6 +76,11 @@ func Import(authClient *auth.Client, file string) error {
 			continue
 		}
 
+		err = authClient.Wait()
+		if err != nil {
+			return err
+		}
+
 		params := &filters.FilterV1PostParams{
 			FContext:     filter.contexts,
 			Phrase:       filter.keyword,
