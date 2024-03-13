@@ -159,11 +159,11 @@ func (o *RemoveListAccountsParams) WriteToRequest(r runtime.ClientRequest, reg s
 
 	if o.AccountIds != nil {
 
-		// binding items for account_ids
+		// binding items for account_ids[]
 		joinedAccountIds := o.bindParamAccountIds(reg)
 
-		// form array param account_ids
-		if err := r.SetFormParam("account_ids", joinedAccountIds...); err != nil {
+		// form array param account_ids[]
+		if err := r.SetFormParam("account_ids[]", joinedAccountIds...); err != nil {
 			return err
 		}
 	}
@@ -179,7 +179,7 @@ func (o *RemoveListAccountsParams) WriteToRequest(r runtime.ClientRequest, reg s
 	return nil
 }
 
-// bindParamRemoveListAccounts binds the parameter account_ids
+// bindParamRemoveListAccounts binds the parameter account_ids[]
 func (o *RemoveListAccountsParams) bindParamAccountIds(formats strfmt.Registry) []string {
 	accountIdsIR := o.AccountIds
 
@@ -190,8 +190,8 @@ func (o *RemoveListAccountsParams) bindParamAccountIds(formats strfmt.Registry) 
 		accountIdsIC = append(accountIdsIC, accountIdsIIV)
 	}
 
-	// items.CollectionFormat: ""
-	accountIdsIS := swag.JoinByFormat(accountIdsIC, "")
+	// items.CollectionFormat: "multi"
+	accountIdsIS := swag.JoinByFormat(accountIdsIC, "multi")
 
 	return accountIdsIS
 }
