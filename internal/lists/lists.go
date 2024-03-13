@@ -25,7 +25,9 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/VyrCossont/slurp/client/lists"
+	"github.com/VyrCossont/slurp/internal/api"
 	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/internal/own"
 	"github.com/VyrCossont/slurp/internal/resolve"
 	"github.com/VyrCossont/slurp/internal/util"
 	"github.com/VyrCossont/slurp/models"
@@ -34,7 +36,41 @@ import (
 // Note: Mastodon's list list exports currently don't have a CSV header.
 
 func Export(authClient *auth.Client, file string) error {
-	return nil
+	ownDomain, err := own.Domain(authClient)
+	if err != nil {
+		return err
+	}
+
+	var entries []*listListEntry
+
+	err = authClient.Wait()
+	if err != nil {
+		return err
+	}
+
+	resp, err := authClient.Client.Lists.Lists(nil, authClient.Auth)
+	if err != nil {
+		slog.Error("couldn't fetch existing lists", "error", err)
+		return errors.WithStack(err)
+	}
+	for _, list := range resp.GetPayload() {
+		pagedRequester := &listAccountsPagedRequester{listID: list.ID}
+		listAccounts, err := api.ReadAllPaged(authClient, pagedRequester)
+		if err != nil {
+			slog.Error("couldn't fetch list accounts", "title", list.Title, "list_id", list.ID, "error", err)
+			continue
+		}
+		for _, account := range listAccounts {
+			entries = append(entries, newListListEntry(ownDomain, list, account))
+		}
+	}
+
+	csvRows := make([][]string, 0, len(entries))
+	for _, entry := range entries {
+		csvRows = append(csvRows, entry.csvFields())
+	}
+
+	return util.WriteCSV(file, csvRows)
 }
 
 func Import(authClient *auth.Client, file string) error {
@@ -152,12 +188,15 @@ func Import(authClient *auth.Client, file string) error {
 	return nil
 }
 
-// listAccountsPagedRequester has no state.
 type listAccountsPagedRequester struct {
+	listID string
 }
 
 func (pagedRequester *listAccountsPagedRequester) Request(authClient *auth.Client, maxID *string) (*listAccountsPagedResponse, error) {
-	resp, err := authClient.Client.Lists.ListAccounts(nil, authClient.Auth)
+	resp, err := authClient.Client.Lists.ListAccounts(&lists.ListAccountsParams{
+		ID:    pagedRequester.listID,
+		MaxID: maxID,
+	}, authClient.Auth)
 	if err != nil {
 		return nil, err
 	}
