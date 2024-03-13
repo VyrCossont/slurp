@@ -15,14 +15,4 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package blocks
-
-import "github.com/VyrCossont/slurp/internal/auth"
-
-func Export(authClient auth.Client) error {
-	return nil
-}
-
-func Import(authClient auth.Client) error {
-	return nil
-}
+package filters

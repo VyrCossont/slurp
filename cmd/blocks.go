@@ -18,9 +18,9 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
+	"errors"
 
-	"github.com/VyrCossont/slurp/internal/blocks"
+	"github.com/spf13/cobra"
 )
 
 // blocksCmd represents the blocks command
@@ -34,7 +34,8 @@ var blocksExportCmd = &cobra.Command{
 	Use:   "export",
 	Short: "Export a list of blocks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return blocks.Export()
+		// TODO
+		return errors.New("NOT IMPLEMENTED")
 	},
 }
 
@@ -43,7 +44,8 @@ var blocksImportCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import a list of blocks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return blocks.Import()
+		// TODO
+		return errors.New("NOT IMPLEMENTED")
 	},
 }
 

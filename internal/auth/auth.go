@@ -19,6 +19,7 @@ package auth
 
 import (
 	"bufio"
+	"context"
 	"encoding/json"
 	"log/slog"
 	"net/http"
@@ -32,6 +33,7 @@ import (
 	"github.com/pkg/browser"
 	"github.com/pkg/errors"
 	"github.com/zalando/go-keyring"
+	"golang.org/x/time/rate"
 	"webfinger.net/go/webfinger"
 
 	apiclient "github.com/VyrCossont/slurp/client"
@@ -40,15 +42,43 @@ import (
 	"github.com/VyrCossont/slurp/models"
 )
 
-// Client is a GtS API client with attached authentication credentials.
+// Client is a GtS API client with attached authentication credentials and rate limiter.
 // Credentials may be no-op.
 type Client struct {
-	Client *apiclient.GoToSocialSwaggerDocumentation
-	Auth   runtime.ClientAuthInfoWriter
+	Client  *apiclient.GoToSocialSwaggerDocumentation
+	Auth    runtime.ClientAuthInfoWriter
+	limiter *rate.Limiter
+	ctx     context.Context
+}
+
+func (c *Client) Wait() error {
+	return c.limiter.Wait(c.ctx)
+}
+
+func NewAuthClient(user string) (*Client, error) {
+	instance, err := keyring.Get(keyringServiceInstance, user)
+	if err != nil {
+		slog.Error("couldn't get user's instance from keychain (did you log in first?)", "user", user)
+		return nil, err
+	}
+
+	accessToken, err := keyring.Get(keyringServiceAccessToken, user)
+	if err != nil {
+		slog.Error("couldn't find user's access token (did you log in first?)", "user", user)
+		return nil, err
+	}
+
+	return &Client{
+		Client:  clientForInstance(instance),
+		Auth:    httptransport.BearerToken(accessToken),
+		limiter: rate.NewLimiter(1.0, 300),
+		ctx:     context.Background(),
+	}, nil
 }
 
 const (
 	keyringServiceAccessToken  = "codes.catgirl.slurp.access-token"
+	keyringServiceInstance     = "codes.catgirl.slurp.instance"
 	keyringServiceClientID     = "codes.catgirl.slurp.client-id"
 	keyringServiceClientSecret = "codes.catgirl.slurp.client-secret"
 )
@@ -79,13 +109,13 @@ func Login(user string) error {
 		return nil
 	}
 
-	instance, err := findInstance(user)
+	instance, err := ensureInstance(user)
 	if err != nil {
-		slog.Error("WebFinger lookup failed", "user", user, "error", err)
+		slog.Error("couldn't get user's instance", "user", user, "error", err)
 		return err
 	}
 
-	client := apiclient.New(httptransport.New(instance, "", []string{"https"}), strfmt.Default)
+	client := clientForInstance(instance)
 	clientID, clientSecret, err := ensureAppCredentials(user, instance, client)
 	if err != nil {
 		slog.Error("OAuth2 app setup failed", "user", user, "instance", instance, "error", err)
@@ -109,6 +139,27 @@ func Login(user string) error {
 	slog.Info("login successful", "user", user, "instance", instance)
 
 	return nil
+}
+
+// ensureInstance finds a user's instance or retrieves a previously cached instance for them.
+func ensureInstance(user string) (string, error) {
+	if instance, err := keyring.Get(keyringServiceInstance, user); err == nil {
+		return instance, nil
+	}
+
+	instance, err := findInstance(user)
+	if err != nil {
+		slog.Error("WebFinger lookup failed", "user", user, "error", err)
+		return "", err
+	}
+
+	err = keyring.Set(keyringServiceInstance, user, instance)
+	if err != nil {
+		slog.Error("couldn't set instance in keychain", "user", user, "instance", instance, "error", err)
+		return "", err
+	}
+
+	return instance, nil
 }
 
 // findInstance does a WebFinger lookup to find the domain of the instance API for a given user.
@@ -140,6 +191,10 @@ func findInstance(user string) (string, error) {
 	}
 
 	return url.Hostname(), nil
+}
+
+func clientForInstance(instance string) *apiclient.GoToSocialSwaggerDocumentation {
+	return apiclient.New(httptransport.New(instance, "", []string{"https"}), strfmt.Default)
 }
 
 // ensureAppCredentials retrieves or creates and stores app credentials.

@@ -19,6 +19,9 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+
+	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/internal/follows"
 )
 
 // followsCmd represents the follows command
@@ -27,6 +30,38 @@ var followsCmd = &cobra.Command{
 	Short: "Import and export follows",
 }
 
+// followsExportCmd represents the follows export command
+var followsExportCmd = &cobra.Command{
+	Use:   "export",
+	Short: "Export a list of follows",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		authClient, err := auth.NewAuthClient(User)
+		if err != nil {
+			return err
+		}
+		return follows.Export(authClient, File)
+	},
+}
+
+// followsImportCmd represents the follows import command
+var followsImportCmd = &cobra.Command{
+	Use:   "import",
+	Short: "Import a list of follows",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		authClient, err := auth.NewAuthClient(User)
+		if err != nil {
+			return err
+		}
+		return follows.Import(authClient, File)
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(followsCmd)
+
+	followsExportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to export follows to (optional: stdout will be used if omitted)")
+	followsCmd.AddCommand(followsExportCmd)
+
+	followsImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import follows from (optional: stdin will be used if omitted)")
+	followsCmd.AddCommand(followsImportCmd)
 }

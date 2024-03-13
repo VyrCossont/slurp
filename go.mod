@@ -10,8 +10,12 @@ require (
 	github.com/go-openapi/swag v0.22.5
 	github.com/go-openapi/validate v0.22.4
 	github.com/peterhellberg/link v1.2.0
+	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/pkg/errors v0.9.1
+	github.com/spf13/cobra v1.8.0
 	github.com/zalando/go-keyring v0.2.3
+	golang.org/x/time v0.5.0
+	webfinger.net/go/webfinger v0.1.0
 )
 
 require (
@@ -33,8 +37,6 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/oklog/ulid v1.3.1 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
-	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c // indirect
-	github.com/spf13/cobra v1.8.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	go.mongodb.org/mongo-driver v1.14.0 // indirect
 	go.opentelemetry.io/otel v1.21.0 // indirect
@@ -44,5 +46,4 @@ require (
 	golang.org/x/sync v0.5.0 // indirect
 	golang.org/x/sys v0.15.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	webfinger.net/go/webfinger v0.1.0 // indirect
 )
