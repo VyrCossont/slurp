@@ -18,14 +18,18 @@
 package blocks
 
 import (
+	"log/slog"
 	"strings"
 
+	"github.com/go-openapi/runtime"
 	"github.com/pkg/errors"
 
+	"github.com/VyrCossont/slurp/client/accounts"
 	"github.com/VyrCossont/slurp/client/blocks"
 	"github.com/VyrCossont/slurp/internal/api"
 	"github.com/VyrCossont/slurp/internal/auth"
 	"github.com/VyrCossont/slurp/internal/own"
+	"github.com/VyrCossont/slurp/internal/resolve"
 	"github.com/VyrCossont/slurp/internal/util"
 	"github.com/VyrCossont/slurp/models"
 )
@@ -59,6 +63,43 @@ func Export(authClient *auth.Client, file string) error {
 }
 
 func Import(authClient *auth.Client, file string) error {
+	csvRows, err := util.ReadCSV(file)
+	if err != nil {
+		return err
+	}
+
+	for _, row := range csvRows {
+		block, err := newBlockListEntryFromCsvFields(row)
+		if err != nil {
+			slog.Warn("couldn't parse block from CSV row", "row", row, "error", err)
+			continue
+		}
+
+		account, err := resolve.Account(authClient, "@"+block.accountAddress)
+		if err != nil {
+			slog.Warn("couldn't resolve account", "account_address", block.accountAddress, "error", err)
+			continue
+		}
+
+		err = authClient.Wait()
+		if err != nil {
+			return err
+		}
+
+		_, err = authClient.Client.Accounts.AccountBlock(
+			&accounts.AccountBlockParams{
+				ID: account.ID,
+			},
+			authClient.Auth,
+			func(op *runtime.ClientOperation) {
+				op.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
+			},
+		)
+		if err != nil {
+			slog.Warn("couldn't block account", "account_address", block.accountAddress, "error", err)
+		}
+	}
+
 	return nil
 }
 
