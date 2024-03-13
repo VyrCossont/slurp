@@ -495,8 +495,6 @@ func (a *Client) AccountLookupGet(params *AccountLookupGetParams, authInfo runti
 
 /*
 AccountMove moves your account to another account
-
-NOT IMPLEMENTED YET!
 */
 func (a *Client) AccountMove(params *AccountMoveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountMoveAccepted, error) {
 	// TODO: Validate the params before sending

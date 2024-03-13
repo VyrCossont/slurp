@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewBookmarksGetParams creates a new BookmarksGetParams object,
@@ -60,6 +61,33 @@ BookmarksGetParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type BookmarksGetParams struct {
+
+	/* Limit.
+
+	   Number of bookmarked statuses to return.
+
+	   Default: 20
+	*/
+	Limit *int64
+
+	/* MaxID.
+
+	   Return only bookmarked statuses *OLDER* than the given max ID. The bookmarked status with the specified ID will not be included in the response. NOTE: the ID is of the internal bookmark, NOT any of the returned statuses.
+	*/
+	MaxID *string
+
+	/* MinID.
+
+	   Return only bookmarked statuses *IMMEDIATELY NEWER* than the given min ID. The bookmarked status with the specified ID may be included in the response. NOTE: the ID is of the internal bookmark, NOT any of the returned statuses.
+	*/
+	MinID *string
+
+	/* SinceID.
+
+	   Return only bookmarked statuses *NEWER* than the given min ID. The bookmarked status with the specified ID will not be included in the response. NOTE: the ID is of the internal bookmark, NOT any of the returned statuses.
+	*/
+	SinceID *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -77,7 +105,18 @@ func (o *BookmarksGetParams) WithDefaults() *BookmarksGetParams {
 //
 // All values with no default are reset to their zero value.
 func (o *BookmarksGetParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		limitDefault = int64(20)
+	)
+
+	val := BookmarksGetParams{
+		Limit: &limitDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the bookmarks get params
@@ -113,6 +152,50 @@ func (o *BookmarksGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithLimit adds the limit to the bookmarks get params
+func (o *BookmarksGetParams) WithLimit(limit *int64) *BookmarksGetParams {
+	o.SetLimit(limit)
+	return o
+}
+
+// SetLimit adds the limit to the bookmarks get params
+func (o *BookmarksGetParams) SetLimit(limit *int64) {
+	o.Limit = limit
+}
+
+// WithMaxID adds the maxID to the bookmarks get params
+func (o *BookmarksGetParams) WithMaxID(maxID *string) *BookmarksGetParams {
+	o.SetMaxID(maxID)
+	return o
+}
+
+// SetMaxID adds the maxId to the bookmarks get params
+func (o *BookmarksGetParams) SetMaxID(maxID *string) {
+	o.MaxID = maxID
+}
+
+// WithMinID adds the minID to the bookmarks get params
+func (o *BookmarksGetParams) WithMinID(minID *string) *BookmarksGetParams {
+	o.SetMinID(minID)
+	return o
+}
+
+// SetMinID adds the minId to the bookmarks get params
+func (o *BookmarksGetParams) SetMinID(minID *string) {
+	o.MinID = minID
+}
+
+// WithSinceID adds the sinceID to the bookmarks get params
+func (o *BookmarksGetParams) WithSinceID(sinceID *string) *BookmarksGetParams {
+	o.SetSinceID(sinceID)
+	return o
+}
+
+// SetSinceID adds the sinceId to the bookmarks get params
+func (o *BookmarksGetParams) SetSinceID(sinceID *string) {
+	o.SinceID = sinceID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *BookmarksGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +203,74 @@ func (o *BookmarksGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
+	if o.Limit != nil {
+
+		// query param limit
+		var qrLimit int64
+
+		if o.Limit != nil {
+			qrLimit = *o.Limit
+		}
+		qLimit := swag.FormatInt64(qrLimit)
+		if qLimit != "" {
+
+			if err := r.SetQueryParam("limit", qLimit); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.MaxID != nil {
+
+		// query param max_id
+		var qrMaxID string
+
+		if o.MaxID != nil {
+			qrMaxID = *o.MaxID
+		}
+		qMaxID := qrMaxID
+		if qMaxID != "" {
+
+			if err := r.SetQueryParam("max_id", qMaxID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.MinID != nil {
+
+		// query param min_id
+		var qrMinID string
+
+		if o.MinID != nil {
+			qrMinID = *o.MinID
+		}
+		qMinID := qrMinID
+		if qMinID != "" {
+
+			if err := r.SetQueryParam("min_id", qMinID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SinceID != nil {
+
+		// query param since_id
+		var qrSinceID string
+
+		if o.SinceID != nil {
+			qrSinceID = *o.SinceID
+		}
+		qSinceID := qrSinceID
+		if qSinceID != "" {
+
+			if err := r.SetQueryParam("since_id", qSinceID); err != nil {
+				return err
+			}
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
