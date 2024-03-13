@@ -19,10 +19,10 @@ package blocks
 
 import "github.com/VyrCossont/slurp/internal/auth"
 
-func Export(authClient auth.Client) error {
+func Export(authClient *auth.Client, file string) error {
 	return nil
 }
 
-func Import(authClient auth.Client) error {
+func Import(authClient *auth.Client, file string) error {
 	return nil
 }

@@ -16,3 +16,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package bookmarks
+
+import "github.com/VyrCossont/slurp/internal/auth"
+
+func Export(authClient *auth.Client, file string) error {
+	return nil
+}
+
+func Import(authClient *auth.Client, file string) error {
+	return nil
+}

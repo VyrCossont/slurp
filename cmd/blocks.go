@@ -18,9 +18,10 @@
 package cmd
 
 import (
-	"errors"
-
 	"github.com/spf13/cobra"
+
+	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/internal/blocks"
 )
 
 // blocksCmd represents the blocks command
@@ -34,8 +35,11 @@ var blocksExportCmd = &cobra.Command{
 	Use:   "export",
 	Short: "Export a list of blocks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// TODO
-		return errors.New("NOT IMPLEMENTED")
+		authClient, err := auth.NewAuthClient(User)
+		if err != nil {
+			return err
+		}
+		return blocks.Export(authClient, File)
 	},
 }
 
@@ -44,8 +48,11 @@ var blocksImportCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import a list of blocks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// TODO
-		return errors.New("NOT IMPLEMENTED")
+		authClient, err := auth.NewAuthClient(User)
+		if err != nil {
+			return err
+		}
+		return blocks.Import(authClient, File)
 	},
 }
 

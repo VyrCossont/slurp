@@ -19,6 +19,9 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+
+	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/internal/bookmarks"
 )
 
 // bookmarksCmd represents the bookmarks command
@@ -27,6 +30,38 @@ var bookmarksCmd = &cobra.Command{
 	Short: "Import and export bookmarks",
 }
 
+// bookmarksExportCmd represents the bookmarks export command
+var bookmarksExportCmd = &cobra.Command{
+	Use:   "export",
+	Short: "Export a list of bookmarks",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		authClient, err := auth.NewAuthClient(User)
+		if err != nil {
+			return err
+		}
+		return bookmarks.Export(authClient, File)
+	},
+}
+
+// bookmarksImportCmd represents the bookmarks import command
+var bookmarksImportCmd = &cobra.Command{
+	Use:   "import",
+	Short: "Import a list of bookmarks",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		authClient, err := auth.NewAuthClient(User)
+		if err != nil {
+			return err
+		}
+		return bookmarks.Import(authClient, File)
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(bookmarksCmd)
+
+	bookmarksExportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to export bookmarks to (optional: stdout will be used if omitted)")
+	bookmarksCmd.AddCommand(bookmarksExportCmd)
+
+	bookmarksImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import bookmarks from (optional: stdin will be used if omitted)")
+	bookmarksCmd.AddCommand(bookmarksImportCmd)
 }
