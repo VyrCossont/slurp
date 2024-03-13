@@ -18,6 +18,7 @@
 package main
 
 import (
+	"encoding/csv"
 	"encoding/json"
 	"log/slog"
 	"net/url"
@@ -34,6 +35,7 @@ import (
 	"github.com/pkg/errors"
 
 	apiclient "github.com/VyrCossont/slurp/client"
+	"github.com/VyrCossont/slurp/client/accounts"
 	"github.com/VyrCossont/slurp/client/filters"
 	"github.com/VyrCossont/slurp/client/search"
 	"github.com/VyrCossont/slurp/client/statuses"
@@ -153,10 +155,13 @@ func (c *config) dstAuth() runtime.ClientAuthInfoWriter {
 type command string
 
 const (
-	commandCopyStatuses  command = "copy-statuses"
-	commandExportFilters command = "export-filters"
-	commandImportFilters command = "import-filters"
-	commandGeneratePost  command = "generate-post"
+	commandCopyStatuses   command = "copy-statuses"
+	commandExportFilters  command = "export-filters"
+	commandImportFilters  command = "import-filters"
+	commandExportFollows  command = "export-follows"
+	commandImportFollows  command = "import-follows"
+	commandGeneratePost   command = "generate-post"
+	commandDeleteOldPosts command = "delete-old-posts"
 )
 
 func main() {
@@ -185,8 +190,14 @@ func main() {
 		err = exportFilters(c)
 	case commandImportFilters:
 		err = importFilters(c)
+	case commandExportFollows:
+		err = exportFollows(c)
+	case commandImportFollows:
+		err = importFollows(c)
 	case commandGeneratePost:
 		err = generatePost(c)
+	case commandDeleteOldPosts:
+		err = deleteOldPosts(c)
 	}
 	if err != nil {
 		os.Exit(1)
@@ -226,6 +237,7 @@ func srcTask(c *config, urlsToResolve chan string, statusesRequested chan int, d
 	auth := c.srcAuth()
 	limit := int64(c.pageSize)
 	var maxID *string
+	//goland:noinspection GoImportUsedAsName
 	var statuses []*models.Status
 
 loop:
@@ -455,7 +467,125 @@ func importFilters(c *config) error {
 
 //endregion
 
-//region generatePost
+//region filters
+
+func exportFollows(c *config) error {
+	w := csv.NewWriter(os.Stdout)
+	defer w.Flush()
+	err := w.Write([]string{"url"})
+	if err != nil {
+		slog.Error("error writing follows", "error", err)
+		return err
+	}
+
+	client := c.srcClient()
+	auth := c.srcAuth()
+
+	accountID, err := getOwnAccountID(client, auth)
+	if err != nil {
+		return err
+	}
+
+	var maxID *string
+	for {
+		resp, err := client.Accounts.AccountFollowing(&accounts.AccountFollowingParams{
+			ID:    accountID,
+			MaxID: maxID,
+		}, auth)
+		if err != nil {
+			slog.Error("error getting follows", "error", err)
+			return err
+		}
+
+		maxID, err = parseLink(resp.Link)
+		if err != nil {
+			slog.Error("paging error", "error", err)
+			return err
+		}
+		if maxID == nil {
+			break
+		}
+
+		for _, account := range resp.GetPayload() {
+			err = w.Write([]string{account.URL})
+			if err != nil {
+				slog.Error("error writing follows", "error", err)
+				return err
+			}
+		}
+	}
+
+	return nil
+}
+
+func importFollows(c *config) error {
+	r := csv.NewReader(os.Stdin)
+	headers, err := r.Read()
+	if err != nil {
+		slog.Error("error reading follows", "error", err)
+		return err
+	}
+	if len(headers) != 1 || headers[0] != "url" {
+		err = errors.Errorf("expected one column named \"url\", got this instead: %v", headers)
+		slog.Error("input doesn't look like a follows list", "error", err)
+		return err
+	}
+
+	follows, err := r.ReadAll()
+	if err != nil {
+		slog.Error("error reading follows", "error", err)
+		return err
+	}
+
+	client := c.dstClient()
+	auth := c.dstAuth()
+
+	for _, row := range follows {
+		if len(row) != 1 {
+			err = errors.Errorf("expected one column containing a URL, got this instead: %v", row)
+			slog.Error("input doesn't look like a follows list", "error", err)
+			return err
+		}
+		//goland:noinspection GoImportUsedAsName
+		url := row[0]
+
+		resp, err := client.Search.SearchGet(&search.SearchGetParams{
+			APIVersion: "v2",
+			Limit:      addr(int64(1)),
+			Q:          url,
+			Resolve:    addr(true),
+			Type:       addr("accounts"),
+		}, auth)
+		if err != nil {
+			slog.Warn("error resolving account", "error", err, "url", url)
+			continue
+		}
+
+		for _, account := range resp.Payload.Accounts {
+			_, err = client.Accounts.AccountFollow(&accounts.AccountFollowParams{
+				ID: account.ID,
+			}, auth)
+			if err != nil {
+				slog.Warn("error following account", "error", err, "url", url)
+				continue
+			}
+		}
+	}
+
+	return nil
+}
+
+func getOwnAccountID(client *apiclient.GoToSocialSwaggerDocumentation, auth runtime.ClientAuthInfoWriter) (string, error) {
+	resp, err := client.Accounts.AccountVerify(nil, auth)
+	if err != nil {
+		return "", err
+	}
+	return resp.GetPayload().ID, nil
+}
+
+//endregion
+
+//region posts
 
 func addr[T any](v T) *T { return &v }
 
@@ -477,6 +607,18 @@ func generatePost(c *config) error {
 		return err
 	}
 	slog.Info("posted status", "url", resp.GetPayload().URL)
+
+	return nil
+}
+
+func deleteOldPosts(c *config) error {
+	// TODO: break this out into its own command with its own JSON settings file
+	// TODO: command-line-to-browser OAuth flow
+	// TODO: adapt srcTask and parseLink to be able to page in both directions
+	// TODO: create shouldDelete(status) mirroring settings at https://mastodon.social/statuses_cleanup
+	// TODO: add https://pkg.go.dev/golang.org/x/time/rate rate limiter support to timeline and delete tasks
+	//	GtS rate limiter default is 1/sec: internal/config/defaults.go:132
+	// TODO: calls that get rate limited (code 429) should just wait and retry up to 2 times
 
 	return nil
 }
