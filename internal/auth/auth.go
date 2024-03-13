@@ -52,7 +52,11 @@ type Client struct {
 }
 
 func (c *Client) Wait() error {
-	return c.limiter.Wait(c.ctx)
+	if err := c.limiter.Wait(c.ctx); err != nil {
+		return errors.WithStack(err)
+	}
+
+	return nil
 }
 
 func NewAuthClient(user string) (*Client, error) {

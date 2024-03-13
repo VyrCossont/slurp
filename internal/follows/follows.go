@@ -18,17 +18,19 @@
 package follows
 
 import (
-	"encoding/csv"
-	"errors"
 	"log/slog"
-	"os"
 	"strconv"
 	"strings"
+
+	"github.com/go-openapi/runtime"
+	"github.com/pkg/errors"
 
 	"github.com/VyrCossont/slurp/client/accounts"
 	"github.com/VyrCossont/slurp/internal/api"
 	"github.com/VyrCossont/slurp/internal/auth"
 	"github.com/VyrCossont/slurp/internal/own"
+	"github.com/VyrCossont/slurp/internal/resolve"
+	"github.com/VyrCossont/slurp/internal/util"
 	"github.com/VyrCossont/slurp/models"
 )
 
@@ -41,16 +43,9 @@ func Export(authClient *auth.Client, file string) error {
 	}
 	pagedRequester := &accountFollowingPagedRequester{accountID: ownAccount.ID}
 
-	ownInstance, err := own.Instance(authClient)
+	ownDomain, err := own.Domain(authClient)
 	if err != nil {
 		return err
-	}
-	ownDomain := ownInstance.AccountDomain
-	if ownDomain == "" {
-		ownDomain = ownInstance.Domain
-	}
-	if ownDomain == "" {
-		return errors.New("couldn't find domain for accounts on this instance")
 	}
 
 	followedAccounts, err := api.ReadAllPaged(authClient, pagedRequester)
@@ -66,13 +61,14 @@ func Export(authClient *auth.Client, file string) error {
 			params.ID = append(params.ID, account.ID)
 		}
 
-		err = authClient.Wait()
+		err := authClient.Wait()
 		if err != nil {
 			return err
 		}
+
 		resp, err := authClient.Client.Accounts.AccountRelationships(params, authClient.Auth)
 		if err != nil {
-			return err
+			return errors.WithStack(err)
 		}
 
 		for _, relationship := range resp.GetPayload() {
@@ -90,39 +86,68 @@ func Export(authClient *auth.Client, file string) error {
 	}
 
 	csvRows := make([][]string, 0, 1+len(follows))
-	csvRows = append(csvRows, []string{
-		"Account address",
-		"Show boosts",
-		"Notify on new posts",
-		"Languages",
-	})
+	csvRows = append(csvRows, csvHeader)
 	for _, follow := range follows {
 		csvRows = append(csvRows, follow.csvFields())
 	}
 
-	out := os.Stdout
-	if file != "" {
-		out, err = os.Create(file)
-		if err != nil {
-			slog.Error("couldn't create output file", "error", err)
-			return err
-		}
-		defer func() { _ = out.Close() }()
-	}
-
-	w := csv.NewWriter(out)
-	err = w.WriteAll(csvRows)
-	if err != nil {
-		slog.Error("couldn't write to output file", "error", err)
-		return err
-	}
-
-	return nil
+	return util.WriteCSV(file, csvRows)
 }
 
 func Import(authClient *auth.Client, file string) error {
-	// TODO
-	return errors.New("NOT IMPLEMENTED")
+	csvRows, err := util.ReadCSV(file)
+	if err != nil {
+		return err
+	}
+
+	csvRows, err = util.RemoveExpectedCSVHeader(csvHeader, csvRows)
+	if err != nil {
+		return err
+	}
+
+	for _, row := range csvRows {
+		follow, err := newFollowDataFromCsvFields(row)
+		if err != nil {
+			slog.Warn("couldn't parse follow from CSV row", "row", row, "error", err)
+			continue
+		}
+
+		account, err := resolve.Account(authClient, "@"+follow.accountAddress)
+		if err != nil {
+			slog.Warn("couldn't resolve account", "account_address", follow.accountAddress, "error", err)
+			continue
+		}
+
+		err = authClient.Wait()
+		if err != nil {
+			return err
+		}
+
+		if account.Locked {
+			slog.Info("can't follow account because it's locked, so a follow request will be sent", "account_address", follow.accountAddress)
+		}
+
+		if len(follow.languages) > 0 {
+			slog.Warn("filtering followed account status languages isn't yet supported by the GtS API", "account_address", follow.accountAddress, "languages", len(follow.languages))
+		}
+
+		_, err = authClient.Client.Accounts.AccountFollow(
+			&accounts.AccountFollowParams{
+				ID:      account.ID,
+				Notify:  util.Ptr(follow.notifyOnNewPosts),
+				Reblogs: util.Ptr(follow.showBoosts),
+			},
+			authClient.Auth,
+			func(op *runtime.ClientOperation) {
+				op.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
+			},
+		)
+		if err != nil {
+			slog.Warn("couldn't follow account", "account_address", follow.accountAddress, "error", err)
+		}
+	}
+
+	return nil
 }
 
 type accountFollowingPagedRequester struct {
@@ -150,6 +175,13 @@ func (pagedResponse *accountFollowingPagedResponse) Link() string {
 
 func (pagedResponse *accountFollowingPagedResponse) Elements() []*models.Account {
 	return pagedResponse.resp.GetPayload()
+}
+
+var csvHeader = []string{
+	"Account address",
+	"Show boosts",
+	"Notify on new posts",
+	"Languages",
 }
 
 type followData struct {
@@ -191,11 +223,11 @@ func newFollowDataFromCsvFields(fields []string) (*followData, error) {
 	f := &followData{}
 
 	if len(fields) == 0 {
-		return nil, errors.New("not enough fields, expected at least 1")
+		return nil, errors.WithStack(errors.New("not enough fields, expected at least 1"))
 	}
 	f.accountAddress = fields[0]
 	if !strings.ContainsRune(f.accountAddress, '@') {
-		err = errors.New("account address expected to contain @")
+		err = errors.WithStack(errors.New("account address expected to contain @"))
 		slog.Error("malformed account address", "fields", fields)
 		return nil, err
 	}
@@ -203,7 +235,7 @@ func newFollowDataFromCsvFields(fields []string) (*followData, error) {
 	if len(fields) > 1 {
 		f.showBoosts, err = strconv.ParseBool(fields[1])
 		if err != nil {
-			err = errors.New("boolean expected")
+			err = errors.WithStack(errors.New("boolean expected"))
 			slog.Error("malformed show boosts", "fields", fields)
 			return nil, err
 		}
@@ -212,15 +244,18 @@ func newFollowDataFromCsvFields(fields []string) (*followData, error) {
 	if len(fields) > 2 {
 		f.notifyOnNewPosts, err = strconv.ParseBool(fields[2])
 		if err != nil {
-			err = errors.New("boolean expected")
+			err = errors.WithStack(errors.New("boolean expected"))
 			slog.Error("malformed notify on new posts", "fields", fields)
 			return nil, err
 		}
 	}
 
 	if len(fields) > 3 {
-		for _, language := range strings.Split(fields[3], ",") {
-			f.languages = append(f.languages, strings.TrimSpace(language))
+		languages := fields[3]
+		if languages != "" {
+			for _, language := range strings.Split(languages, ",") {
+				f.languages = append(f.languages, strings.TrimSpace(language))
+			}
 		}
 	}
 

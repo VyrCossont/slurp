@@ -32,7 +32,7 @@ var NoResults = errors.New("no search results")
 
 // Account uses the search API to resolve an account.
 // The account can be a URL, or a @-prefixed username with optional domain.
-func Account(authClient auth.Client, accountOrURL string) (*models.Account, error) {
+func Account(authClient *auth.Client, accountOrURL string) (*models.Account, error) {
 	results, err := search1(authClient, accountOrURL, "accounts")
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func Account(authClient auth.Client, accountOrURL string) (*models.Account, erro
 }
 
 // Status uses the search API to resolve a status by URL.
-func Status(authClient auth.Client, url string) (*models.Status, error) {
+func Status(authClient *auth.Client, url string) (*models.Status, error) {
 	results, err := search1(authClient, url, "statuses")
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func Status(authClient auth.Client, url string) (*models.Status, error) {
 	return results.Statuses[0], nil
 }
 
-func search1(authClient auth.Client, q string, searchType string) (*models.SearchResult, error) {
+func search1(authClient *auth.Client, q string, searchType string) (*models.SearchResult, error) {
 	resp, err := authClient.Client.Search.SearchGet(&search.SearchGetParams{
 		APIVersion: "v2",
 		Limit:      util.Ptr(int64(1)),

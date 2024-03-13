@@ -20,6 +20,8 @@ package api
 import (
 	"log/slog"
 
+	"github.com/pkg/errors"
+
 	"github.com/VyrCossont/slurp/internal/auth"
 )
 
@@ -39,18 +41,19 @@ func ReadAllPaged[Requester PagedRequester[Response, Element], Response PagedRes
 	for {
 		err := authClient.Wait()
 		if err != nil {
-			return all, err
+			return all, errors.WithStack(err)
 		}
+
 		pagedResponse, err := pagedRequester.Request(authClient, maxID)
 		if err != nil {
 			slog.Error("error fetching page", "error", err)
-			return all, err
+			return all, errors.WithStack(err)
 		}
 
 		maxID, err = ParseLinkMaxID(pagedResponse.Link())
 		if err != nil {
 			slog.Error("error parsing Link header", "error", err)
-			return all, err
+			return all, errors.WithStack(err)
 		}
 		if maxID == nil {
 			// End of pages.
