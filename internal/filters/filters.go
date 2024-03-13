@@ -32,6 +32,9 @@ import (
 	"github.com/VyrCossont/slurp/models"
 )
 
+// Note: Mastodon has no filter export format, so we made up our own,
+// which should be suitable for both v1 and v2 keyword filters in the future.
+
 func Export(authClient *auth.Client, file string) error {
 	err := authClient.Wait()
 	if err != nil {

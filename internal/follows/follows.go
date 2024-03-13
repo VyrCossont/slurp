@@ -82,7 +82,7 @@ func Export(authClient *auth.Client, file string) error {
 		if !found {
 			slog.Warn("couldn't find relationship data", "account_id", account.ID)
 		}
-		follows = append(follows, newFollowData(ownDomain, account, relationship))
+		follows = append(follows, newFollowListEntry(ownDomain, account, relationship))
 	}
 
 	csvRows := make([][]string, 0, 1+len(follows))
@@ -191,7 +191,7 @@ type followListEntry struct {
 	languages        []string
 }
 
-func newFollowData(ownDomain string, account *models.Account, relationship *models.Relationship) *followListEntry {
+func newFollowListEntry(ownDomain string, account *models.Account, relationship *models.Relationship) *followListEntry {
 	e := &followListEntry{
 		accountAddress:   account.Acct,
 		showBoosts:       true,

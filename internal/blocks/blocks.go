@@ -17,12 +17,104 @@
 
 package blocks
 
-import "github.com/VyrCossont/slurp/internal/auth"
+import (
+	"strings"
+
+	"github.com/pkg/errors"
+
+	"github.com/VyrCossont/slurp/client/blocks"
+	"github.com/VyrCossont/slurp/internal/api"
+	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/internal/own"
+	"github.com/VyrCossont/slurp/internal/util"
+	"github.com/VyrCossont/slurp/models"
+)
+
+// Note: Mastodon's block list exports currently don't have a CSV header.
 
 func Export(authClient *auth.Client, file string) error {
-	return nil
+	pagedRequester := &blocksPagedRequester{}
+	blockedAccounts, err := api.ReadAllPaged(authClient, pagedRequester)
+	if err != nil {
+		return err
+	}
+
+	ownDomain, err := own.Domain(authClient)
+	if err != nil {
+		return err
+	}
+
+	//goland:noinspection GoImportUsedAsName
+	blocks := make([]*blockListEntry, 0, len(blockedAccounts))
+	for _, account := range blockedAccounts {
+		blocks = append(blocks, newBlockListEntry(ownDomain, account))
+	}
+
+	csvRows := make([][]string, 0, len(blocks))
+	for _, block := range blocks {
+		csvRows = append(csvRows, block.csvFields())
+	}
+
+	return util.WriteCSV(file, csvRows)
 }
 
 func Import(authClient *auth.Client, file string) error {
 	return nil
+}
+
+// blocksPagedRequester has no state.
+type blocksPagedRequester struct {
+}
+
+func (pagedRequester *blocksPagedRequester) Request(authClient *auth.Client, maxID *string) (*blocksPagedResponse, error) {
+	resp, err := authClient.Client.Blocks.BlocksGet(&blocks.BlocksGetParams{
+		MaxID: maxID,
+	}, authClient.Auth)
+	if err != nil {
+		return nil, err
+	}
+	return &blocksPagedResponse{resp}, nil
+}
+
+type blocksPagedResponse struct {
+	resp *blocks.BlocksGetOK
+}
+
+func (pagedResponse *blocksPagedResponse) Link() string {
+	return pagedResponse.resp.Link
+}
+
+func (pagedResponse *blocksPagedResponse) Elements() []*models.Account {
+	return pagedResponse.resp.GetPayload()
+}
+
+type blockListEntry struct {
+	accountAddress string
+}
+
+func newBlockListEntry(ownDomain string, account *models.Account) *blockListEntry {
+	e := &blockListEntry{
+		accountAddress: account.Acct,
+	}
+	if !strings.ContainsRune(e.accountAddress, '@') {
+		e.accountAddress += "@" + ownDomain
+	}
+	return e
+}
+
+func (e *blockListEntry) csvFields() []string {
+	return []string{
+		e.accountAddress,
+	}
+}
+
+func newBlockListEntryFromCsvFields(fields []string) (*blockListEntry, error) {
+	e := &blockListEntry{}
+
+	if len(fields) == 0 {
+		return nil, errors.WithStack(errors.New("not enough fields, expected at least 1"))
+	}
+	e.accountAddress = fields[0]
+
+	return e, nil
 }
