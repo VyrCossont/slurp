@@ -15,29 +15,29 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package own
+package util
 
 import (
-	"github.com/go-openapi/runtime"
+	"net/url"
 
-	apiclient "github.com/VyrCossont/slurp/client"
-	"github.com/VyrCossont/slurp/models"
+	"github.com/peterhellberg/link"
+	"github.com/pkg/errors"
 )
 
-// Account returns the currently authenticated account.
-func Account(client *apiclient.GoToSocialSwaggerDocumentation, auth runtime.ClientAuthInfoWriter) (*models.Account, error) {
-	resp, err := client.Accounts.AccountVerify(nil, auth)
-	if err != nil {
-		return nil, err
+// ParseLinkMaxID extracts the `max_id` from the `next` link for paging to older items.
+func ParseLinkMaxID(linkHeader string) (*string, error) {
+	next := link.Parse(linkHeader)["next"]
+	if next == nil {
+		// No link header in that direction means end of results.
+		return nil, nil
 	}
-	return resp.GetPayload(), nil
-}
-
-// Instance returns the instance of the currently authenticated account.
-func Instance(client *apiclient.GoToSocialSwaggerDocumentation) (*models.InstanceV2, error) {
-	resp, err := client.Instance.InstanceGetV2(nil)
+	nextUrl, err := url.Parse(next.URI)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "couldn't parse next page URL")
 	}
-	return resp.GetPayload(), nil
+	nextMaxID := nextUrl.Query().Get("max_id")
+	if nextMaxID == "" {
+		return nil, errors.New("couldn't find next page max ID")
+	}
+	return &nextMaxID, err
 }
