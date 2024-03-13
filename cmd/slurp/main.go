@@ -40,6 +40,8 @@ import (
 	"github.com/VyrCossont/slurp/client/search"
 	"github.com/VyrCossont/slurp/client/statuses"
 	"github.com/VyrCossont/slurp/client/timelines"
+	"github.com/VyrCossont/slurp/internal/own"
+	"github.com/VyrCossont/slurp/internal/util"
 	"github.com/VyrCossont/slurp/models"
 )
 
@@ -481,9 +483,11 @@ func exportFollows(c *config) error {
 	client := c.srcClient()
 	auth := c.srcAuth()
 
-	accountID, err := getOwnAccountID(client, auth)
-	if err != nil {
+	var accountID string
+	if account, err := own.Account(client, auth); err != nil {
 		return err
+	} else {
+		accountID = account.Acct
 	}
 
 	var maxID *string
@@ -551,10 +555,10 @@ func importFollows(c *config) error {
 
 		resp, err := client.Search.SearchGet(&search.SearchGetParams{
 			APIVersion: "v2",
-			Limit:      addr(int64(1)),
+			Limit:      util.Ptr(int64(1)),
 			Q:          url,
-			Resolve:    addr(true),
-			Type:       addr("accounts"),
+			Resolve:    util.Ptr(true),
+			Type:       util.Ptr("accounts"),
 		}, auth)
 		if err != nil {
 			slog.Warn("error resolving account", "error", err, "url", url)
@@ -575,28 +579,18 @@ func importFollows(c *config) error {
 	return nil
 }
 
-func getOwnAccountID(client *apiclient.GoToSocialSwaggerDocumentation, auth runtime.ClientAuthInfoWriter) (string, error) {
-	resp, err := client.Accounts.AccountVerify(nil, auth)
-	if err != nil {
-		return "", err
-	}
-	return resp.GetPayload().ID, nil
-}
-
 //endregion
 
 //region posts
-
-func addr[T any](v T) *T { return &v }
 
 func generatePost(c *config) error {
 	client := c.dstClient()
 	auth := c.dstAuth()
 
 	params := &statuses.StatusCreateParams{
-		ContentType: addr("text/plain"),
-		Status:      addr(gofakeit.HipsterParagraph(2, 3, 10, "\n\n")),
-		Visibility:  addr("direct"),
+		ContentType: util.Ptr("text/plain"),
+		Status:      util.Ptr(gofakeit.HipsterParagraph(2, 3, 10, "\n\n")),
+		Visibility:  util.Ptr("direct"),
 	}
 
 	resp, err := client.Statuses.StatusCreate(params, auth, func(op *runtime.ClientOperation) {
