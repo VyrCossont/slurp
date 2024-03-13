@@ -76,7 +76,7 @@ func Export(authClient *auth.Client, file string) error {
 		}
 	}
 
-	follows := make([]*followData, 0, len(followedAccounts))
+	follows := make([]*followListEntry, 0, len(followedAccounts))
 	for _, account := range followedAccounts {
 		relationship, found := relationships[account.ID]
 		if !found {
@@ -106,7 +106,7 @@ func Import(authClient *auth.Client, file string) error {
 	}
 
 	for _, row := range csvRows {
-		follow, err := newFollowDataFromCsvFields(row)
+		follow, err := newFollowListEntryFromCsvFields(row)
 		if err != nil {
 			slog.Warn("couldn't parse follow from CSV row", "row", row, "error", err)
 			continue
@@ -184,56 +184,56 @@ var csvHeader = []string{
 	"Languages",
 }
 
-type followData struct {
+type followListEntry struct {
 	accountAddress   string
 	showBoosts       bool
 	notifyOnNewPosts bool
 	languages        []string
 }
 
-func newFollowData(ownDomain string, account *models.Account, relationship *models.Relationship) *followData {
-	f := &followData{
+func newFollowData(ownDomain string, account *models.Account, relationship *models.Relationship) *followListEntry {
+	e := &followListEntry{
 		accountAddress:   account.Acct,
 		showBoosts:       true,
 		notifyOnNewPosts: false,
 		// FUTURE: Not supported by GtS API.
 		languages: nil,
 	}
-	if !strings.ContainsRune(f.accountAddress, '@') {
-		f.accountAddress += "@" + ownDomain
+	if !strings.ContainsRune(e.accountAddress, '@') {
+		e.accountAddress += "@" + ownDomain
 	}
 	if relationship != nil {
-		f.showBoosts = relationship.ShowingReblogs
-		f.notifyOnNewPosts = relationship.Notifying
+		e.showBoosts = relationship.ShowingReblogs
+		e.notifyOnNewPosts = relationship.Notifying
 	}
-	return f
+	return e
 }
 
-func (f *followData) csvFields() []string {
+func (e *followListEntry) csvFields() []string {
 	return []string{
-		f.accountAddress,
-		strconv.FormatBool(f.showBoosts),
-		strconv.FormatBool(f.notifyOnNewPosts),
-		strings.Join(f.languages, ", "),
+		e.accountAddress,
+		strconv.FormatBool(e.showBoosts),
+		strconv.FormatBool(e.notifyOnNewPosts),
+		strings.Join(e.languages, ", "),
 	}
 }
 
-func newFollowDataFromCsvFields(fields []string) (*followData, error) {
+func newFollowListEntryFromCsvFields(fields []string) (*followListEntry, error) {
 	var err error
-	f := &followData{}
+	e := &followListEntry{}
 
 	if len(fields) == 0 {
 		return nil, errors.WithStack(errors.New("not enough fields, expected at least 1"))
 	}
-	f.accountAddress = fields[0]
-	if !strings.ContainsRune(f.accountAddress, '@') {
+	e.accountAddress = fields[0]
+	if !strings.ContainsRune(e.accountAddress, '@') {
 		err = errors.WithStack(errors.New("account address expected to contain @"))
 		slog.Error("malformed account address", "fields", fields)
 		return nil, err
 	}
 
 	if len(fields) > 1 {
-		f.showBoosts, err = strconv.ParseBool(fields[1])
+		e.showBoosts, err = strconv.ParseBool(fields[1])
 		if err != nil {
 			err = errors.WithStack(errors.New("boolean expected"))
 			slog.Error("malformed show boosts", "fields", fields)
@@ -242,7 +242,7 @@ func newFollowDataFromCsvFields(fields []string) (*followData, error) {
 	}
 
 	if len(fields) > 2 {
-		f.notifyOnNewPosts, err = strconv.ParseBool(fields[2])
+		e.notifyOnNewPosts, err = strconv.ParseBool(fields[2])
 		if err != nil {
 			err = errors.WithStack(errors.New("boolean expected"))
 			slog.Error("malformed notify on new posts", "fields", fields)
@@ -254,10 +254,10 @@ func newFollowDataFromCsvFields(fields []string) (*followData, error) {
 		languages := fields[3]
 		if languages != "" {
 			for _, language := range strings.Split(languages, ",") {
-				f.languages = append(f.languages, strings.TrimSpace(language))
+				e.languages = append(e.languages, strings.TrimSpace(language))
 			}
 		}
 	}
 
-	return f, nil
+	return e, nil
 }

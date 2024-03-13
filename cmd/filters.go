@@ -19,6 +19,9 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+
+	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/internal/filters"
 )
 
 // filtersCmd represents the filters command
@@ -27,6 +30,38 @@ var filtersCmd = &cobra.Command{
 	Short: "Import and export filters",
 }
 
+// filtersExportCmd represents the filters export command
+var filtersExportCmd = &cobra.Command{
+	Use:   "export",
+	Short: "Export a list of filters",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		authClient, err := auth.NewAuthClient(User)
+		if err != nil {
+			return err
+		}
+		return filters.Export(authClient, File)
+	},
+}
+
+// filtersImportCmd represents the filters import command
+var filtersImportCmd = &cobra.Command{
+	Use:   "import",
+	Short: "Import a list of filters",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		authClient, err := auth.NewAuthClient(User)
+		if err != nil {
+			return err
+		}
+		return filters.Import(authClient, File)
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(filtersCmd)
+
+	filtersExportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to export filters to (optional: stdout will be used if omitted)")
+	filtersCmd.AddCommand(filtersExportCmd)
+
+	filtersImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import filters from (optional: stdin will be used if omitted)")
+	filtersCmd.AddCommand(filtersImportCmd)
 }
