@@ -68,7 +68,8 @@ func Export(authClient *auth.Client, file string) error {
 
 		resp, err := authClient.Client.Accounts.AccountRelationships(params, authClient.Auth)
 		if err != nil {
-			return errors.WithStack(err)
+			slog.Warn("couldn't fetch relationships", "account_ids", params.ID)
+			continue
 		}
 
 		for _, relationship := range resp.GetPayload() {
