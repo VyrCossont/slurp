@@ -3,7 +3,7 @@ module github.com/VyrCossont/slurp
 go 1.22
 
 require (
-	github.com/brianvoe/gofakeit/v7 v7.0.2
+	github.com/adrg/xdg v0.4.0
 	github.com/go-openapi/errors v0.21.0
 	github.com/go-openapi/runtime v0.27.1
 	github.com/go-openapi/strfmt v0.22.1
@@ -19,7 +19,6 @@ require (
 )
 
 require (
-	github.com/adrg/xdg v0.4.0 // indirect
 	github.com/alessio/shellescape v1.4.1 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
 	github.com/danieljoos/wincred v1.2.0 // indirect
