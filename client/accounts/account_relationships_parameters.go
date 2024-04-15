@@ -142,11 +142,11 @@ func (o *AccountRelationshipsParams) WriteToRequest(r runtime.ClientRequest, reg
 
 	if o.ID != nil {
 
-		// binding items for id
+		// binding items for id[]
 		joinedID := o.bindParamID(reg)
 
-		// query array param id
-		if err := r.SetQueryParam("id", joinedID...); err != nil {
+		// query array param id[]
+		if err := r.SetQueryParam("id[]", joinedID...); err != nil {
 			return err
 		}
 	}
@@ -157,7 +157,7 @@ func (o *AccountRelationshipsParams) WriteToRequest(r runtime.ClientRequest, reg
 	return nil
 }
 
-// bindParamAccountRelationships binds the parameter id
+// bindParamAccountRelationships binds the parameter id[]
 func (o *AccountRelationshipsParams) bindParamID(formats strfmt.Registry) []string {
 	iDIR := o.ID
 
@@ -168,8 +168,8 @@ func (o *AccountRelationshipsParams) bindParamID(formats strfmt.Registry) []stri
 		iDIC = append(iDIC, iDIIV)
 	}
 
-	// items.CollectionFormat: ""
-	iDIS := swag.JoinByFormat(iDIC, "")
+	// items.CollectionFormat: "multi"
+	iDIS := swag.JoinByFormat(iDIC, "multi")
 
 	return iDIS
 }

@@ -32,6 +32,16 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	AdminAccountAction(params *AdminAccountActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountActionOK, error)
 
+	AdminAccountApprove(params *AdminAccountApproveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountApproveOK, error)
+
+	AdminAccountGet(params *AdminAccountGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountGetOK, error)
+
+	AdminAccountReject(params *AdminAccountRejectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountRejectOK, error)
+
+	AdminAccountsGetV1(params *AdminAccountsGetV1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountsGetV1OK, error)
+
+	AdminAccountsGetV2(params *AdminAccountsGetV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountsGetV2OK, error)
+
 	AdminReportGet(params *AdminReportGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminReportGetOK, error)
 
 	AdminReportResolve(params *AdminReportResolveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminReportResolveOK, error)
@@ -139,6 +149,217 @@ func (a *Client) AdminAccountAction(params *AdminAccountActionParams, authInfo r
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for adminAccountAction: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+AdminAccountApprove approves pending account
+*/
+func (a *Client) AdminAccountApprove(params *AdminAccountApproveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountApproveOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAdminAccountApproveParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "adminAccountApprove",
+		Method:             "POST",
+		PathPattern:        "/api/v1/admin/accounts/{id}/approve",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AdminAccountApproveReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AdminAccountApproveOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for adminAccountApprove: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+AdminAccountGet views one account
+*/
+func (a *Client) AdminAccountGet(params *AdminAccountGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAdminAccountGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "adminAccountGet",
+		Method:             "GET",
+		PathPattern:        "/api/v1/admin/accounts/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AdminAccountGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AdminAccountGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for adminAccountGet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+AdminAccountReject rejects pending account
+*/
+func (a *Client) AdminAccountReject(params *AdminAccountRejectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountRejectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAdminAccountRejectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "adminAccountReject",
+		Method:             "POST",
+		PathPattern:        "/api/v1/admin/accounts/{id}/reject",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AdminAccountRejectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AdminAccountRejectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for adminAccountReject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	AdminAccountsGetV1 views page through known accounts according to given filters
+
+	The next and previous queries can be parsed from the returned Link header.
+
+Example:
+
+```
+<https://example.org/api/v1/admin/accounts?limit=80&max_id=01FC0SKA48HNSVR6YKZCQGS2V8>; rel="next", <https://example.org/api/v1/admin/accounts?limit=80&min_id=01FC0SKW5JK2Q4EVAV2B462YY0>; rel="prev"
+````
+*/
+func (a *Client) AdminAccountsGetV1(params *AdminAccountsGetV1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountsGetV1OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAdminAccountsGetV1Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "adminAccountsGetV1",
+		Method:             "GET",
+		PathPattern:        "/api/v1/admin/accounts",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AdminAccountsGetV1Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AdminAccountsGetV1OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for adminAccountsGetV1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	AdminAccountsGetV2 views page through known accounts according to given filters
+
+	The next and previous queries can be parsed from the returned Link header.
+
+Example:
+
+```
+<https://example.org/api/v2/admin/accounts?limit=80&max_id=01FC0SKA48HNSVR6YKZCQGS2V8>; rel="next", <https://example.org/api/v2/admin/accounts?limit=80&min_id=01FC0SKW5JK2Q4EVAV2B462YY0>; rel="prev"
+````
+*/
+func (a *Client) AdminAccountsGetV2(params *AdminAccountsGetV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountsGetV2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAdminAccountsGetV2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "adminAccountsGetV2",
+		Method:             "GET",
+		PathPattern:        "/api/v2/admin/accounts",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AdminAccountsGetV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AdminAccountsGetV2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for adminAccountsGetV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

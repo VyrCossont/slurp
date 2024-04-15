@@ -176,6 +176,12 @@ type AccountUpdateParams struct {
 	*/
 	Header runtime.NamedReadCloser
 
+	/* HideCollections.
+
+	   Hide the account's following/followers collections.
+	*/
+	HideCollections *bool
+
 	/* Locked.
 
 	   Require manual approval of follow requests.
@@ -211,6 +217,12 @@ type AccountUpdateParams struct {
 	   Default content type to use for authored statuses (text/plain or text/markdown).
 	*/
 	SourceStatusContentType *string
+
+	/* Theme.
+
+	   FileName of the theme to use when rendering this account's profile or statuses. The theme must exist on this server, as indicated by /api/v1/accounts/themes. Empty string unsets theme and returns to the default GoToSocial theme.
+	*/
+	Theme *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -474,6 +486,17 @@ func (o *AccountUpdateParams) SetHeader(header runtime.NamedReadCloser) {
 	o.Header = header
 }
 
+// WithHideCollections adds the hideCollections to the account update params
+func (o *AccountUpdateParams) WithHideCollections(hideCollections *bool) *AccountUpdateParams {
+	o.SetHideCollections(hideCollections)
+	return o
+}
+
+// SetHideCollections adds the hideCollections to the account update params
+func (o *AccountUpdateParams) SetHideCollections(hideCollections *bool) {
+	o.HideCollections = hideCollections
+}
+
 // WithLocked adds the locked to the account update params
 func (o *AccountUpdateParams) WithLocked(locked *bool) *AccountUpdateParams {
 	o.SetLocked(locked)
@@ -538,6 +561,17 @@ func (o *AccountUpdateParams) WithSourceStatusContentType(sourceStatusContentTyp
 // SetSourceStatusContentType adds the sourceStatusContentType to the account update params
 func (o *AccountUpdateParams) SetSourceStatusContentType(sourceStatusContentType *string) {
 	o.SourceStatusContentType = sourceStatusContentType
+}
+
+// WithTheme adds the theme to the account update params
+func (o *AccountUpdateParams) WithTheme(theme *string) *AccountUpdateParams {
+	o.SetTheme(theme)
+	return o
+}
+
+// SetTheme adds the theme to the account update params
+func (o *AccountUpdateParams) SetTheme(theme *string) {
+	o.Theme = theme
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -815,6 +849,21 @@ func (o *AccountUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		}
 	}
 
+	if o.HideCollections != nil {
+
+		// form param hide_collections
+		var frHideCollections bool
+		if o.HideCollections != nil {
+			frHideCollections = *o.HideCollections
+		}
+		fHideCollections := swag.FormatBool(frHideCollections)
+		if fHideCollections != "" {
+			if err := r.SetFormParam("hide_collections", fHideCollections); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.Locked != nil {
 
 		// form param locked
@@ -892,6 +941,21 @@ func (o *AccountUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		fSourceStatusContentType := frSourceStatusContentType
 		if fSourceStatusContentType != "" {
 			if err := r.SetFormParam("source[status_content_type]", fSourceStatusContentType); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Theme != nil {
+
+		// form param theme
+		var frTheme string
+		if o.Theme != nil {
+			frTheme = *o.Theme
+		}
+		fTheme := frTheme
+		if fTheme != "" {
+			if err := r.SetFormParam("theme", fTheme); err != nil {
 				return err
 			}
 		}

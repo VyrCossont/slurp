@@ -56,6 +56,7 @@ type Account struct {
 	Emojis []*Emoji `json:"emojis"`
 
 	// Account has enabled RSS feed.
+	// Key/value omitted if false.
 	EnableRSS bool `json:"enable_rss,omitempty"`
 
 	// Additional metadata attached to this account's profile.
@@ -75,6 +76,10 @@ type Account struct {
 	// Only relevant when the account's main header is a video or a gif.
 	// Example: https://example.org/media/some_user/header/static/header.png
 	HeaderStatic string `json:"header_static,omitempty"`
+
+	// Account has opted to hide their followers/following collections.
+	// Key/value omitted if false.
+	HideCollections bool `json:"hide_collections,omitempty"`
 
 	// The account id.
 	// Example: 01FBVD42CQ3ZEEVMW180SBX03B
@@ -99,6 +104,9 @@ type Account struct {
 
 	// Account has been suspended by our instance.
 	Suspended bool `json:"suspended,omitempty"`
+
+	// Filename of user-selected CSS theme to include when rendering this account's profile or statuses. Eg., `blurple-light.css`.
+	Theme string `json:"theme,omitempty"`
 
 	// Web location of the account's profile page.
 	// Example: https://example.org/@some_user

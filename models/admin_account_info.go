@@ -59,8 +59,8 @@ type AdminAccountInfo struct {
 	// Example: []
 	IPs []interface{} `json:"ips"`
 
-	// The reason given when requesting an invite.
-	// Null if not known / remote account.
+	// The reason given when signing up.
+	// Null if no reason / remote account.
 	// Example: Pleaaaaaaaaaaaaaaase!!
 	InviteRequest string `json:"invite_request,omitempty"`
 

@@ -53,6 +53,12 @@ func (o *AccountCreateReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
+	case 422:
+		result := NewAccountCreateUnprocessableEntity()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewAccountCreateInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -352,6 +358,62 @@ func (o *AccountCreateNotAcceptable) String() string {
 }
 
 func (o *AccountCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewAccountCreateUnprocessableEntity creates a AccountCreateUnprocessableEntity with default headers values
+func NewAccountCreateUnprocessableEntity() *AccountCreateUnprocessableEntity {
+	return &AccountCreateUnprocessableEntity{}
+}
+
+/*
+AccountCreateUnprocessableEntity describes a response with status code 422, with default header values.
+
+Unprocessable. Your account creation request cannot be processed because either too many accounts have been created on this instance in the last 24h, or the pending account backlog is full.
+*/
+type AccountCreateUnprocessableEntity struct {
+}
+
+// IsSuccess returns true when this account create unprocessable entity response has a 2xx status code
+func (o *AccountCreateUnprocessableEntity) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this account create unprocessable entity response has a 3xx status code
+func (o *AccountCreateUnprocessableEntity) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this account create unprocessable entity response has a 4xx status code
+func (o *AccountCreateUnprocessableEntity) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this account create unprocessable entity response has a 5xx status code
+func (o *AccountCreateUnprocessableEntity) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this account create unprocessable entity response a status code equal to that given
+func (o *AccountCreateUnprocessableEntity) IsCode(code int) bool {
+	return code == 422
+}
+
+// Code gets the status code for the account create unprocessable entity response
+func (o *AccountCreateUnprocessableEntity) Code() int {
+	return 422
+}
+
+func (o *AccountCreateUnprocessableEntity) Error() string {
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnprocessableEntity ", 422)
+}
+
+func (o *AccountCreateUnprocessableEntity) String() string {
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnprocessableEntity ", 422)
+}
+
+func (o *AccountCreateUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

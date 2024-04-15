@@ -22,6 +22,7 @@ import (
 	"github.com/VyrCossont/slurp/client/federation"
 	"github.com/VyrCossont/slurp/client/filters"
 	"github.com/VyrCossont/slurp/client/follow_requests"
+	"github.com/VyrCossont/slurp/client/health"
 	"github.com/VyrCossont/slurp/client/instance"
 	"github.com/VyrCossont/slurp/client/lists"
 	"github.com/VyrCossont/slurp/client/markers"
@@ -93,6 +94,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GoToSocial
 	cli.Federation = federation.New(transport, formats)
 	cli.Filters = filters.New(transport, formats)
 	cli.FollowRequests = follow_requests.New(transport, formats)
+	cli.Health = health.New(transport, formats)
 	cli.Instance = instance.New(transport, formats)
 	cli.Lists = lists.New(transport, formats)
 	cli.Markers = markers.New(transport, formats)
@@ -176,6 +178,8 @@ type GoToSocialSwaggerDocumentation struct {
 
 	FollowRequests follow_requests.ClientService
 
+	Health health.ClientService
+
 	Instance instance.ClientService
 
 	Lists lists.ClientService
@@ -224,6 +228,7 @@ func (c *GoToSocialSwaggerDocumentation) SetTransport(transport runtime.ClientTr
 	c.Federation.SetTransport(transport)
 	c.Filters.SetTransport(transport)
 	c.FollowRequests.SetTransport(transport)
+	c.Health.SetTransport(transport)
 	c.Instance.SetTransport(transport)
 	c.Lists.SetTransport(transport)
 	c.Markers.SetTransport(transport)

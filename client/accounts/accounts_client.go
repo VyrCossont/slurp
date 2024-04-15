@@ -60,6 +60,8 @@ type ClientService interface {
 
 	AccountStatuses(params *AccountStatusesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountStatusesOK, error)
 
+	AccountThemes(params *AccountThemesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountThemesOK, error)
+
 	AccountUnblock(params *AccountUnblockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountUnblockOK, error)
 
 	AccountUnfollow(params *AccountUnfollowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountUnfollowOK, error)
@@ -292,6 +294,8 @@ Example:
 ```
 <https://example.org/api/v1/accounts/0657WMDEC3KQDTD6NZ4XJZBK4M/followers?limit=80&max_id=01FC0SKA48HNSVR6YKZCQGS2V8>; rel="next", <https://example.org/api/v1/accounts/0657WMDEC3KQDTD6NZ4XJZBK4M/followers?limit=80&min_id=01FC0SKW5JK2Q4EVAV2B462YY0>; rel="prev"
 ````
+
+If account `hide_collections` is true, and requesting account != target account, no results will be returned.
 */
 func (a *Client) AccountFollowers(params *AccountFollowersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountFollowersOK, error) {
 	// TODO: Validate the params before sending
@@ -339,6 +343,8 @@ Example:
 ```
 <https://example.org/api/v1/accounts/0657WMDEC3KQDTD6NZ4XJZBK4M/following?limit=80&max_id=01FC0SKA48HNSVR6YKZCQGS2V8>; rel="next", <https://example.org/api/v1/accounts/0657WMDEC3KQDTD6NZ4XJZBK4M/following?limit=80&min_id=01FC0SKW5JK2Q4EVAV2B462YY0>; rel="prev"
 ````
+
+If account `hide_collections` is true, and requesting account != target account, no results will be returned.
 */
 func (a *Client) AccountFollowing(params *AccountFollowingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountFollowingOK, error) {
 	// TODO: Validate the params before sending
@@ -687,6 +693,45 @@ func (a *Client) AccountStatuses(params *AccountStatusesParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for accountStatuses: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+AccountThemes sees preset CSS themes available to accounts on this instance
+*/
+func (a *Client) AccountThemes(params *AccountThemesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountThemesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAccountThemesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "accountThemes",
+		Method:             "GET",
+		PathPattern:        "/api/v1/accounts/themes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AccountThemesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AccountThemesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for accountThemes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -64,29 +64,23 @@ type BookmarksGetParams struct {
 
 	/* Limit.
 
-	   Number of bookmarked statuses to return.
+	   Number of statuses to return.
 
-	   Default: 20
+	   Default: 30
 	*/
 	Limit *int64
 
 	/* MaxID.
 
-	   Return only bookmarked statuses *OLDER* than the given max ID. The bookmarked status with the specified ID will not be included in the response. NOTE: the ID is of the internal bookmark, NOT any of the returned statuses.
+	   Return only bookmarked statuses *OLDER* than the given bookmark ID. The status with the corresponding bookmark ID will not be included in the response.
 	*/
 	MaxID *string
 
 	/* MinID.
 
-	   Return only bookmarked statuses *IMMEDIATELY NEWER* than the given min ID. The bookmarked status with the specified ID may be included in the response. NOTE: the ID is of the internal bookmark, NOT any of the returned statuses.
+	   Return only bookmarked statuses *NEWER* than the given bookmark ID. The status with the corresponding bookmark ID will not be included in the response.
 	*/
 	MinID *string
-
-	/* SinceID.
-
-	   Return only bookmarked statuses *NEWER* than the given min ID. The bookmarked status with the specified ID will not be included in the response. NOTE: the ID is of the internal bookmark, NOT any of the returned statuses.
-	*/
-	SinceID *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -106,7 +100,7 @@ func (o *BookmarksGetParams) WithDefaults() *BookmarksGetParams {
 // All values with no default are reset to their zero value.
 func (o *BookmarksGetParams) SetDefaults() {
 	var (
-		limitDefault = int64(20)
+		limitDefault = int64(30)
 	)
 
 	val := BookmarksGetParams{
@@ -185,17 +179,6 @@ func (o *BookmarksGetParams) SetMinID(minID *string) {
 	o.MinID = minID
 }
 
-// WithSinceID adds the sinceID to the bookmarks get params
-func (o *BookmarksGetParams) WithSinceID(sinceID *string) *BookmarksGetParams {
-	o.SetSinceID(sinceID)
-	return o
-}
-
-// SetSinceID adds the sinceId to the bookmarks get params
-func (o *BookmarksGetParams) SetSinceID(sinceID *string) {
-	o.SinceID = sinceID
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *BookmarksGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -250,23 +233,6 @@ func (o *BookmarksGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qMinID != "" {
 
 			if err := r.SetQueryParam("min_id", qMinID); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.SinceID != nil {
-
-		// query param since_id
-		var qrSinceID string
-
-		if o.SinceID != nil {
-			qrSinceID = *o.SinceID
-		}
-		qSinceID := qrSinceID
-		if qSinceID != "" {
-
-			if err := r.SetQueryParam("since_id", qSinceID); err != nil {
 				return err
 			}
 		}
