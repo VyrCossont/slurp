@@ -53,6 +53,7 @@ type Account struct {
 	DisplayName string `json:"display_name,omitempty"`
 
 	// Array of custom emojis used in this account's note or display name.
+	// Empty for blocked accounts.
 	Emojis []*Emoji `json:"emojis"`
 
 	// Account has enabled RSS feed.
@@ -60,6 +61,7 @@ type Account struct {
 	EnableRSS bool `json:"enable_rss,omitempty"`
 
 	// Additional metadata attached to this account's profile.
+	// Empty for blocked accounts.
 	Fields []*Field `json:"fields"`
 
 	// Number of accounts following this account, according to our instance.
@@ -91,10 +93,6 @@ type Account struct {
 
 	// Account manually approves follow requests.
 	Locked bool `json:"locked,omitempty"`
-
-	// If this account has been muted, when will the mute expire (ISO 8601 Datetime).
-	// Example: 2021-07-30T09:20:25+00:00
-	MuteExpiresAt string `json:"mute_expires_at,omitempty"`
 
 	// Bio/description of this account.
 	Note string `json:"note,omitempty"`

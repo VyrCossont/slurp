@@ -272,12 +272,13 @@ func (a *Client) AdminAccountReject(params *AdminAccountRejectParams, authInfo r
 /*
 	AdminAccountsGetV1 views page through known accounts according to given filters
 
-	The next and previous queries can be parsed from the returned Link header.
+	Returned accounts will be ordered alphabetically (a-z) by domain + username.
 
+The next and previous queries can be parsed from the returned Link header.
 Example:
 
 ```
-<https://example.org/api/v1/admin/accounts?limit=80&max_id=01FC0SKA48HNSVR6YKZCQGS2V8>; rel="next", <https://example.org/api/v1/admin/accounts?limit=80&min_id=01FC0SKW5JK2Q4EVAV2B462YY0>; rel="prev"
+<https://example.org/api/v1/admin/accounts?limit=80&max_id=example.org%2F%40someone>; rel="next", <https://example.org/api/v1/admin/accounts?limit=80&min_id=example.org%2F%40someone_else>; rel="prev"
 ````
 */
 func (a *Client) AdminAccountsGetV1(params *AdminAccountsGetV1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountsGetV1OK, error) {
@@ -319,12 +320,13 @@ func (a *Client) AdminAccountsGetV1(params *AdminAccountsGetV1Params, authInfo r
 /*
 	AdminAccountsGetV2 views page through known accounts according to given filters
 
-	The next and previous queries can be parsed from the returned Link header.
+	Returned accounts will be ordered alphabetically (a-z) by domain + username.
 
+The next and previous queries can be parsed from the returned Link header.
 Example:
 
 ```
-<https://example.org/api/v2/admin/accounts?limit=80&max_id=01FC0SKA48HNSVR6YKZCQGS2V8>; rel="next", <https://example.org/api/v2/admin/accounts?limit=80&min_id=01FC0SKW5JK2Q4EVAV2B462YY0>; rel="prev"
+<https://example.org/api/v2/admin/accounts?limit=80&max_id=example.org%2F%40someone>; rel="next", <https://example.org/api/v2/admin/accounts?limit=80&min_id=example.org%2F%40someone_else>; rel="prev"
 ````
 */
 func (a *Client) AdminAccountsGetV2(params *AdminAccountsGetV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AdminAccountsGetV2OK, error) {

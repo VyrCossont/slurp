@@ -65,7 +65,13 @@ type TestEmailSendParams struct {
 
 	   The email address that the test email should be sent to.
 	*/
-	Email *string
+	Email string
+
+	/* Message.
+
+	   Optional message to include in the email.
+	*/
+	Message *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,14 +127,25 @@ func (o *TestEmailSendParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithEmail adds the email to the test email send params
-func (o *TestEmailSendParams) WithEmail(email *string) *TestEmailSendParams {
+func (o *TestEmailSendParams) WithEmail(email string) *TestEmailSendParams {
 	o.SetEmail(email)
 	return o
 }
 
 // SetEmail adds the email to the test email send params
-func (o *TestEmailSendParams) SetEmail(email *string) {
+func (o *TestEmailSendParams) SetEmail(email string) {
 	o.Email = email
+}
+
+// WithMessage adds the message to the test email send params
+func (o *TestEmailSendParams) WithMessage(message *string) *TestEmailSendParams {
+	o.SetMessage(message)
+	return o
+}
+
+// SetMessage adds the message to the test email send params
+func (o *TestEmailSendParams) SetMessage(message *string) {
+	o.Message = message
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -139,16 +156,25 @@ func (o *TestEmailSendParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	}
 	var res []error
 
-	if o.Email != nil {
-
-		// form param email
-		var frEmail string
-		if o.Email != nil {
-			frEmail = *o.Email
+	// form param email
+	frEmail := o.Email
+	fEmail := frEmail
+	if fEmail != "" {
+		if err := r.SetFormParam("email", fEmail); err != nil {
+			return err
 		}
-		fEmail := frEmail
-		if fEmail != "" {
-			if err := r.SetFormParam("email", fEmail); err != nil {
+	}
+
+	if o.Message != nil {
+
+		// form param message
+		var frMessage string
+		if o.Message != nil {
+			frMessage = *o.Message
+		}
+		fMessage := frMessage
+		if fMessage != "" {
+			if err := r.SetFormParam("message", fMessage); err != nil {
 				return err
 			}
 		}

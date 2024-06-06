@@ -102,7 +102,7 @@ type AdminAccountsGetV1Params struct {
 
 	   Maximum number of results to return.
 
-	   Default: 100
+	   Default: 50
 	*/
 	Limit *int64
 
@@ -114,13 +114,13 @@ type AdminAccountsGetV1Params struct {
 
 	/* MaxID.
 
-	   All results returned will be older than the item with this ID.
+	   max_id in the form `[domain]/@[username]`. All results returned will be later in the alphabet than `[domain]/@[username]`. For example, if max_id = `example.org/@someone` then returned entries might contain `example.org/@someone_else`, `later.example.org/@someone`, etc. Local account IDs in this form use an empty string for the `[domain]` part, for example local account with username `someone` would be `/@someone`.
 	*/
 	MaxID *string
 
 	/* MinID.
 
-	   Returns results immediately newer than the item with this ID.
+	   min_id in the form `[domain]/@[username]`. All results returned will be earlier in the alphabet than `[domain]/@[username]`. For example, if min_id = `example.org/@someone` then returned entries might contain `example.org/@earlier_account`, `earlier.example.org/@someone`, etc. Local account IDs in this form use an empty string for the `[domain]` part, for example local account with username `someone` would be `/@someone`.
 	*/
 	MinID *string
 
@@ -147,12 +147,6 @@ type AdminAccountsGetV1Params struct {
 	   Filter for currently silenced accounts.
 	*/
 	Silenced *bool
-
-	/* SinceID.
-
-	   All results returned will be newer than the item with this ID.
-	*/
-	SinceID *string
 
 	/* Staff.
 
@@ -194,7 +188,7 @@ func (o *AdminAccountsGetV1Params) SetDefaults() {
 
 		disabledDefault = bool(false)
 
-		limitDefault = int64(100)
+		limitDefault = int64(50)
 
 		localDefault = bool(false)
 
@@ -415,17 +409,6 @@ func (o *AdminAccountsGetV1Params) WithSilenced(silenced *bool) *AdminAccountsGe
 // SetSilenced adds the silenced to the admin accounts get v1 params
 func (o *AdminAccountsGetV1Params) SetSilenced(silenced *bool) {
 	o.Silenced = silenced
-}
-
-// WithSinceID adds the sinceID to the admin accounts get v1 params
-func (o *AdminAccountsGetV1Params) WithSinceID(sinceID *string) *AdminAccountsGetV1Params {
-	o.SetSinceID(sinceID)
-	return o
-}
-
-// SetSinceID adds the sinceId to the admin accounts get v1 params
-func (o *AdminAccountsGetV1Params) SetSinceID(sinceID *string) {
-	o.SinceID = sinceID
 }
 
 // WithStaff adds the staff to the admin accounts get v1 params
@@ -702,23 +685,6 @@ func (o *AdminAccountsGetV1Params) WriteToRequest(r runtime.ClientRequest, reg s
 		if qSilenced != "" {
 
 			if err := r.SetQueryParam("silenced", qSilenced); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.SinceID != nil {
-
-		// query param since_id
-		var qrSinceID string
-
-		if o.SinceID != nil {
-			qrSinceID = *o.SinceID
-		}
-		qSinceID := qrSinceID
-		if qSinceID != "" {
-
-			if err := r.SetQueryParam("since_id", qSinceID); err != nil {
 				return err
 			}
 		}

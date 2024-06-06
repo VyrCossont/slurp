@@ -8,9 +8,10 @@ A tool for exporting data from and importing data to [Fediverse](https://en.wiki
 
 - `blocks`
 - `bookmarks`
-- `filters` (note that Mastodon can't import or export filters yet, so the current format is `slurp`-specific)
+- `filters` (note that Mastodon can't import or export filters yet, so the current format is `slurp`-specific, and handles keyword filters only, not status filters)
 - `follows`
 - `lists`
+- `mutes`
 
 ## build
 
@@ -58,12 +59,11 @@ Save follows from this instance.
 Do this when the GotoSocial API changes. This will use the Swagger spec on GotoSocial's `main` branch.
 
 ```bash
-go get github.com/go-swagger/go-swagger/cmd/swagger
 rm -rf client models
 go generate ./...
 
 # apply workaround for https://github.com/go-swagger/go-swagger/issues/2997
-patch -u -p1 -i fcontext.diff
+patch -u -p1 -i filter-context.diff
 ```
 
 You can also use `go-swagger` directly instead of through `go generate`, which you'll want to do if using a different branch or tag, or a local copy of the GotoSocial codebase. In the latter case, don't forget to [update your copy's `swagger.yaml`](https://github.com/superseriousbusiness/gotosocial/blob/main/CONTRIBUTING.md#updating-swagger-docs) first.

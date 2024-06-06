@@ -44,7 +44,7 @@ func RemoveExpectedCSVHeader(expectedHeader []string, rows [][]string) ([][]stri
 		return nil, errors.WithStack(errors.New("expected CSV header but first row has no fields"))
 	}
 
-	for i, field := range header[:len(expectedHeader)] {
+	for i, field := range header[:min(len(header), len(expectedHeader))] {
 		if field != expectedHeader[i] {
 			return nil, errors.WithStack(errors.Errorf("unexpected column in CSV header: %v", field))
 		}

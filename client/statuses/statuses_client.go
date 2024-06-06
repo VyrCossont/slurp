@@ -46,11 +46,15 @@ type ClientService interface {
 
 	StatusGet(params *StatusGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusGetOK, error)
 
+	StatusHistoryGet(params *StatusHistoryGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusHistoryGetOK, error)
+
 	StatusMute(params *StatusMuteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusMuteOK, error)
 
 	StatusPin(params *StatusPinParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusPinOK, error)
 
 	StatusReblog(params *StatusReblogParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusReblogOK, error)
+
+	StatusSourceGet(params *StatusSourceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusSourceGetOK, error)
 
 	StatusUnbookmark(params *StatusUnbookmarkParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusUnbookmarkOK, error)
 
@@ -388,6 +392,47 @@ func (a *Client) StatusGet(params *StatusGetParams, authInfo runtime.ClientAuthI
 }
 
 /*
+StatusHistoryGet views edit history of status with the given ID
+
+UNIMPLEMENTED: Currently this endpoint will always return an array of length 1, containing only the latest/current version of the status.
+*/
+func (a *Client) StatusHistoryGet(params *StatusHistoryGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusHistoryGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStatusHistoryGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "statusHistoryGet",
+		Method:             "GET",
+		PathPattern:        "/api/v1/statuses/{id}/history",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StatusHistoryGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StatusHistoryGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for statusHistoryGet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	StatusMute mutes a status s thread this prevents notifications from being created for future replies likes boosts etc in the thread of which the target status is a part
 
 	Target status must belong to you or mention you.
@@ -514,6 +559,45 @@ func (a *Client) StatusReblog(params *StatusReblogParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for statusReblog: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StatusSourceGet views source text of status with the given ID requester must own the status
+*/
+func (a *Client) StatusSourceGet(params *StatusSourceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusSourceGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStatusSourceGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "statusSourceGet",
+		Method:             "GET",
+		PathPattern:        "/api/v1/statuses/{id}/source",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StatusSourceGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StatusSourceGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for statusSourceGet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

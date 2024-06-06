@@ -32,6 +32,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	AccountAlias(params *AccountAliasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountAliasOK, error)
 
+	AccountAvatarDelete(params *AccountAvatarDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountAvatarDeleteOK, error)
+
 	AccountBlock(params *AccountBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountBlockOK, error)
 
 	AccountCreate(params *AccountCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountCreateOK, error)
@@ -46,11 +48,15 @@ type ClientService interface {
 
 	AccountGet(params *AccountGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountGetOK, error)
 
+	AccountHeaderDelete(params *AccountHeaderDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountHeaderDeleteOK, error)
+
 	AccountLists(params *AccountListsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountListsOK, error)
 
 	AccountLookupGet(params *AccountLookupGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountLookupGetOK, error)
 
 	AccountMove(params *AccountMoveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountMoveAccepted, error)
+
+	AccountMute(params *AccountMuteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountMuteOK, error)
 
 	AccountNote(params *AccountNoteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountNoteOK, error)
 
@@ -65,6 +71,8 @@ type ClientService interface {
 	AccountUnblock(params *AccountUnblockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountUnblockOK, error)
 
 	AccountUnfollow(params *AccountUnfollowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountUnfollowOK, error)
+
+	AccountUnmute(params *AccountUnmuteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountUnmuteOK, error)
 
 	AccountUpdate(params *AccountUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountUpdateOK, error)
 
@@ -114,6 +122,47 @@ func (a *Client) AccountAlias(params *AccountAliasParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for accountAlias: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+AccountAvatarDelete deletes the authenticated account s avatar
+
+If the account doesn't have an avatar, the call succeeds anyway.
+*/
+func (a *Client) AccountAvatarDelete(params *AccountAvatarDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountAvatarDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAccountAvatarDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "accountAvatarDelete",
+		Method:             "DELETE",
+		PathPattern:        "/api/v1/profile/avatar",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AccountAvatarDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AccountAvatarDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for accountAvatarDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -422,6 +471,47 @@ func (a *Client) AccountGet(params *AccountGetParams, authInfo runtime.ClientAut
 }
 
 /*
+AccountHeaderDelete deletes the authenticated account s header
+
+If the account doesn't have a header, the call succeeds anyway.
+*/
+func (a *Client) AccountHeaderDelete(params *AccountHeaderDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountHeaderDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAccountHeaderDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "accountHeaderDelete",
+		Method:             "DELETE",
+		PathPattern:        "/api/v1/profile/header",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AccountHeaderDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AccountHeaderDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for accountHeaderDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 AccountLists sees all lists of yours that contain requested account
 */
 func (a *Client) AccountLists(params *AccountListsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountListsOK, error) {
@@ -535,6 +625,47 @@ func (a *Client) AccountMove(params *AccountMoveParams, authInfo runtime.ClientA
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for accountMove: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+AccountMute mutes account by ID
+
+If account was already muted, succeeds anyway. This can be used to update the details of a mute.
+*/
+func (a *Client) AccountMute(params *AccountMuteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountMuteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAccountMuteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "accountMute",
+		Method:             "POST",
+		PathPattern:        "/api/v1/accounts/{id}/mute",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AccountMuteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AccountMuteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for accountMute: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -810,6 +941,47 @@ func (a *Client) AccountUnfollow(params *AccountUnfollowParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for accountUnfollow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+AccountUnmute unmutes account by ID
+
+If account was already unmuted (or has never been muted), succeeds anyway.
+*/
+func (a *Client) AccountUnmute(params *AccountUnmuteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountUnmuteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAccountUnmuteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "accountUnmute",
+		Method:             "POST",
+		PathPattern:        "/api/v1/accounts/{id}/unmute",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AccountUnmuteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AccountUnmuteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for accountUnmute: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

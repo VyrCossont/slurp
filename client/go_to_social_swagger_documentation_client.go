@@ -15,6 +15,7 @@ import (
 	"github.com/VyrCossont/slurp/client/apps"
 	"github.com/VyrCossont/slurp/client/blocks"
 	"github.com/VyrCossont/slurp/client/bookmarks"
+	"github.com/VyrCossont/slurp/client/conversations"
 	"github.com/VyrCossont/slurp/client/custom_emojis"
 	"github.com/VyrCossont/slurp/client/debug"
 	"github.com/VyrCossont/slurp/client/favourites"
@@ -27,6 +28,7 @@ import (
 	"github.com/VyrCossont/slurp/client/lists"
 	"github.com/VyrCossont/slurp/client/markers"
 	"github.com/VyrCossont/slurp/client/media"
+	"github.com/VyrCossont/slurp/client/mutes"
 	"github.com/VyrCossont/slurp/client/nodeinfo"
 	"github.com/VyrCossont/slurp/client/notifications"
 	"github.com/VyrCossont/slurp/client/nr_well_known"
@@ -87,6 +89,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GoToSocial
 	cli.Apps = apps.New(transport, formats)
 	cli.Blocks = blocks.New(transport, formats)
 	cli.Bookmarks = bookmarks.New(transport, formats)
+	cli.Conversations = conversations.New(transport, formats)
 	cli.CustomEmojis = custom_emojis.New(transport, formats)
 	cli.Debug = debug.New(transport, formats)
 	cli.Favourites = favourites.New(transport, formats)
@@ -99,6 +102,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GoToSocial
 	cli.Lists = lists.New(transport, formats)
 	cli.Markers = markers.New(transport, formats)
 	cli.Media = media.New(transport, formats)
+	cli.Mutes = mutes.New(transport, formats)
 	cli.Nodeinfo = nodeinfo.New(transport, formats)
 	cli.Notifications = notifications.New(transport, formats)
 	cli.NrWellKnown = nr_well_known.New(transport, formats)
@@ -164,6 +168,8 @@ type GoToSocialSwaggerDocumentation struct {
 
 	Bookmarks bookmarks.ClientService
 
+	Conversations conversations.ClientService
+
 	CustomEmojis custom_emojis.ClientService
 
 	Debug debug.ClientService
@@ -187,6 +193,8 @@ type GoToSocialSwaggerDocumentation struct {
 	Markers markers.ClientService
 
 	Media media.ClientService
+
+	Mutes mutes.ClientService
 
 	Nodeinfo nodeinfo.ClientService
 
@@ -221,6 +229,7 @@ func (c *GoToSocialSwaggerDocumentation) SetTransport(transport runtime.ClientTr
 	c.Apps.SetTransport(transport)
 	c.Blocks.SetTransport(transport)
 	c.Bookmarks.SetTransport(transport)
+	c.Conversations.SetTransport(transport)
 	c.CustomEmojis.SetTransport(transport)
 	c.Debug.SetTransport(transport)
 	c.Favourites.SetTransport(transport)
@@ -233,6 +242,7 @@ func (c *GoToSocialSwaggerDocumentation) SetTransport(transport runtime.ClientTr
 	c.Lists.SetTransport(transport)
 	c.Markers.SetTransport(transport)
 	c.Media.SetTransport(transport)
+	c.Mutes.SetTransport(transport)
 	c.Nodeinfo.SetTransport(transport)
 	c.Notifications.SetTransport(transport)
 	c.NrWellKnown.SetTransport(transport)

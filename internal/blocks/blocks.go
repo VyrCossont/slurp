@@ -48,15 +48,9 @@ func Export(authClient *auth.Client, file string) error {
 		return err
 	}
 
-	//goland:noinspection GoImportUsedAsName
-	blocks := make([]*blockListEntry, 0, len(blockedAccounts))
+	csvRows := make([][]string, 0, len(blockedAccounts))
 	for _, account := range blockedAccounts {
-		blocks = append(blocks, newBlockListEntry(ownDomain, account))
-	}
-
-	csvRows := make([][]string, 0, len(blocks))
-	for _, block := range blocks {
-		csvRows = append(csvRows, block.csvFields())
+		csvRows = append(csvRows, newBlockListEntry(ownDomain, account).csvFields())
 	}
 
 	return util.WriteCSV(file, csvRows)

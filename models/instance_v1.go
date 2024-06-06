@@ -28,6 +28,9 @@ type InstanceV1 struct {
 	// New account registrations require admin approval.
 	ApprovalRequired bool `json:"approval_required,omitempty"`
 
+	// Whether or not instance is running in DEBUG mode. Omitted if false.
+	Debug bool `json:"debug,omitempty"`
+
 	// Description of the instance.
 	//
 	// Should be HTML formatted, but might be plaintext.

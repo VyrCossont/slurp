@@ -63,7 +63,7 @@ type FilterV1DeleteParams struct {
 
 	/* ID.
 
-	   ID of the list
+	   ID of the filter
 	*/
 	ID string
 

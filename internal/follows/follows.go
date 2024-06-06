@@ -34,8 +34,6 @@ import (
 	"github.com/VyrCossont/slurp/models"
 )
 
-const relationshipBatchSize = 40
-
 func Export(authClient *auth.Client, file string) error {
 	ownAccount, err := own.Account(authClient)
 	if err != nil {
@@ -53,28 +51,13 @@ func Export(authClient *auth.Client, file string) error {
 		return err
 	}
 
-	// Fetch followed account relationship data in batches.
-	relationships := make(map[string]*models.Relationship, len(followedAccounts))
-	for i := 0; i < len(followedAccounts); i += relationshipBatchSize {
-		params := &accounts.AccountRelationshipsParams{}
-		for _, account := range followedAccounts[i:min(i+relationshipBatchSize, len(followedAccounts))] {
-			params.ID = append(params.ID, account.ID)
-		}
-
-		err := authClient.Wait()
-		if err != nil {
-			return err
-		}
-
-		resp, err := authClient.Client.Accounts.AccountRelationships(params, authClient.Auth)
-		if err != nil {
-			slog.Warn("couldn't fetch relationships", "account_ids", params.ID)
-			continue
-		}
-
-		for _, relationship := range resp.GetPayload() {
-			relationships[relationship.ID] = relationship
-		}
+	followedAccountIDs := make([]string, len(followedAccounts))
+	for _, account := range followedAccounts {
+		followedAccountIDs = append(followedAccountIDs, account.ID)
+	}
+	relationships, err := api.GetBatchedRelationships(authClient, followedAccountIDs)
+	if err != nil {
+		return err
 	}
 
 	follows := make([]*followListEntry, 0, len(followedAccounts))

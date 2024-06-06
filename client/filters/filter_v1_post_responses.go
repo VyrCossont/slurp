@@ -41,6 +41,12 @@ func (o *FilterV1PostReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 403:
+		result := NewFilterV1PostForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 404:
 		result := NewFilterV1PostNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -49,6 +55,12 @@ func (o *FilterV1PostReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, result
 	case 406:
 		result := NewFilterV1PostNotAcceptable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewFilterV1PostConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -250,6 +262,62 @@ func (o *FilterV1PostUnauthorized) readResponse(response runtime.ClientResponse,
 	return nil
 }
 
+// NewFilterV1PostForbidden creates a FilterV1PostForbidden with default headers values
+func NewFilterV1PostForbidden() *FilterV1PostForbidden {
+	return &FilterV1PostForbidden{}
+}
+
+/*
+FilterV1PostForbidden describes a response with status code 403, with default header values.
+
+forbidden to moved accounts
+*/
+type FilterV1PostForbidden struct {
+}
+
+// IsSuccess returns true when this filter v1 post forbidden response has a 2xx status code
+func (o *FilterV1PostForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this filter v1 post forbidden response has a 3xx status code
+func (o *FilterV1PostForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this filter v1 post forbidden response has a 4xx status code
+func (o *FilterV1PostForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this filter v1 post forbidden response has a 5xx status code
+func (o *FilterV1PostForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this filter v1 post forbidden response a status code equal to that given
+func (o *FilterV1PostForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the filter v1 post forbidden response
+func (o *FilterV1PostForbidden) Code() int {
+	return 403
+}
+
+func (o *FilterV1PostForbidden) Error() string {
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostForbidden ", 403)
+}
+
+func (o *FilterV1PostForbidden) String() string {
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostForbidden ", 403)
+}
+
+func (o *FilterV1PostForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
 // NewFilterV1PostNotFound creates a FilterV1PostNotFound with default headers values
 func NewFilterV1PostNotFound() *FilterV1PostNotFound {
 	return &FilterV1PostNotFound{}
@@ -358,6 +426,62 @@ func (o *FilterV1PostNotAcceptable) String() string {
 }
 
 func (o *FilterV1PostNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewFilterV1PostConflict creates a FilterV1PostConflict with default headers values
+func NewFilterV1PostConflict() *FilterV1PostConflict {
+	return &FilterV1PostConflict{}
+}
+
+/*
+FilterV1PostConflict describes a response with status code 409, with default header values.
+
+conflict (duplicate keyword)
+*/
+type FilterV1PostConflict struct {
+}
+
+// IsSuccess returns true when this filter v1 post conflict response has a 2xx status code
+func (o *FilterV1PostConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this filter v1 post conflict response has a 3xx status code
+func (o *FilterV1PostConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this filter v1 post conflict response has a 4xx status code
+func (o *FilterV1PostConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this filter v1 post conflict response has a 5xx status code
+func (o *FilterV1PostConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this filter v1 post conflict response a status code equal to that given
+func (o *FilterV1PostConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the filter v1 post conflict response
+func (o *FilterV1PostConflict) Code() int {
+	return 409
+}
+
+func (o *FilterV1PostConflict) Error() string {
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostConflict ", 409)
+}
+
+func (o *FilterV1PostConflict) String() string {
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostConflict ", 409)
+}
+
+func (o *FilterV1PostConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

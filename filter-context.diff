@@ -1,0 +1,204 @@
+diff --git a/client/filters/filter_v1_post_parameters.go b/client/filters/filter_v1_post_parameters.go
+index 1d42920..bb93786 100644
+--- a/client/filters/filter_v1_post_parameters.go
++++ b/client/filters/filter_v1_post_parameters.go
+@@ -62,13 +62,13 @@ FilterV1PostParams contains all the parameters to send to the API endpoint
+ */
+ type FilterV1PostParams struct {
+ 
+-	/* Context.
++	/* FilterContext.
+ 
+ 	     The contexts in which the filter should be applied.
+ 
+ 	Sample: home, public
+ 	*/
+-	Context []string
++	FilterContext []string
+ 
+ 	/* ExpiresIn.
+ 
+@@ -169,15 +169,15 @@ func (o *FilterV1PostParams) SetHTTPClient(client *http.Client) {
+ 	o.HTTPClient = client
+ }
+ 
+-// WithContext adds the context to the filter v1 post params
+-func (o *FilterV1PostParams) WithContext(context []string) *FilterV1PostParams {
+-	o.SetContext(context)
++// WithFilterContext adds the filter context to the filter v1 post params
++func (o *FilterV1PostParams) WithFilterContext(context []string) *FilterV1PostParams {
++	o.SetFilterContext(context)
+ 	return o
+ }
+ 
+-// SetContext adds the context to the filter v1 post params
+-func (o *FilterV1PostParams) SetContext(context []string) {
+-	o.Context = context
++// SetFilterContext adds the filter context to the filter v1 post params
++func (o *FilterV1PostParams) SetFilterContext(context []string) {
++	o.FilterContext = context
+ }
+ 
+ // WithExpiresIn adds the expiresIn to the filter v1 post params
+@@ -305,7 +305,7 @@ func (o *FilterV1PostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
+ 
+ // bindParamFilterV1Post binds the parameter context[]
+ func (o *FilterV1PostParams) bindParamContext(formats strfmt.Registry) []string {
+-	contextIR := o.Context
++	contextIR := o.FilterContext
+ 
+ 	var contextIC []string
+ 	for _, contextIIR := range contextIR { // explode []string
+diff --git a/client/filters/filter_v1_put_parameters.go b/client/filters/filter_v1_put_parameters.go
+index 66d7a1f..5e03a61 100644
+--- a/client/filters/filter_v1_put_parameters.go
++++ b/client/filters/filter_v1_put_parameters.go
+@@ -62,13 +62,13 @@ FilterV1PutParams contains all the parameters to send to the API endpoint
+ */
+ type FilterV1PutParams struct {
+ 
+-	/* Context.
++	/* FilterContext.
+ 
+ 	     The contexts in which the filter should be applied.
+ 
+ 	Sample: home, public
+ 	*/
+-	Context []string
++	FilterContext []string
+ 
+ 	/* ExpiresIn.
+ 
+@@ -175,15 +175,15 @@ func (o *FilterV1PutParams) SetHTTPClient(client *http.Client) {
+ 	o.HTTPClient = client
+ }
+ 
+-// WithContext adds the context to the filter v1 put params
+-func (o *FilterV1PutParams) WithContext(context []string) *FilterV1PutParams {
+-	o.SetContext(context)
++// WithFilterContext adds the filter context to the filter v1 put params
++func (o *FilterV1PutParams) WithFilterContext(context []string) *FilterV1PutParams {
++	o.SetFilterContext(context)
+ 	return o
+ }
+ 
+-// SetContext adds the context to the filter v1 put params
+-func (o *FilterV1PutParams) SetContext(context []string) {
+-	o.Context = context
++// SetFilterContext adds the filter context to the filter v1 put params
++func (o *FilterV1PutParams) SetFilterContext(context []string) {
++	o.FilterContext = context
+ }
+ 
+ // WithExpiresIn adds the expiresIn to the filter v1 put params
+@@ -327,7 +327,7 @@ func (o *FilterV1PutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
+ 
+ // bindParamFilterV1Put binds the parameter context[]
+ func (o *FilterV1PutParams) bindParamContext(formats strfmt.Registry) []string {
+-	contextIR := o.Context
++	contextIR := o.FilterContext
+ 
+ 	var contextIC []string
+ 	for _, contextIIR := range contextIR { // explode []string
+diff --git a/client/filters/filter_v2_post_parameters.go b/client/filters/filter_v2_post_parameters.go
+index c9a7901..7bda5aa 100644
+--- a/client/filters/filter_v2_post_parameters.go
++++ b/client/filters/filter_v2_post_parameters.go
+@@ -62,13 +62,13 @@ FilterV2PostParams contains all the parameters to send to the API endpoint
+ */
+ type FilterV2PostParams struct {
+ 
+-	/* Context.
++	/* FilterContext.
+ 
+ 	     The contexts in which the filter should be applied.
+ 
+ 	Sample: home, public
+ 	*/
+-	Context []string
++	FilterContext []string
+ 
+ 	/* ExpiresIn.
+ 
+@@ -160,15 +160,15 @@ func (o *FilterV2PostParams) SetHTTPClient(client *http.Client) {
+ 	o.HTTPClient = client
+ }
+ 
+-// WithContext adds the context to the filter v2 post params
+-func (o *FilterV2PostParams) WithContext(context []string) *FilterV2PostParams {
+-	o.SetContext(context)
++// WithFilterContext adds the filter context to the filter v2 post params
++func (o *FilterV2PostParams) WithFilterContext(context []string) *FilterV2PostParams {
++	o.SetFilterContext(context)
+ 	return o
+ }
+ 
+-// SetContext adds the context to the filter v2 post params
+-func (o *FilterV2PostParams) SetContext(context []string) {
+-	o.Context = context
++// SetFilterContext adds the filter context to the filter v2 post params
++func (o *FilterV2PostParams) SetFilterContext(context []string) {
++	o.FilterContext = context
+ }
+ 
+ // WithExpiresIn adds the expiresIn to the filter v2 post params
+@@ -270,7 +270,7 @@ func (o *FilterV2PostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
+ 
+ // bindParamFilterV2Post binds the parameter context[]
+ func (o *FilterV2PostParams) bindParamContext(formats strfmt.Registry) []string {
+-	contextIR := o.Context
++	contextIR := o.FilterContext
+ 
+ 	var contextIC []string
+ 	for _, contextIIR := range contextIR { // explode []string
+diff --git a/client/filters/filter_v2_put_parameters.go b/client/filters/filter_v2_put_parameters.go
+index f188025..3312d61 100644
+--- a/client/filters/filter_v2_put_parameters.go
++++ b/client/filters/filter_v2_put_parameters.go
+@@ -62,13 +62,13 @@ FilterV2PutParams contains all the parameters to send to the API endpoint
+ */
+ type FilterV2PutParams struct {
+ 
+-	/* Context.
++	/* FilterContext.
+ 
+ 	     The contexts in which the filter should be applied.
+ 
+ 	Sample: home, public
+ 	*/
+-	Context []string
++	FilterContext []string
+ 
+ 	/* ExpiresIn.
+ 
+@@ -145,15 +145,15 @@ func (o *FilterV2PutParams) SetHTTPClient(client *http.Client) {
+ 	o.HTTPClient = client
+ }
+ 
+-// WithContext adds the context to the filter v2 put params
+-func (o *FilterV2PutParams) WithContext(context []string) *FilterV2PutParams {
+-	o.SetContext(context)
++// WithFilterContext adds the filter context to the filter v2 put params
++func (o *FilterV2PutParams) WithFilterContext(context []string) *FilterV2PutParams {
++	o.SetFilterContext(context)
+ 	return o
+ }
+ 
+-// SetContext adds the context to the filter v2 put params
+-func (o *FilterV2PutParams) SetContext(context []string) {
+-	o.Context = context
++// SetFilterContext adds the filter context to the filter v2 put params
++func (o *FilterV2PutParams) SetFilterContext(context []string) {
++	o.FilterContext = context
+ }
+ 
+ // WithExpiresIn adds the expiresIn to the filter v2 put params
+@@ -245,7 +245,7 @@ func (o *FilterV2PutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
+ 
+ // bindParamFilterV2Put binds the parameter context[]
+ func (o *FilterV2PutParams) bindParamContext(formats strfmt.Registry) []string {
+-	contextIR := o.Context
++	contextIR := o.FilterContext
+ 
+ 	var contextIC []string
+ 	for _, contextIIR := range contextIR { // explode []string

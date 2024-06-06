@@ -96,19 +96,19 @@ type AdminAccountsGetV2Params struct {
 
 	   Maximum number of results to return.
 
-	   Default: 100
+	   Default: 50
 	*/
 	Limit *int64
 
 	/* MaxID.
 
-	   All results returned will be older than the item with this ID.
+	   max_id in the form `[domain]/@[username]`. All results returned will be later in the alphabet than `[domain]/@[username]`. For example, if max_id = `example.org/@someone` then returned entries might contain `example.org/@someone_else`, `later.example.org/@someone`, etc. Local account IDs in this form use an empty string for the `[domain]` part, for example local account with username `someone` would be `/@someone`.
 	*/
 	MaxID *string
 
 	/* MinID.
 
-	   Returns results immediately newer than the item with this ID.
+	   min_id in the form `[domain]/@[username]`. All results returned will be earlier in the alphabet than `[domain]/@[username]`. For example, if min_id = `example.org/@someone` then returned entries might contain `example.org/@earlier_account`, `earlier.example.org/@someone`, etc. Local account IDs in this form use an empty string for the `[domain]` part, for example local account with username `someone` would be `/@someone`.
 	*/
 	MinID *string
 
@@ -129,12 +129,6 @@ type AdminAccountsGetV2Params struct {
 	   Filter for users with these roles.
 	*/
 	RoleIds []string
-
-	/* SinceID.
-
-	   All results returned will be newer than the item with this ID.
-	*/
-	SinceID *string
 
 	/* Status.
 
@@ -166,7 +160,7 @@ func (o *AdminAccountsGetV2Params) WithDefaults() *AdminAccountsGetV2Params {
 // All values with no default are reset to their zero value.
 func (o *AdminAccountsGetV2Params) SetDefaults() {
 	var (
-		limitDefault = int64(100)
+		limitDefault = int64(50)
 	)
 
 	val := AdminAccountsGetV2Params{
@@ -331,17 +325,6 @@ func (o *AdminAccountsGetV2Params) WithRoleIds(roleIds []string) *AdminAccountsG
 // SetRoleIds adds the roleIds to the admin accounts get v2 params
 func (o *AdminAccountsGetV2Params) SetRoleIds(roleIds []string) {
 	o.RoleIds = roleIds
-}
-
-// WithSinceID adds the sinceID to the admin accounts get v2 params
-func (o *AdminAccountsGetV2Params) WithSinceID(sinceID *string) *AdminAccountsGetV2Params {
-	o.SetSinceID(sinceID)
-	return o
-}
-
-// SetSinceID adds the sinceId to the admin accounts get v2 params
-func (o *AdminAccountsGetV2Params) SetSinceID(sinceID *string) {
-	o.SinceID = sinceID
 }
 
 // WithStatus adds the status to the admin accounts get v2 params
@@ -552,23 +535,6 @@ func (o *AdminAccountsGetV2Params) WriteToRequest(r runtime.ClientRequest, reg s
 		// query array param role_ids[]
 		if err := r.SetQueryParam("role_ids[]", joinedRoleIds...); err != nil {
 			return err
-		}
-	}
-
-	if o.SinceID != nil {
-
-		// query param since_id
-		var qrSinceID string
-
-		if o.SinceID != nil {
-			qrSinceID = *o.SinceID
-		}
-		qSinceID := qrSinceID
-		if qSinceID != "" {
-
-			if err := r.SetQueryParam("since_id", qSinceID); err != nil {
-				return err
-			}
 		}
 	}
 

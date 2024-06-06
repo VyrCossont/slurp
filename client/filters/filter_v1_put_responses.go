@@ -41,6 +41,12 @@ func (o *FilterV1PutReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
+	case 403:
+		result := NewFilterV1PutForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 404:
 		result := NewFilterV1PutNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -49,6 +55,12 @@ func (o *FilterV1PutReader) ReadResponse(response runtime.ClientResponse, consum
 		return nil, result
 	case 406:
 		result := NewFilterV1PutNotAcceptable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewFilterV1PutConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -250,6 +262,62 @@ func (o *FilterV1PutUnauthorized) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
+// NewFilterV1PutForbidden creates a FilterV1PutForbidden with default headers values
+func NewFilterV1PutForbidden() *FilterV1PutForbidden {
+	return &FilterV1PutForbidden{}
+}
+
+/*
+FilterV1PutForbidden describes a response with status code 403, with default header values.
+
+forbidden to moved accounts
+*/
+type FilterV1PutForbidden struct {
+}
+
+// IsSuccess returns true when this filter v1 put forbidden response has a 2xx status code
+func (o *FilterV1PutForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this filter v1 put forbidden response has a 3xx status code
+func (o *FilterV1PutForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this filter v1 put forbidden response has a 4xx status code
+func (o *FilterV1PutForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this filter v1 put forbidden response has a 5xx status code
+func (o *FilterV1PutForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this filter v1 put forbidden response a status code equal to that given
+func (o *FilterV1PutForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the filter v1 put forbidden response
+func (o *FilterV1PutForbidden) Code() int {
+	return 403
+}
+
+func (o *FilterV1PutForbidden) Error() string {
+	return fmt.Sprintf("[PUT /api/v1/filters/{id}][%d] filterV1PutForbidden ", 403)
+}
+
+func (o *FilterV1PutForbidden) String() string {
+	return fmt.Sprintf("[PUT /api/v1/filters/{id}][%d] filterV1PutForbidden ", 403)
+}
+
+func (o *FilterV1PutForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
 // NewFilterV1PutNotFound creates a FilterV1PutNotFound with default headers values
 func NewFilterV1PutNotFound() *FilterV1PutNotFound {
 	return &FilterV1PutNotFound{}
@@ -358,6 +426,62 @@ func (o *FilterV1PutNotAcceptable) String() string {
 }
 
 func (o *FilterV1PutNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewFilterV1PutConflict creates a FilterV1PutConflict with default headers values
+func NewFilterV1PutConflict() *FilterV1PutConflict {
+	return &FilterV1PutConflict{}
+}
+
+/*
+FilterV1PutConflict describes a response with status code 409, with default header values.
+
+conflict (duplicate keyword)
+*/
+type FilterV1PutConflict struct {
+}
+
+// IsSuccess returns true when this filter v1 put conflict response has a 2xx status code
+func (o *FilterV1PutConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this filter v1 put conflict response has a 3xx status code
+func (o *FilterV1PutConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this filter v1 put conflict response has a 4xx status code
+func (o *FilterV1PutConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this filter v1 put conflict response has a 5xx status code
+func (o *FilterV1PutConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this filter v1 put conflict response a status code equal to that given
+func (o *FilterV1PutConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the filter v1 put conflict response
+func (o *FilterV1PutConflict) Code() int {
+	return 409
+}
+
+func (o *FilterV1PutConflict) Error() string {
+	return fmt.Sprintf("[PUT /api/v1/filters/{id}][%d] filterV1PutConflict ", 409)
+}
+
+func (o *FilterV1PutConflict) String() string {
+	return fmt.Sprintf("[PUT /api/v1/filters/{id}][%d] filterV1PutConflict ", 409)
+}
+
+func (o *FilterV1PutConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

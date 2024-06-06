@@ -30,9 +30,91 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserOK, error)
+
+	UserEmailChange(params *UserEmailChangeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserEmailChangeAccepted, error)
+
 	UserPasswordChange(params *UserPasswordChangeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserPasswordChangeOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+GetUser gets your own user model
+*/
+func (a *Client) GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetUserParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getUser",
+		Method:             "GET",
+		PathPattern:        "/api/v1/user",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetUserOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UserEmailChange requests changing the email address of authenticated user
+*/
+func (a *Client) UserEmailChange(params *UserEmailChangeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserEmailChangeAccepted, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserEmailChangeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "userEmailChange",
+		Method:             "POST",
+		PathPattern:        "/api/v1/user/email_change",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserEmailChangeReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserEmailChangeAccepted)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for userEmailChange: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*

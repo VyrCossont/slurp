@@ -39,6 +39,9 @@ type Status struct {
 	// Number of favourites/likes this status has received, according to our instance.
 	FavouritesCount int64 `json:"favourites_count,omitempty"`
 
+	// A list of filters that matched this status and why they matched, if there are any such filters.
+	Filtered []*FilterResult `json:"filtered"`
+
 	// ID of the status.
 	// Example: 01FBVD42CQ3ZEEVMW180SBX03B
 	ID string `json:"id,omitempty"`
@@ -129,6 +132,10 @@ func (m *Status) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateFiltered(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMediaAttachments(formats); err != nil {
 		res = append(res, err)
 	}
@@ -183,6 +190,32 @@ func (m *Status) validateEmojis(formats strfmt.Registry) error {
 					return ve.ValidateName("emojis" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("emojis" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Status) validateFiltered(formats strfmt.Registry) error {
+	if swag.IsZero(m.Filtered) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Filtered); i++ {
+		if swag.IsZero(m.Filtered[i]) { // not required
+			continue
+		}
+
+		if m.Filtered[i] != nil {
+			if err := m.Filtered[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("filtered" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filtered" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -374,6 +407,10 @@ func (m *Status) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateFiltered(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateMediaAttachments(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -427,6 +464,31 @@ func (m *Status) contextValidateEmojis(ctx context.Context, formats strfmt.Regis
 					return ve.ValidateName("emojis" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("emojis" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Status) contextValidateFiltered(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Filtered); i++ {
+
+		if m.Filtered[i] != nil {
+
+			if swag.IsZero(m.Filtered[i]) { // not required
+				return nil
+			}
+
+			if err := m.Filtered[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("filtered" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filtered" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

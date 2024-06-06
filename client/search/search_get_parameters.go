@@ -62,6 +62,12 @@ SearchGetParams contains all the parameters to send to the API endpoint
 */
 type SearchGetParams struct {
 
+	/* AccountID.
+
+	   Restrict results to statuses created by the specified account.
+	*/
+	AccountID *string
+
 	/* APIVersion.
 
 	   Version of the API to use. Must be either `v1` or `v2`. If v1 is used, Hashtag results will be a slice of strings. If v2 is used, Hashtag results will be a slice of apimodel tags.
@@ -114,6 +120,9 @@ type SearchGetParams struct {
 	- `https://example.org/some/arbitrary/url` -- search for an account OR a status with the given URL. Will only ever return 1 result at most.
 	- `#[hashtag_name]` -- search for a hashtag with the given hashtag name, or starting with the given hashtag name. Case insensitive. Can return multiple results.
 	- any arbitrary string -- search for accounts or statuses containing the given string. Can return multiple results.
+
+	Arbitrary string queries may include the following operators:
+	- `from:localuser`, `from:remoteuser@instance.tld`: restrict results to statuses created by the specified account.
 	*/
 	Q string
 
@@ -209,6 +218,17 @@ func (o *SearchGetParams) WithHTTPClient(client *http.Client) *SearchGetParams {
 // SetHTTPClient adds the HTTPClient to the search get params
 func (o *SearchGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithAccountID adds the accountID to the search get params
+func (o *SearchGetParams) WithAccountID(accountID *string) *SearchGetParams {
+	o.SetAccountID(accountID)
+	return o
+}
+
+// SetAccountID adds the accountId to the search get params
+func (o *SearchGetParams) SetAccountID(accountID *string) {
+	o.AccountID = accountID
 }
 
 // WithAPIVersion adds the aPIVersion to the search get params
@@ -328,6 +348,23 @@ func (o *SearchGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
+
+	if o.AccountID != nil {
+
+		// query param account_id
+		var qrAccountID string
+
+		if o.AccountID != nil {
+			qrAccountID = *o.AccountID
+		}
+		qAccountID := qrAccountID
+		if qAccountID != "" {
+
+			if err := r.SetQueryParam("account_id", qAccountID); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param api_version
 	if err := r.SetPathParam("api_version", o.APIVersion); err != nil {

@@ -19,6 +19,7 @@ package filters
 
 import (
 	"log/slog"
+	"math"
 	"strconv"
 	"strings"
 	"time"
@@ -52,7 +53,12 @@ func Export(authClient *auth.Client, file string) error {
 	csvRows := make([][]string, 0, 1+len(filters))
 	csvRows = append(csvRows, csvHeader)
 	for _, filter := range filters {
-		csvRows = append(csvRows, newFilterListEntry(filter).csvFields())
+		entry, err := newFilterListEntry(filter)
+		if err != nil {
+			slog.Warn("couldn't convert filter to list entry", "error", err)
+			continue
+		}
+		csvRows = append(csvRows, entry.csvFields())
 	}
 
 	return util.WriteCSV(file, csvRows)
@@ -82,13 +88,14 @@ func Import(authClient *auth.Client, file string) error {
 		}
 
 		params := &filters.FilterV1PostParams{
-			FContext:     filter.contexts,
-			Phrase:       filter.keyword,
-			Irreversible: util.Ptr(filter.action == "drop"),
-			WholeWord:    util.Ptr(filter.wholeWord),
+			FilterContext: filter.contexts,
+			Phrase:        filter.keyword,
+			Irreversible:  util.Ptr(filter.action == "drop"),
+			WholeWord:     util.Ptr(filter.wholeWord),
 		}
 		if !filter.expiresAt.IsZero() {
-			params.ExpiresIn = util.Ptr(filter.expiresAt.Sub(time.Now()).Seconds())
+			// Form version of API expects an integer expires_in.
+			params.ExpiresIn = util.Ptr(math.Trunc(filter.expiresAt.Sub(time.Now()).Seconds()))
 		}
 
 		_, err = authClient.Client.Filters.FilterV1Post(
@@ -124,7 +131,8 @@ type filterListEntry struct {
 	contexts  []string
 }
 
-func newFilterListEntry(filter *models.FilterV1) *filterListEntry {
+func newFilterListEntry(filter *models.FilterV1) (*filterListEntry, error) {
+	var err error
 	e := &filterListEntry{
 		title:     filter.Phrase,
 		keyword:   filter.Phrase,
@@ -137,7 +145,17 @@ func newFilterListEntry(filter *models.FilterV1) *filterListEntry {
 	for _, context := range filter.Context {
 		e.contexts = append(e.contexts, string(context))
 	}
-	return e
+	if filter.ExpiresAt != "" {
+		e.expiresAt, err = time.Parse(time.RFC3339Nano, filter.ExpiresAt)
+		if err != nil {
+			e.expiresAt, err = time.Parse(time.RFC3339, filter.ExpiresAt)
+		}
+		if err != nil {
+			slog.Error("error parsing timestamp", "error", err, "timestamp", filter.ExpiresAt)
+			return nil, err
+		}
+	}
+	return e, nil
 }
 
 func (e *filterListEntry) csvFields() []string {

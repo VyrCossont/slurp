@@ -20,6 +20,8 @@ package api
 import (
 	"log/slog"
 
+	"github.com/VyrCossont/slurp/client/accounts"
+	"github.com/VyrCossont/slurp/models"
 	"github.com/pkg/errors"
 
 	"github.com/VyrCossont/slurp/internal/auth"
@@ -64,4 +66,34 @@ func ReadAllPaged[Requester PagedRequester[Response, Element], Response PagedRes
 	}
 
 	return all, nil
+}
+
+const relationshipBatchSize = 40
+
+// GetBatchedRelationships fetches account relationships in batches.
+// If some batches fail, it will keep going.
+func GetBatchedRelationships(authClient *auth.Client, accountIDs []string) (relationships map[string]*models.Relationship, err error) {
+	relationships = make(map[string]*models.Relationship, len(accountIDs))
+	for i := 0; i < len(accountIDs); i += relationshipBatchSize {
+		params := &accounts.AccountRelationshipsParams{
+			ID: accountIDs[i:min(i+relationshipBatchSize, len(accountIDs))],
+		}
+
+		err = authClient.Wait()
+		if err != nil {
+			return
+		}
+
+		resp, err := authClient.Client.Accounts.AccountRelationships(params, authClient.Auth)
+		if err != nil {
+			slog.Warn("couldn't fetch relationships", "account_ids", params.ID)
+			continue
+		}
+
+		for _, relationship := range resp.GetPayload() {
+			relationships[relationship.ID] = relationship
+		}
+	}
+
+	return
 }
