@@ -10,6 +10,7 @@ A tool for exporting data from and importing data to [Fediverse](https://en.wiki
 - `bookmarks`
 - `filters` (note that Mastodon can't import or export filters yet, so the current format is `slurp`-specific, and handles keyword filters only, not status filters)
 - `follows`
+- `followers` (export only, and Mastodon can't export followers, so the format is `slurp`-specific)
 - `lists`
 - `mutes`
 
