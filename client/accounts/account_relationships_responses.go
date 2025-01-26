@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AccountRelationshipsOK) Code() int {
 }
 
 func (o *AccountRelationshipsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsOK %s", 200, payload)
 }
 
 func (o *AccountRelationshipsOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsOK %s", 200, payload)
 }
 
 func (o *AccountRelationshipsOK) GetPayload() []*models.Relationship {
@@ -174,11 +177,11 @@ func (o *AccountRelationshipsBadRequest) Code() int {
 }
 
 func (o *AccountRelationshipsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsBadRequest", 400)
 }
 
 func (o *AccountRelationshipsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsBadRequest", 400)
 }
 
 func (o *AccountRelationshipsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -230,11 +233,11 @@ func (o *AccountRelationshipsUnauthorized) Code() int {
 }
 
 func (o *AccountRelationshipsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsUnauthorized", 401)
 }
 
 func (o *AccountRelationshipsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsUnauthorized", 401)
 }
 
 func (o *AccountRelationshipsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -286,11 +289,11 @@ func (o *AccountRelationshipsNotFound) Code() int {
 }
 
 func (o *AccountRelationshipsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsNotFound", 404)
 }
 
 func (o *AccountRelationshipsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsNotFound", 404)
 }
 
 func (o *AccountRelationshipsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -342,11 +345,11 @@ func (o *AccountRelationshipsNotAcceptable) Code() int {
 }
 
 func (o *AccountRelationshipsNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsNotAcceptable", 406)
 }
 
 func (o *AccountRelationshipsNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsNotAcceptable", 406)
 }
 
 func (o *AccountRelationshipsNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -398,11 +401,11 @@ func (o *AccountRelationshipsInternalServerError) Code() int {
 }
 
 func (o *AccountRelationshipsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsInternalServerError", 500)
 }
 
 func (o *AccountRelationshipsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/relationships][%d] accountRelationshipsInternalServerError", 500)
 }
 
 func (o *AccountRelationshipsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

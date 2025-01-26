@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListCreateParams creates a new ListCreateParams object,
@@ -61,6 +62,12 @@ ListCreateParams contains all the parameters to send to the API endpoint
 */
 type ListCreateParams struct {
 
+	/* Exclusive.
+
+	   Hide posts from members of this list from your home timeline.
+	*/
+	Exclusive *bool
+
 	/* RepliesPolicy.
 
 	     RepliesPolicy for this list.
@@ -98,10 +105,13 @@ func (o *ListCreateParams) WithDefaults() *ListCreateParams {
 // All values with no default are reset to their zero value.
 func (o *ListCreateParams) SetDefaults() {
 	var (
+		exclusiveDefault = bool(false)
+
 		repliesPolicyDefault = string("list")
 	)
 
 	val := ListCreateParams{
+		Exclusive:     &exclusiveDefault,
 		RepliesPolicy: &repliesPolicyDefault,
 	}
 
@@ -144,6 +154,17 @@ func (o *ListCreateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithExclusive adds the exclusive to the list create params
+func (o *ListCreateParams) WithExclusive(exclusive *bool) *ListCreateParams {
+	o.SetExclusive(exclusive)
+	return o
+}
+
+// SetExclusive adds the exclusive to the list create params
+func (o *ListCreateParams) SetExclusive(exclusive *bool) {
+	o.Exclusive = exclusive
+}
+
 // WithRepliesPolicy adds the repliesPolicy to the list create params
 func (o *ListCreateParams) WithRepliesPolicy(repliesPolicy *string) *ListCreateParams {
 	o.SetRepliesPolicy(repliesPolicy)
@@ -173,6 +194,21 @@ func (o *ListCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
+
+	if o.Exclusive != nil {
+
+		// form param exclusive
+		var frExclusive bool
+		if o.Exclusive != nil {
+			frExclusive = *o.Exclusive
+		}
+		fExclusive := swag.FormatBool(frExclusive)
+		if fExclusive != "" {
+			if err := r.SetFormParam("exclusive", fExclusive); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.RepliesPolicy != nil {
 

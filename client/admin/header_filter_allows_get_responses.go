@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *HeaderFilterAllowsGetOK) Code() int {
 }
 
 func (o *HeaderFilterAllowsGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetOK %s", 200, payload)
 }
 
 func (o *HeaderFilterAllowsGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetOK %s", 200, payload)
 }
 
 func (o *HeaderFilterAllowsGetOK) GetPayload() []*models.HeaderFilter {
@@ -174,11 +177,11 @@ func (o *HeaderFilterAllowsGetBadRequest) Code() int {
 }
 
 func (o *HeaderFilterAllowsGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetBadRequest", 400)
 }
 
 func (o *HeaderFilterAllowsGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetBadRequest", 400)
 }
 
 func (o *HeaderFilterAllowsGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -230,11 +233,11 @@ func (o *HeaderFilterAllowsGetUnauthorized) Code() int {
 }
 
 func (o *HeaderFilterAllowsGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetUnauthorized", 401)
 }
 
 func (o *HeaderFilterAllowsGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetUnauthorized", 401)
 }
 
 func (o *HeaderFilterAllowsGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -286,11 +289,11 @@ func (o *HeaderFilterAllowsGetForbidden) Code() int {
 }
 
 func (o *HeaderFilterAllowsGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetForbidden", 403)
 }
 
 func (o *HeaderFilterAllowsGetForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetForbidden", 403)
 }
 
 func (o *HeaderFilterAllowsGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -342,11 +345,11 @@ func (o *HeaderFilterAllowsGetNotFound) Code() int {
 }
 
 func (o *HeaderFilterAllowsGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetNotFound", 404)
 }
 
 func (o *HeaderFilterAllowsGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetNotFound", 404)
 }
 
 func (o *HeaderFilterAllowsGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -398,11 +401,11 @@ func (o *HeaderFilterAllowsGetInternalServerError) Code() int {
 }
 
 func (o *HeaderFilterAllowsGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetInternalServerError", 500)
 }
 
 func (o *HeaderFilterAllowsGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/header_allows][%d] headerFilterAllowsGetInternalServerError", 500)
 }
 
 func (o *HeaderFilterAllowsGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

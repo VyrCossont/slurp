@@ -6,6 +6,7 @@ package nr_well_known
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,11 +80,13 @@ func (o *NodeInfoWellKnownGetOK) Code() int {
 }
 
 func (o *NodeInfoWellKnownGetOK) Error() string {
-	return fmt.Sprintf("[GET /.well-known/nodeinfo][%d] nodeInfoWellKnownGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /.well-known/nodeinfo][%d] nodeInfoWellKnownGetOK %s", 200, payload)
 }
 
 func (o *NodeInfoWellKnownGetOK) String() string {
-	return fmt.Sprintf("[GET /.well-known/nodeinfo][%d] nodeInfoWellKnownGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /.well-known/nodeinfo][%d] nodeInfoWellKnownGetOK %s", 200, payload)
 }
 
 func (o *NodeInfoWellKnownGetOK) GetPayload() *models.WellKnownResponse {

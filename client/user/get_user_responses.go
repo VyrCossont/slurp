@@ -6,6 +6,7 @@ package user
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetUserOK) Code() int {
 }
 
 func (o *GetUserOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserOK %s", 200, payload)
 }
 
 func (o *GetUserOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserOK %s", 200, payload)
 }
 
 func (o *GetUserOK) GetPayload() *models.User {
@@ -176,11 +179,11 @@ func (o *GetUserBadRequest) Code() int {
 }
 
 func (o *GetUserBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserBadRequest", 400)
 }
 
 func (o *GetUserBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserBadRequest", 400)
 }
 
 func (o *GetUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *GetUserUnauthorized) Code() int {
 }
 
 func (o *GetUserUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserUnauthorized", 401)
 }
 
 func (o *GetUserUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserUnauthorized", 401)
 }
 
 func (o *GetUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *GetUserForbidden) Code() int {
 }
 
 func (o *GetUserForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserForbidden", 403)
 }
 
 func (o *GetUserForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserForbidden", 403)
 }
 
 func (o *GetUserForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *GetUserNotAcceptable) Code() int {
 }
 
 func (o *GetUserNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserNotAcceptable", 406)
 }
 
 func (o *GetUserNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserNotAcceptable", 406)
 }
 
 func (o *GetUserNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *GetUserInternalServerError) Code() int {
 }
 
 func (o *GetUserInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserInternalServerError", 500)
 }
 
 func (o *GetUserInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/user][%d] getUserInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/user][%d] getUserInternalServerError", 500)
 }
 
 func (o *GetUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -75,11 +75,11 @@ func (o *LiveHeadOK) Code() int {
 }
 
 func (o *LiveHeadOK) Error() string {
-	return fmt.Sprintf("[HEAD /livez][%d] liveHeadOK ", 200)
+	return fmt.Sprintf("[HEAD /livez][%d] liveHeadOK", 200)
 }
 
 func (o *LiveHeadOK) String() string {
-	return fmt.Sprintf("[HEAD /livez][%d] liveHeadOK ", 200)
+	return fmt.Sprintf("[HEAD /livez][%d] liveHeadOK", 200)
 }
 
 func (o *LiveHeadOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

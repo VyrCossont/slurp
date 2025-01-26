@@ -51,6 +51,12 @@ type Source struct {
 
 	// The default posting content type for new statuses.
 	StatusContentType string `json:"status_content_type,omitempty"`
+
+	// Visibility level(s) of posts to show for this account via the web api.
+	// "public" = default, show only Public visibility posts on the web.
+	// "unlisted" = show Public *and* Unlisted visibility posts on the web.
+	// "none" = show no posts on the web, not even Public ones.
+	WebVisibility string `json:"web_visibility,omitempty"`
 }
 
 // Validate validates this source

@@ -6,6 +6,7 @@ package filters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -127,11 +128,13 @@ func (o *FilterV2PutOK) Code() int {
 }
 
 func (o *FilterV2PutOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutOK %s", 200, payload)
 }
 
 func (o *FilterV2PutOK) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutOK %s", 200, payload)
 }
 
 func (o *FilterV2PutOK) GetPayload() *models.FilterV2 {
@@ -194,11 +197,11 @@ func (o *FilterV2PutBadRequest) Code() int {
 }
 
 func (o *FilterV2PutBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutBadRequest", 400)
 }
 
 func (o *FilterV2PutBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutBadRequest", 400)
 }
 
 func (o *FilterV2PutBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -250,11 +253,11 @@ func (o *FilterV2PutUnauthorized) Code() int {
 }
 
 func (o *FilterV2PutUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutUnauthorized ", 401)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutUnauthorized", 401)
 }
 
 func (o *FilterV2PutUnauthorized) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutUnauthorized ", 401)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutUnauthorized", 401)
 }
 
 func (o *FilterV2PutUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -306,11 +309,11 @@ func (o *FilterV2PutForbidden) Code() int {
 }
 
 func (o *FilterV2PutForbidden) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutForbidden ", 403)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutForbidden", 403)
 }
 
 func (o *FilterV2PutForbidden) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutForbidden ", 403)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutForbidden", 403)
 }
 
 func (o *FilterV2PutForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -362,11 +365,11 @@ func (o *FilterV2PutNotFound) Code() int {
 }
 
 func (o *FilterV2PutNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutNotFound", 404)
 }
 
 func (o *FilterV2PutNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutNotFound", 404)
 }
 
 func (o *FilterV2PutNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -418,11 +421,11 @@ func (o *FilterV2PutNotAcceptable) Code() int {
 }
 
 func (o *FilterV2PutNotAcceptable) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutNotAcceptable ", 406)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutNotAcceptable", 406)
 }
 
 func (o *FilterV2PutNotAcceptable) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutNotAcceptable ", 406)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutNotAcceptable", 406)
 }
 
 func (o *FilterV2PutNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -474,11 +477,11 @@ func (o *FilterV2PutConflict) Code() int {
 }
 
 func (o *FilterV2PutConflict) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutConflict ", 409)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutConflict", 409)
 }
 
 func (o *FilterV2PutConflict) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutConflict ", 409)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutConflict", 409)
 }
 
 func (o *FilterV2PutConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -530,11 +533,11 @@ func (o *FilterV2PutUnprocessableEntity) Code() int {
 }
 
 func (o *FilterV2PutUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutUnprocessableEntity", 422)
 }
 
 func (o *FilterV2PutUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutUnprocessableEntity", 422)
 }
 
 func (o *FilterV2PutUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -586,11 +589,11 @@ func (o *FilterV2PutInternalServerError) Code() int {
 }
 
 func (o *FilterV2PutInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutInternalServerError", 500)
 }
 
 func (o *FilterV2PutInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /api/v2/filters/{id}][%d] filterV2PutInternalServerError", 500)
 }
 
 func (o *FilterV2PutInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

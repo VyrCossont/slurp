@@ -75,11 +75,11 @@ func (o *ReadyHeadOK) Code() int {
 }
 
 func (o *ReadyHeadOK) Error() string {
-	return fmt.Sprintf("[HEAD /readyz][%d] readyHeadOK ", 200)
+	return fmt.Sprintf("[HEAD /readyz][%d] readyHeadOK", 200)
 }
 
 func (o *ReadyHeadOK) String() string {
-	return fmt.Sprintf("[HEAD /readyz][%d] readyHeadOK ", 200)
+	return fmt.Sprintf("[HEAD /readyz][%d] readyHeadOK", 200)
 }
 
 func (o *ReadyHeadOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

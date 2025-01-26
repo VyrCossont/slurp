@@ -6,6 +6,7 @@ package instance
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -121,11 +122,13 @@ func (o *InstancePeersGetOK) Code() int {
 }
 
 func (o *InstancePeersGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetOK %s", 200, payload)
 }
 
 func (o *InstancePeersGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetOK %s", 200, payload)
 }
 
 func (o *InstancePeersGetOK) GetPayload() []*models.Domain {
@@ -186,11 +189,11 @@ func (o *InstancePeersGetBadRequest) Code() int {
 }
 
 func (o *InstancePeersGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetBadRequest", 400)
 }
 
 func (o *InstancePeersGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetBadRequest", 400)
 }
 
 func (o *InstancePeersGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -242,11 +245,11 @@ func (o *InstancePeersGetUnauthorized) Code() int {
 }
 
 func (o *InstancePeersGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetUnauthorized", 401)
 }
 
 func (o *InstancePeersGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetUnauthorized", 401)
 }
 
 func (o *InstancePeersGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -298,11 +301,11 @@ func (o *InstancePeersGetForbidden) Code() int {
 }
 
 func (o *InstancePeersGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetForbidden", 403)
 }
 
 func (o *InstancePeersGetForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetForbidden", 403)
 }
 
 func (o *InstancePeersGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -354,11 +357,11 @@ func (o *InstancePeersGetNotFound) Code() int {
 }
 
 func (o *InstancePeersGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetNotFound", 404)
 }
 
 func (o *InstancePeersGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetNotFound", 404)
 }
 
 func (o *InstancePeersGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -410,11 +413,11 @@ func (o *InstancePeersGetNotAcceptable) Code() int {
 }
 
 func (o *InstancePeersGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetNotAcceptable", 406)
 }
 
 func (o *InstancePeersGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetNotAcceptable", 406)
 }
 
 func (o *InstancePeersGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -466,11 +469,11 @@ func (o *InstancePeersGetInternalServerError) Code() int {
 }
 
 func (o *InstancePeersGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetInternalServerError", 500)
 }
 
 func (o *InstancePeersGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/instance/peers][%d] instancePeersGetInternalServerError", 500)
 }
 
 func (o *InstancePeersGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

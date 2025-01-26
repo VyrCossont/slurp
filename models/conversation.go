@@ -21,6 +21,10 @@ import (
 type Conversation struct {
 
 	// Participants in the conversation.
+	//
+	// If this is a conversation between no accounts (ie., a self-directed DM),
+	// this will include only the requesting account itself. Otherwise, it will
+	// include every other account in the conversation *except* the requester.
 	Accounts []*Account `json:"accounts"`
 
 	// Local database ID of the conversation.

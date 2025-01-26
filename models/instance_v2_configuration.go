@@ -18,6 +18,9 @@ import (
 // swagger:model InstanceV2Configuration
 type InstanceV2Configuration struct {
 
+	// True if instance is running with OIDC as auth/identity backend, else omitted.
+	OIDCEnabled bool `json:"oidc_enabled,omitempty"`
+
 	// accounts
 	Accounts *InstanceConfigurationAccounts `json:"accounts,omitempty"`
 
@@ -38,6 +41,9 @@ type InstanceV2Configuration struct {
 
 	// urls
 	Urls *InstanceV2URLs `json:"urls,omitempty"`
+
+	// vapid
+	Vapid *InstanceV2ConfigurationVAPID `json:"vapid,omitempty"`
 }
 
 // Validate validates this instance v2 configuration
@@ -69,6 +75,10 @@ func (m *InstanceV2Configuration) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateUrls(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVapid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -211,6 +221,25 @@ func (m *InstanceV2Configuration) validateUrls(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *InstanceV2Configuration) validateVapid(formats strfmt.Registry) error {
+	if swag.IsZero(m.Vapid) { // not required
+		return nil
+	}
+
+	if m.Vapid != nil {
+		if err := m.Vapid.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vapid")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vapid")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this instance v2 configuration based on the context it is used
 func (m *InstanceV2Configuration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -240,6 +269,10 @@ func (m *InstanceV2Configuration) ContextValidate(ctx context.Context, formats s
 	}
 
 	if err := m.contextValidateUrls(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVapid(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -388,6 +421,27 @@ func (m *InstanceV2Configuration) contextValidateUrls(ctx context.Context, forma
 				return ve.ValidateName("urls")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("urls")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *InstanceV2Configuration) contextValidateVapid(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Vapid != nil {
+
+		if swag.IsZero(m.Vapid) { // not required
+			return nil
+		}
+
+		if err := m.Vapid.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vapid")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vapid")
 			}
 			return err
 		}

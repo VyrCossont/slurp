@@ -14,10 +14,11 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Context Context models the tree around a given status.
+// ThreadContext ThreadContext models the tree or
+// "thread" around a given status.
 //
-// swagger:model Context
-type Context struct {
+// swagger:model ThreadContext
+type ThreadContext struct {
 
 	// Parents in the thread.
 	Ancestors []*Status `json:"ancestors"`
@@ -26,8 +27,8 @@ type Context struct {
 	Descendants []*Status `json:"descendants"`
 }
 
-// Validate validates this context
-func (m *Context) Validate(formats strfmt.Registry) error {
+// Validate validates this thread context
+func (m *ThreadContext) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAncestors(formats); err != nil {
@@ -44,7 +45,7 @@ func (m *Context) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Context) validateAncestors(formats strfmt.Registry) error {
+func (m *ThreadContext) validateAncestors(formats strfmt.Registry) error {
 	if swag.IsZero(m.Ancestors) { // not required
 		return nil
 	}
@@ -70,7 +71,7 @@ func (m *Context) validateAncestors(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Context) validateDescendants(formats strfmt.Registry) error {
+func (m *ThreadContext) validateDescendants(formats strfmt.Registry) error {
 	if swag.IsZero(m.Descendants) { // not required
 		return nil
 	}
@@ -96,8 +97,8 @@ func (m *Context) validateDescendants(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this context based on the context it is used
-func (m *Context) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this thread context based on the context it is used
+func (m *ThreadContext) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAncestors(ctx, formats); err != nil {
@@ -114,7 +115,7 @@ func (m *Context) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 	return nil
 }
 
-func (m *Context) contextValidateAncestors(ctx context.Context, formats strfmt.Registry) error {
+func (m *ThreadContext) contextValidateAncestors(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Ancestors); i++ {
 
@@ -139,7 +140,7 @@ func (m *Context) contextValidateAncestors(ctx context.Context, formats strfmt.R
 	return nil
 }
 
-func (m *Context) contextValidateDescendants(ctx context.Context, formats strfmt.Registry) error {
+func (m *ThreadContext) contextValidateDescendants(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Descendants); i++ {
 
@@ -165,7 +166,7 @@ func (m *Context) contextValidateDescendants(ctx context.Context, formats strfmt
 }
 
 // MarshalBinary interface implementation
-func (m *Context) MarshalBinary() ([]byte, error) {
+func (m *ThreadContext) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -173,8 +174,8 @@ func (m *Context) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Context) UnmarshalBinary(b []byte) error {
-	var res Context
+func (m *ThreadContext) UnmarshalBinary(b []byte) error {
+	var res ThreadContext
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

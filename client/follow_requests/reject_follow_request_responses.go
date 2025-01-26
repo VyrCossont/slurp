@@ -6,6 +6,7 @@ package follow_requests
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *RejectFollowRequestOK) Code() int {
 }
 
 func (o *RejectFollowRequestOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestOK %s", 200, payload)
 }
 
 func (o *RejectFollowRequestOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestOK %s", 200, payload)
 }
 
 func (o *RejectFollowRequestOK) GetPayload() *models.Relationship {
@@ -176,11 +179,11 @@ func (o *RejectFollowRequestBadRequest) Code() int {
 }
 
 func (o *RejectFollowRequestBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestBadRequest", 400)
 }
 
 func (o *RejectFollowRequestBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestBadRequest", 400)
 }
 
 func (o *RejectFollowRequestBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *RejectFollowRequestUnauthorized) Code() int {
 }
 
 func (o *RejectFollowRequestUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestUnauthorized", 401)
 }
 
 func (o *RejectFollowRequestUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestUnauthorized", 401)
 }
 
 func (o *RejectFollowRequestUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *RejectFollowRequestNotFound) Code() int {
 }
 
 func (o *RejectFollowRequestNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestNotFound", 404)
 }
 
 func (o *RejectFollowRequestNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestNotFound", 404)
 }
 
 func (o *RejectFollowRequestNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *RejectFollowRequestNotAcceptable) Code() int {
 }
 
 func (o *RejectFollowRequestNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestNotAcceptable", 406)
 }
 
 func (o *RejectFollowRequestNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestNotAcceptable", 406)
 }
 
 func (o *RejectFollowRequestNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *RejectFollowRequestInternalServerError) Code() int {
 }
 
 func (o *RejectFollowRequestInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestInternalServerError", 500)
 }
 
 func (o *RejectFollowRequestInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/follow_requests/{account_id}/reject][%d] rejectFollowRequestInternalServerError", 500)
 }
 
 func (o *RejectFollowRequestInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AccountAvatarDeleteOK) Code() int {
 }
 
 func (o *AccountAvatarDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteOK %s", 200, payload)
 }
 
 func (o *AccountAvatarDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteOK %s", 200, payload)
 }
 
 func (o *AccountAvatarDeleteOK) GetPayload() *models.Account {
@@ -176,11 +179,11 @@ func (o *AccountAvatarDeleteBadRequest) Code() int {
 }
 
 func (o *AccountAvatarDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteBadRequest", 400)
 }
 
 func (o *AccountAvatarDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteBadRequest", 400)
 }
 
 func (o *AccountAvatarDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *AccountAvatarDeleteUnauthorized) Code() int {
 }
 
 func (o *AccountAvatarDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteUnauthorized", 401)
 }
 
 func (o *AccountAvatarDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteUnauthorized", 401)
 }
 
 func (o *AccountAvatarDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *AccountAvatarDeleteForbidden) Code() int {
 }
 
 func (o *AccountAvatarDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteForbidden", 403)
 }
 
 func (o *AccountAvatarDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteForbidden", 403)
 }
 
 func (o *AccountAvatarDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *AccountAvatarDeleteNotAcceptable) Code() int {
 }
 
 func (o *AccountAvatarDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteNotAcceptable", 406)
 }
 
 func (o *AccountAvatarDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteNotAcceptable", 406)
 }
 
 func (o *AccountAvatarDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *AccountAvatarDeleteInternalServerError) Code() int {
 }
 
 func (o *AccountAvatarDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteInternalServerError", 500)
 }
 
 func (o *AccountAvatarDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v1/profile/avatar][%d] accountAvatarDeleteInternalServerError", 500)
 }
 
 func (o *AccountAvatarDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

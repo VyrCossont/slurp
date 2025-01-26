@@ -6,6 +6,7 @@ package filters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *FilterV2GetOK) Code() int {
 }
 
 func (o *FilterV2GetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetOK %s", 200, payload)
 }
 
 func (o *FilterV2GetOK) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetOK %s", 200, payload)
 }
 
 func (o *FilterV2GetOK) GetPayload() *models.FilterV2 {
@@ -176,11 +179,11 @@ func (o *FilterV2GetBadRequest) Code() int {
 }
 
 func (o *FilterV2GetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetBadRequest", 400)
 }
 
 func (o *FilterV2GetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetBadRequest", 400)
 }
 
 func (o *FilterV2GetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *FilterV2GetUnauthorized) Code() int {
 }
 
 func (o *FilterV2GetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetUnauthorized", 401)
 }
 
 func (o *FilterV2GetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetUnauthorized", 401)
 }
 
 func (o *FilterV2GetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *FilterV2GetNotFound) Code() int {
 }
 
 func (o *FilterV2GetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetNotFound", 404)
 }
 
 func (o *FilterV2GetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetNotFound", 404)
 }
 
 func (o *FilterV2GetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *FilterV2GetNotAcceptable) Code() int {
 }
 
 func (o *FilterV2GetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetNotAcceptable", 406)
 }
 
 func (o *FilterV2GetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetNotAcceptable", 406)
 }
 
 func (o *FilterV2GetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *FilterV2GetInternalServerError) Code() int {
 }
 
 func (o *FilterV2GetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetInternalServerError", 500)
 }
 
 func (o *FilterV2GetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}][%d] filterV2GetInternalServerError", 500)
 }
 
 func (o *FilterV2GetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

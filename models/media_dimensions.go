@@ -24,7 +24,7 @@ type MediaDimensions struct {
 
 	// Bitrate of the media in bits per second.
 	// Example: 1000000
-	Bitrate int64 `json:"bitrate,omitempty"`
+	Bitrate uint64 `json:"bitrate,omitempty"`
 
 	// Duration of the media in seconds.
 	// Only set for video and audio.

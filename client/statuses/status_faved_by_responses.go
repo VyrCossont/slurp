@@ -6,6 +6,7 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *StatusFavedByOK) Code() int {
 }
 
 func (o *StatusFavedByOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByOK %s", 200, payload)
 }
 
 func (o *StatusFavedByOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByOK %s", 200, payload)
 }
 
 func (o *StatusFavedByOK) GetPayload() []*models.Account {
@@ -180,11 +183,11 @@ func (o *StatusFavedByBadRequest) Code() int {
 }
 
 func (o *StatusFavedByBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByBadRequest", 400)
 }
 
 func (o *StatusFavedByBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByBadRequest", 400)
 }
 
 func (o *StatusFavedByBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -236,11 +239,11 @@ func (o *StatusFavedByUnauthorized) Code() int {
 }
 
 func (o *StatusFavedByUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByUnauthorized", 401)
 }
 
 func (o *StatusFavedByUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByUnauthorized", 401)
 }
 
 func (o *StatusFavedByUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -292,11 +295,11 @@ func (o *StatusFavedByForbidden) Code() int {
 }
 
 func (o *StatusFavedByForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByForbidden", 403)
 }
 
 func (o *StatusFavedByForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByForbidden", 403)
 }
 
 func (o *StatusFavedByForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -348,11 +351,11 @@ func (o *StatusFavedByNotFound) Code() int {
 }
 
 func (o *StatusFavedByNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByNotFound", 404)
 }
 
 func (o *StatusFavedByNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByNotFound", 404)
 }
 
 func (o *StatusFavedByNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -404,11 +407,11 @@ func (o *StatusFavedByNotAcceptable) Code() int {
 }
 
 func (o *StatusFavedByNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByNotAcceptable", 406)
 }
 
 func (o *StatusFavedByNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByNotAcceptable", 406)
 }
 
 func (o *StatusFavedByNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -460,11 +463,11 @@ func (o *StatusFavedByInternalServerError) Code() int {
 }
 
 func (o *StatusFavedByInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByInternalServerError", 500)
 }
 
 func (o *StatusFavedByInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/favourited_by][%d] statusFavedByInternalServerError", 500)
 }
 
 func (o *StatusFavedByInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

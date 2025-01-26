@@ -6,6 +6,7 @@ package filters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -127,11 +128,13 @@ func (o *FilterKeywordPutOK) Code() int {
 }
 
 func (o *FilterKeywordPutOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutOK %s", 200, payload)
 }
 
 func (o *FilterKeywordPutOK) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutOK %s", 200, payload)
 }
 
 func (o *FilterKeywordPutOK) GetPayload() *models.FilterKeyword {
@@ -194,11 +197,11 @@ func (o *FilterKeywordPutBadRequest) Code() int {
 }
 
 func (o *FilterKeywordPutBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutBadRequest", 400)
 }
 
 func (o *FilterKeywordPutBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutBadRequest", 400)
 }
 
 func (o *FilterKeywordPutBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -250,11 +253,11 @@ func (o *FilterKeywordPutUnauthorized) Code() int {
 }
 
 func (o *FilterKeywordPutUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutUnauthorized ", 401)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutUnauthorized", 401)
 }
 
 func (o *FilterKeywordPutUnauthorized) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutUnauthorized ", 401)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutUnauthorized", 401)
 }
 
 func (o *FilterKeywordPutUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -306,11 +309,11 @@ func (o *FilterKeywordPutForbidden) Code() int {
 }
 
 func (o *FilterKeywordPutForbidden) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutForbidden ", 403)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutForbidden", 403)
 }
 
 func (o *FilterKeywordPutForbidden) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutForbidden ", 403)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutForbidden", 403)
 }
 
 func (o *FilterKeywordPutForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -362,11 +365,11 @@ func (o *FilterKeywordPutNotFound) Code() int {
 }
 
 func (o *FilterKeywordPutNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutNotFound", 404)
 }
 
 func (o *FilterKeywordPutNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutNotFound", 404)
 }
 
 func (o *FilterKeywordPutNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -418,11 +421,11 @@ func (o *FilterKeywordPutNotAcceptable) Code() int {
 }
 
 func (o *FilterKeywordPutNotAcceptable) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutNotAcceptable ", 406)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutNotAcceptable", 406)
 }
 
 func (o *FilterKeywordPutNotAcceptable) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutNotAcceptable ", 406)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutNotAcceptable", 406)
 }
 
 func (o *FilterKeywordPutNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -474,11 +477,11 @@ func (o *FilterKeywordPutConflict) Code() int {
 }
 
 func (o *FilterKeywordPutConflict) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutConflict ", 409)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutConflict", 409)
 }
 
 func (o *FilterKeywordPutConflict) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutConflict ", 409)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutConflict", 409)
 }
 
 func (o *FilterKeywordPutConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -530,11 +533,11 @@ func (o *FilterKeywordPutUnprocessableEntity) Code() int {
 }
 
 func (o *FilterKeywordPutUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutUnprocessableEntity", 422)
 }
 
 func (o *FilterKeywordPutUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutUnprocessableEntity", 422)
 }
 
 func (o *FilterKeywordPutUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -586,11 +589,11 @@ func (o *FilterKeywordPutInternalServerError) Code() int {
 }
 
 func (o *FilterKeywordPutInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutInternalServerError", 500)
 }
 
 func (o *FilterKeywordPutInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /api/v2/filters/keywords{id}][%d] filterKeywordPutInternalServerError", 500)
 }
 
 func (o *FilterKeywordPutInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

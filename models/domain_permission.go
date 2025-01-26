@@ -40,6 +40,10 @@ type DomainPermission struct {
 	// Example: false
 	Obfuscate bool `json:"obfuscate,omitempty"`
 
+	// Permission type of this entry (block, allow).
+	// Only set for domain permission drafts.
+	PermissionType string `json:"permission_type,omitempty"`
+
 	// Private comment for this permission entry, visible to this instance's admins only.
 	// Example: they are poopoo
 	PrivateComment string `json:"private_comment,omitempty"`

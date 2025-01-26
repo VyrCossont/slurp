@@ -62,12 +62,6 @@ StatusCreateParams contains all the parameters to send to the API endpoint
 */
 type StatusCreateParams struct {
 
-	/* Boostable.
-
-	   This status can be boosted/reblogged.
-	*/
-	Boostable *bool
-
 	/* ContentType.
 
 	   Content type to use when parsing this status.
@@ -76,8 +70,8 @@ type StatusCreateParams struct {
 
 	/* Federated.
 
-	   This status will be federated beyond the local timeline(s).
-	*/
+	 ***DEPRECATED***. Included for back compat only. Only used if set and local_only is not yet. If set to true, this status will be federated beyond the local timeline(s). If set to false, this status will NOT be federated beyond the local timeline(s).
+	 */
 	Federated *bool
 
 	/* InReplyToID.
@@ -86,17 +80,53 @@ type StatusCreateParams struct {
 	*/
 	InReplyToID *string
 
+	/* InteractionPolicyCanFavouriteAlways0.
+
+	   Nth entry for interaction_policy.can_favourite.always.
+	*/
+	InteractionPolicyCanFavouriteAlways0 *string
+
+	/* InteractionPolicyCanFavouriteWithApproval0.
+
+	   Nth entry for interaction_policy.can_favourite.with_approval.
+	*/
+	InteractionPolicyCanFavouriteWithApproval0 *string
+
+	/* InteractionPolicyCanReblogAlways0.
+
+	   Nth entry for interaction_policy.can_reblog.always.
+	*/
+	InteractionPolicyCanReblogAlways0 *string
+
+	/* InteractionPolicyCanReblogWithApproval0.
+
+	   Nth entry for interaction_policy.can_reblog.with_approval.
+	*/
+	InteractionPolicyCanReblogWithApproval0 *string
+
+	/* InteractionPolicyCanReplyAlways0.
+
+	   Nth entry for interaction_policy.can_reply.always.
+	*/
+	InteractionPolicyCanReplyAlways0 *string
+
+	/* InteractionPolicyCanReplyWithApproval0.
+
+	   Nth entry for interaction_policy.can_reply.with_approval.
+	*/
+	InteractionPolicyCanReplyWithApproval0 *string
+
 	/* Language.
 
 	   ISO 639 language code for this status.
 	*/
 	Language *string
 
-	/* Likeable.
+	/* LocalOnly.
 
-	   This status can be liked/faved.
+	   If set to true, this status will be "local only" and will NOT be federated beyond the local timeline(s). If set to false (default), this status will be federated to your followers beyond the local timeline(s).
 	*/
-	Likeable *bool
+	LocalOnly *bool
 
 	/* MediaIds.
 
@@ -138,19 +168,13 @@ type StatusCreateParams struct {
 	*/
 	PollOptions []string
 
-	/* Replyable.
-
-	   This status can be replied to.
-	*/
-	Replyable *bool
-
 	/* ScheduledAt.
 
 	     ISO 8601 Datetime at which to schedule a status.
 	Providing this parameter will cause ScheduledStatus to be returned instead of Status.
 	Must be at least 5 minutes in the future.
 
-	This feature isn't implemented yet.
+	This feature isn't implemented yet; attemping to set it will return 501 Not Implemented.
 	*/
 	ScheduledAt *string
 
@@ -199,12 +223,15 @@ func (o *StatusCreateParams) WithDefaults() *StatusCreateParams {
 // All values with no default are reset to their zero value.
 func (o *StatusCreateParams) SetDefaults() {
 	var (
+		localOnlyDefault = bool(false)
+
 		pollHideTotalsDefault = bool(true)
 
 		pollMultipleDefault = bool(false)
 	)
 
 	val := StatusCreateParams{
+		LocalOnly:      &localOnlyDefault,
 		PollHideTotals: &pollHideTotalsDefault,
 		PollMultiple:   &pollMultipleDefault,
 	}
@@ -248,17 +275,6 @@ func (o *StatusCreateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBoostable adds the boostable to the status create params
-func (o *StatusCreateParams) WithBoostable(boostable *bool) *StatusCreateParams {
-	o.SetBoostable(boostable)
-	return o
-}
-
-// SetBoostable adds the boostable to the status create params
-func (o *StatusCreateParams) SetBoostable(boostable *bool) {
-	o.Boostable = boostable
-}
-
 // WithContentType adds the contentType to the status create params
 func (o *StatusCreateParams) WithContentType(contentType *string) *StatusCreateParams {
 	o.SetContentType(contentType)
@@ -292,6 +308,72 @@ func (o *StatusCreateParams) SetInReplyToID(inReplyToID *string) {
 	o.InReplyToID = inReplyToID
 }
 
+// WithInteractionPolicyCanFavouriteAlways0 adds the interactionPolicyCanFavouriteAlways0 to the status create params
+func (o *StatusCreateParams) WithInteractionPolicyCanFavouriteAlways0(interactionPolicyCanFavouriteAlways0 *string) *StatusCreateParams {
+	o.SetInteractionPolicyCanFavouriteAlways0(interactionPolicyCanFavouriteAlways0)
+	return o
+}
+
+// SetInteractionPolicyCanFavouriteAlways0 adds the interactionPolicyCanFavouriteAlways0 to the status create params
+func (o *StatusCreateParams) SetInteractionPolicyCanFavouriteAlways0(interactionPolicyCanFavouriteAlways0 *string) {
+	o.InteractionPolicyCanFavouriteAlways0 = interactionPolicyCanFavouriteAlways0
+}
+
+// WithInteractionPolicyCanFavouriteWithApproval0 adds the interactionPolicyCanFavouriteWithApproval0 to the status create params
+func (o *StatusCreateParams) WithInteractionPolicyCanFavouriteWithApproval0(interactionPolicyCanFavouriteWithApproval0 *string) *StatusCreateParams {
+	o.SetInteractionPolicyCanFavouriteWithApproval0(interactionPolicyCanFavouriteWithApproval0)
+	return o
+}
+
+// SetInteractionPolicyCanFavouriteWithApproval0 adds the interactionPolicyCanFavouriteWithApproval0 to the status create params
+func (o *StatusCreateParams) SetInteractionPolicyCanFavouriteWithApproval0(interactionPolicyCanFavouriteWithApproval0 *string) {
+	o.InteractionPolicyCanFavouriteWithApproval0 = interactionPolicyCanFavouriteWithApproval0
+}
+
+// WithInteractionPolicyCanReblogAlways0 adds the interactionPolicyCanReblogAlways0 to the status create params
+func (o *StatusCreateParams) WithInteractionPolicyCanReblogAlways0(interactionPolicyCanReblogAlways0 *string) *StatusCreateParams {
+	o.SetInteractionPolicyCanReblogAlways0(interactionPolicyCanReblogAlways0)
+	return o
+}
+
+// SetInteractionPolicyCanReblogAlways0 adds the interactionPolicyCanReblogAlways0 to the status create params
+func (o *StatusCreateParams) SetInteractionPolicyCanReblogAlways0(interactionPolicyCanReblogAlways0 *string) {
+	o.InteractionPolicyCanReblogAlways0 = interactionPolicyCanReblogAlways0
+}
+
+// WithInteractionPolicyCanReblogWithApproval0 adds the interactionPolicyCanReblogWithApproval0 to the status create params
+func (o *StatusCreateParams) WithInteractionPolicyCanReblogWithApproval0(interactionPolicyCanReblogWithApproval0 *string) *StatusCreateParams {
+	o.SetInteractionPolicyCanReblogWithApproval0(interactionPolicyCanReblogWithApproval0)
+	return o
+}
+
+// SetInteractionPolicyCanReblogWithApproval0 adds the interactionPolicyCanReblogWithApproval0 to the status create params
+func (o *StatusCreateParams) SetInteractionPolicyCanReblogWithApproval0(interactionPolicyCanReblogWithApproval0 *string) {
+	o.InteractionPolicyCanReblogWithApproval0 = interactionPolicyCanReblogWithApproval0
+}
+
+// WithInteractionPolicyCanReplyAlways0 adds the interactionPolicyCanReplyAlways0 to the status create params
+func (o *StatusCreateParams) WithInteractionPolicyCanReplyAlways0(interactionPolicyCanReplyAlways0 *string) *StatusCreateParams {
+	o.SetInteractionPolicyCanReplyAlways0(interactionPolicyCanReplyAlways0)
+	return o
+}
+
+// SetInteractionPolicyCanReplyAlways0 adds the interactionPolicyCanReplyAlways0 to the status create params
+func (o *StatusCreateParams) SetInteractionPolicyCanReplyAlways0(interactionPolicyCanReplyAlways0 *string) {
+	o.InteractionPolicyCanReplyAlways0 = interactionPolicyCanReplyAlways0
+}
+
+// WithInteractionPolicyCanReplyWithApproval0 adds the interactionPolicyCanReplyWithApproval0 to the status create params
+func (o *StatusCreateParams) WithInteractionPolicyCanReplyWithApproval0(interactionPolicyCanReplyWithApproval0 *string) *StatusCreateParams {
+	o.SetInteractionPolicyCanReplyWithApproval0(interactionPolicyCanReplyWithApproval0)
+	return o
+}
+
+// SetInteractionPolicyCanReplyWithApproval0 adds the interactionPolicyCanReplyWithApproval0 to the status create params
+func (o *StatusCreateParams) SetInteractionPolicyCanReplyWithApproval0(interactionPolicyCanReplyWithApproval0 *string) {
+	o.InteractionPolicyCanReplyWithApproval0 = interactionPolicyCanReplyWithApproval0
+}
+
 // WithLanguage adds the language to the status create params
 func (o *StatusCreateParams) WithLanguage(language *string) *StatusCreateParams {
 	o.SetLanguage(language)
@@ -303,15 +385,15 @@ func (o *StatusCreateParams) SetLanguage(language *string) {
 	o.Language = language
 }
 
-// WithLikeable adds the likeable to the status create params
-func (o *StatusCreateParams) WithLikeable(likeable *bool) *StatusCreateParams {
-	o.SetLikeable(likeable)
+// WithLocalOnly adds the localOnly to the status create params
+func (o *StatusCreateParams) WithLocalOnly(localOnly *bool) *StatusCreateParams {
+	o.SetLocalOnly(localOnly)
 	return o
 }
 
-// SetLikeable adds the likeable to the status create params
-func (o *StatusCreateParams) SetLikeable(likeable *bool) {
-	o.Likeable = likeable
+// SetLocalOnly adds the localOnly to the status create params
+func (o *StatusCreateParams) SetLocalOnly(localOnly *bool) {
+	o.LocalOnly = localOnly
 }
 
 // WithMediaIDs adds the mediaIds to the status create params
@@ -367,17 +449,6 @@ func (o *StatusCreateParams) WithPollOptions(pollOptions []string) *StatusCreate
 // SetPollOptions adds the pollOptions to the status create params
 func (o *StatusCreateParams) SetPollOptions(pollOptions []string) {
 	o.PollOptions = pollOptions
-}
-
-// WithReplyable adds the replyable to the status create params
-func (o *StatusCreateParams) WithReplyable(replyable *bool) *StatusCreateParams {
-	o.SetReplyable(replyable)
-	return o
-}
-
-// SetReplyable adds the replyable to the status create params
-func (o *StatusCreateParams) SetReplyable(replyable *bool) {
-	o.Replyable = replyable
 }
 
 // WithScheduledAt adds the scheduledAt to the status create params
@@ -443,21 +514,6 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	}
 	var res []error
 
-	if o.Boostable != nil {
-
-		// form param boostable
-		var frBoostable bool
-		if o.Boostable != nil {
-			frBoostable = *o.Boostable
-		}
-		fBoostable := swag.FormatBool(frBoostable)
-		if fBoostable != "" {
-			if err := r.SetFormParam("boostable", fBoostable); err != nil {
-				return err
-			}
-		}
-	}
-
 	if o.ContentType != nil {
 
 		// form param content_type
@@ -503,6 +559,96 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
+	if o.InteractionPolicyCanFavouriteAlways0 != nil {
+
+		// form param interaction_policy[can_favourite][always][0]
+		var frInteractionPolicyCanFavouriteAlways0 string
+		if o.InteractionPolicyCanFavouriteAlways0 != nil {
+			frInteractionPolicyCanFavouriteAlways0 = *o.InteractionPolicyCanFavouriteAlways0
+		}
+		fInteractionPolicyCanFavouriteAlways0 := frInteractionPolicyCanFavouriteAlways0
+		if fInteractionPolicyCanFavouriteAlways0 != "" {
+			if err := r.SetFormParam("interaction_policy[can_favourite][always][0]", fInteractionPolicyCanFavouriteAlways0); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.InteractionPolicyCanFavouriteWithApproval0 != nil {
+
+		// form param interaction_policy[can_favourite][with_approval][0]
+		var frInteractionPolicyCanFavouriteWithApproval0 string
+		if o.InteractionPolicyCanFavouriteWithApproval0 != nil {
+			frInteractionPolicyCanFavouriteWithApproval0 = *o.InteractionPolicyCanFavouriteWithApproval0
+		}
+		fInteractionPolicyCanFavouriteWithApproval0 := frInteractionPolicyCanFavouriteWithApproval0
+		if fInteractionPolicyCanFavouriteWithApproval0 != "" {
+			if err := r.SetFormParam("interaction_policy[can_favourite][with_approval][0]", fInteractionPolicyCanFavouriteWithApproval0); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.InteractionPolicyCanReblogAlways0 != nil {
+
+		// form param interaction_policy[can_reblog][always][0]
+		var frInteractionPolicyCanReblogAlways0 string
+		if o.InteractionPolicyCanReblogAlways0 != nil {
+			frInteractionPolicyCanReblogAlways0 = *o.InteractionPolicyCanReblogAlways0
+		}
+		fInteractionPolicyCanReblogAlways0 := frInteractionPolicyCanReblogAlways0
+		if fInteractionPolicyCanReblogAlways0 != "" {
+			if err := r.SetFormParam("interaction_policy[can_reblog][always][0]", fInteractionPolicyCanReblogAlways0); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.InteractionPolicyCanReblogWithApproval0 != nil {
+
+		// form param interaction_policy[can_reblog][with_approval][0]
+		var frInteractionPolicyCanReblogWithApproval0 string
+		if o.InteractionPolicyCanReblogWithApproval0 != nil {
+			frInteractionPolicyCanReblogWithApproval0 = *o.InteractionPolicyCanReblogWithApproval0
+		}
+		fInteractionPolicyCanReblogWithApproval0 := frInteractionPolicyCanReblogWithApproval0
+		if fInteractionPolicyCanReblogWithApproval0 != "" {
+			if err := r.SetFormParam("interaction_policy[can_reblog][with_approval][0]", fInteractionPolicyCanReblogWithApproval0); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.InteractionPolicyCanReplyAlways0 != nil {
+
+		// form param interaction_policy[can_reply][always][0]
+		var frInteractionPolicyCanReplyAlways0 string
+		if o.InteractionPolicyCanReplyAlways0 != nil {
+			frInteractionPolicyCanReplyAlways0 = *o.InteractionPolicyCanReplyAlways0
+		}
+		fInteractionPolicyCanReplyAlways0 := frInteractionPolicyCanReplyAlways0
+		if fInteractionPolicyCanReplyAlways0 != "" {
+			if err := r.SetFormParam("interaction_policy[can_reply][always][0]", fInteractionPolicyCanReplyAlways0); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.InteractionPolicyCanReplyWithApproval0 != nil {
+
+		// form param interaction_policy[can_reply][with_approval][0]
+		var frInteractionPolicyCanReplyWithApproval0 string
+		if o.InteractionPolicyCanReplyWithApproval0 != nil {
+			frInteractionPolicyCanReplyWithApproval0 = *o.InteractionPolicyCanReplyWithApproval0
+		}
+		fInteractionPolicyCanReplyWithApproval0 := frInteractionPolicyCanReplyWithApproval0
+		if fInteractionPolicyCanReplyWithApproval0 != "" {
+			if err := r.SetFormParam("interaction_policy[can_reply][with_approval][0]", fInteractionPolicyCanReplyWithApproval0); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.Language != nil {
 
 		// form param language
@@ -518,16 +664,16 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.Likeable != nil {
+	if o.LocalOnly != nil {
 
-		// form param likeable
-		var frLikeable bool
-		if o.Likeable != nil {
-			frLikeable = *o.Likeable
+		// form param local_only
+		var frLocalOnly bool
+		if o.LocalOnly != nil {
+			frLocalOnly = *o.LocalOnly
 		}
-		fLikeable := swag.FormatBool(frLikeable)
-		if fLikeable != "" {
-			if err := r.SetFormParam("likeable", fLikeable); err != nil {
+		fLocalOnly := swag.FormatBool(frLocalOnly)
+		if fLocalOnly != "" {
+			if err := r.SetFormParam("local_only", fLocalOnly); err != nil {
 				return err
 			}
 		}
@@ -597,21 +743,6 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		// form array param poll[options][]
 		if err := r.SetFormParam("poll[options][]", joinedPollOptions...); err != nil {
 			return err
-		}
-	}
-
-	if o.Replyable != nil {
-
-		// form param replyable
-		var frReplyable bool
-		if o.Replyable != nil {
-			frReplyable = *o.Replyable
-		}
-		fReplyable := swag.FormatBool(frReplyable)
-		if fReplyable != "" {
-			if err := r.SetFormParam("replyable", fReplyable); err != nil {
-				return err
-			}
 		}
 	}
 

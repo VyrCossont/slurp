@@ -30,6 +30,15 @@ type Account struct {
 	// Example: https://example.org/media/some_user/avatar/original/avatar.jpeg
 	Avatar string `json:"avatar,omitempty"`
 
+	// Description of this account's avatar, for alt text.
+	// Example: A cute drawing of a smiling sloth.
+	AvatarDescription string `json:"avatar_description,omitempty"`
+
+	// Database ID of the media attachment for this account's avatar image.
+	// Omitted if no avatar uploaded for this account (ie., default avatar).
+	// Example: 01JAJ3XCD66K3T99JZESCR137W
+	AvatarMediaID string `json:"avatar_media_id,omitempty"`
+
 	// Web location of a static version of the account's avatar.
 	// Only relevant when the account's main avatar is a video or a gif.
 	// Example: https://example.org/media/some_user/avatar/static/avatar.png
@@ -74,6 +83,15 @@ type Account struct {
 	// Example: https://example.org/media/some_user/header/original/header.jpeg
 	Header string `json:"header,omitempty"`
 
+	// Description of this account's header, for alt text.
+	// Example: A sunlit field with purple flowers.
+	HeaderDescription string `json:"header_description,omitempty"`
+
+	// Database ID of the media attachment for this account's header image.
+	// Omitted if no header uploaded for this account (ie., default header).
+	// Example: 01JAJ3XCD66K3T99JZESCR137W
+	HeaderMediaID string `json:"header_media_id,omitempty"`
+
 	// Web location of a static version of the account's header.
 	// Only relevant when the account's main header is a video or a gif.
 	// Example: https://example.org/media/some_user/header/static/header.png
@@ -87,8 +105,8 @@ type Account struct {
 	// Example: 01FBVD42CQ3ZEEVMW180SBX03B
 	ID string `json:"id,omitempty"`
 
-	// When the account's most recent status was posted (ISO 8601 Datetime).
-	// Example: 2021-07-30T09:20:25+00:00
+	// When the account's most recent status was posted (ISO 8601 Date).
+	// Example: 2021-07-30
 	LastStatusAt string `json:"last_status_at,omitempty"`
 
 	// Account manually approves follow requests.
@@ -96,6 +114,11 @@ type Account struct {
 
 	// Bio/description of this account.
 	Note string `json:"note,omitempty"`
+
+	// Roles lists the public roles of the account on this instance.
+	// Unlike Role, this is always available, but never includes permissions details.
+	// Key/value omitted for remote accounts.
+	Roles []*AccountDisplayRole `json:"roles"`
 
 	// Number of statuses posted by this account, according to our instance.
 	StatusesCount int64 `json:"statuses_count,omitempty"`
@@ -133,6 +156,10 @@ func (m *Account) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFields(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRoles(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -196,6 +223,32 @@ func (m *Account) validateFields(formats strfmt.Registry) error {
 					return ve.ValidateName("fields" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("fields" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Account) validateRoles(formats strfmt.Registry) error {
+	if swag.IsZero(m.Roles) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Roles); i++ {
+		if swag.IsZero(m.Roles[i]) { // not required
+			continue
+		}
+
+		if m.Roles[i] != nil {
+			if err := m.Roles[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("roles" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("roles" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -275,6 +328,10 @@ func (m *Account) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateRoles(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateMoved(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -333,6 +390,31 @@ func (m *Account) contextValidateFields(ctx context.Context, formats strfmt.Regi
 					return ve.ValidateName("fields" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("fields" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Account) contextValidateRoles(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Roles); i++ {
+
+		if m.Roles[i] != nil {
+
+			if swag.IsZero(m.Roles[i]) { // not required
+				return nil
+			}
+
+			if err := m.Roles[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("roles" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("roles" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

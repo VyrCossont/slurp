@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new conversations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new conversations API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new conversations API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,22 +51,107 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	ConversationDelete(params *ConversationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConversationDeleteOK, error)
+
+	ConversationRead(params *ConversationReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConversationReadOK, error)
+
 	ConversationsGet(params *ConversationsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConversationsGetOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
+	ConversationDelete deletes a single conversation with the given ID
+
+	This doesn't delete the actual statuses in the conversation,
+
+nor does it prevent a new conversation from being created later from the same thread and participants.
+*/
+func (a *Client) ConversationDelete(params *ConversationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConversationDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewConversationDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "conversationDelete",
+		Method:             "DELETE",
+		PathPattern:        "/api/v1/conversations/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ConversationDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ConversationDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for conversationDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ConversationRead marks a conversation with the given ID as read
+*/
+func (a *Client) ConversationRead(params *ConversationReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConversationReadOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewConversationReadParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "conversationRead",
+		Method:             "POST",
+		PathPattern:        "/api/v1/conversation/{id}/read",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ConversationReadReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ConversationReadOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for conversationRead: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	ConversationsGet gets an array of direct message conversations that requesting account is involved in
 
-	NOT IMPLEMENTED YET: Will currently always return an array of length 0.
+	The next and previous queries can be parsed from the returned Link header.
 
-The next and previous queries can be parsed from the returned Link header.
 Example:
 
 ```

@@ -88,6 +88,24 @@ type FilterV2PostParams struct {
 	*/
 	FilterAction *string
 
+	/* KeywordsAttributesKeyword.
+
+	   Keywords to be added (if not using id param) or updated (if using id param).
+	*/
+	KeywordsAttributesKeyword []string
+
+	/* KeywordsAttributesWholeWord.
+
+	   Should each keyword consider word boundaries?
+	*/
+	KeywordsAttributesWholeWord []bool
+
+	/* StatusesAttributesStatusID.
+
+	   Statuses to be added to the filter.
+	*/
+	StatusesAttributesStatusID []string
+
 	/* Title.
 
 	     The name of the filter.
@@ -193,6 +211,39 @@ func (o *FilterV2PostParams) SetFilterAction(filterAction *string) {
 	o.FilterAction = filterAction
 }
 
+// WithKeywordsAttributesKeyword adds the keywordsAttributesKeyword to the filter v2 post params
+func (o *FilterV2PostParams) WithKeywordsAttributesKeyword(keywordsAttributesKeyword []string) *FilterV2PostParams {
+	o.SetKeywordsAttributesKeyword(keywordsAttributesKeyword)
+	return o
+}
+
+// SetKeywordsAttributesKeyword adds the keywordsAttributesKeyword to the filter v2 post params
+func (o *FilterV2PostParams) SetKeywordsAttributesKeyword(keywordsAttributesKeyword []string) {
+	o.KeywordsAttributesKeyword = keywordsAttributesKeyword
+}
+
+// WithKeywordsAttributesWholeWord adds the keywordsAttributesWholeWord to the filter v2 post params
+func (o *FilterV2PostParams) WithKeywordsAttributesWholeWord(keywordsAttributesWholeWord []bool) *FilterV2PostParams {
+	o.SetKeywordsAttributesWholeWord(keywordsAttributesWholeWord)
+	return o
+}
+
+// SetKeywordsAttributesWholeWord adds the keywordsAttributesWholeWord to the filter v2 post params
+func (o *FilterV2PostParams) SetKeywordsAttributesWholeWord(keywordsAttributesWholeWord []bool) {
+	o.KeywordsAttributesWholeWord = keywordsAttributesWholeWord
+}
+
+// WithStatusesAttributesStatusID adds the statusesAttributesStatusID to the filter v2 post params
+func (o *FilterV2PostParams) WithStatusesAttributesStatusID(statusesAttributesStatusID []string) *FilterV2PostParams {
+	o.SetStatusesAttributesStatusID(statusesAttributesStatusID)
+	return o
+}
+
+// SetStatusesAttributesStatusID adds the statusesAttributesStatusId to the filter v2 post params
+func (o *FilterV2PostParams) SetStatusesAttributesStatusID(statusesAttributesStatusID []string) {
+	o.StatusesAttributesStatusID = statusesAttributesStatusID
+}
+
 // WithTitle adds the title to the filter v2 post params
 func (o *FilterV2PostParams) WithTitle(title string) *FilterV2PostParams {
 	o.SetTitle(title)
@@ -253,6 +304,39 @@ func (o *FilterV2PostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
+	if o.KeywordsAttributesKeyword != nil {
+
+		// binding items for keywords_attributes[][keyword]
+		joinedKeywordsAttributesKeyword := o.bindParamKeywordsAttributesKeyword(reg)
+
+		// form array param keywords_attributes[][keyword]
+		if err := r.SetFormParam("keywords_attributes[][keyword]", joinedKeywordsAttributesKeyword...); err != nil {
+			return err
+		}
+	}
+
+	if o.KeywordsAttributesWholeWord != nil {
+
+		// binding items for keywords_attributes[][whole_word]
+		joinedKeywordsAttributesWholeWord := o.bindParamKeywordsAttributesWholeWord(reg)
+
+		// form array param keywords_attributes[][whole_word]
+		if err := r.SetFormParam("keywords_attributes[][whole_word]", joinedKeywordsAttributesWholeWord...); err != nil {
+			return err
+		}
+	}
+
+	if o.StatusesAttributesStatusID != nil {
+
+		// binding items for statuses_attributes[][status_id]
+		joinedStatusesAttributesStatusID := o.bindParamStatusesAttributesStatusID(reg)
+
+		// form array param statuses_attributes[][status_id]
+		if err := r.SetFormParam("statuses_attributes[][status_id]", joinedStatusesAttributesStatusID...); err != nil {
+			return err
+		}
+	}
+
 	// form param title
 	frTitle := o.Title
 	fTitle := frTitle
@@ -283,4 +367,55 @@ func (o *FilterV2PostParams) bindParamContext(formats strfmt.Registry) []string 
 	contextIS := swag.JoinByFormat(contextIC, "multi")
 
 	return contextIS
+}
+
+// bindParamFilterV2Post binds the parameter keywords_attributes[][keyword]
+func (o *FilterV2PostParams) bindParamKeywordsAttributesKeyword(formats strfmt.Registry) []string {
+	keywordsAttributesKeywordIR := o.KeywordsAttributesKeyword
+
+	var keywordsAttributesKeywordIC []string
+	for _, keywordsAttributesKeywordIIR := range keywordsAttributesKeywordIR { // explode []string
+
+		keywordsAttributesKeywordIIV := keywordsAttributesKeywordIIR // string as string
+		keywordsAttributesKeywordIC = append(keywordsAttributesKeywordIC, keywordsAttributesKeywordIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	keywordsAttributesKeywordIS := swag.JoinByFormat(keywordsAttributesKeywordIC, "multi")
+
+	return keywordsAttributesKeywordIS
+}
+
+// bindParamFilterV2Post binds the parameter keywords_attributes[][whole_word]
+func (o *FilterV2PostParams) bindParamKeywordsAttributesWholeWord(formats strfmt.Registry) []string {
+	keywordsAttributesWholeWordIR := o.KeywordsAttributesWholeWord
+
+	var keywordsAttributesWholeWordIC []string
+	for _, keywordsAttributesWholeWordIIR := range keywordsAttributesWholeWordIR { // explode []bool
+
+		keywordsAttributesWholeWordIIV := swag.FormatBool(keywordsAttributesWholeWordIIR) // bool as string
+		keywordsAttributesWholeWordIC = append(keywordsAttributesWholeWordIC, keywordsAttributesWholeWordIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	keywordsAttributesWholeWordIS := swag.JoinByFormat(keywordsAttributesWholeWordIC, "multi")
+
+	return keywordsAttributesWholeWordIS
+}
+
+// bindParamFilterV2Post binds the parameter statuses_attributes[][status_id]
+func (o *FilterV2PostParams) bindParamStatusesAttributesStatusID(formats strfmt.Registry) []string {
+	statusesAttributesStatusIDIR := o.StatusesAttributesStatusID
+
+	var statusesAttributesStatusIDIC []string
+	for _, statusesAttributesStatusIDIIR := range statusesAttributesStatusIDIR { // explode []string
+
+		statusesAttributesStatusIDIIV := statusesAttributesStatusIDIIR // string as string
+		statusesAttributesStatusIDIC = append(statusesAttributesStatusIDIC, statusesAttributesStatusIDIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	statusesAttributesStatusIDIS := swag.JoinByFormat(statusesAttributesStatusIDIC, "multi")
+
+	return statusesAttributesStatusIDIS
 }

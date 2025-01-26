@@ -28,6 +28,9 @@ type InstanceV1 struct {
 	// New account registrations require admin approval.
 	ApprovalRequired bool `json:"approval_required,omitempty"`
 
+	// Custom CSS for the instance.
+	CustomCSS string `json:"custom_css,omitempty"`
+
 	// Whether or not instance is running in DEBUG mode. Omitted if false.
 	Debug bool `json:"debug,omitempty"`
 
@@ -92,6 +95,14 @@ type InstanceV1 struct {
 	// Description of the instance thumbnail.
 	// Example: picture of a cute lil' friendly sloth
 	ThumbnailDescription string `json:"thumbnail_description,omitempty"`
+
+	// URL of the static instance avatar/banner image.
+	// Example: https://example.org/files/instance/static/thumbnail.webp
+	ThumbnailStatic string `json:"thumbnail_static,omitempty"`
+
+	// MIME type of the static instance thumbnail.
+	// Example: image/webp
+	ThumbnailStaticType string `json:"thumbnail_static_type,omitempty"`
 
 	// MIME type of the instance thumbnail.
 	// Example: image/png

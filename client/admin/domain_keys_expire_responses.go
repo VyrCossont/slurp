@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -121,11 +122,13 @@ func (o *DomainKeysExpireAccepted) Code() int {
 }
 
 func (o *DomainKeysExpireAccepted) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireAccepted  %+v", 202, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireAccepted %s", 202, payload)
 }
 
 func (o *DomainKeysExpireAccepted) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireAccepted  %+v", 202, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireAccepted %s", 202, payload)
 }
 
 func (o *DomainKeysExpireAccepted) GetPayload() *models.AdminActionResponse {
@@ -188,11 +191,11 @@ func (o *DomainKeysExpireBadRequest) Code() int {
 }
 
 func (o *DomainKeysExpireBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireBadRequest", 400)
 }
 
 func (o *DomainKeysExpireBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireBadRequest", 400)
 }
 
 func (o *DomainKeysExpireBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -244,11 +247,11 @@ func (o *DomainKeysExpireUnauthorized) Code() int {
 }
 
 func (o *DomainKeysExpireUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireUnauthorized", 401)
 }
 
 func (o *DomainKeysExpireUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireUnauthorized", 401)
 }
 
 func (o *DomainKeysExpireUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -300,11 +303,11 @@ func (o *DomainKeysExpireForbidden) Code() int {
 }
 
 func (o *DomainKeysExpireForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireForbidden", 403)
 }
 
 func (o *DomainKeysExpireForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireForbidden", 403)
 }
 
 func (o *DomainKeysExpireForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -356,11 +359,11 @@ func (o *DomainKeysExpireNotFound) Code() int {
 }
 
 func (o *DomainKeysExpireNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireNotFound", 404)
 }
 
 func (o *DomainKeysExpireNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireNotFound", 404)
 }
 
 func (o *DomainKeysExpireNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -412,11 +415,11 @@ func (o *DomainKeysExpireNotAcceptable) Code() int {
 }
 
 func (o *DomainKeysExpireNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireNotAcceptable", 406)
 }
 
 func (o *DomainKeysExpireNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireNotAcceptable", 406)
 }
 
 func (o *DomainKeysExpireNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -468,11 +471,11 @@ func (o *DomainKeysExpireConflict) Code() int {
 }
 
 func (o *DomainKeysExpireConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireConflict", 409)
 }
 
 func (o *DomainKeysExpireConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireConflict", 409)
 }
 
 func (o *DomainKeysExpireConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -524,11 +527,11 @@ func (o *DomainKeysExpireInternalServerError) Code() int {
 }
 
 func (o *DomainKeysExpireInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireInternalServerError", 500)
 }
 
 func (o *DomainKeysExpireInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_keys_expire][%d] domainKeysExpireInternalServerError", 500)
 }
 
 func (o *DomainKeysExpireInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

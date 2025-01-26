@@ -117,11 +117,11 @@ func (o *TestEmailSendAccepted) Code() int {
 }
 
 func (o *TestEmailSendAccepted) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendAccepted ", 202)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendAccepted", 202)
 }
 
 func (o *TestEmailSendAccepted) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendAccepted ", 202)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendAccepted", 202)
 }
 
 func (o *TestEmailSendAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -173,11 +173,11 @@ func (o *TestEmailSendBadRequest) Code() int {
 }
 
 func (o *TestEmailSendBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendBadRequest", 400)
 }
 
 func (o *TestEmailSendBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendBadRequest", 400)
 }
 
 func (o *TestEmailSendBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -229,11 +229,11 @@ func (o *TestEmailSendUnauthorized) Code() int {
 }
 
 func (o *TestEmailSendUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendUnauthorized", 401)
 }
 
 func (o *TestEmailSendUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendUnauthorized", 401)
 }
 
 func (o *TestEmailSendUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -285,11 +285,11 @@ func (o *TestEmailSendForbidden) Code() int {
 }
 
 func (o *TestEmailSendForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendForbidden", 403)
 }
 
 func (o *TestEmailSendForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendForbidden", 403)
 }
 
 func (o *TestEmailSendForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -341,11 +341,11 @@ func (o *TestEmailSendNotFound) Code() int {
 }
 
 func (o *TestEmailSendNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendNotFound", 404)
 }
 
 func (o *TestEmailSendNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendNotFound", 404)
 }
 
 func (o *TestEmailSendNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -397,11 +397,11 @@ func (o *TestEmailSendNotAcceptable) Code() int {
 }
 
 func (o *TestEmailSendNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendNotAcceptable", 406)
 }
 
 func (o *TestEmailSendNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendNotAcceptable", 406)
 }
 
 func (o *TestEmailSendNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -453,11 +453,11 @@ func (o *TestEmailSendUnprocessableEntity) Code() int {
 }
 
 func (o *TestEmailSendUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendUnprocessableEntity", 422)
 }
 
 func (o *TestEmailSendUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendUnprocessableEntity", 422)
 }
 
 func (o *TestEmailSendUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -509,11 +509,11 @@ func (o *TestEmailSendInternalServerError) Code() int {
 }
 
 func (o *TestEmailSendInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendInternalServerError", 500)
 }
 
 func (o *TestEmailSendInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/email/test][%d] testEmailSendInternalServerError", 500)
 }
 
 func (o *TestEmailSendInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

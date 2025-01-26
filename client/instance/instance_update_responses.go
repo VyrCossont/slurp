@@ -6,6 +6,7 @@ package instance
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *InstanceUpdateOK) Code() int {
 }
 
 func (o *InstanceUpdateOK) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateOK %s", 200, payload)
 }
 
 func (o *InstanceUpdateOK) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateOK %s", 200, payload)
 }
 
 func (o *InstanceUpdateOK) GetPayload() *models.InstanceV1 {
@@ -182,11 +185,11 @@ func (o *InstanceUpdateBadRequest) Code() int {
 }
 
 func (o *InstanceUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateBadRequest", 400)
 }
 
 func (o *InstanceUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateBadRequest", 400)
 }
 
 func (o *InstanceUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *InstanceUpdateUnauthorized) Code() int {
 }
 
 func (o *InstanceUpdateUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateUnauthorized ", 401)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateUnauthorized", 401)
 }
 
 func (o *InstanceUpdateUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateUnauthorized ", 401)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateUnauthorized", 401)
 }
 
 func (o *InstanceUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *InstanceUpdateForbidden) Code() int {
 }
 
 func (o *InstanceUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateForbidden ", 403)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateForbidden", 403)
 }
 
 func (o *InstanceUpdateForbidden) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateForbidden ", 403)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateForbidden", 403)
 }
 
 func (o *InstanceUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *InstanceUpdateNotFound) Code() int {
 }
 
 func (o *InstanceUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateNotFound ", 404)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateNotFound", 404)
 }
 
 func (o *InstanceUpdateNotFound) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateNotFound ", 404)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateNotFound", 404)
 }
 
 func (o *InstanceUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *InstanceUpdateNotAcceptable) Code() int {
 }
 
 func (o *InstanceUpdateNotAcceptable) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateNotAcceptable ", 406)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateNotAcceptable", 406)
 }
 
 func (o *InstanceUpdateNotAcceptable) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateNotAcceptable ", 406)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateNotAcceptable", 406)
 }
 
 func (o *InstanceUpdateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *InstanceUpdateInternalServerError) Code() int {
 }
 
 func (o *InstanceUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateInternalServerError", 500)
 }
 
 func (o *InstanceUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PATCH /api/v1/instance][%d] instanceUpdateInternalServerError", 500)
 }
 
 func (o *InstanceUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

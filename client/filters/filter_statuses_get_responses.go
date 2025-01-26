@@ -6,6 +6,7 @@ package filters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *FilterStatusesGetOK) Code() int {
 }
 
 func (o *FilterStatusesGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetOK %s", 200, payload)
 }
 
 func (o *FilterStatusesGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetOK %s", 200, payload)
 }
 
 func (o *FilterStatusesGetOK) GetPayload() []*models.FilterStatus {
@@ -174,11 +177,11 @@ func (o *FilterStatusesGetBadRequest) Code() int {
 }
 
 func (o *FilterStatusesGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetBadRequest", 400)
 }
 
 func (o *FilterStatusesGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetBadRequest", 400)
 }
 
 func (o *FilterStatusesGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -230,11 +233,11 @@ func (o *FilterStatusesGetUnauthorized) Code() int {
 }
 
 func (o *FilterStatusesGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetUnauthorized", 401)
 }
 
 func (o *FilterStatusesGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetUnauthorized", 401)
 }
 
 func (o *FilterStatusesGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -286,11 +289,11 @@ func (o *FilterStatusesGetNotFound) Code() int {
 }
 
 func (o *FilterStatusesGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetNotFound", 404)
 }
 
 func (o *FilterStatusesGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetNotFound", 404)
 }
 
 func (o *FilterStatusesGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -342,11 +345,11 @@ func (o *FilterStatusesGetNotAcceptable) Code() int {
 }
 
 func (o *FilterStatusesGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetNotAcceptable", 406)
 }
 
 func (o *FilterStatusesGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetNotAcceptable", 406)
 }
 
 func (o *FilterStatusesGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -398,11 +401,11 @@ func (o *FilterStatusesGetInternalServerError) Code() int {
 }
 
 func (o *FilterStatusesGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetInternalServerError", 500)
 }
 
 func (o *FilterStatusesGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v2/filters/{id}/statuses][%d] filterStatusesGetInternalServerError", 500)
 }
 
 func (o *FilterStatusesGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

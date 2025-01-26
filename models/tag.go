@@ -17,6 +17,10 @@ import (
 // swagger:model Tag
 type Tag struct {
 
+	// Following is true if the user is following this tag, false if they're not,
+	// and not present if there is no currently authenticated user.
+	Following bool `json:"following,omitempty"`
+
 	// History of this hashtag's usage.
 	// Currently just a stub, if provided will always be an empty array.
 	// Example: []

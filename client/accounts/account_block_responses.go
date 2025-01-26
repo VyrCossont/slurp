@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AccountBlockOK) Code() int {
 }
 
 func (o *AccountBlockOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockOK %s", 200, payload)
 }
 
 func (o *AccountBlockOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockOK %s", 200, payload)
 }
 
 func (o *AccountBlockOK) GetPayload() *models.Relationship {
@@ -176,11 +179,11 @@ func (o *AccountBlockBadRequest) Code() int {
 }
 
 func (o *AccountBlockBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockBadRequest", 400)
 }
 
 func (o *AccountBlockBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockBadRequest", 400)
 }
 
 func (o *AccountBlockBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *AccountBlockUnauthorized) Code() int {
 }
 
 func (o *AccountBlockUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockUnauthorized", 401)
 }
 
 func (o *AccountBlockUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockUnauthorized", 401)
 }
 
 func (o *AccountBlockUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *AccountBlockNotFound) Code() int {
 }
 
 func (o *AccountBlockNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockNotFound", 404)
 }
 
 func (o *AccountBlockNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockNotFound", 404)
 }
 
 func (o *AccountBlockNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *AccountBlockNotAcceptable) Code() int {
 }
 
 func (o *AccountBlockNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockNotAcceptable", 406)
 }
 
 func (o *AccountBlockNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockNotAcceptable", 406)
 }
 
 func (o *AccountBlockNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *AccountBlockInternalServerError) Code() int {
 }
 
 func (o *AccountBlockInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockInternalServerError", 500)
 }
 
 func (o *AccountBlockInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/block][%d] accountBlockInternalServerError", 500)
 }
 
 func (o *AccountBlockInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

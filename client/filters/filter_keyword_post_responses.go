@@ -6,6 +6,7 @@ package filters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -127,11 +128,13 @@ func (o *FilterKeywordPostOK) Code() int {
 }
 
 func (o *FilterKeywordPostOK) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostOK %s", 200, payload)
 }
 
 func (o *FilterKeywordPostOK) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostOK %s", 200, payload)
 }
 
 func (o *FilterKeywordPostOK) GetPayload() *models.FilterKeyword {
@@ -194,11 +197,11 @@ func (o *FilterKeywordPostBadRequest) Code() int {
 }
 
 func (o *FilterKeywordPostBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostBadRequest", 400)
 }
 
 func (o *FilterKeywordPostBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostBadRequest", 400)
 }
 
 func (o *FilterKeywordPostBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -250,11 +253,11 @@ func (o *FilterKeywordPostUnauthorized) Code() int {
 }
 
 func (o *FilterKeywordPostUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostUnauthorized", 401)
 }
 
 func (o *FilterKeywordPostUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostUnauthorized", 401)
 }
 
 func (o *FilterKeywordPostUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -306,11 +309,11 @@ func (o *FilterKeywordPostForbidden) Code() int {
 }
 
 func (o *FilterKeywordPostForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostForbidden", 403)
 }
 
 func (o *FilterKeywordPostForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostForbidden", 403)
 }
 
 func (o *FilterKeywordPostForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -362,11 +365,11 @@ func (o *FilterKeywordPostNotFound) Code() int {
 }
 
 func (o *FilterKeywordPostNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostNotFound", 404)
 }
 
 func (o *FilterKeywordPostNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostNotFound", 404)
 }
 
 func (o *FilterKeywordPostNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -418,11 +421,11 @@ func (o *FilterKeywordPostNotAcceptable) Code() int {
 }
 
 func (o *FilterKeywordPostNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostNotAcceptable", 406)
 }
 
 func (o *FilterKeywordPostNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostNotAcceptable", 406)
 }
 
 func (o *FilterKeywordPostNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -474,11 +477,11 @@ func (o *FilterKeywordPostConflict) Code() int {
 }
 
 func (o *FilterKeywordPostConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostConflict ", 409)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostConflict", 409)
 }
 
 func (o *FilterKeywordPostConflict) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostConflict ", 409)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostConflict", 409)
 }
 
 func (o *FilterKeywordPostConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -530,11 +533,11 @@ func (o *FilterKeywordPostUnprocessableEntity) Code() int {
 }
 
 func (o *FilterKeywordPostUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostUnprocessableEntity", 422)
 }
 
 func (o *FilterKeywordPostUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostUnprocessableEntity", 422)
 }
 
 func (o *FilterKeywordPostUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -586,11 +589,11 @@ func (o *FilterKeywordPostInternalServerError) Code() int {
 }
 
 func (o *FilterKeywordPostInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostInternalServerError", 500)
 }
 
 func (o *FilterKeywordPostInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/keywords][%d] filterKeywordPostInternalServerError", 500)
 }
 
 func (o *FilterKeywordPostInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

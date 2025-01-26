@@ -6,6 +6,7 @@ package apps
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *AppCreateOK) Code() int {
 }
 
 func (o *AppCreateOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateOK %s", 200, payload)
 }
 
 func (o *AppCreateOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateOK %s", 200, payload)
 }
 
 func (o *AppCreateOK) GetPayload() *models.Application {
@@ -182,11 +185,11 @@ func (o *AppCreateBadRequest) Code() int {
 }
 
 func (o *AppCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateBadRequest", 400)
 }
 
 func (o *AppCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateBadRequest", 400)
 }
 
 func (o *AppCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *AppCreateUnauthorized) Code() int {
 }
 
 func (o *AppCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateUnauthorized", 401)
 }
 
 func (o *AppCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateUnauthorized", 401)
 }
 
 func (o *AppCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *AppCreateForbidden) Code() int {
 }
 
 func (o *AppCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateForbidden", 403)
 }
 
 func (o *AppCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateForbidden", 403)
 }
 
 func (o *AppCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *AppCreateNotFound) Code() int {
 }
 
 func (o *AppCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateNotFound", 404)
 }
 
 func (o *AppCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateNotFound", 404)
 }
 
 func (o *AppCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *AppCreateNotAcceptable) Code() int {
 }
 
 func (o *AppCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateNotAcceptable", 406)
 }
 
 func (o *AppCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateNotAcceptable", 406)
 }
 
 func (o *AppCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *AppCreateInternalServerError) Code() int {
 }
 
 func (o *AppCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateInternalServerError", 500)
 }
 
 func (o *AppCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/apps][%d] appCreateInternalServerError", 500)
 }
 
 func (o *AppCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

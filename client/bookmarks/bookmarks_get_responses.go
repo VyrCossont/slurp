@@ -6,6 +6,7 @@ package bookmarks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -102,11 +103,13 @@ func (o *BookmarksGetOK) Code() int {
 }
 
 func (o *BookmarksGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetOK %s", 200, payload)
 }
 
 func (o *BookmarksGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetOK %s", 200, payload)
 }
 
 func (o *BookmarksGetOK) GetPayload() []*models.Status {
@@ -174,11 +177,11 @@ func (o *BookmarksGetUnauthorized) Code() int {
 }
 
 func (o *BookmarksGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetUnauthorized", 401)
 }
 
 func (o *BookmarksGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetUnauthorized", 401)
 }
 
 func (o *BookmarksGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -230,11 +233,11 @@ func (o *BookmarksGetNotAcceptable) Code() int {
 }
 
 func (o *BookmarksGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetNotAcceptable", 406)
 }
 
 func (o *BookmarksGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetNotAcceptable", 406)
 }
 
 func (o *BookmarksGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -286,11 +289,11 @@ func (o *BookmarksGetInternalServerError) Code() int {
 }
 
 func (o *BookmarksGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetInternalServerError", 500)
 }
 
 func (o *BookmarksGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/bookmarks][%d] bookmarksGetInternalServerError", 500)
 }
 
 func (o *BookmarksGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

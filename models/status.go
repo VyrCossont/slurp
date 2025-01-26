@@ -30,6 +30,10 @@ type Status struct {
 	// Example: 2021-07-30T09:20:25+00:00
 	CreatedAt string `json:"created_at,omitempty"`
 
+	// Timestamp of when the status was last edited (ISO 8601 Datetime).
+	// Example: 2021-07-30T09:20:25+00:00
+	EditedAt string `json:"edited_at,omitempty"`
+
 	// Custom emoji to be used when rendering status content.
 	Emojis []*Emoji `json:"emojis"`
 
@@ -58,6 +62,9 @@ type Status struct {
 	// Will be null if language is not known.
 	// Example: en
 	Language string `json:"language,omitempty"`
+
+	// Set to "true" if status is not federated, ie., a "local only" status; omitted from response otherwise.
+	LocalOnly bool `json:"local_only,omitempty"`
 
 	// Media that is attached to this status.
 	MediaAttachments []*Attachment `json:"media_attachments"`
@@ -117,6 +124,9 @@ type Status struct {
 	// card
 	Card *Card `json:"card,omitempty"`
 
+	// interaction policy
+	InteractionPolicy *InteractionPolicy `json:"interaction_policy,omitempty"`
+
 	// poll
 	Poll *Poll `json:"poll,omitempty"`
 
@@ -157,6 +167,10 @@ func (m *Status) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCard(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInteractionPolicy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -361,6 +375,25 @@ func (m *Status) validateCard(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Status) validateInteractionPolicy(formats strfmt.Registry) error {
+	if swag.IsZero(m.InteractionPolicy) { // not required
+		return nil
+	}
+
+	if m.InteractionPolicy != nil {
+		if err := m.InteractionPolicy.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("interaction_policy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("interaction_policy")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Status) validatePoll(formats strfmt.Registry) error {
 	if swag.IsZero(m.Poll) { // not required
 		return nil
@@ -432,6 +465,10 @@ func (m *Status) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	}
 
 	if err := m.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInteractionPolicy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -629,6 +666,27 @@ func (m *Status) contextValidateCard(ctx context.Context, formats strfmt.Registr
 				return ve.ValidateName("card")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Status) contextValidateInteractionPolicy(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InteractionPolicy != nil {
+
+		if swag.IsZero(m.InteractionPolicy) { // not required
+			return nil
+		}
+
+		if err := m.InteractionPolicy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("interaction_policy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("interaction_policy")
 			}
 			return err
 		}

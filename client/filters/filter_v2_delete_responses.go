@@ -105,11 +105,11 @@ func (o *FilterV2DeleteOK) Code() int {
 }
 
 func (o *FilterV2DeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteOK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteOK", 200)
 }
 
 func (o *FilterV2DeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteOK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteOK", 200)
 }
 
 func (o *FilterV2DeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *FilterV2DeleteBadRequest) Code() int {
 }
 
 func (o *FilterV2DeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteBadRequest", 400)
 }
 
 func (o *FilterV2DeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteBadRequest", 400)
 }
 
 func (o *FilterV2DeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *FilterV2DeleteUnauthorized) Code() int {
 }
 
 func (o *FilterV2DeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteUnauthorized", 401)
 }
 
 func (o *FilterV2DeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteUnauthorized", 401)
 }
 
 func (o *FilterV2DeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *FilterV2DeleteNotFound) Code() int {
 }
 
 func (o *FilterV2DeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteNotFound", 404)
 }
 
 func (o *FilterV2DeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteNotFound", 404)
 }
 
 func (o *FilterV2DeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *FilterV2DeleteNotAcceptable) Code() int {
 }
 
 func (o *FilterV2DeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteNotAcceptable", 406)
 }
 
 func (o *FilterV2DeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteNotAcceptable", 406)
 }
 
 func (o *FilterV2DeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *FilterV2DeleteInternalServerError) Code() int {
 }
 
 func (o *FilterV2DeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteInternalServerError", 500)
 }
 
 func (o *FilterV2DeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v2/filters/{id}][%d] filterV2DeleteInternalServerError", 500)
 }
 
 func (o *FilterV2DeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

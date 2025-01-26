@@ -25,6 +25,9 @@ type InstanceV2 struct {
 	// Example: example.org
 	AccountDomain string `json:"account_domain,omitempty"`
 
+	// Instance Custom Css
+	CustomCSS string `json:"custom_css,omitempty"`
+
 	// Whether or not instance is running in DEBUG mode. Omitted if false.
 	Debug bool `json:"debug,omitempty"`
 

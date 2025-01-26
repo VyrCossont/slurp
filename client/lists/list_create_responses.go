@@ -6,6 +6,7 @@ package lists
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *ListCreateOK) Code() int {
 }
 
 func (o *ListCreateOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateOK %s", 200, payload)
 }
 
 func (o *ListCreateOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateOK %s", 200, payload)
 }
 
 func (o *ListCreateOK) GetPayload() *models.List {
@@ -182,11 +185,11 @@ func (o *ListCreateBadRequest) Code() int {
 }
 
 func (o *ListCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateBadRequest", 400)
 }
 
 func (o *ListCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateBadRequest", 400)
 }
 
 func (o *ListCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *ListCreateUnauthorized) Code() int {
 }
 
 func (o *ListCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateUnauthorized", 401)
 }
 
 func (o *ListCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateUnauthorized", 401)
 }
 
 func (o *ListCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *ListCreateForbidden) Code() int {
 }
 
 func (o *ListCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateForbidden", 403)
 }
 
 func (o *ListCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateForbidden", 403)
 }
 
 func (o *ListCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *ListCreateNotFound) Code() int {
 }
 
 func (o *ListCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateNotFound", 404)
 }
 
 func (o *ListCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateNotFound", 404)
 }
 
 func (o *ListCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *ListCreateNotAcceptable) Code() int {
 }
 
 func (o *ListCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateNotAcceptable", 406)
 }
 
 func (o *ListCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateNotAcceptable", 406)
 }
 
 func (o *ListCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *ListCreateInternalServerError) Code() int {
 }
 
 func (o *ListCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateInternalServerError", 500)
 }
 
 func (o *ListCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/lists][%d] listCreateInternalServerError", 500)
 }
 
 func (o *ListCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

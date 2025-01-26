@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AccountUnmuteOK) Code() int {
 }
 
 func (o *AccountUnmuteOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteOK %s", 200, payload)
 }
 
 func (o *AccountUnmuteOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteOK %s", 200, payload)
 }
 
 func (o *AccountUnmuteOK) GetPayload() *models.Relationship {
@@ -176,11 +179,11 @@ func (o *AccountUnmuteBadRequest) Code() int {
 }
 
 func (o *AccountUnmuteBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteBadRequest", 400)
 }
 
 func (o *AccountUnmuteBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteBadRequest", 400)
 }
 
 func (o *AccountUnmuteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *AccountUnmuteUnauthorized) Code() int {
 }
 
 func (o *AccountUnmuteUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteUnauthorized", 401)
 }
 
 func (o *AccountUnmuteUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteUnauthorized", 401)
 }
 
 func (o *AccountUnmuteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *AccountUnmuteNotFound) Code() int {
 }
 
 func (o *AccountUnmuteNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteNotFound", 404)
 }
 
 func (o *AccountUnmuteNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteNotFound", 404)
 }
 
 func (o *AccountUnmuteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *AccountUnmuteNotAcceptable) Code() int {
 }
 
 func (o *AccountUnmuteNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteNotAcceptable", 406)
 }
 
 func (o *AccountUnmuteNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteNotAcceptable", 406)
 }
 
 func (o *AccountUnmuteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *AccountUnmuteInternalServerError) Code() int {
 }
 
 func (o *AccountUnmuteInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteInternalServerError", 500)
 }
 
 func (o *AccountUnmuteInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/unmute][%d] accountUnmuteInternalServerError", 500)
 }
 
 func (o *AccountUnmuteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

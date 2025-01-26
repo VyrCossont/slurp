@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AccountHeaderDeleteOK) Code() int {
 }
 
 func (o *AccountHeaderDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteOK %s", 200, payload)
 }
 
 func (o *AccountHeaderDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteOK %s", 200, payload)
 }
 
 func (o *AccountHeaderDeleteOK) GetPayload() *models.Account {
@@ -176,11 +179,11 @@ func (o *AccountHeaderDeleteBadRequest) Code() int {
 }
 
 func (o *AccountHeaderDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteBadRequest", 400)
 }
 
 func (o *AccountHeaderDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteBadRequest", 400)
 }
 
 func (o *AccountHeaderDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *AccountHeaderDeleteUnauthorized) Code() int {
 }
 
 func (o *AccountHeaderDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteUnauthorized", 401)
 }
 
 func (o *AccountHeaderDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteUnauthorized", 401)
 }
 
 func (o *AccountHeaderDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *AccountHeaderDeleteForbidden) Code() int {
 }
 
 func (o *AccountHeaderDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteForbidden", 403)
 }
 
 func (o *AccountHeaderDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteForbidden", 403)
 }
 
 func (o *AccountHeaderDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *AccountHeaderDeleteNotAcceptable) Code() int {
 }
 
 func (o *AccountHeaderDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteNotAcceptable", 406)
 }
 
 func (o *AccountHeaderDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteNotAcceptable", 406)
 }
 
 func (o *AccountHeaderDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *AccountHeaderDeleteInternalServerError) Code() int {
 }
 
 func (o *AccountHeaderDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteInternalServerError", 500)
 }
 
 func (o *AccountHeaderDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v1/profile/header][%d] accountHeaderDeleteInternalServerError", 500)
 }
 
 func (o *AccountHeaderDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

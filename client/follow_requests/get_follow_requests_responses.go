@@ -6,6 +6,7 @@ package follow_requests
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -114,11 +115,13 @@ func (o *GetFollowRequestsOK) Code() int {
 }
 
 func (o *GetFollowRequestsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsOK %s", 200, payload)
 }
 
 func (o *GetFollowRequestsOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsOK %s", 200, payload)
 }
 
 func (o *GetFollowRequestsOK) GetPayload() []*models.Account {
@@ -186,11 +189,11 @@ func (o *GetFollowRequestsBadRequest) Code() int {
 }
 
 func (o *GetFollowRequestsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsBadRequest", 400)
 }
 
 func (o *GetFollowRequestsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsBadRequest", 400)
 }
 
 func (o *GetFollowRequestsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -242,11 +245,11 @@ func (o *GetFollowRequestsUnauthorized) Code() int {
 }
 
 func (o *GetFollowRequestsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsUnauthorized", 401)
 }
 
 func (o *GetFollowRequestsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsUnauthorized", 401)
 }
 
 func (o *GetFollowRequestsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -298,11 +301,11 @@ func (o *GetFollowRequestsNotFound) Code() int {
 }
 
 func (o *GetFollowRequestsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsNotFound", 404)
 }
 
 func (o *GetFollowRequestsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsNotFound", 404)
 }
 
 func (o *GetFollowRequestsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -354,11 +357,11 @@ func (o *GetFollowRequestsNotAcceptable) Code() int {
 }
 
 func (o *GetFollowRequestsNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsNotAcceptable", 406)
 }
 
 func (o *GetFollowRequestsNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsNotAcceptable", 406)
 }
 
 func (o *GetFollowRequestsNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -410,11 +413,11 @@ func (o *GetFollowRequestsInternalServerError) Code() int {
 }
 
 func (o *GetFollowRequestsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsInternalServerError", 500)
 }
 
 func (o *GetFollowRequestsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/follow_requests][%d] getFollowRequestsInternalServerError", 500)
 }
 
 func (o *GetFollowRequestsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

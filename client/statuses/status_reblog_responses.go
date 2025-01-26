@@ -6,6 +6,7 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *StatusReblogOK) Code() int {
 }
 
 func (o *StatusReblogOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogOK %s", 200, payload)
 }
 
 func (o *StatusReblogOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogOK %s", 200, payload)
 }
 
 func (o *StatusReblogOK) GetPayload() *models.Status {
@@ -182,11 +185,11 @@ func (o *StatusReblogBadRequest) Code() int {
 }
 
 func (o *StatusReblogBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogBadRequest", 400)
 }
 
 func (o *StatusReblogBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogBadRequest", 400)
 }
 
 func (o *StatusReblogBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *StatusReblogUnauthorized) Code() int {
 }
 
 func (o *StatusReblogUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogUnauthorized", 401)
 }
 
 func (o *StatusReblogUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogUnauthorized", 401)
 }
 
 func (o *StatusReblogUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *StatusReblogForbidden) Code() int {
 }
 
 func (o *StatusReblogForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogForbidden", 403)
 }
 
 func (o *StatusReblogForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogForbidden", 403)
 }
 
 func (o *StatusReblogForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *StatusReblogNotFound) Code() int {
 }
 
 func (o *StatusReblogNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogNotFound", 404)
 }
 
 func (o *StatusReblogNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogNotFound", 404)
 }
 
 func (o *StatusReblogNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *StatusReblogNotAcceptable) Code() int {
 }
 
 func (o *StatusReblogNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogNotAcceptable", 406)
 }
 
 func (o *StatusReblogNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogNotAcceptable", 406)
 }
 
 func (o *StatusReblogNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *StatusReblogInternalServerError) Code() int {
 }
 
 func (o *StatusReblogInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogInternalServerError", 500)
 }
 
 func (o *StatusReblogInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/reblog][%d] statusReblogInternalServerError", 500)
 }
 
 func (o *StatusReblogInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

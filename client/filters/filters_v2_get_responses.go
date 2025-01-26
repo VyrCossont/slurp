@@ -6,6 +6,7 @@ package filters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *FiltersV2GetOK) Code() int {
 }
 
 func (o *FiltersV2GetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetOK %s", 200, payload)
 }
 
 func (o *FiltersV2GetOK) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetOK %s", 200, payload)
 }
 
 func (o *FiltersV2GetOK) GetPayload() []*models.FilterV2 {
@@ -174,11 +177,11 @@ func (o *FiltersV2GetBadRequest) Code() int {
 }
 
 func (o *FiltersV2GetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetBadRequest", 400)
 }
 
 func (o *FiltersV2GetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetBadRequest", 400)
 }
 
 func (o *FiltersV2GetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -230,11 +233,11 @@ func (o *FiltersV2GetUnauthorized) Code() int {
 }
 
 func (o *FiltersV2GetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetUnauthorized", 401)
 }
 
 func (o *FiltersV2GetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetUnauthorized", 401)
 }
 
 func (o *FiltersV2GetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -286,11 +289,11 @@ func (o *FiltersV2GetNotFound) Code() int {
 }
 
 func (o *FiltersV2GetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetNotFound", 404)
 }
 
 func (o *FiltersV2GetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetNotFound", 404)
 }
 
 func (o *FiltersV2GetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -342,11 +345,11 @@ func (o *FiltersV2GetNotAcceptable) Code() int {
 }
 
 func (o *FiltersV2GetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetNotAcceptable", 406)
 }
 
 func (o *FiltersV2GetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetNotAcceptable", 406)
 }
 
 func (o *FiltersV2GetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -398,11 +401,11 @@ func (o *FiltersV2GetInternalServerError) Code() int {
 }
 
 func (o *FiltersV2GetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetInternalServerError", 500)
 }
 
 func (o *FiltersV2GetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v2/filters][%d] filtersV2GetInternalServerError", 500)
 }
 
 func (o *FiltersV2GetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package instance
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *InstanceGetV2OK) Code() int {
 }
 
 func (o *InstanceGetV2OK) Error() string {
-	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2OK %s", 200, payload)
 }
 
 func (o *InstanceGetV2OK) String() string {
-	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2OK %s", 200, payload)
 }
 
 func (o *InstanceGetV2OK) GetPayload() *models.InstanceV2 {
@@ -158,11 +161,11 @@ func (o *InstanceGetV2NotAcceptable) Code() int {
 }
 
 func (o *InstanceGetV2NotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2NotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2NotAcceptable", 406)
 }
 
 func (o *InstanceGetV2NotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2NotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2NotAcceptable", 406)
 }
 
 func (o *InstanceGetV2NotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *InstanceGetV2InternalServerError) Code() int {
 }
 
 func (o *InstanceGetV2InternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2InternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2InternalServerError", 500)
 }
 
 func (o *InstanceGetV2InternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2InternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v2/instance][%d] instanceGetV2InternalServerError", 500)
 }
 
 func (o *InstanceGetV2InternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

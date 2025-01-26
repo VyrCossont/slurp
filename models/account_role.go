@@ -17,8 +17,23 @@ import (
 // swagger:model AccountRole
 type AccountRole struct {
 
-	// name
+	// Color is a 6-digit CSS-style hex color code with leading `#`, or an empty string if this role has no color.
+	// Since GotoSocial doesn't use role colors, we leave this empty.
+	Color string `json:"color,omitempty"`
+
+	// Highlighted indicates whether the role is publicly visible on the user profile.
+	// This is always true for GotoSocial's built-in admin and moderator roles, and false otherwise.
+	Highlighted bool `json:"highlighted,omitempty"`
+
+	// ID of the role.
+	// Not used by GotoSocial, but we set it to the role name, just in case a client expects a unique ID.
+	ID string `json:"id,omitempty"`
+
+	// Name of the role.
 	Name string `json:"name,omitempty"`
+
+	// Permissions is a bitmap serialized as a numeric string, indicating which admin/moderation actions a user can perform.
+	Permissions string `json:"permissions,omitempty"`
 }
 
 // Validate validates this account role

@@ -105,11 +105,11 @@ func (o *DebugClearCachesOK) Code() int {
 }
 
 func (o *DebugClearCachesOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesOK ", 200)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesOK", 200)
 }
 
 func (o *DebugClearCachesOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesOK ", 200)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesOK", 200)
 }
 
 func (o *DebugClearCachesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *DebugClearCachesBadRequest) Code() int {
 }
 
 func (o *DebugClearCachesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesBadRequest", 400)
 }
 
 func (o *DebugClearCachesBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesBadRequest", 400)
 }
 
 func (o *DebugClearCachesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *DebugClearCachesUnauthorized) Code() int {
 }
 
 func (o *DebugClearCachesUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesUnauthorized", 401)
 }
 
 func (o *DebugClearCachesUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesUnauthorized", 401)
 }
 
 func (o *DebugClearCachesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *DebugClearCachesNotFound) Code() int {
 }
 
 func (o *DebugClearCachesNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesNotFound", 404)
 }
 
 func (o *DebugClearCachesNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesNotFound", 404)
 }
 
 func (o *DebugClearCachesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *DebugClearCachesNotAcceptable) Code() int {
 }
 
 func (o *DebugClearCachesNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesNotAcceptable", 406)
 }
 
 func (o *DebugClearCachesNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesNotAcceptable", 406)
 }
 
 func (o *DebugClearCachesNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *DebugClearCachesInternalServerError) Code() int {
 }
 
 func (o *DebugClearCachesInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesInternalServerError", 500)
 }
 
 func (o *DebugClearCachesInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/debug/caches/clear][%d] debugClearCachesInternalServerError", 500)
 }
 
 func (o *DebugClearCachesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

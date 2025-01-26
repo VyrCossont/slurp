@@ -6,6 +6,7 @@ package nodeinfo
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,11 +80,13 @@ func (o *NodeInfoGetOK) Code() int {
 }
 
 func (o *NodeInfoGetOK) Error() string {
-	return fmt.Sprintf("[GET /nodeinfo/2.0][%d] nodeInfoGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /nodeinfo/2.0][%d] nodeInfoGetOK %s", 200, payload)
 }
 
 func (o *NodeInfoGetOK) String() string {
-	return fmt.Sprintf("[GET /nodeinfo/2.0][%d] nodeInfoGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /nodeinfo/2.0][%d] nodeInfoGetOK %s", 200, payload)
 }
 
 func (o *NodeInfoGetOK) GetPayload() *models.Nodeinfo {

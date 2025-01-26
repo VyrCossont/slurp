@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new statuses API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new statuses API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new statuses API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,8 +51,32 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithContentType allows the client to force the Content-Type header
+// to negotiate a specific Consumer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithContentType(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ConsumesMediaTypes = []string{mime}
+	}
+}
+
+// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
+func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/json"}
+}
+
+// WithContentTypeApplicationxWwwFormUrlencoded sets the Content-Type header to "application/x-www-form-urlencoded".
+func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -34,11 +84,11 @@ type ClientService interface {
 
 	StatusBoostedBy(params *StatusBoostedByParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusBoostedByOK, error)
 
-	StatusContext(params *StatusContextParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusContextOK, error)
-
 	StatusCreate(params *StatusCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusCreateOK, error)
 
 	StatusDelete(params *StatusDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusDeleteOK, error)
+
+	StatusEdit(params *StatusEditParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusEditOK, error)
 
 	StatusFave(params *StatusFaveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusFaveOK, error)
 
@@ -65,6 +115,8 @@ type ClientService interface {
 	StatusUnpin(params *StatusUnpinParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusUnpinOK, error)
 
 	StatusUnreblog(params *StatusUnreblogParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusUnreblogOK, error)
+
+	ThreadContext(params *ThreadContextParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ThreadContextOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -148,52 +200,27 @@ func (a *Client) StatusBoostedBy(params *StatusBoostedByParams, authInfo runtime
 }
 
 /*
-StatusContext returns ancestors and descendants of the given status
-
-The returned statuses will be ordered in a thread structure, so they are suitable to be displayed in the order in which they were returned.
-*/
-func (a *Client) StatusContext(params *StatusContextParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusContextOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewStatusContextParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "statusContext",
-		Method:             "GET",
-		PathPattern:        "/api/v1/statuses/{id}/context",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &StatusContextReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*StatusContextOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for statusContext: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	StatusCreate creates a new status
+	StatusCreate creates a new status using the given form field parameters
 
 	The parameters can also be given in the body of the request, as JSON, if the content-type is set to 'application/json'.
 
-The parameters can also be given in the body of the request, as XML, if the content-type is set to 'application/xml'.
+The 'interaction_policy' field can be used to set an interaction policy for this status.
+
+If submitting using form data, use the following pattern to set an interaction policy:
+
+`interaction_policy[INTERACTION_TYPE][CONDITION][INDEX]=Value`
+
+For example: `interaction_policy[can_reply][always][0]=author`
+
+Using `curl` this might look something like:
+
+`curl -F 'interaction_policy[can_reply][always][0]=author' -F 'interaction_policy[can_reply][always][1]=followers' [... other form fields ...]`
+
+The JSON equivalent would be:
+
+`curl -H 'Content-Type: application/json' -d '{"interaction_policy":{"can_reply":{"always":["author","followers"]}} [... other json fields ...]}'`
+
+The server will perform some normalization on the submitted policy so that you can't submit something totally invalid.
 */
 func (a *Client) StatusCreate(params *StatusCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -205,7 +232,7 @@ func (a *Client) StatusCreate(params *StatusCreateParams, authInfo runtime.Clien
 		Method:             "POST",
 		PathPattern:        "/api/v1/statuses",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &StatusCreateReader{formats: a.formats},
@@ -271,6 +298,47 @@ func (a *Client) StatusDelete(params *StatusDeleteParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for statusDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StatusEdit edits an existing status using the given form field parameters
+
+The parameters can also be given in the body of the request, as JSON, if the content-type is set to 'application/json'.
+*/
+func (a *Client) StatusEdit(params *StatusEditParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusEditOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStatusEditParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "statusEdit",
+		Method:             "PUT",
+		PathPattern:        "/api/v1/statuses",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StatusEditReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StatusEditOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for statusEdit: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -797,6 +865,47 @@ func (a *Client) StatusUnreblog(params *StatusUnreblogParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for statusUnreblog: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ThreadContext returns ancestors and descendants of the given status
+
+The returned statuses will be ordered in a thread structure, so they are suitable to be displayed in the order in which they were returned.
+*/
+func (a *Client) ThreadContext(params *ThreadContextParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ThreadContextOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewThreadContextParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "threadContext",
+		Method:             "GET",
+		PathPattern:        "/api/v1/statuses/{id}/context",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ThreadContextReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ThreadContextOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for threadContext: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

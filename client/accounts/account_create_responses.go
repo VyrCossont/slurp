@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *AccountCreateOK) Code() int {
 }
 
 func (o *AccountCreateOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateOK %s", 200, payload)
 }
 
 func (o *AccountCreateOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateOK %s", 200, payload)
 }
 
 func (o *AccountCreateOK) GetPayload() *models.Token {
@@ -182,11 +185,11 @@ func (o *AccountCreateBadRequest) Code() int {
 }
 
 func (o *AccountCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateBadRequest", 400)
 }
 
 func (o *AccountCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateBadRequest", 400)
 }
 
 func (o *AccountCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *AccountCreateUnauthorized) Code() int {
 }
 
 func (o *AccountCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnauthorized", 401)
 }
 
 func (o *AccountCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnauthorized", 401)
 }
 
 func (o *AccountCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *AccountCreateNotFound) Code() int {
 }
 
 func (o *AccountCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateNotFound", 404)
 }
 
 func (o *AccountCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateNotFound", 404)
 }
 
 func (o *AccountCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *AccountCreateNotAcceptable) Code() int {
 }
 
 func (o *AccountCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateNotAcceptable", 406)
 }
 
 func (o *AccountCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateNotAcceptable", 406)
 }
 
 func (o *AccountCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *AccountCreateUnprocessableEntity) Code() int {
 }
 
 func (o *AccountCreateUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnprocessableEntity", 422)
 }
 
 func (o *AccountCreateUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateUnprocessableEntity", 422)
 }
 
 func (o *AccountCreateUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *AccountCreateInternalServerError) Code() int {
 }
 
 func (o *AccountCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateInternalServerError", 500)
 }
 
 func (o *AccountCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts][%d] accountCreateInternalServerError", 500)
 }
 
 func (o *AccountCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

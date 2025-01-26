@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AccountGetOK) Code() int {
 }
 
 func (o *AccountGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetOK %s", 200, payload)
 }
 
 func (o *AccountGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetOK %s", 200, payload)
 }
 
 func (o *AccountGetOK) GetPayload() *models.Account {
@@ -176,11 +179,11 @@ func (o *AccountGetBadRequest) Code() int {
 }
 
 func (o *AccountGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetBadRequest", 400)
 }
 
 func (o *AccountGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetBadRequest", 400)
 }
 
 func (o *AccountGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *AccountGetUnauthorized) Code() int {
 }
 
 func (o *AccountGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetUnauthorized", 401)
 }
 
 func (o *AccountGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetUnauthorized", 401)
 }
 
 func (o *AccountGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *AccountGetNotFound) Code() int {
 }
 
 func (o *AccountGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetNotFound", 404)
 }
 
 func (o *AccountGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetNotFound", 404)
 }
 
 func (o *AccountGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *AccountGetNotAcceptable) Code() int {
 }
 
 func (o *AccountGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetNotAcceptable", 406)
 }
 
 func (o *AccountGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetNotAcceptable", 406)
 }
 
 func (o *AccountGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *AccountGetInternalServerError) Code() int {
 }
 
 func (o *AccountGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetInternalServerError", 500)
 }
 
 func (o *AccountGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/{id}][%d] accountGetInternalServerError", 500)
 }
 
 func (o *AccountGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

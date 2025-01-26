@@ -6,6 +6,7 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *StatusUnmuteOK) Code() int {
 }
 
 func (o *StatusUnmuteOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteOK %s", 200, payload)
 }
 
 func (o *StatusUnmuteOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteOK %s", 200, payload)
 }
 
 func (o *StatusUnmuteOK) GetPayload() *models.Status {
@@ -182,11 +185,11 @@ func (o *StatusUnmuteBadRequest) Code() int {
 }
 
 func (o *StatusUnmuteBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteBadRequest", 400)
 }
 
 func (o *StatusUnmuteBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteBadRequest", 400)
 }
 
 func (o *StatusUnmuteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *StatusUnmuteUnauthorized) Code() int {
 }
 
 func (o *StatusUnmuteUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteUnauthorized", 401)
 }
 
 func (o *StatusUnmuteUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteUnauthorized", 401)
 }
 
 func (o *StatusUnmuteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *StatusUnmuteForbidden) Code() int {
 }
 
 func (o *StatusUnmuteForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteForbidden", 403)
 }
 
 func (o *StatusUnmuteForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteForbidden", 403)
 }
 
 func (o *StatusUnmuteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *StatusUnmuteNotFound) Code() int {
 }
 
 func (o *StatusUnmuteNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteNotFound", 404)
 }
 
 func (o *StatusUnmuteNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteNotFound", 404)
 }
 
 func (o *StatusUnmuteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *StatusUnmuteNotAcceptable) Code() int {
 }
 
 func (o *StatusUnmuteNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteNotAcceptable", 406)
 }
 
 func (o *StatusUnmuteNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteNotAcceptable", 406)
 }
 
 func (o *StatusUnmuteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *StatusUnmuteInternalServerError) Code() int {
 }
 
 func (o *StatusUnmuteInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteInternalServerError", 500)
 }
 
 func (o *StatusUnmuteInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses/{id}/unmute][%d] statusUnmuteInternalServerError", 500)
 }
 
 func (o *StatusUnmuteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

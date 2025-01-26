@@ -6,6 +6,7 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *StatusBoostedByOK) Code() int {
 }
 
 func (o *StatusBoostedByOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByOK %s", 200, payload)
 }
 
 func (o *StatusBoostedByOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByOK %s", 200, payload)
 }
 
 func (o *StatusBoostedByOK) GetPayload() []*models.Account {
@@ -168,11 +171,11 @@ func (o *StatusBoostedByBadRequest) Code() int {
 }
 
 func (o *StatusBoostedByBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByBadRequest", 400)
 }
 
 func (o *StatusBoostedByBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByBadRequest", 400)
 }
 
 func (o *StatusBoostedByBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -224,11 +227,11 @@ func (o *StatusBoostedByUnauthorized) Code() int {
 }
 
 func (o *StatusBoostedByUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByUnauthorized", 401)
 }
 
 func (o *StatusBoostedByUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByUnauthorized", 401)
 }
 
 func (o *StatusBoostedByUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -280,11 +283,11 @@ func (o *StatusBoostedByForbidden) Code() int {
 }
 
 func (o *StatusBoostedByForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByForbidden", 403)
 }
 
 func (o *StatusBoostedByForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByForbidden", 403)
 }
 
 func (o *StatusBoostedByForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -336,11 +339,11 @@ func (o *StatusBoostedByNotFound) Code() int {
 }
 
 func (o *StatusBoostedByNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByNotFound", 404)
 }
 
 func (o *StatusBoostedByNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/reblogged_by][%d] statusBoostedByNotFound", 404)
 }
 
 func (o *StatusBoostedByNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

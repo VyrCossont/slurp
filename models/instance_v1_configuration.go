@@ -18,6 +18,9 @@ import (
 // swagger:model InstanceV1Configuration
 type InstanceV1Configuration struct {
 
+	// True if instance is running with OIDC as auth/identity backend, else omitted.
+	OIDCEnabled bool `json:"oidc_enabled,omitempty"`
+
 	// accounts
 	Accounts *InstanceConfigurationAccounts `json:"accounts,omitempty"`
 

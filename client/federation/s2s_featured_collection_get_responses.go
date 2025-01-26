@@ -6,6 +6,7 @@ package federation
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *S2sFeaturedCollectionGetOK) Code() int {
 }
 
 func (o *S2sFeaturedCollectionGetOK) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetOK %s", 200, payload)
 }
 
 func (o *S2sFeaturedCollectionGetOK) String() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetOK %s", 200, payload)
 }
 
 func (o *S2sFeaturedCollectionGetOK) GetPayload() *models.SwaggerFeaturedCollection {
@@ -170,11 +173,11 @@ func (o *S2sFeaturedCollectionGetBadRequest) Code() int {
 }
 
 func (o *S2sFeaturedCollectionGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetBadRequest", 400)
 }
 
 func (o *S2sFeaturedCollectionGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetBadRequest", 400)
 }
 
 func (o *S2sFeaturedCollectionGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *S2sFeaturedCollectionGetUnauthorized) Code() int {
 }
 
 func (o *S2sFeaturedCollectionGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetUnauthorized", 401)
 }
 
 func (o *S2sFeaturedCollectionGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetUnauthorized", 401)
 }
 
 func (o *S2sFeaturedCollectionGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *S2sFeaturedCollectionGetForbidden) Code() int {
 }
 
 func (o *S2sFeaturedCollectionGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetForbidden", 403)
 }
 
 func (o *S2sFeaturedCollectionGetForbidden) String() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetForbidden", 403)
 }
 
 func (o *S2sFeaturedCollectionGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *S2sFeaturedCollectionGetNotFound) Code() int {
 }
 
 func (o *S2sFeaturedCollectionGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetNotFound", 404)
 }
 
 func (o *S2sFeaturedCollectionGetNotFound) String() string {
-	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{username}/collections/featured][%d] s2sFeaturedCollectionGetNotFound", 404)
 }
 
 func (o *S2sFeaturedCollectionGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

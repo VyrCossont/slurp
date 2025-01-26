@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AdminReportGetOK) Code() int {
 }
 
 func (o *AdminReportGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetOK %s", 200, payload)
 }
 
 func (o *AdminReportGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetOK %s", 200, payload)
 }
 
 func (o *AdminReportGetOK) GetPayload() *models.AdminReport {
@@ -176,11 +179,11 @@ func (o *AdminReportGetBadRequest) Code() int {
 }
 
 func (o *AdminReportGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetBadRequest", 400)
 }
 
 func (o *AdminReportGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetBadRequest", 400)
 }
 
 func (o *AdminReportGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *AdminReportGetUnauthorized) Code() int {
 }
 
 func (o *AdminReportGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetUnauthorized", 401)
 }
 
 func (o *AdminReportGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetUnauthorized", 401)
 }
 
 func (o *AdminReportGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *AdminReportGetNotFound) Code() int {
 }
 
 func (o *AdminReportGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetNotFound", 404)
 }
 
 func (o *AdminReportGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetNotFound", 404)
 }
 
 func (o *AdminReportGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *AdminReportGetNotAcceptable) Code() int {
 }
 
 func (o *AdminReportGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetNotAcceptable", 406)
 }
 
 func (o *AdminReportGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetNotAcceptable", 406)
 }
 
 func (o *AdminReportGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *AdminReportGetInternalServerError) Code() int {
 }
 
 func (o *AdminReportGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetInternalServerError", 500)
 }
 
 func (o *AdminReportGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/reports/{id}][%d] adminReportGetInternalServerError", 500)
 }
 
 func (o *AdminReportGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

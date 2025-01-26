@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -121,11 +122,13 @@ func (o *DomainAllowCreateOK) Code() int {
 }
 
 func (o *DomainAllowCreateOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateOK %s", 200, payload)
 }
 
 func (o *DomainAllowCreateOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateOK %s", 200, payload)
 }
 
 func (o *DomainAllowCreateOK) GetPayload() *models.DomainPermission {
@@ -188,11 +191,11 @@ func (o *DomainAllowCreateBadRequest) Code() int {
 }
 
 func (o *DomainAllowCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateBadRequest", 400)
 }
 
 func (o *DomainAllowCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateBadRequest", 400)
 }
 
 func (o *DomainAllowCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -244,11 +247,11 @@ func (o *DomainAllowCreateUnauthorized) Code() int {
 }
 
 func (o *DomainAllowCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateUnauthorized", 401)
 }
 
 func (o *DomainAllowCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateUnauthorized", 401)
 }
 
 func (o *DomainAllowCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -300,11 +303,11 @@ func (o *DomainAllowCreateForbidden) Code() int {
 }
 
 func (o *DomainAllowCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateForbidden", 403)
 }
 
 func (o *DomainAllowCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateForbidden", 403)
 }
 
 func (o *DomainAllowCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -356,11 +359,11 @@ func (o *DomainAllowCreateNotFound) Code() int {
 }
 
 func (o *DomainAllowCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateNotFound", 404)
 }
 
 func (o *DomainAllowCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateNotFound", 404)
 }
 
 func (o *DomainAllowCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -412,11 +415,11 @@ func (o *DomainAllowCreateNotAcceptable) Code() int {
 }
 
 func (o *DomainAllowCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateNotAcceptable", 406)
 }
 
 func (o *DomainAllowCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateNotAcceptable", 406)
 }
 
 func (o *DomainAllowCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -468,11 +471,11 @@ func (o *DomainAllowCreateConflict) Code() int {
 }
 
 func (o *DomainAllowCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateConflict", 409)
 }
 
 func (o *DomainAllowCreateConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateConflict", 409)
 }
 
 func (o *DomainAllowCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -524,11 +527,11 @@ func (o *DomainAllowCreateInternalServerError) Code() int {
 }
 
 func (o *DomainAllowCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateInternalServerError", 500)
 }
 
 func (o *DomainAllowCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/domain_allows][%d] domainAllowCreateInternalServerError", 500)
 }
 
 func (o *DomainAllowCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package mutes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -114,11 +115,13 @@ func (o *MutesGetOK) Code() int {
 }
 
 func (o *MutesGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetOK %s", 200, payload)
 }
 
 func (o *MutesGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetOK %s", 200, payload)
 }
 
 func (o *MutesGetOK) GetPayload() []*models.MutedAccount {
@@ -186,11 +189,11 @@ func (o *MutesGetBadRequest) Code() int {
 }
 
 func (o *MutesGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetBadRequest", 400)
 }
 
 func (o *MutesGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetBadRequest", 400)
 }
 
 func (o *MutesGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -242,11 +245,11 @@ func (o *MutesGetUnauthorized) Code() int {
 }
 
 func (o *MutesGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetUnauthorized", 401)
 }
 
 func (o *MutesGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetUnauthorized", 401)
 }
 
 func (o *MutesGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -298,11 +301,11 @@ func (o *MutesGetNotFound) Code() int {
 }
 
 func (o *MutesGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetNotFound", 404)
 }
 
 func (o *MutesGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetNotFound", 404)
 }
 
 func (o *MutesGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -354,11 +357,11 @@ func (o *MutesGetNotAcceptable) Code() int {
 }
 
 func (o *MutesGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetNotAcceptable", 406)
 }
 
 func (o *MutesGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetNotAcceptable", 406)
 }
 
 func (o *MutesGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -410,11 +413,11 @@ func (o *MutesGetInternalServerError) Code() int {
 }
 
 func (o *MutesGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetInternalServerError", 500)
 }
 
 func (o *MutesGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/mutes][%d] mutesGetInternalServerError", 500)
 }
 
 func (o *MutesGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

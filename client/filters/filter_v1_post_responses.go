@@ -6,6 +6,7 @@ package filters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -127,11 +128,13 @@ func (o *FilterV1PostOK) Code() int {
 }
 
 func (o *FilterV1PostOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostOK %s", 200, payload)
 }
 
 func (o *FilterV1PostOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostOK %s", 200, payload)
 }
 
 func (o *FilterV1PostOK) GetPayload() *models.FilterV1 {
@@ -194,11 +197,11 @@ func (o *FilterV1PostBadRequest) Code() int {
 }
 
 func (o *FilterV1PostBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostBadRequest", 400)
 }
 
 func (o *FilterV1PostBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostBadRequest", 400)
 }
 
 func (o *FilterV1PostBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -250,11 +253,11 @@ func (o *FilterV1PostUnauthorized) Code() int {
 }
 
 func (o *FilterV1PostUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostUnauthorized", 401)
 }
 
 func (o *FilterV1PostUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostUnauthorized", 401)
 }
 
 func (o *FilterV1PostUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -306,11 +309,11 @@ func (o *FilterV1PostForbidden) Code() int {
 }
 
 func (o *FilterV1PostForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostForbidden", 403)
 }
 
 func (o *FilterV1PostForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostForbidden", 403)
 }
 
 func (o *FilterV1PostForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -362,11 +365,11 @@ func (o *FilterV1PostNotFound) Code() int {
 }
 
 func (o *FilterV1PostNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostNotFound", 404)
 }
 
 func (o *FilterV1PostNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostNotFound", 404)
 }
 
 func (o *FilterV1PostNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -418,11 +421,11 @@ func (o *FilterV1PostNotAcceptable) Code() int {
 }
 
 func (o *FilterV1PostNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostNotAcceptable", 406)
 }
 
 func (o *FilterV1PostNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostNotAcceptable", 406)
 }
 
 func (o *FilterV1PostNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -474,11 +477,11 @@ func (o *FilterV1PostConflict) Code() int {
 }
 
 func (o *FilterV1PostConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostConflict", 409)
 }
 
 func (o *FilterV1PostConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostConflict", 409)
 }
 
 func (o *FilterV1PostConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -530,11 +533,11 @@ func (o *FilterV1PostUnprocessableEntity) Code() int {
 }
 
 func (o *FilterV1PostUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostUnprocessableEntity", 422)
 }
 
 func (o *FilterV1PostUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostUnprocessableEntity", 422)
 }
 
 func (o *FilterV1PostUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -586,11 +589,11 @@ func (o *FilterV1PostInternalServerError) Code() int {
 }
 
 func (o *FilterV1PostInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostInternalServerError", 500)
 }
 
 func (o *FilterV1PostInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/filters][%d] filterV1PostInternalServerError", 500)
 }
 
 func (o *FilterV1PostInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AccountThemesOK) Code() int {
 }
 
 func (o *AccountThemesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesOK %s", 200, payload)
 }
 
 func (o *AccountThemesOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesOK %s", 200, payload)
 }
 
 func (o *AccountThemesOK) GetPayload() []*models.Theme {
@@ -174,11 +177,11 @@ func (o *AccountThemesBadRequest) Code() int {
 }
 
 func (o *AccountThemesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesBadRequest", 400)
 }
 
 func (o *AccountThemesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesBadRequest", 400)
 }
 
 func (o *AccountThemesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -230,11 +233,11 @@ func (o *AccountThemesUnauthorized) Code() int {
 }
 
 func (o *AccountThemesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesUnauthorized", 401)
 }
 
 func (o *AccountThemesUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesUnauthorized", 401)
 }
 
 func (o *AccountThemesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -286,11 +289,11 @@ func (o *AccountThemesNotFound) Code() int {
 }
 
 func (o *AccountThemesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesNotFound", 404)
 }
 
 func (o *AccountThemesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesNotFound", 404)
 }
 
 func (o *AccountThemesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -342,11 +345,11 @@ func (o *AccountThemesNotAcceptable) Code() int {
 }
 
 func (o *AccountThemesNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesNotAcceptable", 406)
 }
 
 func (o *AccountThemesNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesNotAcceptable", 406)
 }
 
 func (o *AccountThemesNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -398,11 +401,11 @@ func (o *AccountThemesInternalServerError) Code() int {
 }
 
 func (o *AccountThemesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesInternalServerError", 500)
 }
 
 func (o *AccountThemesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/accounts/themes][%d] accountThemesInternalServerError", 500)
 }
 
 func (o *AccountThemesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

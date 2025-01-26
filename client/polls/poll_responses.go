@@ -6,6 +6,7 @@ package polls
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *PollOK) Code() int {
 }
 
 func (o *PollOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollOK %s", 200, payload)
 }
 
 func (o *PollOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollOK %s", 200, payload)
 }
 
 func (o *PollOK) GetPayload() *models.Poll {
@@ -182,11 +185,11 @@ func (o *PollBadRequest) Code() int {
 }
 
 func (o *PollBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollBadRequest", 400)
 }
 
 func (o *PollBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollBadRequest", 400)
 }
 
 func (o *PollBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *PollUnauthorized) Code() int {
 }
 
 func (o *PollUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollUnauthorized", 401)
 }
 
 func (o *PollUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollUnauthorized", 401)
 }
 
 func (o *PollUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *PollForbidden) Code() int {
 }
 
 func (o *PollForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollForbidden", 403)
 }
 
 func (o *PollForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollForbidden", 403)
 }
 
 func (o *PollForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *PollNotFound) Code() int {
 }
 
 func (o *PollNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollNotFound", 404)
 }
 
 func (o *PollNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollNotFound", 404)
 }
 
 func (o *PollNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *PollNotAcceptable) Code() int {
 }
 
 func (o *PollNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollNotAcceptable", 406)
 }
 
 func (o *PollNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollNotAcceptable", 406)
 }
 
 func (o *PollNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *PollInternalServerError) Code() int {
 }
 
 func (o *PollInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollInternalServerError", 500)
 }
 
 func (o *PollInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/polls/{id}][%d] pollInternalServerError", 500)
 }
 
 func (o *PollInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

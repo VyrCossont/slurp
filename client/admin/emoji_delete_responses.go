@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *EmojiDeleteOK) Code() int {
 }
 
 func (o *EmojiDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteOK %s", 200, payload)
 }
 
 func (o *EmojiDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteOK %s", 200, payload)
 }
 
 func (o *EmojiDeleteOK) GetPayload() *models.AdminEmoji {
@@ -182,11 +185,11 @@ func (o *EmojiDeleteBadRequest) Code() int {
 }
 
 func (o *EmojiDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteBadRequest", 400)
 }
 
 func (o *EmojiDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteBadRequest", 400)
 }
 
 func (o *EmojiDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *EmojiDeleteUnauthorized) Code() int {
 }
 
 func (o *EmojiDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteUnauthorized", 401)
 }
 
 func (o *EmojiDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteUnauthorized", 401)
 }
 
 func (o *EmojiDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *EmojiDeleteForbidden) Code() int {
 }
 
 func (o *EmojiDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteForbidden", 403)
 }
 
 func (o *EmojiDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteForbidden", 403)
 }
 
 func (o *EmojiDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *EmojiDeleteNotFound) Code() int {
 }
 
 func (o *EmojiDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteNotFound", 404)
 }
 
 func (o *EmojiDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteNotFound", 404)
 }
 
 func (o *EmojiDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *EmojiDeleteNotAcceptable) Code() int {
 }
 
 func (o *EmojiDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteNotAcceptable", 406)
 }
 
 func (o *EmojiDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteNotAcceptable", 406)
 }
 
 func (o *EmojiDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *EmojiDeleteInternalServerError) Code() int {
 }
 
 func (o *EmojiDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteInternalServerError", 500)
 }
 
 func (o *EmojiDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v1/admin/custom_emojis/{id}][%d] emojiDeleteInternalServerError", 500)
 }
 
 func (o *EmojiDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

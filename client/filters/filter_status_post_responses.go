@@ -6,6 +6,7 @@ package filters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -127,11 +128,13 @@ func (o *FilterStatusPostOK) Code() int {
 }
 
 func (o *FilterStatusPostOK) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostOK %s", 200, payload)
 }
 
 func (o *FilterStatusPostOK) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostOK %s", 200, payload)
 }
 
 func (o *FilterStatusPostOK) GetPayload() *models.FilterStatus {
@@ -194,11 +197,11 @@ func (o *FilterStatusPostBadRequest) Code() int {
 }
 
 func (o *FilterStatusPostBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostBadRequest", 400)
 }
 
 func (o *FilterStatusPostBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostBadRequest", 400)
 }
 
 func (o *FilterStatusPostBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -250,11 +253,11 @@ func (o *FilterStatusPostUnauthorized) Code() int {
 }
 
 func (o *FilterStatusPostUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostUnauthorized", 401)
 }
 
 func (o *FilterStatusPostUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostUnauthorized", 401)
 }
 
 func (o *FilterStatusPostUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -306,11 +309,11 @@ func (o *FilterStatusPostForbidden) Code() int {
 }
 
 func (o *FilterStatusPostForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostForbidden", 403)
 }
 
 func (o *FilterStatusPostForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostForbidden", 403)
 }
 
 func (o *FilterStatusPostForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -362,11 +365,11 @@ func (o *FilterStatusPostNotFound) Code() int {
 }
 
 func (o *FilterStatusPostNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostNotFound", 404)
 }
 
 func (o *FilterStatusPostNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostNotFound", 404)
 }
 
 func (o *FilterStatusPostNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -418,11 +421,11 @@ func (o *FilterStatusPostNotAcceptable) Code() int {
 }
 
 func (o *FilterStatusPostNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostNotAcceptable", 406)
 }
 
 func (o *FilterStatusPostNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostNotAcceptable", 406)
 }
 
 func (o *FilterStatusPostNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -474,11 +477,11 @@ func (o *FilterStatusPostConflict) Code() int {
 }
 
 func (o *FilterStatusPostConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostConflict ", 409)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostConflict", 409)
 }
 
 func (o *FilterStatusPostConflict) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostConflict ", 409)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostConflict", 409)
 }
 
 func (o *FilterStatusPostConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -530,11 +533,11 @@ func (o *FilterStatusPostUnprocessableEntity) Code() int {
 }
 
 func (o *FilterStatusPostUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostUnprocessableEntity", 422)
 }
 
 func (o *FilterStatusPostUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostUnprocessableEntity", 422)
 }
 
 func (o *FilterStatusPostUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -586,11 +589,11 @@ func (o *FilterStatusPostInternalServerError) Code() int {
 }
 
 func (o *FilterStatusPostInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostInternalServerError", 500)
 }
 
 func (o *FilterStatusPostInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v2/filters/{id}/statuses][%d] filterStatusPostInternalServerError", 500)
 }
 
 func (o *FilterStatusPostInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

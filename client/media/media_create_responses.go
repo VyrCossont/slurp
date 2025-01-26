@@ -6,6 +6,7 @@ package media
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *MediaCreateOK) Code() int {
 }
 
 func (o *MediaCreateOK) Error() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateOK %s", 200, payload)
 }
 
 func (o *MediaCreateOK) String() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateOK %s", 200, payload)
 }
 
 func (o *MediaCreateOK) GetPayload() *models.Attachment {
@@ -170,11 +173,11 @@ func (o *MediaCreateBadRequest) Code() int {
 }
 
 func (o *MediaCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateBadRequest", 400)
 }
 
 func (o *MediaCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateBadRequest", 400)
 }
 
 func (o *MediaCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *MediaCreateUnauthorized) Code() int {
 }
 
 func (o *MediaCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateUnauthorized", 401)
 }
 
 func (o *MediaCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateUnauthorized", 401)
 }
 
 func (o *MediaCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *MediaCreateUnprocessableEntity) Code() int {
 }
 
 func (o *MediaCreateUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateUnprocessableEntity", 422)
 }
 
 func (o *MediaCreateUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateUnprocessableEntity", 422)
 }
 
 func (o *MediaCreateUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *MediaCreateInternalServerError) Code() int {
 }
 
 func (o *MediaCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateInternalServerError", 500)
 }
 
 func (o *MediaCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/{api_version}/media][%d] mediaCreateInternalServerError", 500)
 }
 
 func (o *MediaCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

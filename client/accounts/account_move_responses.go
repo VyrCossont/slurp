@@ -111,11 +111,11 @@ func (o *AccountMoveAccepted) Code() int {
 }
 
 func (o *AccountMoveAccepted) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveAccepted ", 202)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveAccepted", 202)
 }
 
 func (o *AccountMoveAccepted) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveAccepted ", 202)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveAccepted", 202)
 }
 
 func (o *AccountMoveAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -167,11 +167,11 @@ func (o *AccountMoveBadRequest) Code() int {
 }
 
 func (o *AccountMoveBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveBadRequest", 400)
 }
 
 func (o *AccountMoveBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveBadRequest", 400)
 }
 
 func (o *AccountMoveBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -223,11 +223,11 @@ func (o *AccountMoveUnauthorized) Code() int {
 }
 
 func (o *AccountMoveUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveUnauthorized", 401)
 }
 
 func (o *AccountMoveUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveUnauthorized", 401)
 }
 
 func (o *AccountMoveUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -279,11 +279,11 @@ func (o *AccountMoveNotFound) Code() int {
 }
 
 func (o *AccountMoveNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveNotFound", 404)
 }
 
 func (o *AccountMoveNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveNotFound", 404)
 }
 
 func (o *AccountMoveNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -335,11 +335,11 @@ func (o *AccountMoveNotAcceptable) Code() int {
 }
 
 func (o *AccountMoveNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveNotAcceptable", 406)
 }
 
 func (o *AccountMoveNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveNotAcceptable", 406)
 }
 
 func (o *AccountMoveNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -391,11 +391,11 @@ func (o *AccountMoveUnprocessableEntity) Code() int {
 }
 
 func (o *AccountMoveUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveUnprocessableEntity", 422)
 }
 
 func (o *AccountMoveUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveUnprocessableEntity", 422)
 }
 
 func (o *AccountMoveUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -447,11 +447,11 @@ func (o *AccountMoveInternalServerError) Code() int {
 }
 
 func (o *AccountMoveInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveInternalServerError", 500)
 }
 
 func (o *AccountMoveInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/move][%d] accountMoveInternalServerError", 500)
 }
 
 func (o *AccountMoveInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -62,7 +62,10 @@ NotificationsParams contains all the parameters to send to the API endpoint
 */
 type NotificationsParams struct {
 
-	// ExcludeTypes.
+	/* ExcludeTypes.
+
+	   Types of notifications to exclude.
+	*/
 	ExcludeTypes []string
 
 	/* Limit.
@@ -90,6 +93,12 @@ type NotificationsParams struct {
 	   Return only notifications *newer* than the given since notification ID. The notification with the specified ID will not be included in the response.
 	*/
 	SinceID *string
+
+	/* Types.
+
+	   Types of notifications to include. If not provided, all notification types will be included.
+	*/
+	Types []string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -210,6 +219,17 @@ func (o *NotificationsParams) SetSinceID(sinceID *string) {
 	o.SinceID = sinceID
 }
 
+// WithTypes adds the types to the notifications params
+func (o *NotificationsParams) WithTypes(types []string) *NotificationsParams {
+	o.SetTypes(types)
+	return o
+}
+
+// SetTypes adds the types to the notifications params
+func (o *NotificationsParams) SetTypes(types []string) {
+	o.Types = types
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *NotificationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -220,11 +240,11 @@ func (o *NotificationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 	if o.ExcludeTypes != nil {
 
-		// binding items for exclude_types
+		// binding items for exclude_types[]
 		joinedExcludeTypes := o.bindParamExcludeTypes(reg)
 
-		// query array param exclude_types
-		if err := r.SetQueryParam("exclude_types", joinedExcludeTypes...); err != nil {
+		// query array param exclude_types[]
+		if err := r.SetQueryParam("exclude_types[]", joinedExcludeTypes...); err != nil {
 			return err
 		}
 	}
@@ -297,13 +317,24 @@ func (o *NotificationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		}
 	}
 
+	if o.Types != nil {
+
+		// binding items for types[]
+		joinedTypes := o.bindParamTypes(reg)
+
+		// query array param types[]
+		if err := r.SetQueryParam("types[]", joinedTypes...); err != nil {
+			return err
+		}
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
-// bindParamNotifications binds the parameter exclude_types
+// bindParamNotifications binds the parameter exclude_types[]
 func (o *NotificationsParams) bindParamExcludeTypes(formats strfmt.Registry) []string {
 	excludeTypesIR := o.ExcludeTypes
 
@@ -318,4 +349,21 @@ func (o *NotificationsParams) bindParamExcludeTypes(formats strfmt.Registry) []s
 	excludeTypesIS := swag.JoinByFormat(excludeTypesIC, "")
 
 	return excludeTypesIS
+}
+
+// bindParamNotifications binds the parameter types[]
+func (o *NotificationsParams) bindParamTypes(formats strfmt.Registry) []string {
+	typesIR := o.Types
+
+	var typesIC []string
+	for _, typesIIR := range typesIR { // explode []string
+
+		typesIIV := typesIIR // string as string
+		typesIC = append(typesIC, typesIIV)
+	}
+
+	// items.CollectionFormat: ""
+	typesIS := swag.JoinByFormat(typesIC, "")
+
+	return typesIS
 }

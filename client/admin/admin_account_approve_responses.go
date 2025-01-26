@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *AdminAccountApproveOK) Code() int {
 }
 
 func (o *AdminAccountApproveOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveOK %s", 200, payload)
 }
 
 func (o *AdminAccountApproveOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveOK %s", 200, payload)
 }
 
 func (o *AdminAccountApproveOK) GetPayload() *models.AdminAccountInfo {
@@ -182,11 +185,11 @@ func (o *AdminAccountApproveBadRequest) Code() int {
 }
 
 func (o *AdminAccountApproveBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveBadRequest", 400)
 }
 
 func (o *AdminAccountApproveBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveBadRequest", 400)
 }
 
 func (o *AdminAccountApproveBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *AdminAccountApproveUnauthorized) Code() int {
 }
 
 func (o *AdminAccountApproveUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveUnauthorized", 401)
 }
 
 func (o *AdminAccountApproveUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveUnauthorized", 401)
 }
 
 func (o *AdminAccountApproveUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *AdminAccountApproveForbidden) Code() int {
 }
 
 func (o *AdminAccountApproveForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveForbidden", 403)
 }
 
 func (o *AdminAccountApproveForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveForbidden", 403)
 }
 
 func (o *AdminAccountApproveForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *AdminAccountApproveNotFound) Code() int {
 }
 
 func (o *AdminAccountApproveNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveNotFound", 404)
 }
 
 func (o *AdminAccountApproveNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveNotFound", 404)
 }
 
 func (o *AdminAccountApproveNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *AdminAccountApproveNotAcceptable) Code() int {
 }
 
 func (o *AdminAccountApproveNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveNotAcceptable", 406)
 }
 
 func (o *AdminAccountApproveNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveNotAcceptable", 406)
 }
 
 func (o *AdminAccountApproveNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *AdminAccountApproveInternalServerError) Code() int {
 }
 
 func (o *AdminAccountApproveInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveInternalServerError", 500)
 }
 
 func (o *AdminAccountApproveInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/approve][%d] adminAccountApproveInternalServerError", 500)
 }
 
 func (o *AdminAccountApproveInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

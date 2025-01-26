@@ -105,11 +105,11 @@ func (o *AccountDeleteAccepted) Code() int {
 }
 
 func (o *AccountDeleteAccepted) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteAccepted ", 202)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteAccepted", 202)
 }
 
 func (o *AccountDeleteAccepted) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteAccepted ", 202)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteAccepted", 202)
 }
 
 func (o *AccountDeleteAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *AccountDeleteBadRequest) Code() int {
 }
 
 func (o *AccountDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteBadRequest", 400)
 }
 
 func (o *AccountDeleteBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteBadRequest", 400)
 }
 
 func (o *AccountDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *AccountDeleteUnauthorized) Code() int {
 }
 
 func (o *AccountDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteUnauthorized", 401)
 }
 
 func (o *AccountDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteUnauthorized", 401)
 }
 
 func (o *AccountDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *AccountDeleteNotFound) Code() int {
 }
 
 func (o *AccountDeleteNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteNotFound", 404)
 }
 
 func (o *AccountDeleteNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteNotFound", 404)
 }
 
 func (o *AccountDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *AccountDeleteNotAcceptable) Code() int {
 }
 
 func (o *AccountDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteNotAcceptable", 406)
 }
 
 func (o *AccountDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteNotAcceptable", 406)
 }
 
 func (o *AccountDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *AccountDeleteInternalServerError) Code() int {
 }
 
 func (o *AccountDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteInternalServerError", 500)
 }
 
 func (o *AccountDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/delete][%d] accountDeleteInternalServerError", 500)
 }
 
 func (o *AccountDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

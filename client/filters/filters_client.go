@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new filters API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new filters API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new filters API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,8 +51,37 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithContentType allows the client to force the Content-Type header
+// to negotiate a specific Consumer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithContentType(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ConsumesMediaTypes = []string{mime}
+	}
+}
+
+// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
+func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/json"}
+}
+
+// WithContentTypeApplicationxWwwFormUrlencoded sets the Content-Type header to "application/x-www-form-urlencoded".
+func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
+}
+
+// WithContentTypeApplicationXML sets the Content-Type header to "application/xml".
+func WithContentTypeApplicationXML(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/xml"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -162,7 +217,7 @@ func (a *Client) FilterKeywordPost(params *FilterKeywordPostParams, authInfo run
 		Method:             "POST",
 		PathPattern:        "/api/v2/filters/{id}/keywords",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		ConsumesMediaTypes: []string{"application/json", "application/xml", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilterKeywordPostReader{formats: a.formats},
@@ -201,7 +256,7 @@ func (a *Client) FilterKeywordPut(params *FilterKeywordPutParams, authInfo runti
 		Method:             "PUT",
 		PathPattern:        "/api/v2/filters/keywords{id}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		ConsumesMediaTypes: []string{"application/json", "application/xml", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilterKeywordPutReader{formats: a.formats},
@@ -357,7 +412,7 @@ func (a *Client) FilterStatusPost(params *FilterStatusPostParams, authInfo runti
 		Method:             "POST",
 		PathPattern:        "/api/v2/filters/{id}/statuses",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		ConsumesMediaTypes: []string{"application/json", "application/xml", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilterStatusPostReader{formats: a.formats},
@@ -513,7 +568,7 @@ func (a *Client) FilterV1Post(params *FilterV1PostParams, authInfo runtime.Clien
 		Method:             "POST",
 		PathPattern:        "/api/v1/filters",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		ConsumesMediaTypes: []string{"application/json", "application/xml", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilterV1PostReader{formats: a.formats},
@@ -552,7 +607,7 @@ func (a *Client) FilterV1Put(params *FilterV1PutParams, authInfo runtime.ClientA
 		Method:             "PUT",
 		PathPattern:        "/api/v1/filters/{id}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		ConsumesMediaTypes: []string{"application/json", "application/xml", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilterV1PutReader{formats: a.formats},
@@ -669,7 +724,7 @@ func (a *Client) FilterV2Post(params *FilterV2PostParams, authInfo runtime.Clien
 		Method:             "POST",
 		PathPattern:        "/api/v2/filters",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		ConsumesMediaTypes: []string{"application/json", "application/xml", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilterV2PostReader{formats: a.formats},
@@ -712,7 +767,7 @@ func (a *Client) FilterV2Put(params *FilterV2PutParams, authInfo runtime.ClientA
 		Method:             "PUT",
 		PathPattern:        "/api/v2/filters/{id}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded", "application/xml"},
+		ConsumesMediaTypes: []string{"application/json", "application/xml", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilterV2PutReader{formats: a.formats},

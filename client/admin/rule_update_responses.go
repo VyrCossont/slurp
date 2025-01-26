@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *RuleUpdateOK) Code() int {
 }
 
 func (o *RuleUpdateOK) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateOK %s", 200, payload)
 }
 
 func (o *RuleUpdateOK) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateOK %s", 200, payload)
 }
 
 func (o *RuleUpdateOK) GetPayload() *models.InstanceRule {
@@ -182,11 +185,11 @@ func (o *RuleUpdateBadRequest) Code() int {
 }
 
 func (o *RuleUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateBadRequest", 400)
 }
 
 func (o *RuleUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateBadRequest", 400)
 }
 
 func (o *RuleUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *RuleUpdateUnauthorized) Code() int {
 }
 
 func (o *RuleUpdateUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateUnauthorized ", 401)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateUnauthorized", 401)
 }
 
 func (o *RuleUpdateUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateUnauthorized ", 401)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateUnauthorized", 401)
 }
 
 func (o *RuleUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *RuleUpdateForbidden) Code() int {
 }
 
 func (o *RuleUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateForbidden ", 403)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateForbidden", 403)
 }
 
 func (o *RuleUpdateForbidden) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateForbidden ", 403)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateForbidden", 403)
 }
 
 func (o *RuleUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *RuleUpdateNotFound) Code() int {
 }
 
 func (o *RuleUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateNotFound ", 404)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateNotFound", 404)
 }
 
 func (o *RuleUpdateNotFound) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateNotFound ", 404)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateNotFound", 404)
 }
 
 func (o *RuleUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *RuleUpdateNotAcceptable) Code() int {
 }
 
 func (o *RuleUpdateNotAcceptable) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateNotAcceptable ", 406)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateNotAcceptable", 406)
 }
 
 func (o *RuleUpdateNotAcceptable) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateNotAcceptable ", 406)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateNotAcceptable", 406)
 }
 
 func (o *RuleUpdateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *RuleUpdateInternalServerError) Code() int {
 }
 
 func (o *RuleUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateInternalServerError", 500)
 }
 
 func (o *RuleUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PATCH /api/v1/admin/instance/rules/{id}][%d] ruleUpdateInternalServerError", 500)
 }
 
 func (o *RuleUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

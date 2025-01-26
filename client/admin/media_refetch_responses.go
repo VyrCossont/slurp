@@ -111,11 +111,11 @@ func (o *MediaRefetchAccepted) Code() int {
 }
 
 func (o *MediaRefetchAccepted) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchAccepted ", 202)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchAccepted", 202)
 }
 
 func (o *MediaRefetchAccepted) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchAccepted ", 202)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchAccepted", 202)
 }
 
 func (o *MediaRefetchAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -167,11 +167,11 @@ func (o *MediaRefetchBadRequest) Code() int {
 }
 
 func (o *MediaRefetchBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchBadRequest", 400)
 }
 
 func (o *MediaRefetchBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchBadRequest", 400)
 }
 
 func (o *MediaRefetchBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -223,11 +223,11 @@ func (o *MediaRefetchUnauthorized) Code() int {
 }
 
 func (o *MediaRefetchUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchUnauthorized", 401)
 }
 
 func (o *MediaRefetchUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchUnauthorized", 401)
 }
 
 func (o *MediaRefetchUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -279,11 +279,11 @@ func (o *MediaRefetchForbidden) Code() int {
 }
 
 func (o *MediaRefetchForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchForbidden", 403)
 }
 
 func (o *MediaRefetchForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchForbidden", 403)
 }
 
 func (o *MediaRefetchForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -335,11 +335,11 @@ func (o *MediaRefetchNotFound) Code() int {
 }
 
 func (o *MediaRefetchNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchNotFound", 404)
 }
 
 func (o *MediaRefetchNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchNotFound", 404)
 }
 
 func (o *MediaRefetchNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -391,11 +391,11 @@ func (o *MediaRefetchNotAcceptable) Code() int {
 }
 
 func (o *MediaRefetchNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchNotAcceptable", 406)
 }
 
 func (o *MediaRefetchNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchNotAcceptable", 406)
 }
 
 func (o *MediaRefetchNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -447,11 +447,11 @@ func (o *MediaRefetchInternalServerError) Code() int {
 }
 
 func (o *MediaRefetchInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchInternalServerError", 500)
 }
 
 func (o *MediaRefetchInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/media_refetch][%d] mediaRefetchInternalServerError", 500)
 }
 
 func (o *MediaRefetchInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

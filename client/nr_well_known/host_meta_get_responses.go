@@ -6,6 +6,7 @@ package nr_well_known
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,11 +80,13 @@ func (o *HostMetaGetOK) Code() int {
 }
 
 func (o *HostMetaGetOK) Error() string {
-	return fmt.Sprintf("[GET /.well-known/host-meta][%d] hostMetaGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /.well-known/host-meta][%d] hostMetaGetOK %s", 200, payload)
 }
 
 func (o *HostMetaGetOK) String() string {
-	return fmt.Sprintf("[GET /.well-known/host-meta][%d] hostMetaGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /.well-known/host-meta][%d] hostMetaGetOK %s", 200, payload)
 }
 
 func (o *HostMetaGetOK) GetPayload() *models.HostMeta {

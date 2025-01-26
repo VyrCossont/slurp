@@ -105,11 +105,11 @@ func (o *FilterStatusDeleteOK) Code() int {
 }
 
 func (o *FilterStatusDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteOK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteOK", 200)
 }
 
 func (o *FilterStatusDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteOK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteOK", 200)
 }
 
 func (o *FilterStatusDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *FilterStatusDeleteBadRequest) Code() int {
 }
 
 func (o *FilterStatusDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteBadRequest", 400)
 }
 
 func (o *FilterStatusDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteBadRequest", 400)
 }
 
 func (o *FilterStatusDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *FilterStatusDeleteUnauthorized) Code() int {
 }
 
 func (o *FilterStatusDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteUnauthorized", 401)
 }
 
 func (o *FilterStatusDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteUnauthorized", 401)
 }
 
 func (o *FilterStatusDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *FilterStatusDeleteNotFound) Code() int {
 }
 
 func (o *FilterStatusDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteNotFound", 404)
 }
 
 func (o *FilterStatusDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteNotFound", 404)
 }
 
 func (o *FilterStatusDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *FilterStatusDeleteNotAcceptable) Code() int {
 }
 
 func (o *FilterStatusDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteNotAcceptable", 406)
 }
 
 func (o *FilterStatusDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteNotAcceptable", 406)
 }
 
 func (o *FilterStatusDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *FilterStatusDeleteInternalServerError) Code() int {
 }
 
 func (o *FilterStatusDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteInternalServerError", 500)
 }
 
 func (o *FilterStatusDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v2/filters/statuses/{id}][%d] filterStatusDeleteInternalServerError", 500)
 }
 
 func (o *FilterStatusDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -120,11 +121,13 @@ func (o *EmojisGetOK) Code() int {
 }
 
 func (o *EmojisGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetOK %s", 200, payload)
 }
 
 func (o *EmojisGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetOK %s", 200, payload)
 }
 
 func (o *EmojisGetOK) GetPayload() []*models.AdminEmoji {
@@ -192,11 +195,11 @@ func (o *EmojisGetBadRequest) Code() int {
 }
 
 func (o *EmojisGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetBadRequest", 400)
 }
 
 func (o *EmojisGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetBadRequest", 400)
 }
 
 func (o *EmojisGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -248,11 +251,11 @@ func (o *EmojisGetUnauthorized) Code() int {
 }
 
 func (o *EmojisGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetUnauthorized", 401)
 }
 
 func (o *EmojisGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetUnauthorized", 401)
 }
 
 func (o *EmojisGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -304,11 +307,11 @@ func (o *EmojisGetForbidden) Code() int {
 }
 
 func (o *EmojisGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetForbidden", 403)
 }
 
 func (o *EmojisGetForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetForbidden", 403)
 }
 
 func (o *EmojisGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -360,11 +363,11 @@ func (o *EmojisGetNotFound) Code() int {
 }
 
 func (o *EmojisGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetNotFound", 404)
 }
 
 func (o *EmojisGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetNotFound", 404)
 }
 
 func (o *EmojisGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -416,11 +419,11 @@ func (o *EmojisGetNotAcceptable) Code() int {
 }
 
 func (o *EmojisGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetNotAcceptable", 406)
 }
 
 func (o *EmojisGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetNotAcceptable", 406)
 }
 
 func (o *EmojisGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -472,11 +475,11 @@ func (o *EmojisGetInternalServerError) Code() int {
 }
 
 func (o *EmojisGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetInternalServerError", 500)
 }
 
 func (o *EmojisGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/admin/custom_emojis][%d] emojisGetInternalServerError", 500)
 }
 
 func (o *EmojisGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

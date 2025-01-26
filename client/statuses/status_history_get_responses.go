@@ -6,6 +6,7 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *StatusHistoryGetOK) Code() int {
 }
 
 func (o *StatusHistoryGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetOK %s", 200, payload)
 }
 
 func (o *StatusHistoryGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetOK %s", 200, payload)
 }
 
 func (o *StatusHistoryGetOK) GetPayload() []*models.StatusEdit {
@@ -180,11 +183,11 @@ func (o *StatusHistoryGetBadRequest) Code() int {
 }
 
 func (o *StatusHistoryGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetBadRequest", 400)
 }
 
 func (o *StatusHistoryGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetBadRequest", 400)
 }
 
 func (o *StatusHistoryGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -236,11 +239,11 @@ func (o *StatusHistoryGetUnauthorized) Code() int {
 }
 
 func (o *StatusHistoryGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetUnauthorized", 401)
 }
 
 func (o *StatusHistoryGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetUnauthorized", 401)
 }
 
 func (o *StatusHistoryGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -292,11 +295,11 @@ func (o *StatusHistoryGetForbidden) Code() int {
 }
 
 func (o *StatusHistoryGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetForbidden", 403)
 }
 
 func (o *StatusHistoryGetForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetForbidden", 403)
 }
 
 func (o *StatusHistoryGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -348,11 +351,11 @@ func (o *StatusHistoryGetNotFound) Code() int {
 }
 
 func (o *StatusHistoryGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetNotFound", 404)
 }
 
 func (o *StatusHistoryGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetNotFound", 404)
 }
 
 func (o *StatusHistoryGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -404,11 +407,11 @@ func (o *StatusHistoryGetNotAcceptable) Code() int {
 }
 
 func (o *StatusHistoryGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetNotAcceptable", 406)
 }
 
 func (o *StatusHistoryGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetNotAcceptable", 406)
 }
 
 func (o *StatusHistoryGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -460,11 +463,11 @@ func (o *StatusHistoryGetInternalServerError) Code() int {
 }
 
 func (o *StatusHistoryGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetInternalServerError", 500)
 }
 
 func (o *StatusHistoryGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/history][%d] statusHistoryGetInternalServerError", 500)
 }
 
 func (o *StatusHistoryGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

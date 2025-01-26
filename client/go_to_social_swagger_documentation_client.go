@@ -12,6 +12,7 @@ import (
 
 	"github.com/VyrCossont/slurp/client/accounts"
 	"github.com/VyrCossont/slurp/client/admin"
+	"github.com/VyrCossont/slurp/client/announcements"
 	"github.com/VyrCossont/slurp/client/apps"
 	"github.com/VyrCossont/slurp/client/blocks"
 	"github.com/VyrCossont/slurp/client/bookmarks"
@@ -19,12 +20,14 @@ import (
 	"github.com/VyrCossont/slurp/client/custom_emojis"
 	"github.com/VyrCossont/slurp/client/debug"
 	"github.com/VyrCossont/slurp/client/favourites"
-	"github.com/VyrCossont/slurp/client/featured_tags"
 	"github.com/VyrCossont/slurp/client/federation"
 	"github.com/VyrCossont/slurp/client/filters"
 	"github.com/VyrCossont/slurp/client/follow_requests"
 	"github.com/VyrCossont/slurp/client/health"
+	"github.com/VyrCossont/slurp/client/import_export"
 	"github.com/VyrCossont/slurp/client/instance"
+	"github.com/VyrCossont/slurp/client/interaction_policies"
+	"github.com/VyrCossont/slurp/client/interaction_requests"
 	"github.com/VyrCossont/slurp/client/lists"
 	"github.com/VyrCossont/slurp/client/markers"
 	"github.com/VyrCossont/slurp/client/media"
@@ -34,10 +37,12 @@ import (
 	"github.com/VyrCossont/slurp/client/nr_well_known"
 	"github.com/VyrCossont/slurp/client/polls"
 	"github.com/VyrCossont/slurp/client/preferences"
+	"github.com/VyrCossont/slurp/client/push"
 	"github.com/VyrCossont/slurp/client/reports"
 	"github.com/VyrCossont/slurp/client/search"
 	"github.com/VyrCossont/slurp/client/statuses"
 	"github.com/VyrCossont/slurp/client/streaming"
+	"github.com/VyrCossont/slurp/client/tags"
 	"github.com/VyrCossont/slurp/client/timelines"
 	"github.com/VyrCossont/slurp/client/user"
 )
@@ -86,6 +91,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GoToSocial
 	cli.Transport = transport
 	cli.Accounts = accounts.New(transport, formats)
 	cli.Admin = admin.New(transport, formats)
+	cli.Announcements = announcements.New(transport, formats)
 	cli.Apps = apps.New(transport, formats)
 	cli.Blocks = blocks.New(transport, formats)
 	cli.Bookmarks = bookmarks.New(transport, formats)
@@ -93,12 +99,14 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GoToSocial
 	cli.CustomEmojis = custom_emojis.New(transport, formats)
 	cli.Debug = debug.New(transport, formats)
 	cli.Favourites = favourites.New(transport, formats)
-	cli.FeaturedTags = featured_tags.New(transport, formats)
 	cli.Federation = federation.New(transport, formats)
 	cli.Filters = filters.New(transport, formats)
 	cli.FollowRequests = follow_requests.New(transport, formats)
 	cli.Health = health.New(transport, formats)
+	cli.ImportExport = import_export.New(transport, formats)
 	cli.Instance = instance.New(transport, formats)
+	cli.InteractionPolicies = interaction_policies.New(transport, formats)
+	cli.InteractionRequests = interaction_requests.New(transport, formats)
 	cli.Lists = lists.New(transport, formats)
 	cli.Markers = markers.New(transport, formats)
 	cli.Media = media.New(transport, formats)
@@ -108,10 +116,12 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GoToSocial
 	cli.NrWellKnown = nr_well_known.New(transport, formats)
 	cli.Polls = polls.New(transport, formats)
 	cli.Preferences = preferences.New(transport, formats)
+	cli.Push = push.New(transport, formats)
 	cli.Reports = reports.New(transport, formats)
 	cli.Search = search.New(transport, formats)
 	cli.Statuses = statuses.New(transport, formats)
 	cli.Streaming = streaming.New(transport, formats)
+	cli.Tags = tags.New(transport, formats)
 	cli.Timelines = timelines.New(transport, formats)
 	cli.User = user.New(transport, formats)
 	return cli
@@ -162,6 +172,8 @@ type GoToSocialSwaggerDocumentation struct {
 
 	Admin admin.ClientService
 
+	Announcements announcements.ClientService
+
 	Apps apps.ClientService
 
 	Blocks blocks.ClientService
@@ -176,8 +188,6 @@ type GoToSocialSwaggerDocumentation struct {
 
 	Favourites favourites.ClientService
 
-	FeaturedTags featured_tags.ClientService
-
 	Federation federation.ClientService
 
 	Filters filters.ClientService
@@ -186,7 +196,13 @@ type GoToSocialSwaggerDocumentation struct {
 
 	Health health.ClientService
 
+	ImportExport import_export.ClientService
+
 	Instance instance.ClientService
+
+	InteractionPolicies interaction_policies.ClientService
+
+	InteractionRequests interaction_requests.ClientService
 
 	Lists lists.ClientService
 
@@ -206,6 +222,8 @@ type GoToSocialSwaggerDocumentation struct {
 
 	Preferences preferences.ClientService
 
+	Push push.ClientService
+
 	Reports reports.ClientService
 
 	Search search.ClientService
@@ -213,6 +231,8 @@ type GoToSocialSwaggerDocumentation struct {
 	Statuses statuses.ClientService
 
 	Streaming streaming.ClientService
+
+	Tags tags.ClientService
 
 	Timelines timelines.ClientService
 
@@ -226,6 +246,7 @@ func (c *GoToSocialSwaggerDocumentation) SetTransport(transport runtime.ClientTr
 	c.Transport = transport
 	c.Accounts.SetTransport(transport)
 	c.Admin.SetTransport(transport)
+	c.Announcements.SetTransport(transport)
 	c.Apps.SetTransport(transport)
 	c.Blocks.SetTransport(transport)
 	c.Bookmarks.SetTransport(transport)
@@ -233,12 +254,14 @@ func (c *GoToSocialSwaggerDocumentation) SetTransport(transport runtime.ClientTr
 	c.CustomEmojis.SetTransport(transport)
 	c.Debug.SetTransport(transport)
 	c.Favourites.SetTransport(transport)
-	c.FeaturedTags.SetTransport(transport)
 	c.Federation.SetTransport(transport)
 	c.Filters.SetTransport(transport)
 	c.FollowRequests.SetTransport(transport)
 	c.Health.SetTransport(transport)
+	c.ImportExport.SetTransport(transport)
 	c.Instance.SetTransport(transport)
+	c.InteractionPolicies.SetTransport(transport)
+	c.InteractionRequests.SetTransport(transport)
 	c.Lists.SetTransport(transport)
 	c.Markers.SetTransport(transport)
 	c.Media.SetTransport(transport)
@@ -248,10 +271,12 @@ func (c *GoToSocialSwaggerDocumentation) SetTransport(transport runtime.ClientTr
 	c.NrWellKnown.SetTransport(transport)
 	c.Polls.SetTransport(transport)
 	c.Preferences.SetTransport(transport)
+	c.Push.SetTransport(transport)
 	c.Reports.SetTransport(transport)
 	c.Search.SetTransport(transport)
 	c.Statuses.SetTransport(transport)
 	c.Streaming.SetTransport(transport)
+	c.Tags.SetTransport(transport)
 	c.Timelines.SetTransport(transport)
 	c.User.SetTransport(transport)
 }

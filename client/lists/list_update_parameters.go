@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListUpdateParams creates a new ListUpdateParams object,
@@ -60,6 +61,12 @@ ListUpdateParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type ListUpdateParams struct {
+
+	/* Exclusive.
+
+	   Hide posts from members of this list from your home timeline.
+	*/
+	Exclusive *bool
 
 	/* ID.
 
@@ -137,6 +144,17 @@ func (o *ListUpdateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithExclusive adds the exclusive to the list update params
+func (o *ListUpdateParams) WithExclusive(exclusive *bool) *ListUpdateParams {
+	o.SetExclusive(exclusive)
+	return o
+}
+
+// SetExclusive adds the exclusive to the list update params
+func (o *ListUpdateParams) SetExclusive(exclusive *bool) {
+	o.Exclusive = exclusive
+}
+
 // WithID adds the id to the list update params
 func (o *ListUpdateParams) WithID(id string) *ListUpdateParams {
 	o.SetID(id)
@@ -177,6 +195,21 @@ func (o *ListUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
+
+	if o.Exclusive != nil {
+
+		// form param exclusive
+		var frExclusive bool
+		if o.Exclusive != nil {
+			frExclusive = *o.Exclusive
+		}
+		fExclusive := swag.FormatBool(frExclusive)
+		if fExclusive != "" {
+			if err := r.SetFormParam("exclusive", fExclusive); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {

@@ -6,6 +6,7 @@ package user
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *UserEmailChangeAccepted) Code() int {
 }
 
 func (o *UserEmailChangeAccepted) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeAccepted  %+v", 202, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeAccepted %s", 202, payload)
 }
 
 func (o *UserEmailChangeAccepted) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeAccepted  %+v", 202, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeAccepted %s", 202, payload)
 }
 
 func (o *UserEmailChangeAccepted) GetPayload() *models.User {
@@ -182,11 +185,11 @@ func (o *UserEmailChangeBadRequest) Code() int {
 }
 
 func (o *UserEmailChangeBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeBadRequest", 400)
 }
 
 func (o *UserEmailChangeBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeBadRequest", 400)
 }
 
 func (o *UserEmailChangeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *UserEmailChangeUnauthorized) Code() int {
 }
 
 func (o *UserEmailChangeUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeUnauthorized", 401)
 }
 
 func (o *UserEmailChangeUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeUnauthorized", 401)
 }
 
 func (o *UserEmailChangeUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *UserEmailChangeForbidden) Code() int {
 }
 
 func (o *UserEmailChangeForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeForbidden", 403)
 }
 
 func (o *UserEmailChangeForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeForbidden", 403)
 }
 
 func (o *UserEmailChangeForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *UserEmailChangeNotAcceptable) Code() int {
 }
 
 func (o *UserEmailChangeNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeNotAcceptable", 406)
 }
 
 func (o *UserEmailChangeNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeNotAcceptable", 406)
 }
 
 func (o *UserEmailChangeNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *UserEmailChangeConflict) Code() int {
 }
 
 func (o *UserEmailChangeConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeConflict", 409)
 }
 
 func (o *UserEmailChangeConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeConflict", 409)
 }
 
 func (o *UserEmailChangeConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *UserEmailChangeInternalServerError) Code() int {
 }
 
 func (o *UserEmailChangeInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeInternalServerError", 500)
 }
 
 func (o *UserEmailChangeInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/user/email_change][%d] userEmailChangeInternalServerError", 500)
 }
 
 func (o *UserEmailChangeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

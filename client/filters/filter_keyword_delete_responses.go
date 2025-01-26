@@ -105,11 +105,11 @@ func (o *FilterKeywordDeleteOK) Code() int {
 }
 
 func (o *FilterKeywordDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteOK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteOK", 200)
 }
 
 func (o *FilterKeywordDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteOK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteOK", 200)
 }
 
 func (o *FilterKeywordDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,11 +161,11 @@ func (o *FilterKeywordDeleteBadRequest) Code() int {
 }
 
 func (o *FilterKeywordDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteBadRequest", 400)
 }
 
 func (o *FilterKeywordDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteBadRequest", 400)
 }
 
 func (o *FilterKeywordDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *FilterKeywordDeleteUnauthorized) Code() int {
 }
 
 func (o *FilterKeywordDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteUnauthorized", 401)
 }
 
 func (o *FilterKeywordDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteUnauthorized", 401)
 }
 
 func (o *FilterKeywordDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -273,11 +273,11 @@ func (o *FilterKeywordDeleteNotFound) Code() int {
 }
 
 func (o *FilterKeywordDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteNotFound", 404)
 }
 
 func (o *FilterKeywordDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteNotFound", 404)
 }
 
 func (o *FilterKeywordDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -329,11 +329,11 @@ func (o *FilterKeywordDeleteNotAcceptable) Code() int {
 }
 
 func (o *FilterKeywordDeleteNotAcceptable) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteNotAcceptable", 406)
 }
 
 func (o *FilterKeywordDeleteNotAcceptable) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteNotAcceptable ", 406)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteNotAcceptable", 406)
 }
 
 func (o *FilterKeywordDeleteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -385,11 +385,11 @@ func (o *FilterKeywordDeleteInternalServerError) Code() int {
 }
 
 func (o *FilterKeywordDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteInternalServerError", 500)
 }
 
 func (o *FilterKeywordDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /api/v2/filters/keywords/{id}][%d] filterKeywordDeleteInternalServerError", 500)
 }
 
 func (o *FilterKeywordDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

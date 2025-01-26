@@ -17,6 +17,10 @@ import (
 // swagger:model List
 type List struct {
 
+	// Exclusive setting for this list.
+	// If true, hide posts from members of this list from your home timeline.
+	Exclusive bool `json:"exclusive,omitempty"`
+
 	// The ID of the list.
 	ID string `json:"id,omitempty"`
 

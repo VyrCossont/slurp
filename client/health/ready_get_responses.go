@@ -81,11 +81,11 @@ func (o *ReadyGetOK) Code() int {
 }
 
 func (o *ReadyGetOK) Error() string {
-	return fmt.Sprintf("[GET /readyz][%d] readyGetOK ", 200)
+	return fmt.Sprintf("[GET /readyz][%d] readyGetOK", 200)
 }
 
 func (o *ReadyGetOK) String() string {
-	return fmt.Sprintf("[GET /readyz][%d] readyGetOK ", 200)
+	return fmt.Sprintf("[GET /readyz][%d] readyGetOK", 200)
 }
 
 func (o *ReadyGetOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,11 +137,11 @@ func (o *ReadyGetInternalServerError) Code() int {
 }
 
 func (o *ReadyGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /readyz][%d] readyGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /readyz][%d] readyGetInternalServerError", 500)
 }
 
 func (o *ReadyGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /readyz][%d] readyGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /readyz][%d] readyGetInternalServerError", 500)
 }
 
 func (o *ReadyGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

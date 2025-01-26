@@ -6,6 +6,7 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *AccountMuteOK) Code() int {
 }
 
 func (o *AccountMuteOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteOK %s", 200, payload)
 }
 
 func (o *AccountMuteOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteOK %s", 200, payload)
 }
 
 func (o *AccountMuteOK) GetPayload() *models.Relationship {
@@ -182,11 +185,11 @@ func (o *AccountMuteBadRequest) Code() int {
 }
 
 func (o *AccountMuteBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteBadRequest", 400)
 }
 
 func (o *AccountMuteBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteBadRequest", 400)
 }
 
 func (o *AccountMuteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +241,11 @@ func (o *AccountMuteUnauthorized) Code() int {
 }
 
 func (o *AccountMuteUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteUnauthorized", 401)
 }
 
 func (o *AccountMuteUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteUnauthorized", 401)
 }
 
 func (o *AccountMuteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +297,11 @@ func (o *AccountMuteForbidden) Code() int {
 }
 
 func (o *AccountMuteForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteForbidden", 403)
 }
 
 func (o *AccountMuteForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteForbidden", 403)
 }
 
 func (o *AccountMuteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +353,11 @@ func (o *AccountMuteNotFound) Code() int {
 }
 
 func (o *AccountMuteNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteNotFound", 404)
 }
 
 func (o *AccountMuteNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteNotFound", 404)
 }
 
 func (o *AccountMuteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +409,11 @@ func (o *AccountMuteNotAcceptable) Code() int {
 }
 
 func (o *AccountMuteNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteNotAcceptable", 406)
 }
 
 func (o *AccountMuteNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteNotAcceptable", 406)
 }
 
 func (o *AccountMuteNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,11 +465,11 @@ func (o *AccountMuteInternalServerError) Code() int {
 }
 
 func (o *AccountMuteInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteInternalServerError", 500)
 }
 
 func (o *AccountMuteInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/accounts/{id}/mute][%d] accountMuteInternalServerError", 500)
 }
 
 func (o *AccountMuteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

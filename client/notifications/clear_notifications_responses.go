@@ -6,6 +6,7 @@ package notifications
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -107,11 +108,13 @@ func (o *ClearNotificationsOK) Code() int {
 }
 
 func (o *ClearNotificationsOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsOK %s", 200, payload)
 }
 
 func (o *ClearNotificationsOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsOK %s", 200, payload)
 }
 
 func (o *ClearNotificationsOK) GetPayload() interface{} {
@@ -172,11 +175,11 @@ func (o *ClearNotificationsBadRequest) Code() int {
 }
 
 func (o *ClearNotificationsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsBadRequest", 400)
 }
 
 func (o *ClearNotificationsBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsBadRequest", 400)
 }
 
 func (o *ClearNotificationsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -228,11 +231,11 @@ func (o *ClearNotificationsUnauthorized) Code() int {
 }
 
 func (o *ClearNotificationsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsUnauthorized", 401)
 }
 
 func (o *ClearNotificationsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsUnauthorized", 401)
 }
 
 func (o *ClearNotificationsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -284,11 +287,11 @@ func (o *ClearNotificationsNotFound) Code() int {
 }
 
 func (o *ClearNotificationsNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsNotFound", 404)
 }
 
 func (o *ClearNotificationsNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsNotFound", 404)
 }
 
 func (o *ClearNotificationsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -340,11 +343,11 @@ func (o *ClearNotificationsNotAcceptable) Code() int {
 }
 
 func (o *ClearNotificationsNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsNotAcceptable", 406)
 }
 
 func (o *ClearNotificationsNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsNotAcceptable", 406)
 }
 
 func (o *ClearNotificationsNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -396,11 +399,11 @@ func (o *ClearNotificationsInternalServerError) Code() int {
 }
 
 func (o *ClearNotificationsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsInternalServerError", 500)
 }
 
 func (o *ClearNotificationsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/notifications/clear][%d] clearNotificationsInternalServerError", 500)
 }
 
 func (o *ClearNotificationsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

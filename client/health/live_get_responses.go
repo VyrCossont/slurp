@@ -75,11 +75,11 @@ func (o *LiveGetOK) Code() int {
 }
 
 func (o *LiveGetOK) Error() string {
-	return fmt.Sprintf("[GET /livez][%d] liveGetOK ", 200)
+	return fmt.Sprintf("[GET /livez][%d] liveGetOK", 200)
 }
 
 func (o *LiveGetOK) String() string {
-	return fmt.Sprintf("[GET /livez][%d] liveGetOK ", 200)
+	return fmt.Sprintf("[GET /livez][%d] liveGetOK", 200)
 }
 
 func (o *LiveGetOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

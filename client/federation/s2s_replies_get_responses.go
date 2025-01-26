@@ -6,6 +6,7 @@ package federation
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *S2sRepliesGetOK) Code() int {
 }
 
 func (o *S2sRepliesGetOK) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetOK %s", 200, payload)
 }
 
 func (o *S2sRepliesGetOK) String() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetOK %s", 200, payload)
 }
 
 func (o *S2sRepliesGetOK) GetPayload() *models.SwaggerCollection {
@@ -170,11 +173,11 @@ func (o *S2sRepliesGetBadRequest) Code() int {
 }
 
 func (o *S2sRepliesGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetBadRequest", 400)
 }
 
 func (o *S2sRepliesGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetBadRequest", 400)
 }
 
 func (o *S2sRepliesGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *S2sRepliesGetUnauthorized) Code() int {
 }
 
 func (o *S2sRepliesGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetUnauthorized", 401)
 }
 
 func (o *S2sRepliesGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetUnauthorized", 401)
 }
 
 func (o *S2sRepliesGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *S2sRepliesGetForbidden) Code() int {
 }
 
 func (o *S2sRepliesGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetForbidden", 403)
 }
 
 func (o *S2sRepliesGetForbidden) String() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetForbidden", 403)
 }
 
 func (o *S2sRepliesGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *S2sRepliesGetNotFound) Code() int {
 }
 
 func (o *S2sRepliesGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetNotFound", 404)
 }
 
 func (o *S2sRepliesGetNotFound) String() string {
-	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{username}/statuses/{status}/replies][%d] s2sRepliesGetNotFound", 404)
 }
 
 func (o *S2sRepliesGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

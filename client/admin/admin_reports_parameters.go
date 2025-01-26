@@ -70,7 +70,7 @@ type AdminReportsParams struct {
 
 	/* Limit.
 
-	   Number of reports to return. If more than 100 or less than 1, will be clamped to 100.
+	   Number of reports to return.
 
 	   Default: 20
 	*/
@@ -78,13 +78,13 @@ type AdminReportsParams struct {
 
 	/* MaxID.
 
-	   Return only reports *OLDER* than the given max ID. The report with the specified ID will not be included in the response.
+	   Return only reports *OLDER* than the given max ID (for paging downwards). The report with the specified ID will not be included in the response.
 	*/
 	MaxID *string
 
 	/* MinID.
 
-	   Return only reports *NEWER* than the given min ID. The report with the specified ID will not be included in the response. This parameter is functionally equivalent to since_id.
+	   Return only reports immediately *NEWER* than the given min ID (for paging upwards). The report with the specified ID will not be included in the response.
 	*/
 	MinID *string
 
@@ -96,7 +96,7 @@ type AdminReportsParams struct {
 
 	/* SinceID.
 
-	   Return only reports *NEWER* than the given since ID. The report with the specified ID will not be included in the response. This parameter is functionally equivalent to min_id.
+	   Return only reports *NEWER* than the given since ID. The report with the specified ID will not be included in the response.
 	*/
 	SinceID *string
 

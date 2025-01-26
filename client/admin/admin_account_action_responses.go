@@ -117,11 +117,11 @@ func (o *AdminAccountActionOK) Code() int {
 }
 
 func (o *AdminAccountActionOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionOK ", 200)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionOK", 200)
 }
 
 func (o *AdminAccountActionOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionOK ", 200)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionOK", 200)
 }
 
 func (o *AdminAccountActionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -173,11 +173,11 @@ func (o *AdminAccountActionBadRequest) Code() int {
 }
 
 func (o *AdminAccountActionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionBadRequest", 400)
 }
 
 func (o *AdminAccountActionBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionBadRequest", 400)
 }
 
 func (o *AdminAccountActionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -229,11 +229,11 @@ func (o *AdminAccountActionUnauthorized) Code() int {
 }
 
 func (o *AdminAccountActionUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionUnauthorized", 401)
 }
 
 func (o *AdminAccountActionUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionUnauthorized", 401)
 }
 
 func (o *AdminAccountActionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -285,11 +285,11 @@ func (o *AdminAccountActionForbidden) Code() int {
 }
 
 func (o *AdminAccountActionForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionForbidden", 403)
 }
 
 func (o *AdminAccountActionForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionForbidden", 403)
 }
 
 func (o *AdminAccountActionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -341,11 +341,11 @@ func (o *AdminAccountActionNotFound) Code() int {
 }
 
 func (o *AdminAccountActionNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionNotFound", 404)
 }
 
 func (o *AdminAccountActionNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionNotFound", 404)
 }
 
 func (o *AdminAccountActionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -397,11 +397,11 @@ func (o *AdminAccountActionNotAcceptable) Code() int {
 }
 
 func (o *AdminAccountActionNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionNotAcceptable", 406)
 }
 
 func (o *AdminAccountActionNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionNotAcceptable", 406)
 }
 
 func (o *AdminAccountActionNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -453,11 +453,11 @@ func (o *AdminAccountActionConflict) Code() int {
 }
 
 func (o *AdminAccountActionConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionConflict", 409)
 }
 
 func (o *AdminAccountActionConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionConflict ", 409)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionConflict", 409)
 }
 
 func (o *AdminAccountActionConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -509,11 +509,11 @@ func (o *AdminAccountActionInternalServerError) Code() int {
 }
 
 func (o *AdminAccountActionInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionInternalServerError", 500)
 }
 
 func (o *AdminAccountActionInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/accounts/{id}/action][%d] adminAccountActionInternalServerError", 500)
 }
 
 func (o *AdminAccountActionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -68,6 +68,12 @@ type AccountUpdateParams struct {
 	*/
 	Avatar runtime.NamedReadCloser
 
+	/* AvatarDescription.
+
+	   Description of avatar image, for alt-text.
+	*/
+	AvatarDescription string
+
 	/* Bot.
 
 	   Account is flagged as a bot.
@@ -176,6 +182,12 @@ type AccountUpdateParams struct {
 	*/
 	Header runtime.NamedReadCloser
 
+	/* HeaderDescription.
+
+	   Description of header image, for alt-text.
+	*/
+	HeaderDescription string
+
 	/* HideCollections.
 
 	   Hide the account's following/followers collections.
@@ -223,6 +235,15 @@ type AccountUpdateParams struct {
 	   FileName of the theme to use when rendering this account's profile or statuses. The theme must exist on this server, as indicated by /api/v1/accounts/themes. Empty string unsets theme and returns to the default GoToSocial theme.
 	*/
 	Theme *string
+
+	/* WebVisibility.
+
+	     Posts to show on the web view of the account.
+	"public": default, show only Public visibility posts on the web.
+	"unlisted": show Public *and* Unlisted visibility posts on the web.
+	"none": show no posts on the web, not even Public ones.
+	*/
+	WebVisibility *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -286,6 +307,17 @@ func (o *AccountUpdateParams) WithAvatar(avatar runtime.NamedReadCloser) *Accoun
 // SetAvatar adds the avatar to the account update params
 func (o *AccountUpdateParams) SetAvatar(avatar runtime.NamedReadCloser) {
 	o.Avatar = avatar
+}
+
+// WithAvatarDescription adds the avatarDescription to the account update params
+func (o *AccountUpdateParams) WithAvatarDescription(avatarDescription string) *AccountUpdateParams {
+	o.SetAvatarDescription(avatarDescription)
+	return o
+}
+
+// SetAvatarDescription adds the avatarDescription to the account update params
+func (o *AccountUpdateParams) SetAvatarDescription(avatarDescription string) {
+	o.AvatarDescription = avatarDescription
 }
 
 // WithBot adds the bot to the account update params
@@ -486,6 +518,17 @@ func (o *AccountUpdateParams) SetHeader(header runtime.NamedReadCloser) {
 	o.Header = header
 }
 
+// WithHeaderDescription adds the headerDescription to the account update params
+func (o *AccountUpdateParams) WithHeaderDescription(headerDescription string) *AccountUpdateParams {
+	o.SetHeaderDescription(headerDescription)
+	return o
+}
+
+// SetHeaderDescription adds the headerDescription to the account update params
+func (o *AccountUpdateParams) SetHeaderDescription(headerDescription string) {
+	o.HeaderDescription = headerDescription
+}
+
 // WithHideCollections adds the hideCollections to the account update params
 func (o *AccountUpdateParams) WithHideCollections(hideCollections *bool) *AccountUpdateParams {
 	o.SetHideCollections(hideCollections)
@@ -574,6 +617,17 @@ func (o *AccountUpdateParams) SetTheme(theme *string) {
 	o.Theme = theme
 }
 
+// WithWebVisibility adds the webVisibility to the account update params
+func (o *AccountUpdateParams) WithWebVisibility(webVisibility *string) *AccountUpdateParams {
+	o.SetWebVisibility(webVisibility)
+	return o
+}
+
+// SetWebVisibility adds the webVisibility to the account update params
+func (o *AccountUpdateParams) SetWebVisibility(webVisibility *string) {
+	o.WebVisibility = webVisibility
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *AccountUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -590,6 +644,13 @@ func (o *AccountUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 				return err
 			}
 		}
+	}
+
+	// form param avatar_description
+	frAvatarDescription := o.AvatarDescription
+	fAvatarDescription := frAvatarDescription
+	if err := r.SetFormParam("avatar_description", fAvatarDescription); err != nil {
+		return err
 	}
 
 	if o.Bot != nil {
@@ -849,6 +910,13 @@ func (o *AccountUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		}
 	}
 
+	// form param header_description
+	frHeaderDescription := o.HeaderDescription
+	fHeaderDescription := frHeaderDescription
+	if err := r.SetFormParam("header_description", fHeaderDescription); err != nil {
+		return err
+	}
+
 	if o.HideCollections != nil {
 
 		// form param hide_collections
@@ -956,6 +1024,21 @@ func (o *AccountUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		fTheme := frTheme
 		if fTheme != "" {
 			if err := r.SetFormParam("theme", fTheme); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.WebVisibility != nil {
+
+		// form param web_visibility
+		var frWebVisibility string
+		if o.WebVisibility != nil {
+			frWebVisibility = *o.WebVisibility
+		}
+		fWebVisibility := frWebVisibility
+		if fWebVisibility != "" {
+			if err := r.SetFormParam("web_visibility", fWebVisibility); err != nil {
 				return err
 			}
 		}

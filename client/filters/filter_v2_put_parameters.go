@@ -78,11 +78,37 @@ type FilterV2PutParams struct {
 	*/
 	ExpiresIn *float64
 
+	/* FilterAction.
+
+	     The action to be taken when a status matches this filter.
+
+	Sample: warn
+	*/
+	FilterAction *string
+
 	/* ID.
 
 	   ID of the filter.
 	*/
 	ID string
+
+	/* KeywordsAttributesKeyword.
+
+	   Keywords to be added to the created filter.
+	*/
+	KeywordsAttributesKeyword []string
+
+	/* KeywordsAttributesWholeWord.
+
+	   Should each keyword consider word boundaries?
+	*/
+	KeywordsAttributesWholeWord []bool
+
+	/* StatusesAttributesStatusID.
+
+	   Statuses to be added to the newly created filter.
+	*/
+	StatusesAttributesStatusID []string
 
 	/* Title.
 
@@ -167,6 +193,17 @@ func (o *FilterV2PutParams) SetExpiresIn(expiresIn *float64) {
 	o.ExpiresIn = expiresIn
 }
 
+// WithFilterAction adds the filterAction to the filter v2 put params
+func (o *FilterV2PutParams) WithFilterAction(filterAction *string) *FilterV2PutParams {
+	o.SetFilterAction(filterAction)
+	return o
+}
+
+// SetFilterAction adds the filterAction to the filter v2 put params
+func (o *FilterV2PutParams) SetFilterAction(filterAction *string) {
+	o.FilterAction = filterAction
+}
+
 // WithID adds the id to the filter v2 put params
 func (o *FilterV2PutParams) WithID(id string) *FilterV2PutParams {
 	o.SetID(id)
@@ -176,6 +213,39 @@ func (o *FilterV2PutParams) WithID(id string) *FilterV2PutParams {
 // SetID adds the id to the filter v2 put params
 func (o *FilterV2PutParams) SetID(id string) {
 	o.ID = id
+}
+
+// WithKeywordsAttributesKeyword adds the keywordsAttributesKeyword to the filter v2 put params
+func (o *FilterV2PutParams) WithKeywordsAttributesKeyword(keywordsAttributesKeyword []string) *FilterV2PutParams {
+	o.SetKeywordsAttributesKeyword(keywordsAttributesKeyword)
+	return o
+}
+
+// SetKeywordsAttributesKeyword adds the keywordsAttributesKeyword to the filter v2 put params
+func (o *FilterV2PutParams) SetKeywordsAttributesKeyword(keywordsAttributesKeyword []string) {
+	o.KeywordsAttributesKeyword = keywordsAttributesKeyword
+}
+
+// WithKeywordsAttributesWholeWord adds the keywordsAttributesWholeWord to the filter v2 put params
+func (o *FilterV2PutParams) WithKeywordsAttributesWholeWord(keywordsAttributesWholeWord []bool) *FilterV2PutParams {
+	o.SetKeywordsAttributesWholeWord(keywordsAttributesWholeWord)
+	return o
+}
+
+// SetKeywordsAttributesWholeWord adds the keywordsAttributesWholeWord to the filter v2 put params
+func (o *FilterV2PutParams) SetKeywordsAttributesWholeWord(keywordsAttributesWholeWord []bool) {
+	o.KeywordsAttributesWholeWord = keywordsAttributesWholeWord
+}
+
+// WithStatusesAttributesStatusID adds the statusesAttributesStatusID to the filter v2 put params
+func (o *FilterV2PutParams) WithStatusesAttributesStatusID(statusesAttributesStatusID []string) *FilterV2PutParams {
+	o.SetStatusesAttributesStatusID(statusesAttributesStatusID)
+	return o
+}
+
+// SetStatusesAttributesStatusID adds the statusesAttributesStatusId to the filter v2 put params
+func (o *FilterV2PutParams) SetStatusesAttributesStatusID(statusesAttributesStatusID []string) {
+	o.StatusesAttributesStatusID = statusesAttributesStatusID
 }
 
 // WithTitle adds the title to the filter v2 put params
@@ -223,9 +293,57 @@ func (o *FilterV2PutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		}
 	}
 
+	if o.FilterAction != nil {
+
+		// form param filter_action
+		var frFilterAction string
+		if o.FilterAction != nil {
+			frFilterAction = *o.FilterAction
+		}
+		fFilterAction := frFilterAction
+		if fFilterAction != "" {
+			if err := r.SetFormParam("filter_action", fFilterAction); err != nil {
+				return err
+			}
+		}
+	}
+
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
+	}
+
+	if o.KeywordsAttributesKeyword != nil {
+
+		// binding items for keywords_attributes[][keyword]
+		joinedKeywordsAttributesKeyword := o.bindParamKeywordsAttributesKeyword(reg)
+
+		// form array param keywords_attributes[][keyword]
+		if err := r.SetFormParam("keywords_attributes[][keyword]", joinedKeywordsAttributesKeyword...); err != nil {
+			return err
+		}
+	}
+
+	if o.KeywordsAttributesWholeWord != nil {
+
+		// binding items for keywords_attributes[][whole_word]
+		joinedKeywordsAttributesWholeWord := o.bindParamKeywordsAttributesWholeWord(reg)
+
+		// form array param keywords_attributes[][whole_word]
+		if err := r.SetFormParam("keywords_attributes[][whole_word]", joinedKeywordsAttributesWholeWord...); err != nil {
+			return err
+		}
+	}
+
+	if o.StatusesAttributesStatusID != nil {
+
+		// binding items for statuses_attributes[][status_id]
+		joinedStatusesAttributesStatusID := o.bindParamStatusesAttributesStatusID(reg)
+
+		// form array param statuses_attributes[][status_id]
+		if err := r.SetFormParam("statuses_attributes[][status_id]", joinedStatusesAttributesStatusID...); err != nil {
+			return err
+		}
 	}
 
 	// form param title
@@ -258,4 +376,55 @@ func (o *FilterV2PutParams) bindParamContext(formats strfmt.Registry) []string {
 	contextIS := swag.JoinByFormat(contextIC, "multi")
 
 	return contextIS
+}
+
+// bindParamFilterV2Put binds the parameter keywords_attributes[][keyword]
+func (o *FilterV2PutParams) bindParamKeywordsAttributesKeyword(formats strfmt.Registry) []string {
+	keywordsAttributesKeywordIR := o.KeywordsAttributesKeyword
+
+	var keywordsAttributesKeywordIC []string
+	for _, keywordsAttributesKeywordIIR := range keywordsAttributesKeywordIR { // explode []string
+
+		keywordsAttributesKeywordIIV := keywordsAttributesKeywordIIR // string as string
+		keywordsAttributesKeywordIC = append(keywordsAttributesKeywordIC, keywordsAttributesKeywordIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	keywordsAttributesKeywordIS := swag.JoinByFormat(keywordsAttributesKeywordIC, "multi")
+
+	return keywordsAttributesKeywordIS
+}
+
+// bindParamFilterV2Put binds the parameter keywords_attributes[][whole_word]
+func (o *FilterV2PutParams) bindParamKeywordsAttributesWholeWord(formats strfmt.Registry) []string {
+	keywordsAttributesWholeWordIR := o.KeywordsAttributesWholeWord
+
+	var keywordsAttributesWholeWordIC []string
+	for _, keywordsAttributesWholeWordIIR := range keywordsAttributesWholeWordIR { // explode []bool
+
+		keywordsAttributesWholeWordIIV := swag.FormatBool(keywordsAttributesWholeWordIIR) // bool as string
+		keywordsAttributesWholeWordIC = append(keywordsAttributesWholeWordIC, keywordsAttributesWholeWordIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	keywordsAttributesWholeWordIS := swag.JoinByFormat(keywordsAttributesWholeWordIC, "multi")
+
+	return keywordsAttributesWholeWordIS
+}
+
+// bindParamFilterV2Put binds the parameter statuses_attributes[][status_id]
+func (o *FilterV2PutParams) bindParamStatusesAttributesStatusID(formats strfmt.Registry) []string {
+	statusesAttributesStatusIDIR := o.StatusesAttributesStatusID
+
+	var statusesAttributesStatusIDIC []string
+	for _, statusesAttributesStatusIDIIR := range statusesAttributesStatusIDIR { // explode []string
+
+		statusesAttributesStatusIDIIV := statusesAttributesStatusIDIIR // string as string
+		statusesAttributesStatusIDIC = append(statusesAttributesStatusIDIC, statusesAttributesStatusIDIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	statusesAttributesStatusIDIS := swag.JoinByFormat(statusesAttributesStatusIDIC, "multi")
+
+	return statusesAttributesStatusIDIS
 }

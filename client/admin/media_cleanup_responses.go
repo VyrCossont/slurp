@@ -111,11 +111,11 @@ func (o *MediaCleanupOK) Code() int {
 }
 
 func (o *MediaCleanupOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupOK ", 200)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupOK", 200)
 }
 
 func (o *MediaCleanupOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupOK ", 200)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupOK", 200)
 }
 
 func (o *MediaCleanupOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -167,11 +167,11 @@ func (o *MediaCleanupBadRequest) Code() int {
 }
 
 func (o *MediaCleanupBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupBadRequest", 400)
 }
 
 func (o *MediaCleanupBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupBadRequest", 400)
 }
 
 func (o *MediaCleanupBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -223,11 +223,11 @@ func (o *MediaCleanupUnauthorized) Code() int {
 }
 
 func (o *MediaCleanupUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupUnauthorized", 401)
 }
 
 func (o *MediaCleanupUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupUnauthorized", 401)
 }
 
 func (o *MediaCleanupUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -279,11 +279,11 @@ func (o *MediaCleanupForbidden) Code() int {
 }
 
 func (o *MediaCleanupForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupForbidden", 403)
 }
 
 func (o *MediaCleanupForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupForbidden", 403)
 }
 
 func (o *MediaCleanupForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -335,11 +335,11 @@ func (o *MediaCleanupNotFound) Code() int {
 }
 
 func (o *MediaCleanupNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupNotFound", 404)
 }
 
 func (o *MediaCleanupNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupNotFound", 404)
 }
 
 func (o *MediaCleanupNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -391,11 +391,11 @@ func (o *MediaCleanupNotAcceptable) Code() int {
 }
 
 func (o *MediaCleanupNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupNotAcceptable", 406)
 }
 
 func (o *MediaCleanupNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupNotAcceptable", 406)
 }
 
 func (o *MediaCleanupNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -447,11 +447,11 @@ func (o *MediaCleanupInternalServerError) Code() int {
 }
 
 func (o *MediaCleanupInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupInternalServerError", 500)
 }
 
 func (o *MediaCleanupInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/admin/media_cleanup][%d] mediaCleanupInternalServerError", 500)
 }
 
 func (o *MediaCleanupInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -65,6 +66,12 @@ func (o *StatusCreateReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 501:
+		result := NewStatusCreateNotImplemented()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[POST /api/v1/statuses] statusCreate", response, response.Code())
 	}
@@ -115,11 +122,13 @@ func (o *StatusCreateOK) Code() int {
 }
 
 func (o *StatusCreateOK) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateOK %s", 200, payload)
 }
 
 func (o *StatusCreateOK) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateOK %s", 200, payload)
 }
 
 func (o *StatusCreateOK) GetPayload() *models.Status {
@@ -182,11 +191,11 @@ func (o *StatusCreateBadRequest) Code() int {
 }
 
 func (o *StatusCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateBadRequest", 400)
 }
 
 func (o *StatusCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateBadRequest", 400)
 }
 
 func (o *StatusCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -238,11 +247,11 @@ func (o *StatusCreateUnauthorized) Code() int {
 }
 
 func (o *StatusCreateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateUnauthorized", 401)
 }
 
 func (o *StatusCreateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateUnauthorized", 401)
 }
 
 func (o *StatusCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -294,11 +303,11 @@ func (o *StatusCreateForbidden) Code() int {
 }
 
 func (o *StatusCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateForbidden", 403)
 }
 
 func (o *StatusCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateForbidden", 403)
 }
 
 func (o *StatusCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -350,11 +359,11 @@ func (o *StatusCreateNotFound) Code() int {
 }
 
 func (o *StatusCreateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotFound", 404)
 }
 
 func (o *StatusCreateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotFound", 404)
 }
 
 func (o *StatusCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -406,11 +415,11 @@ func (o *StatusCreateNotAcceptable) Code() int {
 }
 
 func (o *StatusCreateNotAcceptable) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotAcceptable", 406)
 }
 
 func (o *StatusCreateNotAcceptable) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotAcceptable ", 406)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotAcceptable", 406)
 }
 
 func (o *StatusCreateNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -462,14 +471,70 @@ func (o *StatusCreateInternalServerError) Code() int {
 }
 
 func (o *StatusCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateInternalServerError", 500)
 }
 
 func (o *StatusCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateInternalServerError", 500)
 }
 
 func (o *StatusCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewStatusCreateNotImplemented creates a StatusCreateNotImplemented with default headers values
+func NewStatusCreateNotImplemented() *StatusCreateNotImplemented {
+	return &StatusCreateNotImplemented{}
+}
+
+/*
+StatusCreateNotImplemented describes a response with status code 501, with default header values.
+
+scheduled_at was set, but this feature is not yet implemented
+*/
+type StatusCreateNotImplemented struct {
+}
+
+// IsSuccess returns true when this status create not implemented response has a 2xx status code
+func (o *StatusCreateNotImplemented) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this status create not implemented response has a 3xx status code
+func (o *StatusCreateNotImplemented) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this status create not implemented response has a 4xx status code
+func (o *StatusCreateNotImplemented) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this status create not implemented response has a 5xx status code
+func (o *StatusCreateNotImplemented) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this status create not implemented response a status code equal to that given
+func (o *StatusCreateNotImplemented) IsCode(code int) bool {
+	return code == 501
+}
+
+// Code gets the status code for the status create not implemented response
+func (o *StatusCreateNotImplemented) Code() int {
+	return 501
+}
+
+func (o *StatusCreateNotImplemented) Error() string {
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotImplemented", 501)
+}
+
+func (o *StatusCreateNotImplemented) String() string {
+	return fmt.Sprintf("[POST /api/v1/statuses][%d] statusCreateNotImplemented", 501)
+}
+
+func (o *StatusCreateNotImplemented) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

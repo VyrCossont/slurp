@@ -6,6 +6,7 @@ package reports
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -114,11 +115,13 @@ func (o *ReportsOK) Code() int {
 }
 
 func (o *ReportsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsOK %s", 200, payload)
 }
 
 func (o *ReportsOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsOK %s", 200, payload)
 }
 
 func (o *ReportsOK) GetPayload() []*models.Report {
@@ -186,11 +189,11 @@ func (o *ReportsBadRequest) Code() int {
 }
 
 func (o *ReportsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsBadRequest", 400)
 }
 
 func (o *ReportsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsBadRequest", 400)
 }
 
 func (o *ReportsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -242,11 +245,11 @@ func (o *ReportsUnauthorized) Code() int {
 }
 
 func (o *ReportsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsUnauthorized", 401)
 }
 
 func (o *ReportsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsUnauthorized", 401)
 }
 
 func (o *ReportsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -298,11 +301,11 @@ func (o *ReportsNotFound) Code() int {
 }
 
 func (o *ReportsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsNotFound", 404)
 }
 
 func (o *ReportsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsNotFound", 404)
 }
 
 func (o *ReportsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -354,11 +357,11 @@ func (o *ReportsNotAcceptable) Code() int {
 }
 
 func (o *ReportsNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsNotAcceptable", 406)
 }
 
 func (o *ReportsNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsNotAcceptable", 406)
 }
 
 func (o *ReportsNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -410,11 +413,11 @@ func (o *ReportsInternalServerError) Code() int {
 }
 
 func (o *ReportsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsInternalServerError", 500)
 }
 
 func (o *ReportsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/reports][%d] reportsInternalServerError", 500)
 }
 
 func (o *ReportsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

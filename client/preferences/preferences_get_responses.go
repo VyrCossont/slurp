@@ -6,6 +6,7 @@ package preferences
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -107,11 +108,13 @@ func (o *PreferencesGetOK) Code() int {
 }
 
 func (o *PreferencesGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetOK %s", 200, payload)
 }
 
 func (o *PreferencesGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetOK %s", 200, payload)
 }
 
 func (o *PreferencesGetOK) GetPayload() interface{} {
@@ -172,11 +175,11 @@ func (o *PreferencesGetBadRequest) Code() int {
 }
 
 func (o *PreferencesGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetBadRequest", 400)
 }
 
 func (o *PreferencesGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetBadRequest", 400)
 }
 
 func (o *PreferencesGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -228,11 +231,11 @@ func (o *PreferencesGetUnauthorized) Code() int {
 }
 
 func (o *PreferencesGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetUnauthorized", 401)
 }
 
 func (o *PreferencesGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetUnauthorized", 401)
 }
 
 func (o *PreferencesGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -284,11 +287,11 @@ func (o *PreferencesGetNotFound) Code() int {
 }
 
 func (o *PreferencesGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetNotFound", 404)
 }
 
 func (o *PreferencesGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetNotFound", 404)
 }
 
 func (o *PreferencesGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -340,11 +343,11 @@ func (o *PreferencesGetNotAcceptable) Code() int {
 }
 
 func (o *PreferencesGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetNotAcceptable", 406)
 }
 
 func (o *PreferencesGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetNotAcceptable", 406)
 }
 
 func (o *PreferencesGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -396,11 +399,11 @@ func (o *PreferencesGetInternalServerError) Code() int {
 }
 
 func (o *PreferencesGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetInternalServerError", 500)
 }
 
 func (o *PreferencesGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/preferences][%d] preferencesGetInternalServerError", 500)
 }
 
 func (o *PreferencesGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

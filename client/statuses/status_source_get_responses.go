@@ -6,6 +6,7 @@ package statuses
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -115,11 +116,13 @@ func (o *StatusSourceGetOK) Code() int {
 }
 
 func (o *StatusSourceGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetOK %s", 200, payload)
 }
 
 func (o *StatusSourceGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetOK %s", 200, payload)
 }
 
 func (o *StatusSourceGetOK) GetPayload() []*models.StatusSource {
@@ -180,11 +183,11 @@ func (o *StatusSourceGetBadRequest) Code() int {
 }
 
 func (o *StatusSourceGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetBadRequest", 400)
 }
 
 func (o *StatusSourceGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetBadRequest", 400)
 }
 
 func (o *StatusSourceGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -236,11 +239,11 @@ func (o *StatusSourceGetUnauthorized) Code() int {
 }
 
 func (o *StatusSourceGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetUnauthorized", 401)
 }
 
 func (o *StatusSourceGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetUnauthorized", 401)
 }
 
 func (o *StatusSourceGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -292,11 +295,11 @@ func (o *StatusSourceGetForbidden) Code() int {
 }
 
 func (o *StatusSourceGetForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetForbidden", 403)
 }
 
 func (o *StatusSourceGetForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetForbidden", 403)
 }
 
 func (o *StatusSourceGetForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -348,11 +351,11 @@ func (o *StatusSourceGetNotFound) Code() int {
 }
 
 func (o *StatusSourceGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetNotFound", 404)
 }
 
 func (o *StatusSourceGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetNotFound", 404)
 }
 
 func (o *StatusSourceGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -404,11 +407,11 @@ func (o *StatusSourceGetNotAcceptable) Code() int {
 }
 
 func (o *StatusSourceGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetNotAcceptable", 406)
 }
 
 func (o *StatusSourceGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetNotAcceptable", 406)
 }
 
 func (o *StatusSourceGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -460,11 +463,11 @@ func (o *StatusSourceGetInternalServerError) Code() int {
 }
 
 func (o *StatusSourceGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetInternalServerError", 500)
 }
 
 func (o *StatusSourceGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/statuses/{id}/source][%d] statusSourceGetInternalServerError", 500)
 }
 
 func (o *StatusSourceGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

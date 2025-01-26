@@ -6,6 +6,7 @@ package conversations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -114,11 +115,13 @@ func (o *ConversationsGetOK) Code() int {
 }
 
 func (o *ConversationsGetOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetOK %s", 200, payload)
 }
 
 func (o *ConversationsGetOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetOK %s", 200, payload)
 }
 
 func (o *ConversationsGetOK) GetPayload() []*models.Conversation {
@@ -186,11 +189,11 @@ func (o *ConversationsGetBadRequest) Code() int {
 }
 
 func (o *ConversationsGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetBadRequest", 400)
 }
 
 func (o *ConversationsGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetBadRequest", 400)
 }
 
 func (o *ConversationsGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -242,11 +245,11 @@ func (o *ConversationsGetUnauthorized) Code() int {
 }
 
 func (o *ConversationsGetUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetUnauthorized", 401)
 }
 
 func (o *ConversationsGetUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetUnauthorized", 401)
 }
 
 func (o *ConversationsGetUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -298,11 +301,11 @@ func (o *ConversationsGetNotFound) Code() int {
 }
 
 func (o *ConversationsGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetNotFound", 404)
 }
 
 func (o *ConversationsGetNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetNotFound", 404)
 }
 
 func (o *ConversationsGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -354,11 +357,11 @@ func (o *ConversationsGetNotAcceptable) Code() int {
 }
 
 func (o *ConversationsGetNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetNotAcceptable", 406)
 }
 
 func (o *ConversationsGetNotAcceptable) String() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetNotAcceptable ", 406)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetNotAcceptable", 406)
 }
 
 func (o *ConversationsGetNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -410,11 +413,11 @@ func (o *ConversationsGetInternalServerError) Code() int {
 }
 
 func (o *ConversationsGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetInternalServerError", 500)
 }
 
 func (o *ConversationsGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /api/v1/conversations][%d] conversationsGetInternalServerError", 500)
 }
 
 func (o *ConversationsGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
