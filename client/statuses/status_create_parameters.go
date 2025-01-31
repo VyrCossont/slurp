@@ -171,12 +171,17 @@ type StatusCreateParams struct {
 	/* ScheduledAt.
 
 	     ISO 8601 Datetime at which to schedule a status.
-	Providing this parameter will cause ScheduledStatus to be returned instead of Status.
-	Must be at least 5 minutes in the future.
 
-	This feature isn't implemented yet; attemping to set it will return 501 Not Implemented.
+	Providing this parameter with a *future* time will cause ScheduledStatus to be returned instead of Status.
+	Must be at least 5 minutes in the future.
+	This feature isn't implemented yet.
+
+	Providing this parameter with a *past* time will cause the status to be backdated,
+	and will not push it to the user's followers. This is intended for importing old statuses.
+
+	     Format: date-time
 	*/
-	ScheduledAt *string
+	ScheduledAt *strfmt.DateTime
 
 	/* Sensitive.
 
@@ -452,13 +457,13 @@ func (o *StatusCreateParams) SetPollOptions(pollOptions []string) {
 }
 
 // WithScheduledAt adds the scheduledAt to the status create params
-func (o *StatusCreateParams) WithScheduledAt(scheduledAt *string) *StatusCreateParams {
+func (o *StatusCreateParams) WithScheduledAt(scheduledAt *strfmt.DateTime) *StatusCreateParams {
 	o.SetScheduledAt(scheduledAt)
 	return o
 }
 
 // SetScheduledAt adds the scheduledAt to the status create params
-func (o *StatusCreateParams) SetScheduledAt(scheduledAt *string) {
+func (o *StatusCreateParams) SetScheduledAt(scheduledAt *strfmt.DateTime) {
 	o.ScheduledAt = scheduledAt
 }
 
@@ -749,11 +754,11 @@ func (o *StatusCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	if o.ScheduledAt != nil {
 
 		// form param scheduled_at
-		var frScheduledAt string
+		var frScheduledAt strfmt.DateTime
 		if o.ScheduledAt != nil {
 			frScheduledAt = *o.ScheduledAt
 		}
-		fScheduledAt := frScheduledAt
+		fScheduledAt := frScheduledAt.String()
 		if fScheduledAt != "" {
 			if err := r.SetFormParam("scheduled_at", fScheduledAt); err != nil {
 				return err
