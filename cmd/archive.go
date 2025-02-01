@@ -39,17 +39,21 @@ var archiveImportCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		return archive.Import(authClient, File, MapFile)
+		return archive.Import(authClient, File, MapFile, AttachmentMapFile)
 	},
 }
 
 // MapFile is the file path for recording how archive status IDs map to imported status IDs.
 var MapFile string
 
+// AttachmentMapFile is the file path for recording how archive media attachment paths map to imported media attachment IDs.
+var AttachmentMapFile string
+
 func init() {
 	rootCmd.AddCommand(archiveCmd)
 
 	archiveImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import archive from (optional: stdin will be used if omitted)")
 	archiveImportCmd.PersistentFlags().StringVarP(&MapFile, "map-file", "m", "", "file to store mapping of archive status IDs to imported status IDs")
+	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentMapFile, "attachment-map-file", "a", "", "file to store mapping of archive media attachment paths IDs to media attachment IDs")
 	archiveCmd.AddCommand(archiveImportCmd)
 }

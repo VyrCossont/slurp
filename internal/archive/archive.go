@@ -30,6 +30,7 @@ import (
 	"strings"
 
 	htmltomarkdown "github.com/JohannesKaufmann/html-to-markdown/v2"
+	"github.com/VyrCossont/slurp/client/media"
 	"github.com/VyrCossont/slurp/client/statuses"
 	"github.com/VyrCossont/slurp/internal/auth"
 	"github.com/VyrCossont/slurp/internal/own"
@@ -40,12 +41,13 @@ import (
 
 var mentionPattern = regexp.MustCompile(`@\w+`)
 
-func Import(authClient *auth.Client, file string, mapFile string) error {
+func Import(authClient *auth.Client, file string, mapFile string, attachmentMapFile string) error {
 	// TODO: (Vyr) assume folder for now
 	if file == "-" || strings.HasSuffix(strings.ToLower(file), ".zip") {
 		return errors.New("can't handle compressed archives yet")
 	}
 
+	// Require map file.
 	if !strings.HasSuffix(strings.ToLower(mapFile), ".json") {
 		return errors.New("map file is required and must have a .json extension")
 	}
@@ -61,6 +63,22 @@ func Import(authClient *auth.Client, file string, mapFile string) error {
 		return err
 	}
 
+	// Require attachment map file.
+	if !strings.HasSuffix(strings.ToLower(mapFile), ".json") {
+		return errors.New("map file is required and must have a .json extension")
+	}
+	mediaPathToImportedApiId, err := readMapFile(attachmentMapFile)
+	if err != nil {
+		if errors.Is(err, fs.ErrNotExist) {
+			mediaPathToImportedApiId = map[string]string{}
+		} else {
+			return err
+		}
+	}
+	if err = writeMapFile(attachmentMapFile, mediaPathToImportedApiId); err != nil {
+		return err
+	}
+
 	instance, err := own.Instance(authClient)
 	if err != nil {
 		return err
@@ -70,6 +88,7 @@ func Import(authClient *auth.Client, file string, mapFile string) error {
 		return errors.New("instance must support posting in Markdown")
 	}
 	// TODO: (Vyr) some instance types (Glitch, Akkoma) can handle text/html as well, but that's another route
+	// TODO: (Vyr) could we post HTML-in-Markdown to skip conversion, or does that mangle mentions/hashtags?
 
 	// TODO: (Vyr) do we need to detect scheduled status support *and* backfill support?
 	// 	Assuming GTS 0.18 for now.
@@ -184,11 +203,6 @@ NotesLoop:
 			markdown = linkPattern.ReplaceAllString(markdown, hashtag.Name)
 		}
 
-		// TODO: (Vyr) handle attachments. For now, skip posts with them.
-		if len(note.Attachments) > 0 {
-			continue
-		}
-
 		// TODO: (Vyr) handle emoji. This will need admin privs, and access to a live original server,
 		// 	or an emoji export of some kind if there is such a thing.
 		if len(requiredEmojiNames) > 0 {
@@ -211,11 +225,27 @@ NotesLoop:
 			return err
 		}
 
+		mediaIDs := make([]string, 0, len(note.Attachments))
+		for _, attachment := range note.Attachments {
+			mediaID, err := uploadAttachment(authClient, attachmentMapFile, mediaPathToImportedApiId, file, attachment)
+			if err != nil {
+				log.Printf(
+					"error retrieving or uploading attachment %+v for archive ID %+v: %+v",
+					note.Id,
+					attachment.Url,
+					err,
+				)
+				continue NotesLoop
+			}
+			mediaIDs = append(mediaIDs, mediaID)
+		}
+
 		response, err := authClient.Client.Statuses.StatusCreate(
 			&statuses.StatusCreateParams{
 				ContentType: &statusContentType,
 				InReplyToID: inReplyToApiId,
 				Language:    note.Language(),
+				MediaIDs:    mediaIDs,
 				ScheduledAt: util.Ptr(strfmt.DateTime(note.Published)),
 				Sensitive:   &note.Sensitive,
 				SpoilerText: note.Summary,
@@ -243,6 +273,60 @@ NotesLoop:
 	}
 
 	return nil
+}
+
+func uploadAttachment(
+	authClient *auth.Client,
+	attachmentMapFile string,
+	mediaPathToImportedApiId map[string]string,
+	archiveBasePath string,
+	attachment *Attachment,
+) (string, error) {
+	// Check the attachment map file for a previously uploaded copy.
+	if id, previouslyUploaded := mediaPathToImportedApiId[attachment.Url]; previouslyUploaded {
+		return id, nil
+	}
+
+	_, filename := path.Split(attachment.Url)
+	file, err := os.Open(path.Join(archiveBasePath, attachment.Url))
+	if err != nil {
+		return "", err
+	}
+
+	if err := authClient.Wait(); err != nil {
+		return "", err
+	}
+
+	// TODO: (Vyr) we may have thumbnails as the .Icon property, but GTS doesn't support thumbnails yet.
+	// 	Also note that as of Mastodon 4.3, thumbnails are exported as URLs on the original server,
+	// 	and not as part of the archive, so video thumbnails require HTTPS calls to get,
+	//	and may be lost if the server is down.
+	response, err := authClient.Client.Media.MediaCreate(
+		&media.MediaCreateParams{
+			APIVersion:  "v2",
+			Description: attachment.Name,
+			File:        runtime.NamedReader(filename, file),
+			Focus:       attachment.FocusString(),
+		},
+		authClient.Auth,
+		func(op *runtime.ClientOperation) {
+			op.ConsumesMediaTypes = []string{"multipart/form-data"}
+		},
+	)
+	if err != nil {
+		log.Printf("couldn't upload media attachment from archive path %+v: %+v", attachment.Url, err)
+		return "", err
+	}
+	apiAttachment := response.GetPayload()
+
+	// Save the API ID of the status we just imported for future imports.
+	mediaPathToImportedApiId[attachment.Url] = apiAttachment.ID
+	if err := writeMapFile(attachmentMapFile, mediaPathToImportedApiId); err != nil {
+		return "", err
+	}
+
+	log.Printf("uploaded %s as %s", attachment.Url, apiAttachment.TextURL)
+	return apiAttachment.ID, nil
 }
 
 // TODO: (Vyr) can we collapse these two into a generic?

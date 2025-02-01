@@ -19,6 +19,7 @@ package archive
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -76,7 +77,7 @@ type Object struct {
 	Content       string            `json:"content"`
 	ContentMap    map[string]string `json:"contentMap"`
 	DirectMessage bool              `json:"directMessage"`
-	Attachments   []Attachment      `json:"attachment"`
+	Attachments   []*Attachment     `json:"attachment"`
 	RawTags       []json.RawMessage `json:"tag"`
 }
 
@@ -128,19 +129,28 @@ type Attachment struct {
 	Type          string    `json:"type"`
 	MediaType     string    `json:"mediaType"`
 	Url           string    `json:"url"`
-	Name          string    `json:"name"`
+	Name          *string   `json:"name"`
 	RawFocalPoint []float64 `json:"focalPoint"`
+	Icon          *Icon     `json:"icon"`
 }
 
-func (a Attachment) FocalPointX() float64 {
-	if len(a.RawFocalPoint) == 2 {
+func (a *Attachment) FocusString() *string {
+	if len(a.RawFocalPoint) != 2 {
+		return nil
+	}
+	focusString := fmt.Sprintf("%f,%f", a.FocalPointX(), a.FocalPointY())
+	return &focusString
+}
+
+func (a *Attachment) FocalPointX() float64 {
+	if len(a.RawFocalPoint) > 0 {
 		return a.RawFocalPoint[0]
 	}
 	return 0
 }
 
-func (a Attachment) FocalPointY() float64 {
-	if len(a.RawFocalPoint) == 2 {
+func (a *Attachment) FocalPointY() float64 {
+	if len(a.RawFocalPoint) > 1 {
 		return a.RawFocalPoint[1]
 	}
 	return 0
