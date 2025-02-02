@@ -18,6 +18,8 @@
 package own
 
 import (
+	"log/slog"
+
 	"github.com/pkg/errors"
 
 	"github.com/VyrCossont/slurp/internal/auth"
@@ -69,4 +71,19 @@ func Domain(authClient *auth.Client) (string, error) {
 	}
 
 	return ownDomain, nil
+}
+
+// Emojis returns custom emojis available to the authenticated account.
+func Emojis(authClient *auth.Client) ([]*models.Emoji, error) {
+	if err := authClient.Wait(); err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	response, err := authClient.Client.CustomEmojis.CustomEmojisGet(nil, authClient.Auth)
+	if err != nil {
+		slog.Error("error getting emojis", "error", err)
+		return nil, errors.WithStack(err)
+	}
+
+	return response.GetPayload(), nil
 }

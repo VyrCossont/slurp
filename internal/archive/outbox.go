@@ -161,9 +161,11 @@ func (o *Object) Tags() []Tag {
 	for _, rawTag := range o.RawTags {
 		var mentionOrHashtag MentionOrHashtag
 		var emoji Emoji
-		if err := json.Unmarshal(rawTag, &mentionOrHashtag); err == nil {
+		if err := json.Unmarshal(rawTag, &mentionOrHashtag); err == nil &&
+			(mentionOrHashtag.Type == "Mention" || mentionOrHashtag.Type == "Hashtag") {
 			tags = append(tags, &mentionOrHashtag)
-		} else if err := json.Unmarshal(rawTag, &emoji); err == nil {
+		} else if err := json.Unmarshal(rawTag, &emoji); err == nil &&
+			mentionOrHashtag.Type == "Emoji" {
 			tags = append(tags, &emoji)
 		}
 	}

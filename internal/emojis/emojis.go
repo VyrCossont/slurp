@@ -30,6 +30,7 @@ import (
 
 	"github.com/VyrCossont/slurp/client/admin"
 	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/internal/own"
 	"github.com/VyrCossont/slurp/models"
 	"github.com/go-openapi/runtime"
 	"github.com/pkg/errors"
@@ -37,18 +38,10 @@ import (
 )
 
 func Export(authClient *auth.Client, file string, inline bool) error {
-	err := authClient.Wait()
+	emojis, err := own.Emojis(authClient)
 	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	response, err := authClient.Client.CustomEmojis.CustomEmojisGet(nil, authClient.Auth)
-	if err != nil {
-		slog.Error("error getting filters", "error", err)
 		return err
 	}
-	//goland:noinspection GoImportUsedAsName
-	emojis := response.GetPayload()
 
 	if inline {
 		for _, emoji := range emojis {

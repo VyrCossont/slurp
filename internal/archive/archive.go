@@ -93,6 +93,16 @@ func Import(authClient *auth.Client, file string, mapFile string, attachmentMapF
 	// TODO: (Vyr) do we need to detect scheduled status support *and* backfill support?
 	// 	Assuming GTS 0.18 for now.
 
+	emojis, err := own.Emojis(authClient)
+	if err != nil {
+		return err
+	}
+	// Stores shortcodes wrapped in colons.
+	instanceEmojiNames := map[string]struct{}{}
+	for _, emoji := range emojis {
+		instanceEmojiNames[":"+emoji.Shortcode+":"] = struct{}{}
+	}
+
 	actor, err := readActor(file)
 	if err != nil {
 		return err
@@ -203,10 +213,11 @@ NotesLoop:
 			markdown = linkPattern.ReplaceAllString(markdown, hashtag.Name)
 		}
 
-		// TODO: (Vyr) handle emoji. This will need admin privs, and access to a live original server,
-		// 	or an emoji export of some kind if there is such a thing.
-		if len(requiredEmojiNames) > 0 {
-			continue
+		for _, name := range requiredEmojiNames {
+			if _, foundOnInstance := instanceEmojiNames[name]; !foundOnInstance {
+				log.Printf("Instance is missing required custom emoji: %s", name)
+				continue NotesLoop
+			}
 		}
 
 		// Get the imported API ID of the post we're replying to, if applicable.
@@ -216,7 +227,7 @@ NotesLoop:
 			if apiId, found := archiveIdToImportedApiId[inReplyToArchiveId]; found {
 				inReplyToApiId = &apiId
 			} else {
-				log.Printf("couldn't find API ID for archive ID (post may have not been imported if not supported, or topo sort error): %+v", inReplyToArchiveId)
+				log.Printf("couldn't find API ID for in-reply-to archive ID (post may have not been imported if not supported, or topo sort error): %+v", inReplyToArchiveId)
 				continue
 			}
 		}
