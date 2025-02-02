@@ -38,7 +38,7 @@ var emojisExportCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		return emojis.Export(authClient, File)
+		return emojis.Export(authClient, File, Inline)
 	},
 }
 
@@ -55,10 +55,14 @@ var emojisImportCmd = &cobra.Command{
 	},
 }
 
+// Inline includes emojis in the exported emoji JSON as data: URLs.
+var Inline bool
+
 func init() {
 	rootCmd.AddCommand(emojisCmd)
 
 	emojisExportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to export emojis to (optional: stdout will be used if omitted)")
+	emojisExportCmd.PersistentFlags().BoolVarP(&Inline, "inline", "i", false, "inline emojis as data: URLs")
 	emojisCmd.AddCommand(emojisExportCmd)
 
 	emojisImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import emojis from (optional: stdin will be used if omitted)")

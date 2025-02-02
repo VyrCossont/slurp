@@ -287,7 +287,7 @@ func uploadAttachment(
 		return id, nil
 	}
 
-	_, filename := path.Split(attachment.Url)
+	filename := path.Base(attachment.Url)
 	file, err := os.Open(path.Join(archiveBasePath, attachment.Url))
 	if err != nil {
 		return "", err
