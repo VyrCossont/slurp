@@ -21,6 +21,7 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
+	"fmt"
 	"log/slog"
 	"net/http"
 	neturl "net/url"
@@ -78,14 +79,26 @@ func NewAuthClient(user string) (*Client, error) {
 
 	accessToken, err := keyring.Get(keyringServiceAccessToken, user)
 	if err != nil {
-		slog.Error("couldn't find user's access token (did you log in first?)", "user", user)
+		slog.Error("couldn't find user's access token (did you log in first?)", "user", user, "instance", instance)
+		return nil, err
+	}
+
+	client, err := clientForInstance(instance)
+	if err != nil {
+		slog.Error("couldn't get client for user's instance", "user", user, "instance", instance)
+		return nil, err
+	}
+
+	limiter, err := rateLimiterForInstance(instance)
+	if err != nil {
+		slog.Error("couldn't get rate limiter for user's instance", "user", user, "instance", instance)
 		return nil, err
 	}
 
 	return &Client{
-		Client:  clientForInstance(instance),
+		Client:  client,
 		Auth:    httptransport.BearerToken(accessToken),
-		limiter: rate.NewLimiter(1.0, 300),
+		limiter: limiter,
 		ctx:     context.Background(),
 	}, nil
 }
@@ -101,7 +114,7 @@ const (
 )
 
 // Login authenticates the user and saves the credentials in the system keychain.
-func Login(user string) error {
+func Login(user string, allowHTTP bool) error {
 	var err error
 
 	if user == "" {
@@ -126,20 +139,28 @@ func Login(user string) error {
 		slog.Warn("already logged in, will log in again", "user", user)
 	}
 
-	instance, err := ensureInstance(user)
+	instance, err := ensureInstance(user, allowHTTP)
 	if err != nil {
 		slog.Error("couldn't get user's instance", "user", user, "error", err)
 		return err
 	}
 
-	client := clientForInstance(instance)
+	client, err := clientForInstance(instance)
+	if err != nil {
+		slog.Error("couldn't get client for user's instance", "user", user, "instance", instance, "error", err)
+		return err
+	}
 	clientID, clientSecret, err := ensureAppCredentials(instance, client)
 	if err != nil {
 		slog.Error("OAuth2 app setup failed", "user", user, "instance", instance, "error", err)
 		return err
 	}
 
-	code := promptForOAuthCode(instance, clientID)
+	code, err := promptForOAuthCode(instance, clientID)
+	if err != nil {
+		slog.Error("couldn't prompt for OAuth2 authorization code", "user", user, "instance", instance, "error", err)
+		return err
+	}
 
 	accessToken, err := exchangeCodeForToken(instance, clientID, clientSecret, code)
 	if err != nil {
@@ -165,14 +186,20 @@ func Login(user string) error {
 }
 
 // ensureInstance finds a user's instance or retrieves a previously cached instance for them.
-func ensureInstance(user string) (string, error) {
+func ensureInstance(user string, allowHTTP bool) (string, error) {
 	if instance, err := util.GetUserInstance(user); err == nil {
 		return instance, nil
 	}
 
-	instance, err := findInstance(user)
+	instance, scheme, err := findInstance(user, allowHTTP)
 	if err != nil {
 		slog.Error("WebFinger lookup failed", "user", user, "error", err)
+		return "", err
+	}
+
+	err = util.SetInstanceScheme(instance, scheme)
+	if err != nil {
+		slog.Error("couldn't set instance scheme in prefs", "user", user, "instance", instance, "error", err)
 		return "", err
 	}
 
@@ -185,12 +212,14 @@ func ensureInstance(user string) (string, error) {
 	return instance, nil
 }
 
-// findInstance does a WebFinger lookup to find the domain of the instance API for a given user.
-func findInstance(user string) (string, error) {
+// findInstance does a WebFinger lookup to find the domain (with optional port)
+// and scheme of the instance API for a given user.
+func findInstance(user string, allowHTTP bool) (string, string, error) {
 	webfingerClient := webfinger.NewClient(nil)
-	jrd, err := webfingerClient.Lookup(user, nil)
+	webfingerClient.AllowHTTP = allowHTTP
+	jrd, err := webfingerClient.Lookup("acct:"+user, nil)
 	if err != nil {
-		return "", err
+		return "", "", fmt.Errorf("WebFinger lookup failed: %w", err)
 	}
 
 	var href string
@@ -201,23 +230,67 @@ func findInstance(user string) (string, error) {
 		}
 	}
 	if href == "" {
-		return "", errors.New("no link with rel=\"self\" and type=\"application/activity+json\"")
+		return "", "", errors.New("no link with rel=\"self\" and type=\"application/activity+json\"")
 	}
 
 	url, err := neturl.Parse(href)
 	if err != nil {
-		return "", err
+		return "", "", err
+	}
+	if url.Hostname() == "" {
+		return "", "", errors.New("unexpected URL format")
 	}
 
-	if url.Scheme != "https" || !(url.Port() == "" || url.Port() == "443") || url.Hostname() == "" {
-		return "", errors.New("unexpected URL format")
-	}
+	switch url.Scheme {
+	case "https":
+		if url.Port() == "" || url.Port() == "443" {
+			return url.Hostname(), url.Scheme, nil
+		} else {
+			return url.Hostname() + ":" + url.Port(), url.Scheme, nil
+		}
 
-	return url.Hostname(), nil
+	case "http":
+		if !allowHTTP {
+			return "", "", errors.Errorf("unexpected URL scheme: %s", url.Scheme)
+		}
+
+		if url.Port() == "" || url.Port() == "80" {
+			return url.Hostname(), url.Scheme, nil
+		} else {
+			return url.Hostname() + ":" + url.Port(), url.Scheme, nil
+		}
+
+	default:
+		return "", "", errors.Errorf("unexpected URL scheme: %s", url.Scheme)
+	}
 }
 
-func clientForInstance(instance string) *apiclient.GoToSocialSwaggerDocumentation {
-	return apiclient.New(httptransport.New(instance, "", []string{"https"}), strfmt.Default)
+// clientForInstance returns an OpenAPI client for the instance.
+func clientForInstance(instance string) (*apiclient.GoToSocialSwaggerDocumentation, error) {
+	scheme, err := util.GetInstanceScheme(instance)
+	if err != nil {
+		slog.Error("couldn't get instance URL scheme from prefs", "instance", instance, "error", err)
+		return nil, err
+	}
+
+	return apiclient.New(httptransport.New(instance, "", []string{scheme}), strfmt.Default), nil
+}
+
+// rateLimiterForInstance returns a rate limiter for the instance.
+func rateLimiterForInstance(instance string) (*rate.Limiter, error) {
+	rateLimit, err := util.GetInstanceRateLimit(instance)
+	if err != nil {
+		slog.Error("couldn't get instance rate limit from prefs", "instance", instance)
+		return nil, err
+	}
+
+	burstCap, err := util.GetInstanceBurstCap(instance)
+	if err != nil {
+		slog.Error("couldn't get instance burst capacity from prefs", "instance", instance)
+		return nil, err
+	}
+
+	return rate.NewLimiter(rate.Limit(rateLimit), burstCap), nil
 }
 
 // ensureAppCredentials retrieves or creates and stores app credentials.
@@ -285,9 +358,15 @@ func createApp(client *apiclient.GoToSocialSwaggerDocumentation) (*models.Applic
 	return resp.GetPayload(), nil
 }
 
-func promptForOAuthCode(instance string, clientID string) string {
+func promptForOAuthCode(instance string, clientID string) (string, error) {
+	scheme, err := util.GetInstanceScheme(instance)
+	if err != nil {
+		slog.Error("couldn't get instance URL scheme from prefs", "instance", instance, "error", err)
+		return "", err
+	}
+
 	oauthAuthorizeURL := (&neturl.URL{
-		Scheme: "https",
+		Scheme: scheme,
 		Host:   instance,
 		Path:   "/oauth/authorize",
 		RawQuery: neturl.Values{
@@ -297,7 +376,7 @@ func promptForOAuthCode(instance string, clientID string) string {
 			"scope":         []string{oauthScopes},
 		}.Encode(),
 	}).String()
-	err := browser.OpenURL(oauthAuthorizeURL)
+	err = browser.OpenURL(oauthAuthorizeURL)
 	if err != nil {
 		slog.Warn("couldn't open browser to authorize", "error", err)
 		print("Please open this URL in your browser:", oauthAuthorizeURL)
@@ -308,7 +387,7 @@ func promptForOAuthCode(instance string, clientID string) string {
 	scanner.Scan()
 	code := strings.TrimSpace(scanner.Text())
 
-	return code
+	return code, nil
 }
 
 type oauthTokenOK struct {
@@ -325,8 +404,14 @@ type oauthTokenError struct {
 
 // exchangeCodeForToken exchanges an authorization code for an access token.
 func exchangeCodeForToken(instance string, clientID string, clientSecret string, code string) (string, error) {
+	scheme, err := util.GetInstanceScheme(instance)
+	if err != nil {
+		slog.Error("couldn't get instance URL scheme from prefs", "instance", instance, "error", err)
+		return "", err
+	}
+
 	oauthTokenURL := (&neturl.URL{
-		Scheme: "https",
+		Scheme: scheme,
 		Host:   instance,
 		Path:   "/oauth/token",
 	}).String()
@@ -385,14 +470,20 @@ func Logout(user string) error {
 	return errors.New("NOT IMPLEMENTED")
 }
 
-func Whoami() error {
+func Whoami() (string, error) {
 	user, err := util.GetDefaultUser()
 	if err != nil {
 		slog.Error("no user provided, couldn't get default user from prefs (have you logged in before?)")
-		return err
+		return "", err
 	}
 
-	println(user)
+	return user, nil
+}
 
-	return nil
+func Switch(user string) error {
+	if user == "" {
+		return errors.New("no user provided")
+	}
+
+	return util.SetDefaultUser(user)
 }

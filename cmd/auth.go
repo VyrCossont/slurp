@@ -18,6 +18,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 
 	"github.com/VyrCossont/slurp/internal/auth"
@@ -34,7 +36,7 @@ var authLoginCmd = &cobra.Command{
 	Use:   "login",
 	Short: "Log in",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return auth.Login(User)
+		return auth.Login(User, AllowHTTP)
 	},
 }
 
@@ -47,21 +49,43 @@ var authLogoutCmd = &cobra.Command{
 	},
 }
 
-// authWhoami represents the auth whoami command
+// authWhoamiCmd represents the auth whoami command
 var authWhoamiCmd = &cobra.Command{
 	Use:   "whoami",
 	Short: "Display the default currently authenticated user, if there is one",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return auth.Whoami()
+		user, err := auth.Whoami()
+		if err != nil {
+			return err
+		}
+
+		_, err = cmd.OutOrStderr().Write([]byte(fmt.Sprintf("%s\n", user)))
+		return err
 	},
 }
+
+// authSwitchCmd represents the auth switch command
+var authSwitchCmd = &cobra.Command{
+	Use:   "switch",
+	Short: "Change the default user",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return auth.Switch(User)
+	},
+}
+
+// AllowHTTP allows cleartext HTTP instead of HTTPS.
+// Should be used for local testing only.
+var AllowHTTP bool
 
 func init() {
 	rootCmd.AddCommand(authCmd)
 
+	authLoginCmd.PersistentFlags().BoolVarP(&AllowHTTP, "allow-http", "x", false, "allow cleartext HTTP for user's instance (should be used for local testing only)")
 	authCmd.AddCommand(authLoginCmd)
 
 	authCmd.AddCommand(authLogoutCmd)
 
 	authCmd.AddCommand(authWhoamiCmd)
+
+	authCmd.AddCommand(authSwitchCmd)
 }
