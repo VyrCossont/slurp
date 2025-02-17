@@ -104,6 +104,16 @@ You can also set burst capacity for an instance (the maximum number of requests 
 ./slurp prefs set burstcap 300
 ```
 
+## test
+
+You can use `slurp` with a local [GTS testrig server](https://github.com/superseriousbusiness/gotosocial/blob/main/CONTRIBUTING.md#standalone-testrig-with-pinafore). This requires using unencrypted HTTP instead of HTTPS, so you'll need to use a special flag when logging in:
+
+```bash
+./slurp --user the_mighty_zork@localhost:8080 auth login --allow-http
+```
+
+Note that since GTS testrig data isn't stored anywhere permanent, you'll need to log in again every time you restart the testrig.
+
 ## update Swagger client
 
 Do this when the GotoSocial API changes. This will use the Swagger spec on GotoSocial's `main` branch.
