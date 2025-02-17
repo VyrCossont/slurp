@@ -50,9 +50,8 @@ func (o *Outbox) Notes() map[string]*Object {
 
 type Activity struct {
 	Type      string          `json:"type"`
-	To        []string        `json:"to"`
-	Cc        []string        `json:"cc"`
 	RawObject json.RawMessage `json:"object"`
+	// TODO: (Vyr) for compat with Akkoma, might need to check To, Cc, and DirectMessage on activity as well as object
 }
 
 func (a *Activity) Object() *Object {
@@ -83,21 +82,30 @@ type Object struct {
 
 const ASPublic = "https://www.w3.org/ns/activitystreams#Public"
 
-func (o *Object) Visibility() string {
+type Visibility string
+
+const (
+	VisibilityPublic   Visibility = "public"
+	VisibilityUnlisted Visibility = "unlisted"
+	VisibilityPrivate  Visibility = "private"
+	VisibilityDirect   Visibility = "direct"
+)
+
+func (o *Object) Visibility() Visibility {
 	for _, url := range o.To {
 		if url == ASPublic {
-			return "public"
+			return VisibilityPublic
 		}
 	}
 	for _, url := range o.Cc {
 		if url == ASPublic {
-			return "unlisted"
+			return VisibilityUnlisted
 		}
 	}
 	if o.DirectMessage {
-		return "direct"
+		return VisibilityDirect
 	}
-	return "private"
+	return VisibilityPrivate
 }
 
 func (o *Object) Language() *string {
@@ -110,15 +118,15 @@ func (o *Object) Language() *string {
 }
 
 // TargetsSpecificUsersInToOrCc is true if the status is addressed to anything that
-// isn't the public or followers collections.
+// isn't the public or followers collections or the actor that posted it.
 func (o *Object) TargetsSpecificUsersInToOrCc(a *Actor) bool {
 	for _, url := range o.To {
-		if url != ASPublic && url != a.Followers {
-			continue
+		if url != ASPublic && url != a.Id && url != a.Followers {
+			return true
 		}
 	}
 	for _, url := range o.Cc {
-		if url != ASPublic && url != a.Followers {
+		if url != ASPublic && url != a.Id && url != a.Followers {
 			return true
 		}
 	}
@@ -132,6 +140,7 @@ type Attachment struct {
 	Name          *string   `json:"name"`
 	RawFocalPoint []float64 `json:"focalPoint"`
 	Icon          *Icon     `json:"icon"`
+	// TODO: (Vyr) Akkoma archives may have Url as a list containing href, mediaType, etc.
 }
 
 func (a *Attachment) FocusString() *string {
