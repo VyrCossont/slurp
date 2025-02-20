@@ -95,7 +95,7 @@ func Import(authClient *auth.Client, file string) error {
 		}
 		if !filter.expiresAt.IsZero() {
 			// Form version of API expects an integer expires_in.
-			params.ExpiresIn = util.Ptr(math.Trunc(filter.expiresAt.Sub(time.Now()).Seconds()))
+			params.ExpiresIn = util.Ptr(math.Trunc(time.Until(filter.expiresAt).Seconds()))
 		}
 
 		_, err = authClient.Client.Filters.FilterV1Post(

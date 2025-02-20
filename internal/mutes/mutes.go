@@ -111,7 +111,7 @@ func Import(authClient *auth.Client, file string) error {
 		duration := 0.0 // indefinite mute
 		if !mute.expiresAt.IsZero() {
 			// Form version of API expects an integer expires_in.
-			duration = math.Trunc(mute.expiresAt.Sub(time.Now()).Seconds())
+			duration = math.Trunc(time.Until(mute.expiresAt).Seconds())
 		}
 		_, err = authClient.Client.Accounts.AccountMute(
 			&accounts.AccountMuteParams{
