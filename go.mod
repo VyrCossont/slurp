@@ -14,10 +14,10 @@ require (
 	github.com/peterhellberg/link v1.2.0
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/pkg/errors v0.9.1
-	github.com/spf13/cobra v1.8.1
+	github.com/spf13/cobra v1.9.1
 	github.com/vincent-petithory/dataurl v1.0.0
 	github.com/zalando/go-keyring v0.2.6
-	golang.org/x/time v0.9.0
+	golang.org/x/time v0.10.0
 	webfinger.net/go/webfinger v0.1.0
 )
 
@@ -65,7 +65,7 @@ require (
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/spf13/viper v1.18.2 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/toqueteos/webbrowser v1.2.0 // indirect
@@ -87,6 +87,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace (
-	webfinger.net/go/webfinger v0.1.0 => github.com/VyrCossont/go-webfinger v0.1.1
-)
+replace webfinger.net/go/webfinger v0.1.0 => github.com/VyrCossont/go-webfinger v0.1.1
