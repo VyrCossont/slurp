@@ -78,6 +78,27 @@ Assuming you have downloaded your archive and uncompressed it as `archive-XXXXXX
   --attachment-map-file archive-XXXXXX-YYYYYYYYYY/attachment-map.json
 ```
 
+### importing a Pixelfed archive
+
+Pixelfed allows exporting your statuses, but the exported file doesn't contain any of your actual photos. `slurp` can download them for you.
+
+⚠️ However, it can only do this if your Pixelfed server is still up and your account hasn't been deleted. Do not delete your account before importing your statuses.
+
+Assuming you've downloaded your `pixelfed-statuses.json` to a folder called `pixelfed-archive`, here's how you import them:
+
+```bash
+./slurp --user user@instance.tld archive import \
+  --format pixelfed \
+  --file pixelfed-archive/pixelfed-statuses.json \
+  --attachment-map-file pixelfed-archive/attachment-map.json \
+  --status-map-file pixelfed-archive/status-map.json \
+  --attachment-directory pixelfed-archive/media_attachments
+```
+
+After the process finishes, `pixelfed-archive/media_attachments` will contain your photos.
+
+⚠️ Currently, `slurp` only downloads photos for statuses that it imports. Photos from public and unlisted statuses will be downloaded, but photos in private or direct messages and/or replies to other accounts will be skipped.
+
 ### prefs
 
 `slurp` respects these environment variables:
