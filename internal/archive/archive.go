@@ -21,7 +21,7 @@ import (
 	"cmp"
 	"encoding/json"
 	"errors"
-	"io/fs"
+	"fmt"
 	"log/slog"
 	"os"
 	"path"
@@ -57,35 +57,8 @@ func Import(authClient *auth.Client, file string, statusMapFile string, attachme
 		return errors.New("archive must be an uncompressed folder")
 	}
 
-	// Require status map file.
-	if !strings.HasSuffix(strings.ToLower(statusMapFile), ".json") {
-		return errors.New("status map file is required and must have a .json extension")
-	}
-	archiveIdToImportedApiId, err := readMapFile(statusMapFile)
+	archiveIdToImportedApiId, mediaPathToImportedApiId, err := requireMapFiles(statusMapFile, attachmentMapFile)
 	if err != nil {
-		if errors.Is(err, fs.ErrNotExist) {
-			archiveIdToImportedApiId = map[string]string{}
-		} else {
-			return err
-		}
-	}
-	if err = writeMapFile(statusMapFile, archiveIdToImportedApiId); err != nil {
-		return err
-	}
-
-	// Require attachment map file.
-	if !strings.HasSuffix(strings.ToLower(attachmentMapFile), ".json") {
-		return errors.New("attachment map file is required and must have a .json extension")
-	}
-	mediaPathToImportedApiId, err := readMapFile(attachmentMapFile)
-	if err != nil {
-		if errors.Is(err, fs.ErrNotExist) {
-			mediaPathToImportedApiId = map[string]string{}
-		} else {
-			return err
-		}
-	}
-	if err = writeMapFile(attachmentMapFile, mediaPathToImportedApiId); err != nil {
 		return err
 	}
 
@@ -157,11 +130,13 @@ func Import(authClient *auth.Client, file string, statusMapFile string, attachme
 
 NotesLoop:
 	for _, note := range notesInOrder {
+		// Skip previously imported notes.
 		if _, previouslyImported := archiveIdToImportedApiId[note.Id]; previouslyImported {
-			continue
+			continue NotesLoop
 		}
 
 		visibility := note.Visibility()
+		// TODO: (Vyr) command-line visibility mapping
 		if visibility != VisibilityPublic && visibility != VisibilityUnlisted {
 			slog.Info("Skipping status due to visibility", "status", note.Id, "visibility", string(visibility))
 			continue NotesLoop
@@ -261,18 +236,28 @@ NotesLoop:
 			}
 		}
 
-		if err := authClient.Wait(); err != nil {
-			return err
-		}
-
+		// Upload any media attachments.
 		mediaIDs := make([]string, 0, len(note.Attachments))
 		for _, attachment := range note.Attachments {
-			mediaID, err := uploadAttachment(authClient, attachmentMapFile, mediaPathToImportedApiId, file, attachment)
+			mediaID, err := uploadAttachment(
+				authClient,
+				attachmentMapFile,
+				mediaPathToImportedApiId,
+				attachment.Url,
+				path.Join(file, attachment.Url),
+				attachment.Name,
+				attachment.FocalPointX(),
+				attachment.FocalPointY(),
+			)
 			if err != nil {
 				slog.Error("Error retrieving or uploading attachment", "status", note.Id, "attachment", attachment.Url, "err", err)
 				continue NotesLoop
 			}
 			mediaIDs = append(mediaIDs, mediaID)
+		}
+
+		if err := authClient.Wait(); err != nil {
+			return err
 		}
 
 		response, err := authClient.Client.Statuses.StatusCreate(
@@ -315,22 +300,30 @@ func uploadAttachment(
 	authClient *auth.Client,
 	attachmentMapFile string,
 	mediaPathToImportedApiId map[string]string,
-	archiveBasePath string,
-	attachment *Attachment,
+	archiveURL string,
+	localPath string,
+	description *string,
+	focusX *float64,
+	focusY *float64,
 ) (string, error) {
 	// Check the attachment map file for a previously uploaded copy.
-	if id, previouslyUploaded := mediaPathToImportedApiId[attachment.Url]; previouslyUploaded {
+	if id, previouslyUploaded := mediaPathToImportedApiId[archiveURL]; previouslyUploaded {
 		return id, nil
 	}
 
-	filename := path.Base(attachment.Url)
-	file, err := os.Open(path.Join(archiveBasePath, attachment.Url))
+	filename := path.Base(archiveURL)
+	file, err := os.Open(localPath)
 	if err != nil {
 		return "", err
 	}
 
 	if err := authClient.Wait(); err != nil {
 		return "", err
+	}
+
+	var focusString *string
+	if focusX != nil && focusY != nil {
+		focusString = util.Ptr(fmt.Sprintf("%f,%f", *focusX, *focusY))
 	}
 
 	// TODO: (Vyr) we may have thumbnails as the .Icon property, but GTS doesn't support thumbnails yet.
@@ -340,9 +333,9 @@ func uploadAttachment(
 	response, err := authClient.Client.Media.MediaCreate(
 		&media.MediaCreateParams{
 			APIVersion:  "v2",
-			Description: attachment.Name,
+			Description: description,
 			File:        runtime.NamedReader(filename, file),
-			Focus:       attachment.FocusString(),
+			Focus:       focusString,
 		},
 		authClient.Auth,
 		func(op *runtime.ClientOperation) {
@@ -350,19 +343,19 @@ func uploadAttachment(
 		},
 	)
 	if err != nil {
-		slog.Error("Couldn't upload media attachment", "path", attachment.Url, "err", err)
+		slog.Error("Couldn't upload media attachment", "path", localPath, "err", err)
 		return "", err
 	}
 	apiAttachment := response.GetPayload()
 
 	// Save the API ID of the status we just imported for future imports.
-	mediaPathToImportedApiId[attachment.Url] = apiAttachment.ID
+	mediaPathToImportedApiId[archiveURL] = apiAttachment.ID
 	if err := writeMapFile(attachmentMapFile, mediaPathToImportedApiId); err != nil {
 		slog.Error("Couldn't write attachment map file", "path", attachmentMapFile, "err", err)
 		return "", err
 	}
 
-	slog.Info("Imported attachment", "path", attachment.Url, "url", apiAttachment.TextURL)
+	slog.Info("Imported attachment", "path", localPath, "url", apiAttachment.TextURL)
 	return apiAttachment.ID, nil
 }
 

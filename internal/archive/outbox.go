@@ -19,7 +19,6 @@ package archive
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
 )
 
@@ -27,6 +26,7 @@ type Outbox struct {
 	OrderedItems []Activity `json:"orderedItems"`
 }
 
+// Notes returns a map of AP ID URIs to Note objects.
 func (o *Outbox) Notes() map[string]*Object {
 	notes := make(map[string]*Object, len(o.OrderedItems))
 	for _, activity := range o.OrderedItems {
@@ -143,26 +143,18 @@ type Attachment struct {
 	// TODO: (Vyr) Akkoma archives may have Url as a list containing href, mediaType, etc.
 }
 
-func (a *Attachment) FocusString() *string {
-	if len(a.RawFocalPoint) != 2 {
-		return nil
-	}
-	focusString := fmt.Sprintf("%f,%f", a.FocalPointX(), a.FocalPointY())
-	return &focusString
-}
-
-func (a *Attachment) FocalPointX() float64 {
+func (a *Attachment) FocalPointX() *float64 {
 	if len(a.RawFocalPoint) > 0 {
-		return a.RawFocalPoint[0]
+		return &a.RawFocalPoint[0]
 	}
-	return 0
+	return nil
 }
 
-func (a *Attachment) FocalPointY() float64 {
+func (a *Attachment) FocalPointY() *float64 {
 	if len(a.RawFocalPoint) > 1 {
-		return a.RawFocalPoint[1]
+		return &a.RawFocalPoint[1]
 	}
-	return 0
+	return nil
 }
 
 func (o *Object) Tags() []Tag {

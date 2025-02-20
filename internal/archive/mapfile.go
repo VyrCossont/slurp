@@ -19,7 +19,10 @@ package archive
 
 import (
 	"encoding/json"
+	"errors"
+	"io/fs"
 	"os"
+	"strings"
 )
 
 func readMapFile(mapFile string) (map[string]string, error) {
@@ -47,4 +50,40 @@ func writeMapFile(mapFile string, doc map[string]string) error {
 	encoder.SetIndent("", "  ")
 	encoder.SetEscapeHTML(false)
 	return encoder.Encode(doc)
+}
+
+func requireMapFiles(statusMapFile string, attachmentMapFile string) (map[string]string, map[string]string, error) {
+	// Require status map file.
+	if !strings.HasSuffix(strings.ToLower(statusMapFile), ".json") {
+		return nil, nil, errors.New("status map file is required and must have a .json extension")
+	}
+	archiveIdToImportedApiId, err := readMapFile(statusMapFile)
+	if err != nil {
+		if errors.Is(err, fs.ErrNotExist) {
+			archiveIdToImportedApiId = map[string]string{}
+		} else {
+			return nil, nil, err
+		}
+	}
+	if err = writeMapFile(statusMapFile, archiveIdToImportedApiId); err != nil {
+		return nil, nil, err
+	}
+
+	// Require attachment map file.
+	if !strings.HasSuffix(strings.ToLower(attachmentMapFile), ".json") {
+		return nil, nil, errors.New("attachment map file is required and must have a .json extension")
+	}
+	mediaPathToImportedApiId, err := readMapFile(attachmentMapFile)
+	if err != nil {
+		if errors.Is(err, fs.ErrNotExist) {
+			mediaPathToImportedApiId = map[string]string{}
+		} else {
+			return nil, nil, err
+		}
+	}
+	if err = writeMapFile(attachmentMapFile, mediaPathToImportedApiId); err != nil {
+		return nil, nil, err
+	}
+
+	return archiveIdToImportedApiId, mediaPathToImportedApiId, nil
 }

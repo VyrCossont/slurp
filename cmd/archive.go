@@ -18,6 +18,7 @@
 package cmd
 
 import (
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/VyrCossont/slurp/internal/archive"
@@ -33,15 +34,27 @@ var archiveCmd = &cobra.Command{
 // archiveImportCmd represents the archive import command
 var archiveImportCmd = &cobra.Command{
 	Use:   "import",
-	Short: "Import a Mastodon-format post archive",
+	Short: "Import a post archive",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		authClient, err := auth.NewAuthClient(User)
 		if err != nil {
 			return err
 		}
-		return archive.Import(authClient, File, StatusMapFile, AttachmentMapFile)
+		switch Format {
+		case "", "mastodon":
+			return archive.Import(authClient, File, StatusMapFile, AttachmentMapFile)
+
+		case "pixelfed":
+			return archive.PixelfedImport(authClient, File, StatusMapFile, AttachmentMapFile, AttachmentDirectory)
+
+		default:
+			return errors.Errorf("unknown archive format: %s", Format)
+		}
 	},
 }
+
+// Format is the file path for recording how archive media attachment paths map to imported media attachment IDs.
+var Format string
 
 // StatusMapFile is the file path for recording how archive status IDs map to imported status IDs.
 var StatusMapFile string
@@ -49,11 +62,16 @@ var StatusMapFile string
 // AttachmentMapFile is the file path for recording how archive media attachment paths map to imported media attachment IDs.
 var AttachmentMapFile string
 
+// AttachmentDirectory is the folder for attachments downloaded from Pixelfed during the course of an import.
+var AttachmentDirectory string
+
 func init() {
 	rootCmd.AddCommand(archiveCmd)
 
-	archiveImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import archive from (this must be an uncompressed folder)")
+	archiveImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import archive from (this must be an uncompressed folder for Mastodon)")
+	archiveImportCmd.PersistentFlags().StringVarP(&Format, "format", "t", "", "archive format can be one of: mastodon, pixelfed (default is mastodon)")
 	archiveImportCmd.PersistentFlags().StringVarP(&StatusMapFile, "status-map-file", "m", "", "JSON file to store mapping of archive status IDs to imported status IDs")
 	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentMapFile, "attachment-map-file", "a", "", "JSON file to store mapping of archive media attachment paths IDs to media attachment IDs")
+	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentDirectory, "attachment-directory", "d", "", "folder to store media downloaded from Pixelfed")
 	archiveCmd.AddCommand(archiveImportCmd)
 }
