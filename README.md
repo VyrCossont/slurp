@@ -1,6 +1,25 @@
 # slurp
 
-A tool for exporting data from and importing data to [Fediverse](https://en.wikipedia.org/wiki/Fediverse) instances. Requires that they support the [Mastodon API](https://docs.joinmastodon.org/) as implemented By [GotoSocial](https://gotosocial.org/). Intended for use with GotoSocial, but should work with other Mastodon-like instances, including Mastodon.
+A tool for exporting data from and importing data to [Fediverse](https://en.wikipedia.org/wiki/Fediverse) instances. Requires that they support the [Mastodon API](https://docs.joinmastodon.org/) as implemented by [GoToSocial](https://gotosocial.org/). Intended for use with GoToSocial, but should work with other Mastodon-like instances, including Mastodon.
+
+[//]: # (brew install github-markdown-toc)
+[//]: # (gh-md-toc --hide-header --hide-footer --start-depth 1 --no-escape README.md)
+
+[//]: # (start ToC)
+
+* [what](#what)
+* [build](#build)
+* [run](#run)
+    * [importing a Mastodon archive](#importing-a-mastodon-archive)
+    * [importing a Pixelfed archive](#importing-a-pixelfed-archive)
+    * [prefs](#prefs)
+        * [rate limits](#rate-limits)
+* [troubleshooting](#troubleshooting)
+    * [fallback keyring](#fallback-keyring)
+* [test](#test)
+* [update Swagger client](#update-swagger-client)
+
+[//]: # (end ToC)
 
 ## what
 
@@ -33,7 +52,7 @@ Show help for all commands.
 
 Before running other commands, log in.
 
-You'll be asked to log into your instance in your web browser, and paste the provided authorization code into the prompt. This will save your access token in the system keychain, and that user as the default user in slurp's preferences.
+You'll be asked to log into your instance in your web browser, and paste the provided authorization code into the prompt. This will save your access token in the system keyring, and that user as the default user in slurp's preferences.
 
 ```bash
 ./slurp --user user@instance.tld auth login
@@ -57,12 +76,12 @@ Save follows from this instance.
 
 Backdating requires GoToSocial 0.18.0-rc2 or newer. Importing statuses to non-GTS instances and importing statuses from non-Mastodon instances (for example, Akkoma) have *not* been tested. Try it at your own risk, ideally on a throwaway development instance.
 
-Before proceeding, you might want to copy custom emoji from your old instance. Otherwise, imported statuses that use missing custom emoji will be skipped. The `--inline` option saves the emoji picture data as well as their metadata in the `emoji.json` file, and is optional, but useful for keeping your favorite emoji if the old instance later goes away.
+Before proceeding, you might want to copy custom emojis from your old instance. Otherwise, imported statuses that use missing custom emojis will be skipped. The `--inline` option saves emoji picture data as well as their metadata in the `emojis.json` file, and is optional, but useful for keeping your favorite emojis if the old instance later goes away.
 
 ```bash
-./slurp --user olduser@old-instance.tld emojis export --inline --file emoji.json
+./slurp --user olduser@old-instance.tld emojis export --inline --file emojis.json
 
-./slurp --user user@instance.tld emojis import --file emoji.json
+./slurp --user user@instance.tld emojis import --file emojis.json
 ```
 
 Importing an archive requires that your archive be already uncompressed. (It should contain `actor.json` and `outbox.json` files, and a `media_attachments` folder.) Importing also requires two map files so that an interrupted import can be resumed. It is safe to interrupt an archive import: as long as you have your map files, this shouldn't result in duplicated statuses or media.
@@ -123,6 +142,16 @@ You can also set burst capacity for an instance (the maximum number of requests 
 
 ```bash
 ./slurp prefs set burstcap 300
+```
+
+## troubleshooting
+
+### fallback keyring
+
+On headless Linux systems, you might get an error like `The name org.freedesktop.secrets was not provided by any .service files`, in which case you can use a file-backed keyring. The file-backed keyring will be created with permissions such that only you can read or write it, but is not otherwise secure and is not encrypted.
+
+```bash
+./slurp --user user@instance.tld auth login --use-cleartext-file-keyring
 ```
 
 ## test
