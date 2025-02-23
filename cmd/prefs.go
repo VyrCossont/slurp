@@ -142,6 +142,16 @@ var prefsPathCmd = &cobra.Command{
 	},
 }
 
+// prefsKeyringPathCmd represents the prefs keyring-path command
+var prefsKeyringPathCmd = &cobra.Command{
+	Use:   "keyring-path",
+	Short: "Get the path to the keyring file (whether or not you're using the file-backed keyring)",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		_, err := cmd.OutOrStderr().Write([]byte(fmt.Sprintf("%s\n", util.KeyringPath())))
+		return err
+	},
+}
+
 // prefsGetInstance returns the instance for the provided or default user, if there is one.
 func prefsGetInstance() (string, error) {
 	var err error
@@ -178,4 +188,6 @@ func init() {
 	prefsSetCmd.AddCommand(prefsSetBurstCapCmd)
 
 	prefsCmd.AddCommand(prefsPathCmd)
+
+	prefsCmd.AddCommand(prefsKeyringPathCmd)
 }

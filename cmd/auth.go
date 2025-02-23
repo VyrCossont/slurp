@@ -36,7 +36,7 @@ var authLoginCmd = &cobra.Command{
 	Use:   "login",
 	Short: "Log in",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return auth.Login(User, AllowHTTP)
+		return auth.Login(User, AllowHTTP, UseCleartextFileKeyring)
 	},
 }
 
@@ -77,10 +77,15 @@ var authSwitchCmd = &cobra.Command{
 // Should be used for local testing only.
 var AllowHTTP bool
 
+// UseCleartextFileKeyring uses a cleartext file-backed keyring instead of a system keyring.
+// Should be used only if you're
+var UseCleartextFileKeyring bool
+
 func init() {
 	rootCmd.AddCommand(authCmd)
 
 	authLoginCmd.PersistentFlags().BoolVarP(&AllowHTTP, "allow-http", "x", false, "allow cleartext HTTP for user's instance (should be used for local testing only)")
+	authLoginCmd.PersistentFlags().BoolVarP(&UseCleartextFileKeyring, "use-cleartext-file-keyring", "k", false, "use cleartext file keyring instead of system keyring (should be used only if your system doesn't provide a keyring)")
 	authCmd.AddCommand(authLoginCmd)
 
 	authCmd.AddCommand(authLogoutCmd)

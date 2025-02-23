@@ -33,7 +33,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/pkg/browser"
 	"github.com/pkg/errors"
-	"github.com/zalando/go-keyring"
+	gokeyring "github.com/zalando/go-keyring"
 	"golang.org/x/time/rate"
 	"webfinger.net/go/webfinger"
 
@@ -62,6 +62,16 @@ func (c *Client) Wait() error {
 
 func NewAuthClient(user string) (*Client, error) {
 	var err error
+
+	keyring := util.SystemKeyring
+	useCleartextFileKeyring, err := util.GetUseCleartextFileKeyring()
+	if err != nil {
+		slog.Error("couldn't get keyring prefs")
+		return nil, err
+	}
+	if useCleartextFileKeyring {
+		keyring = util.CleartextFileKeyring
+	}
 
 	if user == "" {
 		user, err = util.GetDefaultUser()
@@ -114,8 +124,26 @@ const (
 )
 
 // Login authenticates the user and saves the credentials in the system keychain.
-func Login(user string, allowHTTP bool) error {
+func Login(user string, allowHTTP bool, useCleartextFileKeyring bool) error {
 	var err error
+
+	keyring := util.SystemKeyring
+	if useCleartextFileKeyring {
+		err = util.SetUseCleartextFileKeyring(true)
+		if err != nil {
+			slog.Error("couldn't set keyring prefs")
+			return err
+		}
+	} else {
+		useCleartextFileKeyring, err = util.GetUseCleartextFileKeyring()
+		if err != nil {
+			slog.Error("couldn't get keyring prefs")
+			return err
+		}
+	}
+	if useCleartextFileKeyring {
+		keyring = util.CleartextFileKeyring
+	}
 
 	if user == "" {
 		user, err = util.GetDefaultUser()
@@ -150,7 +178,7 @@ func Login(user string, allowHTTP bool) error {
 		slog.Error("couldn't get client for user's instance", "user", user, "instance", instance, "error", err)
 		return err
 	}
-	clientID, clientSecret, err := ensureAppCredentials(instance, client)
+	clientID, clientSecret, err := ensureAppCredentials(instance, keyring, client)
 	if err != nil {
 		slog.Error("OAuth2 app setup failed", "user", user, "instance", instance, "error", err)
 		return err
@@ -294,11 +322,11 @@ func rateLimiterForInstance(instance string) (*rate.Limiter, error) {
 }
 
 // ensureAppCredentials retrieves or creates and stores app credentials.
-func ensureAppCredentials(instance string, client *apiclient.GoToSocialSwaggerDocumentation) (string, string, error) {
+func ensureAppCredentials(instance string, keyring gokeyring.Keyring, client *apiclient.GoToSocialSwaggerDocumentation) (string, string, error) {
 	shouldCreateNewApp := false
 
 	clientID, err := util.GetInstanceClientID(instance)
-	if clientID == "" || errors.Is(err, keyring.ErrNotFound) {
+	if clientID == "" || errors.Is(err, gokeyring.ErrNotFound) {
 		shouldCreateNewApp = true
 	} else if err != nil {
 		slog.Error("couldn't get client ID from prefs", "instance", instance, "error", err)
@@ -306,7 +334,7 @@ func ensureAppCredentials(instance string, client *apiclient.GoToSocialSwaggerDo
 	}
 
 	clientSecret, err := keyring.Get(keyringServiceClientSecret, instance)
-	if clientSecret == "" || errors.Is(err, keyring.ErrNotFound) {
+	if clientSecret == "" || errors.Is(err, gokeyring.ErrNotFound) {
 		shouldCreateNewApp = true
 	} else if err != nil {
 		slog.Error("couldn't get client secret from keychain", "instance", instance, "error", err)

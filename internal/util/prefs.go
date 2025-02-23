@@ -36,6 +36,8 @@ type Prefs struct {
 	// DefaultUser is the username@domain of the last user we successfully authenticated as,
 	// if there is one.
 	DefaultUser string `json:"default_user,omitempty"`
+	// UseCleartextFileKeyring controls whether we use a file-backed keyring instead of a system keyring.
+	UseCleartextFileKeyring bool `json:"use_cleartext_file_keyring,omitempty"`
 }
 
 // PrefsInstance stores preferences for a given instance.
@@ -67,14 +69,24 @@ var prefsDir string
 // prefsPath is the path to the file within that directory that stores all of our prefs.
 var prefsPath string
 
+// keyringPath is the path to the file within that directory that stores all of our credentials.
+// This is only used if specifically requested; normally an encrypted system keyring will be used.
+var keyringPath string
+
 func init() {
 	prefsDir = filepath.Join(xdg.ConfigHome, "codes.catgirl.slurp")
 	prefsPath = filepath.Join(prefsDir, "prefs.json")
+	keyringPath = filepath.Join(prefsDir, "keyring.json")
 }
 
 // PrefsPath returns the path to the preferences file, whether or not it exists yet.
 func PrefsPath() string {
 	return prefsPath
+}
+
+// KeyringPath returns the path to the keyring file, whether or not it exists yet.
+func KeyringPath() string {
+	return keyringPath
 }
 
 // LoadPrefs returns preferences from disk or an empty prefs object if there are none stored or accessible.
@@ -194,6 +206,18 @@ func SetDefaultUser(user string) error {
 
 	return setPrefValue(func(prefs *Prefs) {
 		prefs.DefaultUser = user
+	})
+}
+
+func GetUseCleartextFileKeyring() (bool, error) {
+	return getPrefValue(func(prefs *Prefs) (bool, bool) {
+		return prefs.UseCleartextFileKeyring, true
+	})
+}
+
+func SetUseCleartextFileKeyring(value bool) error {
+	return setPrefValue(func(prefs *Prefs) {
+		prefs.UseCleartextFileKeyring = value
 	})
 }
 
