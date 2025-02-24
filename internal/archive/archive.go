@@ -46,7 +46,13 @@ import (
 var mentionPattern = regexp.MustCompile(`@\w+`)
 var atLinkPattern = regexp.MustCompile(`https://[a-z0-9.-]+/@\w+`)
 
-func Import(authClient *auth.Client, file string, statusMapFile string, attachmentMapFile string) error {
+func Import(
+	authClient *auth.Client,
+	file string,
+	statusMapFile string,
+	attachmentMapFile string,
+	allowMissingCustomEmojis bool,
+) error {
 	// Require archive to be already uncompressed.
 	stat, err := os.Stat(file)
 	if err != nil {
@@ -198,7 +204,7 @@ NotesLoop:
 
 		// Check for missing emojis.
 		for _, name := range requiredEmojiNames {
-			if _, foundOnInstance := instanceEmojiNames[name]; !foundOnInstance {
+			if _, foundOnInstance := instanceEmojiNames[name]; !foundOnInstance && !allowMissingCustomEmojis {
 				slog.Error("Instance is missing required custom emoji", "status", note.Id, "emoji", name)
 				continue NotesLoop
 			}

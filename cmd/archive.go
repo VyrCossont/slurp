@@ -42,7 +42,7 @@ var archiveImportCmd = &cobra.Command{
 		}
 		switch Format {
 		case "", "mastodon":
-			return archive.Import(authClient, File, StatusMapFile, AttachmentMapFile)
+			return archive.Import(authClient, File, StatusMapFile, AttachmentMapFile, AllowMissingCustomEmojis)
 
 		case "pixelfed":
 			return archive.PixelfedImport(authClient, File, StatusMapFile, AttachmentMapFile, AttachmentDirectory)
@@ -65,6 +65,9 @@ var AttachmentMapFile string
 // AttachmentDirectory is the folder for attachments downloaded from Pixelfed during the course of an import.
 var AttachmentDirectory string
 
+// AllowMissingCustomEmojis allows importing statuses for which the instance doesn't have a matching custom emoji.
+var AllowMissingCustomEmojis bool
+
 func init() {
 	rootCmd.AddCommand(archiveCmd)
 
@@ -73,5 +76,6 @@ func init() {
 	archiveImportCmd.PersistentFlags().StringVarP(&StatusMapFile, "status-map-file", "m", "", "JSON file to store mapping of archive status IDs to imported status IDs")
 	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentMapFile, "attachment-map-file", "a", "", "JSON file to store mapping of archive media attachment paths IDs to media attachment IDs")
 	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentDirectory, "attachment-directory", "d", "", "folder to store media downloaded from Pixelfed")
+	archiveImportCmd.PersistentFlags().BoolVarP(&AllowMissingCustomEmojis, "allow-missing-custom-emojis", "e", false, "import statuses for which the instance doesn't have all of the custom emojis")
 	archiveCmd.AddCommand(archiveImportCmd)
 }

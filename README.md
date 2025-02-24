@@ -76,7 +76,7 @@ Save follows from this instance.
 
 Backdating requires GoToSocial 0.18.0-rc2 or newer. Importing statuses to non-GTS instances and importing statuses from non-Mastodon instances (for example, Akkoma) have *not* been tested. Try it at your own risk, ideally on a throwaway development instance.
 
-Before proceeding, you might want to copy custom emojis from your old instance. Otherwise, imported statuses that use missing custom emojis will be skipped. The `--inline` option saves emoji picture data as well as their metadata in the `emojis.json` file, and is optional, but useful for keeping your favorite emojis if the old instance later goes away.
+Before proceeding, you might want to copy custom emojis from your old instance. The `--inline` option saves emoji picture data as well as their metadata in the `emojis.json` file, and is optional, but useful for keeping your favorite emojis if the old instance later goes away.
 
 ```bash
 ./slurp --user olduser@old-instance.tld emojis export --inline --file emojis.json
@@ -95,6 +95,16 @@ Assuming you have downloaded your archive and uncompressed it as `archive-XXXXXX
   --file archive-XXXXXX-YYYYYYYYYY \
   --status-map-file archive-XXXXXX-YYYYYYYYYY/status-map.json \
   --attachment-map-file archive-XXXXXX-YYYYYYYYYY/attachment-map.json
+```
+
+If you were not able to import your previous instance's custom emojis (for example, if you're not an admin of your new instance, or your old instance no longer exists and you weren't able to download its emojis), you can use the `--allow-missing-custom-emojis` flag. Missing emojis in imported statuses will display as their name surrounded by colons: `:name_of_emoji:`.
+
+```bash
+./slurp --user user@instance.tld archive import \
+  --file archive-XXXXXX-YYYYYYYYYY \
+  --status-map-file archive-XXXXXX-YYYYYYYYYY/status-map.json \
+  --attachment-map-file archive-XXXXXX-YYYYYYYYYY/attachment-map.json \
+  --allow-missing-custom-emojis
 ```
 
 ### importing a Pixelfed archive
