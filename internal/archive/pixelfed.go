@@ -53,7 +53,7 @@ func PixelfedImport(
 
 	// TODO: (Vyr) make this configurable thru command-line flags
 	mediaDownloadLimiter := rate.NewLimiter(1, 1)
-	mediaDownloadClient := &http.Client{}
+	mediaDownloadClient := util.HttpClient
 
 	if attachmentDirectory == "" {
 		return errors.New("attachment directory is required for Pixelfed imports")

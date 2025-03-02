@@ -243,7 +243,7 @@ func ensureInstance(user string, allowHTTP bool) (string, error) {
 // findInstance does a WebFinger lookup to find the domain (with optional port)
 // and scheme of the instance API for a given user.
 func findInstance(user string, allowHTTP bool) (string, string, error) {
-	webfingerClient := webfinger.NewClient(nil)
+	webfingerClient := webfinger.NewClient(util.HttpClient)
 	webfingerClient.AllowHTTP = allowHTTP
 	jrd, err := webfingerClient.Lookup("acct:"+user, nil)
 	if err != nil {
@@ -301,7 +301,15 @@ func clientForInstance(instance string) (*apiclient.GoToSocialSwaggerDocumentati
 		return nil, err
 	}
 
-	return apiclient.New(httptransport.New(instance, "", []string{scheme}), strfmt.Default), nil
+	return apiclient.New(
+		httptransport.NewWithClient(
+			instance,
+			"",
+			[]string{scheme},
+			util.HttpClient,
+		),
+		strfmt.Default,
+	), nil
 }
 
 // rateLimiterForInstance returns a rate limiter for the instance.
@@ -374,7 +382,7 @@ func createApp(client *apiclient.GoToSocialSwaggerDocumentation) (*models.Applic
 			ClientName:   "slurp",
 			RedirectURIs: oauthRedirect,
 			Scopes:       util.Ptr(oauthScopes),
-			Website:      util.Ptr("https://catgirl.codes/slurp"),
+			Website:      util.Ptr(util.Website),
 		},
 		func(op *runtime.ClientOperation) {
 			op.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
