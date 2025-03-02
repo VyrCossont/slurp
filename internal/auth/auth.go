@@ -60,10 +60,9 @@ func (c *Client) Wait() error {
 	return nil
 }
 
-func NewAuthClient(user string) (*Client, error) {
-	var err error
-
-	keyring := util.SystemKeyring
+// ClientKeyring returns the appropriate keyring (system or file) but does not change the keyring pref.
+func ClientKeyring() (keyring gokeyring.Keyring, err error) {
+	keyring = util.SystemKeyring
 	useCleartextFileKeyring, err := util.GetUseCleartextFileKeyring()
 	if err != nil {
 		slog.Error("couldn't get keyring prefs")
@@ -72,6 +71,11 @@ func NewAuthClient(user string) (*Client, error) {
 	if useCleartextFileKeyring {
 		keyring = util.CleartextFileKeyring
 	}
+	return
+}
+
+func NewAuthClient(user string, keyring gokeyring.Keyring) (*Client, error) {
+	var err error
 
 	if user == "" {
 		user, err = util.GetDefaultUser()
@@ -123,27 +127,31 @@ const (
 	oauthScopes   = "read write"
 )
 
-// Login authenticates the user and saves the credentials in the system keychain.
-func Login(user string, allowHTTP bool, useCleartextFileKeyring bool) error {
-	var err error
-
-	keyring := util.SystemKeyring
+// LoginKeyring sets the keyring pref and returns the appropriate keyring (system or file).
+func LoginKeyring(useCleartextFileKeyring bool) (keyring gokeyring.Keyring, err error) {
+	keyring = util.SystemKeyring
 	if useCleartextFileKeyring {
 		err = util.SetUseCleartextFileKeyring(true)
 		if err != nil {
 			slog.Error("couldn't set keyring prefs")
-			return err
+			return
 		}
 	} else {
 		useCleartextFileKeyring, err = util.GetUseCleartextFileKeyring()
 		if err != nil {
 			slog.Error("couldn't get keyring prefs")
-			return err
+			return
 		}
 	}
 	if useCleartextFileKeyring {
 		keyring = util.CleartextFileKeyring
 	}
+	return
+}
+
+// Login authenticates the user and saves the credentials in the system keychain.
+func Login(user string, allowHTTP bool, keyring gokeyring.Keyring, authorizer Authorizer) error {
+	var err error
 
 	if user == "" {
 		user, err = util.GetDefaultUser()
@@ -184,7 +192,7 @@ func Login(user string, allowHTTP bool, useCleartextFileKeyring bool) error {
 		return err
 	}
 
-	code, err := promptForOAuthCode(instance, clientID)
+	code, err := promptForOAuthCode(instance, clientID, authorizer)
 	if err != nil {
 		slog.Error("couldn't prompt for OAuth2 authorization code", "user", user, "instance", instance, "error", err)
 		return err
@@ -394,7 +402,30 @@ func createApp(client *apiclient.GoToSocialSwaggerDocumentation) (*models.Applic
 	return resp.GetPayload(), nil
 }
 
-func promptForOAuthCode(instance string, clientID string) (string, error) {
+// Authorizer is a function that can exchange an OAuth authorization URL for an authorization code.
+type Authorizer func(oauthAuthorizeURL string) (code string, err error)
+
+// InteractiveAuthorizer prompts the user to log in with their browser and then enter their auth code.
+func InteractiveAuthorizer(oauthAuthorizeURL string) (code string, err error) {
+	err = browser.OpenURL(oauthAuthorizeURL)
+	if err != nil {
+		slog.Warn("couldn't open browser to authorize", "error", err)
+		print("Please open this URL in your browser:", oauthAuthorizeURL)
+	}
+
+	print("Enter authorization code: ")
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	code = strings.TrimSpace(scanner.Text())
+
+	return
+}
+
+func promptForOAuthCode(
+	instance string,
+	clientID string,
+	authorizer Authorizer,
+) (string, error) {
 	scheme, err := util.GetInstanceScheme(instance)
 	if err != nil {
 		slog.Error("couldn't get instance URL scheme from prefs", "instance", instance, "error", err)
@@ -412,18 +443,8 @@ func promptForOAuthCode(instance string, clientID string) (string, error) {
 			"scope":         []string{oauthScopes},
 		}.Encode(),
 	}).String()
-	err = browser.OpenURL(oauthAuthorizeURL)
-	if err != nil {
-		slog.Warn("couldn't open browser to authorize", "error", err)
-		print("Please open this URL in your browser:", oauthAuthorizeURL)
-	}
 
-	print("Enter authorization code: ")
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	code := strings.TrimSpace(scanner.Text())
-
-	return code, nil
+	return authorizer(oauthAuthorizeURL)
 }
 
 type oauthTokenOK struct {

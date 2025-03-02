@@ -36,10 +36,16 @@ var archiveImportCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import a post archive",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		switch Format {
 		case "", "mastodon":
 			return archive.Import(authClient, File, StatusMapFile, AttachmentMapFile, AllowMissingCustomEmojis)

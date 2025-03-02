@@ -34,10 +34,16 @@ var emojisExportCmd = &cobra.Command{
 	Use:   "export",
 	Short: "Export a list of emojis",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		return emojis.Export(authClient, File, Inline)
 	},
 }
@@ -47,10 +53,16 @@ var emojisImportCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import a list of emojis",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		return emojis.Import(authClient, File)
 	},
 }

@@ -35,10 +35,16 @@ var bookmarksExportCmd = &cobra.Command{
 	Use:   "export",
 	Short: "Export a list of bookmarks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		return bookmarks.Export(authClient, File)
 	},
 }
@@ -48,10 +54,16 @@ var bookmarksImportCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import a list of bookmarks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		return bookmarks.Import(authClient, File)
 	},
 }

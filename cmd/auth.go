@@ -35,8 +35,13 @@ var authCmd = &cobra.Command{
 var authLoginCmd = &cobra.Command{
 	Use:   "login",
 	Short: "Log in",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		return auth.Login(User, AllowHTTP, UseCleartextFileKeyring)
+	RunE: func(cmd *cobra.Command, args []string) (err error) {
+		keyring, err := auth.LoginKeyring(UseCleartextFileKeyring)
+		if err != nil {
+			return err
+		}
+
+		return auth.Login(User, AllowHTTP, keyring, auth.InteractiveAuthorizer)
 	},
 }
 

@@ -35,10 +35,16 @@ var listsExportCmd = &cobra.Command{
 	Use:   "export",
 	Short: "Export a list of lists",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		return lists.Export(authClient, File)
 	},
 }
@@ -48,10 +54,16 @@ var listsImportCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import a list of lists",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		return lists.Import(authClient, File)
 	},
 }

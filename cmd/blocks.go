@@ -35,10 +35,16 @@ var blocksExportCmd = &cobra.Command{
 	Use:   "export",
 	Short: "Export a list of blocks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		return blocks.Export(authClient, File)
 	},
 }
@@ -48,10 +54,16 @@ var blocksImportCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import a list of blocks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		authClient, err := auth.NewAuthClient(User)
+		keyring, err := auth.ClientKeyring()
 		if err != nil {
 			return err
 		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
 		return blocks.Import(authClient, File)
 	},
 }
