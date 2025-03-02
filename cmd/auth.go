@@ -78,7 +78,7 @@ var authSwitchCmd = &cobra.Command{
 var AllowHTTP bool
 
 // UseCleartextFileKeyring uses a cleartext file-backed keyring instead of a system keyring.
-// Should be used only if you're
+// Should be used only if you're on a system that doesn't support encrypted keyrings.
 var UseCleartextFileKeyring bool
 
 func init() {
