@@ -18,6 +18,7 @@
 package cmd
 
 import (
+	"github.com/VyrCossont/slurp/internal/archive/pixelfed"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -51,7 +52,7 @@ var archiveImportCmd = &cobra.Command{
 			return archive.Import(authClient, File, StatusMapFile, AttachmentMapFile, AllowMissingCustomEmojis)
 
 		case "pixelfed":
-			return archive.PixelfedImport(authClient, File, StatusMapFile, AttachmentMapFile, AttachmentDirectory)
+			return pixelfed.PixelfedImport(authClient, File, StatusMapFile, AttachmentMapFile, AttachmentDirectory)
 
 		default:
 			return errors.Errorf("unknown archive format: %s", Format)

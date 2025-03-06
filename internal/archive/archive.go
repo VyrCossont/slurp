@@ -33,6 +33,7 @@ import (
 	"github.com/JohannesKaufmann/html-to-markdown/v2/plugin/base"
 	"github.com/JohannesKaufmann/html-to-markdown/v2/plugin/commonmark"
 	"github.com/JohannesKaufmann/html-to-markdown/v2/plugin/strikethrough"
+	"github.com/VyrCossont/slurp/internal/archive/mastodon"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
@@ -43,8 +44,8 @@ import (
 	"github.com/VyrCossont/slurp/internal/util"
 )
 
-var mentionPattern = regexp.MustCompile(`@\w+`)
-var atLinkPattern = regexp.MustCompile(`https://[a-z0-9.-]+/@\w+`)
+var MentionPattern = regexp.MustCompile(`@\w+`)
+var AtLinkPattern = regexp.MustCompile(`https://[a-z0-9.-]+/@\w+`)
 
 func Import(
 	authClient *auth.Client,
@@ -53,17 +54,8 @@ func Import(
 	attachmentMapFile string,
 	allowMissingCustomEmojis bool,
 ) error {
-	// Require archive to be already uncompressed.
-	stat, err := os.Stat(file)
-	if err != nil {
-		slog.Error("couldn't get archive info from filesystem", "path", file, "err", err)
-		return err
-	}
-	if !stat.IsDir() {
-		return errors.New("archive must be an uncompressed folder")
-	}
 
-	archiveIdToImportedApiId, mediaPathToImportedApiId, err := requireMapFiles(statusMapFile, attachmentMapFile)
+	archiveIdToImportedApiId, mediaPathToImportedApiId, err := RequireMapFiles(statusMapFile, attachmentMapFile)
 	if err != nil {
 		return err
 	}
@@ -98,125 +90,118 @@ func Import(
 		instanceEmojiNames[":"+emoji.Shortcode+":"] = struct{}{}
 	}
 
-	actor, err := readActor(file)
-	if err != nil {
-		return err
-	}
-
-	outbox, err := readOutbox(file)
-	if err != nil {
-		return err
-	}
-	notes := outbox.Notes()
-
-	// Put notes in order so we do things consistently. Only the topo sort is required for correctness,
+	// Put statuses in order so we do things consistently. Only the topo sort is required for correctness,
 	// but the rest is a nice property when running the same job again and again while debugging.
-	notesInOrder := make([]*Object, 0, len(notes))
-	for _, note := range notes {
-		notesInOrder = append(notesInOrder, note)
+	var reader ImportableReader
+	statuses := reader.Statuses()
+	statusMap := make(map[string]ImportableStatus, len(statuses))
+	statusesInImportOrder := make([]ImportableStatus, 0, len(statuses))
+	for _, status := range statuses {
+		statusMap[status.ID()] = status
+		statusesInImportOrder = append(statusesInImportOrder, status)
 	}
-	slices.SortFunc(notesInOrder, func(a, b *Object) int {
+	slices.SortFunc(statusesInImportOrder, func(a, b ImportableStatus) int {
 		// Topo sort by reply graph.
-		if b.InReplyTo != nil && a.Id == *b.InReplyTo {
+		if b.InReplyToID() != "" && a.ID() == b.InReplyToID() {
 			return -1
-		} else if a.InReplyTo != nil && *a.InReplyTo == b.Id {
+		} else if a.InReplyToID() != "" && a.InReplyToID() == b.ID() {
 			return 1
 		}
 
 		// Sort by published date.
-		publishedCmp := a.Published.Compare(b.Published)
+		publishedCmp := a.CreatedAt().Compare(b.CreatedAt())
 		if publishedCmp != 0 {
 			return publishedCmp
 		}
 
 		// AP outbox IDs are URLs and sorting them may not always be useful,
 		// but after date sorting, it's usually okay.
-		return cmp.Compare(a.Id, b.Id)
+		return cmp.Compare(a.ID(), b.ID())
 	})
 
-NotesLoop:
-	for _, note := range notesInOrder {
+StatusesLoop:
+	for _, status := range statusesInImportOrder {
 		// Skip previously imported notes.
-		if _, previouslyImported := archiveIdToImportedApiId[note.Id]; previouslyImported {
-			continue NotesLoop
+		if _, previouslyImported := archiveIdToImportedApiId[status.ID()]; previouslyImported {
+			continue StatusesLoop
 		}
 
-		visibility := note.Visibility()
+		visibility := status.Visibility()
 		// TODO: (Vyr) command-line visibility mapping
-		if visibility != VisibilityPublic && visibility != VisibilityUnlisted {
-			slog.Info("Skipping status due to visibility", "status", note.Id, "visibility", string(visibility))
-			continue NotesLoop
+		if visibility != string(mastodon.VisibilityPublic) && visibility != string(mastodon.VisibilityUnlisted) {
+			slog.Info("Skipping status due to visibility", "status", status.ID(), "visibility", string(visibility))
+			continue StatusesLoop
 		}
 
 		// Allow OPs or self-replies to our other posts only.
-		if note.InReplyTo != nil && notes[*note.InReplyTo] == nil {
-			slog.Info("Skipping status because it isn't a top-level status or self-reply", "status", note.Id)
-			continue NotesLoop
+		if status.InReplyToID() != "" && statusMap[status.InReplyToID()] == nil {
+			slog.Info("Skipping status because it isn't a top-level status or self-reply", "status", status.Id)
+			continue StatusesLoop
 		}
-		if note.TargetsSpecificUsersInToOrCc(actor) {
+		if status.TargetsSpecificUsersInToOrCc(actor) {
 			var audience []string
-			audience = append(audience, note.To...)
-			audience = append(audience, note.Cc...)
-			slog.Info("Skipping status because its audience includes other accounts", "status", note.Id, "audience", audience)
-			continue NotesLoop
+			audience = append(audience, status.To...)
+			audience = append(audience, status.Cc...)
+			slog.Info("Skipping status because its audience includes other accounts", "status", status.Id, "audience", audience)
+			continue StatusesLoop
 		}
 
 		// Convert to Markdown.
-		markdown, err := markdownConverter.ConvertString(note.Content)
+		markdown, err := markdownConverter.ConvertString(status.Content)
 		if err != nil {
-			slog.Error("Markdown conversion error", "status", note.Id, "err", err)
-			continue NotesLoop
+			slog.Error("Markdown conversion error", "status", status.Id, "err", err)
+			continue StatusesLoop
 		}
 
 		// Check for messages that start with an @ and are clearly a non-self-reply.
 		if strings.HasPrefix(markdown, "[@") {
-			slog.Error("Skipping status because it looks like a reply", "status", note.Id)
-			continue NotesLoop
+			slog.Error("Skipping status because it looks like a reply", "status", status.Id)
+			continue StatusesLoop
 		}
 
 		// Skip anything that mentions somebody else.
 		// Skip other indicators of mentions.
 		// Collect hashtags and emojis for later processing.
-		noteTags := note.Tags()
-		hashtags := make([]*MentionOrHashtag, 0, len(noteTags))
+		noteTags := status.Tags()
+		hashtags := make([]*mastodon.MentionOrHashtag, 0, len(noteTags))
 		requiredEmojiNames := make([]string, 0, len(noteTags))
 		for _, tag := range noteTags {
 			tagType := tag.GetType()
 			switch tagType {
 			case "Mention":
-				if mention, ok := tag.(*MentionOrHashtag); ok {
-					slog.Info("Skipping status because it mentions another account", "status", note.Id, "mention", mention)
-					continue NotesLoop
+				if mention, ok := tag.(*mastodon.MentionOrHashtag); ok {
+					slog.Info("Skipping status because it mentions another account", "status", status.Id, "mention", mention)
+					continue StatusesLoop
 				}
 			case "Hashtag":
-				if hashtag, ok := tag.(*MentionOrHashtag); ok {
+				if hashtag, ok := tag.(*mastodon.MentionOrHashtag); ok {
 					hashtags = append(hashtags, hashtag)
 				}
 			case "Emoji":
-				if emoji, ok := tag.(*Emoji); ok {
+				if emoji, ok := tag.(*mastodon.Emoji); ok {
 					requiredEmojiNames = append(requiredEmojiNames, emoji.Name)
 				}
 			default:
-				slog.Error("Unexpected tag type", "status", note.Id, "tagType", tagType)
-				continue NotesLoop
+				slog.Error("Unexpected tag type", "status", status.Id, "tagType", tagType)
+				continue StatusesLoop
 			}
 		}
 
 		// Check for missing emojis.
 		for _, name := range requiredEmojiNames {
 			if _, foundOnInstance := instanceEmojiNames[name]; !foundOnInstance && !allowMissingCustomEmojis {
-				slog.Error("Instance is missing required custom emoji", "status", note.Id, "emoji", name)
-				continue NotesLoop
+				slog.Error("Instance is missing required custom emoji", "status", status.Id, "emoji", name)
+				continue StatusesLoop
 			}
 		}
 
 		// Mentions from deleted instances or users don't show up as mention tags. Skip those too.
 		// This transform allows the common case of URLs that contain @ but are probably links to Fedi posts.
 		// TODO: (Vyr) Will give false positives on code blocks, Bluesky handles, mentions that never resolved, etc.
-		atLinkPlaceholderMarkdown := atLinkPattern.ReplaceAllString(markdown, "at_link_placeholder")
-		if mentionPattern.MatchString(atLinkPlaceholderMarkdown) {
-			slog.Info("Skipping status because it looks like it has a mention of a dead account", "status", note.Id)
-			continue NotesLoop
+		atLinkPlaceholderMarkdown := AtLinkPattern.ReplaceAllString(markdown, "at_link_placeholder")
+		if MentionPattern.MatchString(atLinkPlaceholderMarkdown) {
+			slog.Info("Skipping status because it looks like it has a mention of a dead account", "status", status.Id)
+			continue StatusesLoop
 		}
 
 		// Convert Markdown links to hashtags back into hashtags.
@@ -224,27 +209,27 @@ NotesLoop:
 		for _, hashtag := range hashtags {
 			linkPattern, err := regexp.Compile(`(?i)\Q` + `[` + hashtag.Name + `](` + hashtag.Href + `)\E`)
 			if err != nil {
-				slog.Error("Regex compilation error", "status", note.Id, "err", err)
-				continue NotesLoop
+				slog.Error("Regex compilation error", "status", status.Id, "err", err)
+				continue StatusesLoop
 			}
 			markdown = linkPattern.ReplaceAllString(markdown, hashtag.Name)
 		}
 
 		// Get the imported API ID of the post we're replying to, if applicable.
 		var inReplyToApiId *string
-		if note.InReplyTo != nil {
-			inReplyToArchiveId := *note.InReplyTo
+		if status.InReplyTo != nil {
+			inReplyToArchiveId := *status.InReplyTo
 			if apiId, found := archiveIdToImportedApiId[inReplyToArchiveId]; found {
 				inReplyToApiId = &apiId
 			} else {
-				slog.Error("Couldn't find API ID for status being replied to", "status", note.Id, "inReplyTo", inReplyToArchiveId)
-				continue NotesLoop
+				slog.Error("Couldn't find API ID for status being replied to", "status", status.Id, "inReplyTo", inReplyToArchiveId)
+				continue StatusesLoop
 			}
 		}
 
 		// Upload any media attachments.
-		mediaIDs := make([]string, 0, len(note.Attachments))
-		for _, attachment := range note.Attachments {
+		mediaIDs := make([]string, 0, len(status.Attachments))
+		for _, attachment := range status.Attachments {
 			mediaID, err := uploadAttachment(
 				authClient,
 				attachmentMapFile,
@@ -256,8 +241,8 @@ NotesLoop:
 				attachment.FocalPointY(),
 			)
 			if err != nil {
-				slog.Error("Error retrieving or uploading attachment", "status", note.Id, "attachment", attachment.Url, "err", err)
-				continue NotesLoop
+				slog.Error("Error retrieving or uploading attachment", "status", status.Id, "attachment", attachment.Url, "err", err)
+				continue StatusesLoop
 			}
 			mediaIDs = append(mediaIDs, mediaID)
 		}
@@ -270,13 +255,13 @@ NotesLoop:
 			&statuses.StatusCreateParams{
 				ContentType: &statusContentType,
 				InReplyToID: inReplyToApiId,
-				Language:    note.Language(),
+				Language:    status.Language(),
 				MediaIDs:    mediaIDs,
-				ScheduledAt: util.Ptr(strfmt.DateTime(note.Published)),
-				Sensitive:   &note.Sensitive,
-				SpoilerText: note.Summary,
+				ScheduledAt: util.Ptr(strfmt.DateTime(status.Published)),
+				Sensitive:   &status.Sensitive,
+				SpoilerText: status.Summary,
 				Status:      &markdown,
-				Visibility:  util.Ptr(string(note.Visibility())),
+				Visibility:  util.Ptr(string(status.Visibility())),
 			},
 			authClient.Auth,
 			func(op *runtime.ClientOperation) {
@@ -284,19 +269,19 @@ NotesLoop:
 			},
 		)
 		if err != nil {
-			slog.Error("Couldn't post converted status", "status", note.Id, "err", err)
-			continue NotesLoop
+			slog.Error("Couldn't post converted status", "status", status.Id, "err", err)
+			continue StatusesLoop
 		}
 		status := response.GetPayload()
 
 		// Save the API ID of the status we just imported for future imports.
-		archiveIdToImportedApiId[note.Id] = status.ID
+		archiveIdToImportedApiId[status.Id] = status.ID
 		if err := writeMapFile(statusMapFile, archiveIdToImportedApiId); err != nil {
 			slog.Error("Couldn't write status map file", "path", statusMapFile, "err", err)
 			return err
 		}
 
-		slog.Info("Imported status", "status", note.Id, "url", status.URL)
+		slog.Info("Imported status", "status", status.Id, "url", status.URL)
 	}
 
 	return nil
@@ -365,33 +350,14 @@ func uploadAttachment(
 	return apiAttachment.ID, nil
 }
 
-// TODO: (Vyr) can we collapse these two into a generic?
-func readActor(file string) (*Actor, error) {
-	jsonPath := path.Join(file, "actor.json")
-
-	jsonFile, err := os.Open(jsonPath)
+func ReadJSON[T any](path string) (*T, error) {
+	jsonFile, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer func() { _ = jsonFile.Close() }()
 
-	var doc Actor
-	if err := json.NewDecoder(jsonFile).Decode(&doc); err != nil {
-		return nil, err
-	}
-	return &doc, nil
-}
-
-func readOutbox(file string) (*Outbox, error) {
-	jsonPath := path.Join(file, "outbox.json")
-
-	jsonFile, err := os.Open(jsonPath)
-	if err != nil {
-		return nil, err
-	}
-	defer func() { _ = jsonFile.Close() }()
-
-	var doc Outbox
+	var doc T
 	if err := json.NewDecoder(jsonFile).Decode(&doc); err != nil {
 		return nil, err
 	}

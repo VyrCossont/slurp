@@ -15,20 +15,21 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package archive
+package mastodon
 
 import (
 	"encoding/json"
 	"time"
 )
 
+// Outbox represents a Mastodon export's `outbox.json`.
 type Outbox struct {
 	OrderedItems []Activity `json:"orderedItems"`
 }
 
-// Notes returns a map of AP ID URIs to Note objects.
-func (o *Outbox) Notes() map[string]*Object {
-	notes := make(map[string]*Object, len(o.OrderedItems))
+// Notes returns a list of Note objects.
+func (o *Outbox) Notes() []*Object {
+	notes := make([]*Object, 0, len(o.OrderedItems))
 	for _, activity := range o.OrderedItems {
 		if activity.Type != "Create" {
 			continue
@@ -42,8 +43,6 @@ func (o *Outbox) Notes() map[string]*Object {
 		if object.Type != "Note" {
 			continue
 		}
-
-		notes[object.Id] = object
 	}
 	return notes
 }
@@ -63,21 +62,21 @@ func (a *Activity) Object() *Object {
 }
 
 type Object struct {
-	Id            string            `json:"id"`
-	Type          string            `json:"type"`
-	Summary       *string           `json:"summary"`
-	InReplyTo     *string           `json:"inReplyTo"`
-	Published     time.Time         `json:"published"`
-	Url           string            `json:"url"`
-	To            []string          `json:"to"`
-	Cc            []string          `json:"cc"`
-	Sensitive     bool              `json:"sensitive"`
-	Conversation  string            `json:"conversation"`
-	Content       string            `json:"content"`
-	ContentMap    map[string]string `json:"contentMap"`
-	DirectMessage bool              `json:"directMessage"`
-	Attachments   []*Attachment     `json:"attachment"`
-	RawTags       []json.RawMessage `json:"tag"`
+	Id             string            `json:"id"`
+	Type           string            `json:"type"`
+	Summary        *string           `json:"summary"`
+	InReplyTo      *string           `json:"inReplyTo"`
+	Published      time.Time         `json:"published"`
+	Url            string            `json:"url"`
+	To             []string          `json:"to"`
+	Cc             []string          `json:"cc"`
+	Sensitive      bool              `json:"sensitive"`
+	Conversation   string            `json:"conversation"`
+	Content        string            `json:"content"`
+	ContentMap     map[string]string `json:"contentMap"`
+	DirectMessage  bool              `json:"directMessage"`
+	AllAttachments []*Attachment     `json:"attachment"`
+	RawTags        []json.RawMessage `json:"tag"`
 }
 
 const ASPublic = "https://www.w3.org/ns/activitystreams#Public"

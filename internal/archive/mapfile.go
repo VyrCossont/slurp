@@ -52,7 +52,7 @@ func writeMapFile(mapFile string, doc map[string]string) error {
 	return encoder.Encode(doc)
 }
 
-func requireMapFiles(statusMapFile string, attachmentMapFile string) (map[string]string, map[string]string, error) {
+func RequireMapFiles(statusMapFile string, attachmentMapFile string) (map[string]string, map[string]string, error) {
 	// Require status map file.
 	if !strings.HasSuffix(strings.ToLower(statusMapFile), ".json") {
 		return nil, nil, errors.New("status map file is required and must have a .json extension")

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package archive
+package pixelfed
 
 import (
 	"cmp"
@@ -30,6 +30,8 @@ import (
 	"time"
 
 	"github.com/VyrCossont/slurp/client/statuses"
+	"github.com/VyrCossont/slurp/internal/archive"
+	"github.com/VyrCossont/slurp/internal/archive/mastodon"
 	"github.com/VyrCossont/slurp/internal/auth"
 	"github.com/VyrCossont/slurp/internal/util"
 	"github.com/VyrCossont/slurp/models"
@@ -39,14 +41,14 @@ import (
 	"golang.org/x/time/rate"
 )
 
-func PixelfedImport(
+func Import(
 	authClient *auth.Client,
 	file string,
 	statusMapFile string,
 	attachmentMapFile string,
 	attachmentDirectory string,
 ) error {
-	archiveIdToImportedApiId, mediaPathToImportedApiId, err := requireMapFiles(statusMapFile, attachmentMapFile)
+	archiveIdToImportedApiId, mediaPathToImportedApiId, err := archive.RequireMapFiles(statusMapFile, attachmentMapFile)
 	if err != nil {
 		return err
 	}
@@ -123,9 +125,9 @@ StatusesLoop:
 			continue StatusesLoop
 		}
 
-		visibility := Visibility(status.Visibility)
+		visibility := mastodon.Visibility(status.Visibility)
 		// TODO: (Vyr) command-line visibility mapping
-		if visibility != VisibilityPublic && visibility != VisibilityUnlisted {
+		if visibility != mastodon.VisibilityPublic && visibility != mastodon.VisibilityUnlisted {
 			slog.Info("Skipping status due to visibility", "status", status.URI, "visibility", string(visibility))
 			continue StatusesLoop
 		}
@@ -158,8 +160,8 @@ StatusesLoop:
 		if status.ContentText != nil {
 			contentText = *status.ContentText
 		}
-		atLinkPlaceholderText := atLinkPattern.ReplaceAllString(contentText, "at_link_placeholder")
-		if mentionPattern.MatchString(atLinkPlaceholderText) {
+		atLinkPlaceholderText := archive.AtLinkPattern.ReplaceAllString(contentText, "at_link_placeholder")
+		if archive.MentionPattern.MatchString(atLinkPlaceholderText) {
 			slog.Info("Skipping status because it looks like it has a mention of a dead account", "status", status.URI)
 			continue StatusesLoop
 		}
@@ -205,7 +207,7 @@ StatusesLoop:
 				focusX = util.Ptr(float64(attachment.Meta.Focus.X))
 				focusY = util.Ptr(float64(attachment.Meta.Focus.Y))
 			}
-			mediaID, err := uploadAttachment(
+			mediaID, err := mastodon.uploadAttachment(
 				authClient,
 				attachmentMapFile,
 				mediaPathToImportedApiId,
@@ -246,7 +248,7 @@ StatusesLoop:
 
 		// Save the API ID of the status we just imported for future imports.
 		archiveIdToImportedApiId[status.ID] = importedStatus.ID
-		if err := writeMapFile(statusMapFile, archiveIdToImportedApiId); err != nil {
+		if err := archive.writeMapFile(statusMapFile, archiveIdToImportedApiId); err != nil {
 			slog.Error("Couldn't write status map file", "path", statusMapFile, "err", err)
 			return err
 		}
