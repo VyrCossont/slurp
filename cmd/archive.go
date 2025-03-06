@@ -59,6 +59,25 @@ var archiveImportCmd = &cobra.Command{
 	},
 }
 
+// archiveExportCmd represents the archive import command
+var archiveExportCmd = &cobra.Command{
+	Use:   "export",
+	Short: "Export a post archive",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		keyring, err := auth.ClientKeyring()
+		if err != nil {
+			return err
+		}
+
+		authClient, err := auth.NewAuthClient(User, keyring)
+		if err != nil {
+			return err
+		}
+
+		return archive.Export(authClient, File)
+	},
+}
+
 // Format is the file path for recording how archive media attachment paths map to imported media attachment IDs.
 var Format string
 
@@ -84,4 +103,7 @@ func init() {
 	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentDirectory, "attachment-directory", "d", "", "folder to store media downloaded from Pixelfed")
 	archiveImportCmd.PersistentFlags().BoolVarP(&AllowMissingCustomEmojis, "allow-missing-custom-emojis", "e", false, "import statuses for which the instance doesn't have all of the custom emojis")
 	archiveCmd.AddCommand(archiveImportCmd)
+
+	archiveExportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import archive from (this must be an empty folder; if it doesn't exist, it'll be created)")
+	archiveCmd.AddCommand(archiveExportCmd)
 }
