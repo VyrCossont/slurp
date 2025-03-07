@@ -55,7 +55,7 @@ func Export(authClient *auth.Client, file string) error {
 	}
 	for _, list := range resp.GetPayload() {
 		pagedRequester := &listAccountsPagedRequester{listID: list.ID}
-		listAccounts, err := api.ReadAllPaged(authClient, pagedRequester)
+		listAccounts, err := api.ReadAllPaged(authClient, pagedRequester, nil, nil)
 		if err != nil {
 			slog.Error("couldn't fetch list accounts", "title", list.Title, "list_id", list.ID, "error", err)
 			continue
@@ -189,18 +189,24 @@ func Import(authClient *auth.Client, file string) error {
 }
 
 type listAccountsPagedRequester struct {
-	listID string
+	listID        string
+	forwardPaging bool
 }
 
-func (pagedRequester *listAccountsPagedRequester) Request(authClient *auth.Client, maxID *string) (*listAccountsPagedResponse, error) {
+func (pagedRequester *listAccountsPagedRequester) Request(authClient *auth.Client, maxID *string, minID *string) (*listAccountsPagedResponse, error) {
 	resp, err := authClient.Client.Lists.ListAccounts(&lists.ListAccountsParams{
 		ID:    pagedRequester.listID,
 		MaxID: maxID,
+		MinID: minID,
 	}, authClient.Auth)
 	if err != nil {
 		return nil, err
 	}
 	return &listAccountsPagedResponse{resp}, nil
+}
+
+func (pagedRequester *listAccountsPagedRequester) ForwardPaging() bool {
+	return pagedRequester.forwardPaging
 }
 
 type listAccountsPagedResponse struct {

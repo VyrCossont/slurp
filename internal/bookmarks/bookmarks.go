@@ -36,7 +36,7 @@ import (
 
 func Export(authClient *auth.Client, file string) error {
 	pagedRequester := &bookmarksPagedRequester{}
-	bookmarkedStatuses, err := api.ReadAllPaged(authClient, pagedRequester)
+	bookmarkedStatuses, err := api.ReadAllPaged(authClient, pagedRequester, nil, nil)
 	if err != nil {
 		return err
 	}
@@ -96,18 +96,23 @@ func Import(authClient *auth.Client, file string) error {
 	return nil
 }
 
-// bookmarksPagedRequester has no state.
 type bookmarksPagedRequester struct {
+	forwardPaging bool
 }
 
-func (pagedRequester *bookmarksPagedRequester) Request(authClient *auth.Client, maxID *string) (*bookmarksPagedResponse, error) {
+func (pagedRequester *bookmarksPagedRequester) Request(authClient *auth.Client, maxID *string, minID *string) (*bookmarksPagedResponse, error) {
 	resp, err := authClient.Client.Bookmarks.BookmarksGet(&bookmarks.BookmarksGetParams{
 		MaxID: maxID,
+		MinID: minID,
 	}, authClient.Auth)
 	if err != nil {
 		return nil, err
 	}
 	return &bookmarksPagedResponse{resp}, nil
+}
+
+func (pagedRequester *bookmarksPagedRequester) ForwardPaging() bool {
+	return pagedRequester.forwardPaging
 }
 
 type bookmarksPagedResponse struct {

@@ -65,19 +65,18 @@ func (a *Activity) Object() *Object {
 type Object struct {
 	Id            string            `json:"id"`
 	Type          string            `json:"type"`
-	Summary       *string           `json:"summary"`
-	InReplyTo     *string           `json:"inReplyTo"`
+	Summary       *string           `json:"summary,omitempty"`
+	InReplyTo     *string           `json:"inReplyTo,omitempty"`
 	Published     time.Time         `json:"published"`
 	Url           string            `json:"url"`
-	To            []string          `json:"to"`
+	To            []string          `json:"to,omitempty"`
 	Cc            []string          `json:"cc"`
 	Sensitive     bool              `json:"sensitive"`
-	Conversation  string            `json:"conversation"`
 	Content       string            `json:"content"`
-	ContentMap    map[string]string `json:"contentMap"`
+	ContentMap    map[string]string `json:"contentMap,omitempty"`
 	DirectMessage bool              `json:"directMessage"`
-	Attachments   []*Attachment     `json:"attachment"`
-	RawTags       []json.RawMessage `json:"tag"`
+	Attachments   []*Attachment     `json:"attachment,omitempty"`
+	RawTags       []json.RawMessage `json:"tag,omitempty"`
 }
 
 const ASPublic = "https://www.w3.org/ns/activitystreams#Public"
@@ -138,8 +137,8 @@ type Attachment struct {
 	MediaType     string    `json:"mediaType"`
 	Url           string    `json:"url"`
 	Name          *string   `json:"name"`
-	RawFocalPoint []float64 `json:"focalPoint"`
-	Icon          *Icon     `json:"icon"`
+	RawFocalPoint []float64 `json:"focalPoint,omitempty"`
+	Icon          *Icon     `json:"icon,omitempty"`
 	// TODO: (Vyr) Akkoma archives may have Url as a list containing href, mediaType, etc.
 }
 
@@ -188,11 +187,9 @@ func (m *MentionOrHashtag) GetType() string {
 }
 
 type Emoji struct {
-	Type    string    `json:"type"`
-	Name    string    `json:"name"`
-	Id      string    `json:"id"`
-	Updated time.Time `json:"updated"`
-	Icon    Icon      `json:"icon"`
+	Type string `json:"type"`
+	Name string `json:"name"`
+	Icon Icon   `json:"icon"`
 }
 
 func (e *Emoji) GetType() string {

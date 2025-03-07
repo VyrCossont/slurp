@@ -21,22 +21,21 @@ import (
 	"cmp"
 	"context"
 	"encoding/json"
-	"io"
 	"log/slog"
-	"net/http"
 	"os"
 	"path"
 	"slices"
 	"time"
 
-	"github.com/VyrCossont/slurp/client/statuses"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 	"github.com/pkg/errors"
 	"golang.org/x/time/rate"
+
+	"github.com/VyrCossont/slurp/client/statuses"
+	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/internal/util"
+	"github.com/VyrCossont/slurp/models"
 )
 
 func PixelfedImport(
@@ -187,7 +186,7 @@ StatusesLoop:
 		// Download and then upload any media attachments.
 		mediaIDs := make([]string, 0, len(status.MediaAttachments))
 		for _, attachment := range status.MediaAttachments {
-			localPath, err := downloadAttachment(
+			localPath, _, err := DownloadAttachment(
 				context.TODO(),
 				mediaDownloadLimiter,
 				mediaDownloadClient,
@@ -255,50 +254,6 @@ StatusesLoop:
 	}
 
 	return nil
-}
-
-func downloadAttachment(
-	ctx context.Context,
-	mediaDownloadLimiter *rate.Limiter,
-	mediaDownloadClient *http.Client,
-	statusURI string,
-	localDir string,
-	url string,
-) (string, error) {
-	localPath := path.Join(localDir, path.Base(url))
-	localFile, err := os.Create(localPath)
-	if err != nil {
-		slog.Error("Error creating local attachment file", "status", statusURI, "attachment", url, "localPath", localPath, "err", err)
-	}
-	defer func() {
-		if err := localFile.Close(); err != nil {
-			slog.Error("Error closing local attachment file", "status", statusURI, "attachment", url, "localPath", localPath, "err", err)
-		}
-	}()
-
-	// TODO: (Vyr) add media download timeout
-	if err := mediaDownloadLimiter.Wait(ctx); err != nil {
-		return "", err
-	}
-
-	// Download the attachment from the original server.
-	resp, err := mediaDownloadClient.Get(url)
-	if err != nil {
-		slog.Error("Error downloading attachment", "status", statusURI, "attachment", url, "err", err)
-		return "", err
-	}
-	defer func() {
-		if err := resp.Body.Close(); err != nil {
-			slog.Error("Error closing attachment response body", "status", statusURI, "attachment", url, "err", err)
-		}
-	}()
-
-	if _, err := io.Copy(localFile, resp.Body); err != nil {
-		slog.Error("Error copying response to local file", "status", statusURI, "attachment", url, "localPath", localPath, "err", err)
-		return "", err
-	}
-
-	return localPath, nil
 }
 
 // PixelfedArchiveStatus is a Mastodon API status with a few extra fields.

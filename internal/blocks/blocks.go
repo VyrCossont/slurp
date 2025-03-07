@@ -38,7 +38,7 @@ import (
 
 func Export(authClient *auth.Client, file string) error {
 	pagedRequester := &blocksPagedRequester{}
-	blockedAccounts, err := api.ReadAllPaged(authClient, pagedRequester)
+	blockedAccounts, err := api.ReadAllPaged(authClient, pagedRequester, nil, nil)
 	if err != nil {
 		return err
 	}
@@ -99,16 +99,22 @@ func Import(authClient *auth.Client, file string) error {
 
 // blocksPagedRequester has no state.
 type blocksPagedRequester struct {
+	forwardPaging bool
 }
 
-func (pagedRequester *blocksPagedRequester) Request(authClient *auth.Client, maxID *string) (*blocksPagedResponse, error) {
+func (pagedRequester *blocksPagedRequester) Request(authClient *auth.Client, maxID *string, minID *string) (*blocksPagedResponse, error) {
 	resp, err := authClient.Client.Blocks.BlocksGet(&blocks.BlocksGetParams{
 		MaxID: maxID,
+		MinID: minID,
 	}, authClient.Auth)
 	if err != nil {
 		return nil, err
 	}
 	return &blocksPagedResponse{resp}, nil
+}
+
+func (pagedRequester *blocksPagedRequester) ForwardPaging() bool {
+	return pagedRequester.forwardPaging
 }
 
 type blocksPagedResponse struct {

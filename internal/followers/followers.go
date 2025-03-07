@@ -23,7 +23,7 @@ func Export(authClient *auth.Client, file string) error {
 		return err
 	}
 
-	followedAccounts, err := api.ReadAllPaged(authClient, pagedRequester)
+	followedAccounts, err := api.ReadAllPaged(authClient, pagedRequester, nil, nil)
 	if err != nil {
 		return err
 	}
@@ -43,18 +43,24 @@ func Export(authClient *auth.Client, file string) error {
 }
 
 type accountFollowersPagedRequester struct {
-	accountID string
+	accountID     string
+	forwardPaging bool
 }
 
-func (pagedRequester *accountFollowersPagedRequester) Request(authClient *auth.Client, maxID *string) (*accountFollowersPagedResponse, error) {
+func (pagedRequester *accountFollowersPagedRequester) Request(authClient *auth.Client, maxID *string, minID *string) (*accountFollowersPagedResponse, error) {
 	resp, err := authClient.Client.Accounts.AccountFollowers(&accounts.AccountFollowersParams{
 		ID:    pagedRequester.accountID,
 		MaxID: maxID,
+		MinID: minID,
 	}, authClient.Auth)
 	if err != nil {
 		return nil, err
 	}
 	return &accountFollowersPagedResponse{resp}, nil
+}
+
+func (pagedRequester *accountFollowersPagedRequester) ForwardPaging() bool {
+	return pagedRequester.forwardPaging
 }
 
 type accountFollowersPagedResponse struct {

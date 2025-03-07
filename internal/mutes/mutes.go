@@ -41,7 +41,7 @@ import (
 
 func Export(authClient *auth.Client, file string) error {
 	pagedRequester := &mutesPagedRequester{}
-	mutedAccounts, err := api.ReadAllPaged(authClient, pagedRequester)
+	mutedAccounts, err := api.ReadAllPaged(authClient, pagedRequester, nil, nil)
 	if err != nil {
 		return err
 	}
@@ -136,7 +136,7 @@ func Import(authClient *auth.Client, file string) error {
 type mutesPagedRequester struct {
 }
 
-func (pagedRequester *mutesPagedRequester) Request(authClient *auth.Client, maxID *string) (*mutesPagedResponse, error) {
+func (pagedRequester *mutesPagedRequester) Request(authClient *auth.Client, maxID *string, minID *string) (*mutesPagedResponse, error) {
 	resp, err := authClient.Client.Mutes.MutesGet(&mutes.MutesGetParams{
 		MaxID: maxID,
 	}, authClient.Auth)
@@ -144,6 +144,10 @@ func (pagedRequester *mutesPagedRequester) Request(authClient *auth.Client, maxI
 		return nil, err
 	}
 	return &mutesPagedResponse{resp}, nil
+}
+
+func (pagedRequester *mutesPagedRequester) ForwardPaging() bool {
+	return false
 }
 
 type mutesPagedResponse struct {

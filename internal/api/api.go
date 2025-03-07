@@ -19,16 +19,19 @@ package api
 
 import (
 	"log/slog"
+	"slices"
 
-	"github.com/VyrCossont/slurp/client/accounts"
-	"github.com/VyrCossont/slurp/models"
 	"github.com/pkg/errors"
 
+	"github.com/VyrCossont/slurp/client/accounts"
 	"github.com/VyrCossont/slurp/internal/auth"
+	"github.com/VyrCossont/slurp/models"
 )
 
 type PagedRequester[Response PagedResponse[Element], Element any] interface {
-	Request(authClient *auth.Client, maxID *string) (Response, error)
+	Request(authClient *auth.Client, maxID *string, minID *string) (Response, error)
+	// ForwardPaging pagers go from lowest ID to highest.
+	ForwardPaging() bool
 }
 
 type PagedResponse[Element any] interface {
@@ -36,9 +39,17 @@ type PagedResponse[Element any] interface {
 	Elements() []Element
 }
 
-func ReadAllPaged[Requester PagedRequester[Response, Element], Response PagedResponse[Element], Element any](authClient *auth.Client, pagedRequester Requester) ([]Element, error) {
+func ReadAllPaged[
+	Requester PagedRequester[Response, Element],
+	Response PagedResponse[Element],
+	Element any,
+](
+	authClient *auth.Client,
+	pagedRequester Requester,
+	maxID *string,
+	minID *string,
+) ([]Element, error) {
 	var all []Element
-	var maxID *string
 
 	for {
 		err := authClient.Wait()
@@ -46,23 +57,37 @@ func ReadAllPaged[Requester PagedRequester[Response, Element], Response PagedRes
 			return all, errors.WithStack(err)
 		}
 
-		pagedResponse, err := pagedRequester.Request(authClient, maxID)
+		pagedResponse, err := pagedRequester.Request(authClient, maxID, minID)
 		if err != nil {
 			slog.Error("error fetching page", "error", err)
 			return all, errors.WithStack(err)
 		}
 
-		maxID, err = ParseLinkMaxID(pagedResponse.Link())
-		if err != nil {
-			slog.Error("error parsing Link header", "error", err)
-			return all, errors.WithStack(err)
-		}
-		if maxID == nil {
-			// End of pages.
-			break
+		elements := pagedResponse.Elements()
+		if pagedRequester.ForwardPaging() {
+			minID, err = ParseLinkMinID(pagedResponse.Link())
+			if err != nil {
+				slog.Error("error parsing Link header", "error", err)
+				return all, errors.WithStack(err)
+			}
+			if minID == nil {
+				// End of pages.
+				break
+			}
+			slices.Reverse(elements)
+		} else {
+			maxID, err = ParseLinkMaxID(pagedResponse.Link())
+			if err != nil {
+				slog.Error("error parsing Link header", "error", err)
+				return all, errors.WithStack(err)
+			}
+			if maxID == nil {
+				// End of pages.
+				break
+			}
 		}
 
-		all = append(all, pagedResponse.Elements()...)
+		all = append(all, elements...)
 	}
 
 	return all, nil

@@ -41,3 +41,21 @@ func ParseLinkMaxID(linkHeader string) (*string, error) {
 	}
 	return &nextMaxID, err
 }
+
+// ParseLinkMinID extracts the `min_id` from the `prev` link for paging to newer items.
+func ParseLinkMinID(linkHeader string) (*string, error) {
+	prev := link.Parse(linkHeader)["prev"]
+	if prev == nil {
+		// No link header in that direction means end of results.
+		return nil, nil
+	}
+	prevUrl, err := url.Parse(prev.URI)
+	if err != nil {
+		return nil, errors.Wrap(err, "couldn't parse prev page URL")
+	}
+	prevMinID := prevUrl.Query().Get("min_id")
+	if prevMinID == "" {
+		return nil, errors.New("couldn't find prev page min ID")
+	}
+	return &prevMinID, err
+}
