@@ -243,8 +243,8 @@ StatusesLoop:
 				)
 				if err != nil {
 					// TODO: (Vyr) DownloadAttachment has detailed error messages already, but they all say "attachment" instead of "emoji". lol. refactor.
-					slog.Error("couldn't download an emoji, skipping status", "status", status.URI, "emoji", emoji.Shortcode, "err", err)
-					continue StatusesLoop
+					slog.Error("couldn't download an emoji, skipping emoji and continuing anyway", "status", status.URI, "emoji", emoji.Shortcode, "err", err)
+					continue
 				}
 
 				// Construct the relative path, which is the "URL" we include in the export.
@@ -299,8 +299,8 @@ StatusesLoop:
 				attachment.URL,
 			)
 			if err != nil {
-				slog.Error("couldn't download an attachment, skipping status", "status", status.URI, "attachment", attachment.URL, "err", err)
-				continue StatusesLoop
+				slog.Error("couldn't download an attachment, skipping attachment and continuing anyway", "status", status.URI, "attachment", attachment.URL, "err", err)
+				continue
 			}
 
 			// Construct the relative path, which is the "URL" we include in the export.
