@@ -17,6 +17,7 @@ require (
 	github.com/spf13/cobra v1.9.1
 	github.com/vincent-petithory/dataurl v1.0.0
 	github.com/zalando/go-keyring v0.2.6
+	golang.org/x/net v0.34.0
 	golang.org/x/time v0.10.0
 	webfinger.net/go/webfinger v0.1.0
 )
@@ -77,7 +78,6 @@ require (
 	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225 // indirect
 	golang.org/x/mod v0.17.0 // indirect
-	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect

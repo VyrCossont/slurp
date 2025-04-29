@@ -1,3 +1,6 @@
 # binary
 /slurp
 /slurp.exe
+
+# goreleaser aritifact directory shouldn't be in source
+/dist
