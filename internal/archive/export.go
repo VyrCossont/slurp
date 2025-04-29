@@ -107,24 +107,25 @@ func Export(
 	mediaDownloadClient := util.HttpClient
 
 	// Convert each status into an ActivityPub object, and download their attachments.
+StatusesLoop:
 	for _, status := range accountStatuses {
 		if status.Reblog != nil {
 			// TODO: (Vyr) implement boosts
-			slog.Warn("export doesn't handle boosts yet", "status", status.URI)
-			continue
+			slog.Error("export doesn't handle boosts yet, skipping", "status", status.URI)
+			continue StatusesLoop
 		}
 		if status.Poll != nil {
 			// TODO: (Vyr) implement polls
-			slog.Warn("export doesn't handle polls yet", "status", status.URI)
-			continue
+			slog.Error("export doesn't handle polls yet, skipping", "status", status.URI)
+			continue StatusesLoop
 		}
 		if status.InteractionPolicy != nil {
 			// TODO: (Vyr) implement interaction policies. check GTS AP serializer.
-			slog.Warn("export can't handle interaction policies correctly", "status", status.URI)
+			slog.Warn("export can't handle interaction policies correctly, continuing anyway", "status", status.URI)
 		}
 		if status.LocalOnly {
 			// TODO: (Vyr) this is a fun puzzle since non-federated statuses may not *have* an AP serialization.
-			slog.Warn("export can't handle local-only statuses correctly", "status", status.URI)
+			slog.Warn("export can't handle local-only statuses correctly, continuing anyway", "status", status.URI)
 		}
 
 		object := Object{
@@ -138,8 +139,8 @@ func Export(
 			object.Summary = &status.SpoilerText
 		}
 		if object.Published, err = time.Parse(time.RFC3339Nano, status.CreatedAt); err != nil {
-			slog.Error("couldn't parse status creation time", "status", status.URI, "err", err)
-			return err
+			slog.Error("couldn't parse status creation time, skipping", "status", status.URI, "err", err)
+			continue StatusesLoop
 		}
 		language := status.Language
 		if language == "" {
@@ -169,7 +170,7 @@ func Export(
 			object.DirectMessage = true
 		default:
 			// TODO: (Vyr) check how GTS handles mutuals-only
-			slog.Warn("export doesn't support this visibility level", "status", status.URI, "visibility", status.Visibility)
+			slog.Warn("export doesn't support this visibility level, skipping", "status", status.URI, "visibility", status.Visibility)
 			continue
 		}
 
@@ -187,8 +188,8 @@ func Export(
 				authClient.Auth,
 			)
 			if err != nil {
-				slog.Error("couldn't get status being replied to", "status", status.URI, "inReplyToID", status.InReplyToID, "err", err)
-				return err
+				slog.Warn("couldn't get status being replied to (it may have been deleted), continuing anyway", "status", status.URI, "inReplyToID", status.InReplyToID, "err", err)
+				continue StatusesLoop
 			}
 
 			object.InReplyTo = &response.GetPayload().URI
@@ -204,7 +205,7 @@ func Export(
 			var rawTag json.RawMessage
 			rawTag, err = json.MarshalIndent(tag, "          ", "  ")
 			if err != nil {
-				slog.Error("couldn't serialize status mention as JSON", "status", status.URI, "mention", mention.Acct, "err", err)
+				slog.Error("couldn't serialize status mention as JSON (should never happen)", "status", status.URI, "mention", mention.Acct, "err", err)
 				return err
 			}
 			object.RawTags = append(object.RawTags, rawTag)
@@ -220,7 +221,7 @@ func Export(
 			var rawTag json.RawMessage
 			rawTag, err = json.MarshalIndent(tag, "          ", "  ")
 			if err != nil {
-				slog.Error("couldn't serialize status hashtag as JSON", "status", status.URI, "hashtag", hashtag.Name, "err", err)
+				slog.Error("couldn't serialize status hashtag as JSON (should never happen)", "status", status.URI, "hashtag", hashtag.Name, "err", err)
 				return err
 			}
 			object.RawTags = append(object.RawTags, rawTag)
@@ -242,14 +243,15 @@ func Export(
 				)
 				if err != nil {
 					// TODO: (Vyr) DownloadAttachment has detailed error messages already, but they all say "attachment" instead of "emoji". lol. refactor.
-					return err
+					slog.Error("couldn't download an emoji, skipping status", "status", status.URI, "emoji", emoji.Shortcode, "err", err)
+					continue StatusesLoop
 				}
 
 				// Construct the relative path, which is the "URL" we include in the export.
 				var relPath string
 				relPath, err = filepath.Rel(emojisFolder, localPath)
 				if err != nil {
-					slog.Error("couldn't derive emoji folder relative path for emoji", "status", status.URI, "emoji", emoji.Shortcode, "path", localPath, "err", err)
+					slog.Error("couldn't derive emoji folder relative path for emoji (should never happen)", "status", status.URI, "emoji", emoji.Shortcode, "path", localPath, "err", err)
 					return err
 				}
 
@@ -272,7 +274,7 @@ func Export(
 			var rawTag json.RawMessage
 			rawTag, err = json.MarshalIndent(tag, "          ", "  ")
 			if err != nil {
-				slog.Error("couldn't serialize status emoji as JSON", "status", status.URI, "emoji", emoji.Shortcode, "err", err)
+				slog.Error("couldn't serialize status emoji as JSON (should never happen)", "status", status.URI, "emoji", emoji.Shortcode, "err", err)
 				return err
 			}
 			object.RawTags = append(object.RawTags, rawTag)
@@ -297,15 +299,15 @@ func Export(
 				attachment.URL,
 			)
 			if err != nil {
-				// DownloadAttachment has detailed error messages already.
-				return err
+				slog.Error("couldn't download an attachment, skipping status", "status", status.URI, "attachment", attachment.URL, "err", err)
+				continue StatusesLoop
 			}
 
 			// Construct the relative path, which is the "URL" we include in the export.
 			var relPath string
 			relPath, err = filepath.Rel(archiveFolderPath, localPath)
 			if err != nil {
-				slog.Error("couldn't derive archive folder relative path for attachment", "status", status.URI, "attachment", attachment.URL, "path", localPath, "err", err)
+				slog.Error("couldn't derive archive folder relative path for attachment (should never happen)", "status", status.URI, "attachment", attachment.URL, "path", localPath, "err", err)
 				return err
 			}
 
@@ -334,7 +336,7 @@ func Export(
 		}
 		activity.RawObject, err = json.MarshalIndent(object, "        ", "  ")
 		if err != nil {
-			slog.Error("couldn't serialize AP object for status as JSON", "status", status.URI, "err", err)
+			slog.Error("couldn't serialize AP object for status as JSON (should never happen)", "status", status.URI, "err", err)
 			return err
 		}
 		outbox.OrderedItems = append(outbox.OrderedItems, activity)
