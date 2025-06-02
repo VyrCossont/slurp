@@ -84,7 +84,7 @@ Before proceeding, you might want to copy custom emojis from your old instance. 
 ./slurp --user user@instance.tld emojis import --file emojis.json
 ```
 
-Importing an archive requires that your archive be already uncompressed. (It should contain `actor.json` and `outbox.json` files, and a `media_attachments` folder.) Importing also requires two map files so that an interrupted import can be resumed. It is safe to interrupt an archive import: as long as you have your map files, this shouldn't result in duplicated statuses or media.
+Importing an archive requires that your archive be already uncompressed. (It should contain `actor.json` and `outbox.json` files, and a `media_attachments` folder.) Importing will also create two map files, so that an interrupted import can be resumed. It is safe to interrupt an archive import: as long as you have your map files, this shouldn't result in duplicated statuses or media.
 
 Depending on your rate limit settings for both `slurp` and your GTS instance, and how much media you have, an archive import may take minutes or hours.
 
