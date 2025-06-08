@@ -80,7 +80,7 @@ func Export(authClient *auth.Client, file string, inline bool) error {
 	return nil
 }
 
-func Import(authClient *auth.Client, file string) error {
+func Import(authClient *auth.Client, file string, ignoreErrors bool) error {
 	var emojis []*models.Emoji
 
 	var err error
@@ -159,7 +159,11 @@ func Import(authClient *auth.Client, file string) error {
 		)
 		if err != nil {
 			slog.Error("couldn't create emoji", "shortcode", emoji.Shortcode, "err", err)
-			return errors.WithStack(err)
+			if ignoreErrors {
+				continue
+			} else {
+				return errors.WithStack(err)
+			}
 		}
 		apiEmoji := response.GetPayload()
 
