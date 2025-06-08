@@ -63,12 +63,15 @@ var emojisImportCmd = &cobra.Command{
 			return err
 		}
 
-		return emojis.Import(authClient, File)
+		return emojis.Import(authClient, File, IgnoreErrors)
 	},
 }
 
 // Inline includes emojis in the exported emoji JSON as data: URLs.
 var Inline bool
+
+// IgnoreErrors determines whether to ignore errors during emoji import.
+var IgnoreErrors bool
 
 func init() {
 	rootCmd.AddCommand(emojisCmd)
@@ -78,5 +81,6 @@ func init() {
 	emojisCmd.AddCommand(emojisExportCmd)
 
 	emojisImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import emojis from (optional: stdin will be used if omitted)")
+	emojisImportCmd.PersistentFlags().BoolVarP(&IgnoreErrors, "ignore-errors", "", false, "whether to ignore errors during import")
 	emojisCmd.AddCommand(emojisImportCmd)
 }
