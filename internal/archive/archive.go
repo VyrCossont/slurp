@@ -134,6 +134,16 @@ func Import(
 		return cmp.Compare(a.Id, b.Id)
 	})
 
+	// Pattern matching allowed self-links.
+	// TODO: (Vyr) we cheat a little bit using known URL patterns to make life easier this once.
+	selfLinkWebPattern, err := regexp.Compile(`https://demon.social/@vyr/\d+`)
+	if err != nil {
+		slog.Error("Regex compilation error for self-link pattern", "err", err)
+		return err
+	}
+	originIdPrefix := "https://demon.social/users/vyr/statuses/"
+	importedWebUrlPrefix := "https://princess.industries/@vyr/statuses/"
+
 NotesLoop:
 	for _, note := range notesInOrder {
 		// Skip previously imported notes.
@@ -208,6 +218,24 @@ NotesLoop:
 				slog.Error("Instance is missing required custom emoji", "status", note.Id, "emoji", name)
 				continue NotesLoop
 			}
+		}
+
+		// Update allowed self-links.
+		selfLinkWebReplaceFailed := false
+		markdown = selfLinkWebPattern.ReplaceAllStringFunc(markdown, func(url string) string {
+			originId := originIdPrefix + path.Base(url)
+			importedApiId, found := archiveIdToImportedApiId[originId]
+			if !found {
+				// Normally topo sort would prevent this but we could be dealing with a deleted or future or private status or a malformed URL.
+				slog.Error("Couldn't update allowed self-link because its status hasn't been imported", "status", note.Id, "url", url)
+				selfLinkWebReplaceFailed = true
+				return ""
+			}
+			importedWebUrl := importedWebUrlPrefix + importedApiId
+			return importedWebUrl
+		})
+		if selfLinkWebReplaceFailed {
+			continue NotesLoop
 		}
 
 		// Mentions from deleted instances or users don't show up as mention tags. Skip those too.
