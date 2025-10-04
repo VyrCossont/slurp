@@ -19,7 +19,6 @@ package archive
 
 import (
 	"cmp"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log/slog"
@@ -98,12 +97,12 @@ func Import(
 		instanceEmojiNames[":"+emoji.Shortcode+":"] = struct{}{}
 	}
 
-	actor, err := readActor(file)
+	actor, err := util.LoadJSON[Actor](path.Join(file, "actor.json"))
 	if err != nil {
 		return err
 	}
 
-	outbox, err := readOutbox(file)
+	outbox, err := util.LoadJSON[Outbox](file)
 	if err != nil {
 		return err
 	}
@@ -363,37 +362,4 @@ func uploadAttachment(
 
 	slog.Info("Imported attachment", "path", localPath, "url", apiAttachment.TextURL)
 	return apiAttachment.ID, nil
-}
-
-// TODO: (Vyr) can we collapse these two into a generic?
-func readActor(file string) (*Actor, error) {
-	jsonPath := path.Join(file, "actor.json")
-
-	jsonFile, err := os.Open(jsonPath)
-	if err != nil {
-		return nil, err
-	}
-	defer func() { _ = jsonFile.Close() }()
-
-	var doc Actor
-	if err := json.NewDecoder(jsonFile).Decode(&doc); err != nil {
-		return nil, err
-	}
-	return &doc, nil
-}
-
-func readOutbox(file string) (*Outbox, error) {
-	jsonPath := path.Join(file, "outbox.json")
-
-	jsonFile, err := os.Open(jsonPath)
-	if err != nil {
-		return nil, err
-	}
-	defer func() { _ = jsonFile.Close() }()
-
-	var doc Outbox
-	if err := json.NewDecoder(jsonFile).Decode(&doc); err != nil {
-		return nil, err
-	}
-	return &doc, nil
 }

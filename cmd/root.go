@@ -30,6 +30,7 @@ var rootCmd = &cobra.Command{
 }
 
 // User is the username@domain of the account whose data we're working with.
+// For the `bluesky download` command only, there is no username part and the leading @ should be omitted.
 var User string
 
 // File is the file path of the data we're working with.

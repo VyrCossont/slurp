@@ -25,6 +25,37 @@ import (
 	"os"
 )
 
+func CheckArchiveFolder(archiveFolderPath string) error {
+	// If the folder doesn't exist, create it.
+	stat, err := os.Stat(archiveFolderPath)
+	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			err = os.MkdirAll(archiveFolderPath, 0755)
+			if err != nil {
+				slog.Error("archive folder didn't exist, failed to create it", "path", archiveFolderPath, "err", err)
+				return err
+			}
+		} else {
+			slog.Error("couldn't get archive info from filesystem", "path", archiveFolderPath, "err", err)
+			return err
+		}
+	} else if !stat.IsDir() {
+		return errors.New("archive folder path is already occupied by something that isn't a folder")
+	}
+
+	// Check that it's empty.
+	empty, err := IsEmpty(archiveFolderPath)
+	if err != nil {
+		slog.Error("couldn't check whether archive folder is empty", "path", archiveFolderPath, "err", err)
+		return err
+	}
+	if !empty {
+		return errors.New("archive folder must be empty")
+	}
+
+	return nil
+}
+
 // IsEmpty returns whether a folder is empty.
 func IsEmpty(folderPath string) (bool, error) {
 	archiveFolder, err := os.Open(folderPath)
@@ -49,6 +80,27 @@ func IsEmpty(folderPath string) (bool, error) {
 	return false, nil
 }
 
+func LoadJSON[T any](path string) (*T, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		slog.Error("couldn't open input file", "path", path, "err", err)
+		return nil, err
+	}
+	defer func() {
+		err := f.Close()
+		if err != nil {
+			slog.Error("couldn't close input file", "path", path, "err", err)
+		}
+	}()
+
+	var doc T
+	if err := json.NewDecoder(f).Decode(&doc); err != nil {
+		slog.Error("couldn't read data as JSON from input file", "path", path, "err", err)
+		return nil, err
+	}
+	return &doc, nil
+}
+
 func SaveJSON(path string, data any) error {
 	f, err := os.Create(path)
 	if err != nil {
@@ -56,7 +108,7 @@ func SaveJSON(path string, data any) error {
 		return err
 	}
 	defer func() {
-		err = f.Close()
+		err := f.Close()
 		if err != nil {
 			slog.Error("couldn't close output file", "path", path, "err", err)
 		}

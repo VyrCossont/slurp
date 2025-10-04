@@ -53,6 +53,9 @@ var archiveImportCmd = &cobra.Command{
 		case "pixelfed":
 			return archive.PixelfedImport(authClient, File, StatusMapFile, AttachmentMapFile, AttachmentDirectory)
 
+		case "bluesky":
+			return archive.BlueskyImport(authClient, File, StatusMapFile, AttachmentMapFile, AttachmentDirectory)
+
 		default:
 			return errors.Errorf("unknown archive format: %s", Format)
 		}

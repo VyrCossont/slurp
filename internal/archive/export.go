@@ -20,7 +20,6 @@ package archive
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"log/slog"
 	"os"
 	"path"
@@ -44,7 +43,7 @@ func Export(
 	authClient *auth.Client,
 	archiveFolderPath string,
 ) error {
-	err := checkArchiveFolder(archiveFolderPath)
+	err := util.CheckArchiveFolder(archiveFolderPath)
 	if err != nil {
 		return err
 	}
@@ -350,37 +349,6 @@ StatusesLoop:
 type emojiCacheValue struct {
 	relPath     string
 	contentType string
-}
-
-func checkArchiveFolder(archiveFolderPath string) error {
-	// If the folder doesn't exist, create it.
-	stat, err := os.Stat(archiveFolderPath)
-	if err != nil {
-		if errors.Is(err, os.ErrNotExist) {
-			err = os.MkdirAll(archiveFolderPath, 0755)
-			if err != nil {
-				slog.Error("archive folder didn't exist, failed to create it", "path", archiveFolderPath, "err", err)
-				return err
-			}
-		} else {
-			slog.Error("couldn't get archive info from filesystem", "path", archiveFolderPath, "err", err)
-			return err
-		}
-	} else if !stat.IsDir() {
-		return errors.New("archive folder path is already occupied by something that isn't a folder")
-	}
-
-	// Check that it's empty.
-	empty, err := util.IsEmpty(archiveFolderPath)
-	if err != nil {
-		slog.Error("couldn't check whether archive folder is empty", "path", archiveFolderPath, "err", err)
-		return err
-	}
-	if !empty {
-		return errors.New("archive folder must be empty")
-	}
-
-	return nil
 }
 
 func exportActor(
