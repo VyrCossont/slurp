@@ -59,13 +59,13 @@ func PixelfedImport(
 	}
 	err = os.MkdirAll(attachmentDirectory, 0755)
 	if err != nil {
-		slog.Error("Couldn't create attachment directory", "path", attachmentDirectory, "err", err)
+		slog.Error("Couldn't create attachment directory", "path", attachmentDirectory, "error", err)
 		return err
 	}
 
 	statusesToImport, err := pixelfedReadStatuses(file)
 	if err != nil {
-		slog.Error("Couldn't read Pixelfed statuses from JSON file", "path", file, "err", err)
+		slog.Error("Couldn't read Pixelfed statuses from JSON file", "path", file, "error", err)
 		return err
 	}
 
@@ -178,7 +178,7 @@ StatusesLoop:
 		localDir := path.Join(attachmentDirectory, status.ID)
 		if len(status.MediaAttachments) > 0 {
 			if err := os.MkdirAll(localDir, 0755); err != nil {
-				slog.Error("Couldn't create attachment directory", "status", status.URI, "localDir", localDir, "err", err)
+				slog.Error("Couldn't create attachment directory", "status", status.URI, "localDir", localDir, "error", err)
 				continue StatusesLoop
 			}
 		}
@@ -215,7 +215,7 @@ StatusesLoop:
 				focusY,
 			)
 			if err != nil {
-				slog.Error("Error retrieving or uploading attachment", "status", status.URI, "attachment", attachment.URL, "err", err)
+				slog.Error("Error retrieving or uploading attachment", "status", status.URI, "attachment", attachment.URL, "error", err)
 				continue StatusesLoop
 			}
 			mediaIDs = append(mediaIDs, mediaID)
@@ -238,7 +238,7 @@ StatusesLoop:
 			},
 		)
 		if err != nil {
-			slog.Error("Couldn't post converted status", "status", status.URI, "err", err)
+			slog.Error("Couldn't post converted status", "status", status.URI, "error", err)
 			continue StatusesLoop
 		}
 		importedStatus := response.GetPayload()
@@ -246,7 +246,7 @@ StatusesLoop:
 		// Save the API ID of the status we just imported for future imports.
 		archiveIdToImportedApiId[status.ID] = importedStatus.ID
 		if err := writeMapFile(statusMapFile, archiveIdToImportedApiId); err != nil {
-			slog.Error("Couldn't write status map file", "path", statusMapFile, "err", err)
+			slog.Error("Couldn't write status map file", "path", statusMapFile, "error", err)
 			return err
 		}
 

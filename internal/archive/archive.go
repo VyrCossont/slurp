@@ -55,7 +55,7 @@ func Import(
 	// Require archive to be already uncompressed.
 	stat, err := os.Stat(file)
 	if err != nil {
-		slog.Error("couldn't get archive info from filesystem", "path", file, "err", err)
+		slog.Error("couldn't get archive info from filesystem", "path", file, "error", err)
 		return err
 	}
 	if !stat.IsDir() {
@@ -163,7 +163,7 @@ NotesLoop:
 		// Convert to Markdown.
 		markdown, err := markdownConverter.ConvertString(note.Content)
 		if err != nil {
-			slog.Error("Markdown conversion error", "status", note.Id, "err", err)
+			slog.Error("Markdown conversion error", "status", note.Id, "error", err)
 			continue NotesLoop
 		}
 
@@ -223,7 +223,7 @@ NotesLoop:
 		for _, hashtag := range hashtags {
 			linkPattern, err := regexp.Compile(`(?i)\Q` + `[` + hashtag.Name + `](` + hashtag.Href + `)\E`)
 			if err != nil {
-				slog.Error("Regex compilation error", "status", note.Id, "err", err)
+				slog.Error("Regex compilation error", "status", note.Id, "error", err)
 				continue NotesLoop
 			}
 			markdown = linkPattern.ReplaceAllString(markdown, hashtag.Name)
@@ -255,7 +255,7 @@ NotesLoop:
 				attachment.FocalPointY(),
 			)
 			if err != nil {
-				slog.Error("Error retrieving or uploading attachment", "status", note.Id, "attachment", attachment.Url, "err", err)
+				slog.Error("Error retrieving or uploading attachment", "status", note.Id, "attachment", attachment.Url, "error", err)
 				continue NotesLoop
 			}
 			mediaIDs = append(mediaIDs, mediaID)
@@ -283,7 +283,7 @@ NotesLoop:
 			},
 		)
 		if err != nil {
-			slog.Error("Couldn't post converted status", "status", note.Id, "err", err)
+			slog.Error("Couldn't post converted status", "status", note.Id, "error", err)
 			continue NotesLoop
 		}
 		status := response.GetPayload()
@@ -291,7 +291,7 @@ NotesLoop:
 		// Save the API ID of the status we just imported for future imports.
 		archiveIdToImportedApiId[note.Id] = status.ID
 		if err := writeMapFile(statusMapFile, archiveIdToImportedApiId); err != nil {
-			slog.Error("Couldn't write status map file", "path", statusMapFile, "err", err)
+			slog.Error("Couldn't write status map file", "path", statusMapFile, "error", err)
 			return err
 		}
 
@@ -348,7 +348,7 @@ func uploadAttachment(
 		},
 	)
 	if err != nil {
-		slog.Error("Couldn't upload media attachment", "path", localPath, "err", err)
+		slog.Error("Couldn't upload media attachment", "path", localPath, "error", err)
 		return "", err
 	}
 	apiAttachment := response.GetPayload()
@@ -356,7 +356,7 @@ func uploadAttachment(
 	// Save the API ID of the status we just imported for future imports.
 	mediaPathToImportedApiId[archiveURL] = apiAttachment.ID
 	if err := writeMapFile(attachmentMapFile, mediaPathToImportedApiId); err != nil {
-		slog.Error("Couldn't write attachment map file", "path", attachmentMapFile, "err", err)
+		slog.Error("Couldn't write attachment map file", "path", attachmentMapFile, "error", err)
 		return "", err
 	}
 

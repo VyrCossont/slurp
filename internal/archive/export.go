@@ -50,7 +50,7 @@ func Export(
 
 	account, err := own.Account(authClient)
 	if err != nil {
-		slog.Error("couldn't retrieve your account", "err", err)
+		slog.Error("couldn't retrieve your account", "error", err)
 		return err
 	}
 
@@ -81,21 +81,21 @@ func Export(
 	}
 	accountStatuses, err := api.ReadAllPaged(authClient, pagedRequester, nil, util.Ptr("0"))
 	if err != nil {
-		slog.Error("couldn't retrieve your account's statuses", "err", err)
+		slog.Error("couldn't retrieve your account's statuses", "error", err)
 		return err
 	}
 
 	// Create a media attachments folder.
 	attachmentsFolder := path.Join(archiveFolderPath, "media_attachments")
 	if err = os.MkdirAll(attachmentsFolder, 0755); err != nil {
-		slog.Error("couldn't create attachments folder", "path", attachmentsFolder, "err", err)
+		slog.Error("couldn't create attachments folder", "path", attachmentsFolder, "error", err)
 		return err
 	}
 
 	// Create an emojis folder.
 	emojisFolder := path.Join(archiveFolderPath, "custom_emojis")
 	if err = os.MkdirAll(emojisFolder, 0755); err != nil {
-		slog.Error("couldn't create emojis folder", "path", emojisFolder, "err", err)
+		slog.Error("couldn't create emojis folder", "path", emojisFolder, "error", err)
 		return err
 	}
 	// Map of shortcode (no colons) to cache value.
@@ -138,7 +138,7 @@ StatusesLoop:
 			object.Summary = &status.SpoilerText
 		}
 		if object.Published, err = time.Parse(time.RFC3339Nano, status.CreatedAt); err != nil {
-			slog.Error("couldn't parse status creation time, skipping", "status", status.URI, "err", err)
+			slog.Error("couldn't parse status creation time, skipping", "status", status.URI, "error", err)
 			continue StatusesLoop
 		}
 		language := status.Language
@@ -187,7 +187,7 @@ StatusesLoop:
 				authClient.Auth,
 			)
 			if err != nil {
-				slog.Warn("couldn't get status being replied to (it may have been deleted), continuing anyway", "status", status.URI, "inReplyToID", status.InReplyToID, "err", err)
+				slog.Warn("couldn't get status being replied to (it may have been deleted), continuing anyway", "status", status.URI, "inReplyToID", status.InReplyToID, "error", err)
 				continue StatusesLoop
 			}
 
@@ -204,7 +204,7 @@ StatusesLoop:
 			var rawTag json.RawMessage
 			rawTag, err = json.MarshalIndent(tag, "          ", "  ")
 			if err != nil {
-				slog.Error("couldn't serialize status mention as JSON (should never happen)", "status", status.URI, "mention", mention.Acct, "err", err)
+				slog.Error("couldn't serialize status mention as JSON (should never happen)", "status", status.URI, "mention", mention.Acct, "error", err)
 				return err
 			}
 			object.RawTags = append(object.RawTags, rawTag)
@@ -220,7 +220,7 @@ StatusesLoop:
 			var rawTag json.RawMessage
 			rawTag, err = json.MarshalIndent(tag, "          ", "  ")
 			if err != nil {
-				slog.Error("couldn't serialize status hashtag as JSON (should never happen)", "status", status.URI, "hashtag", hashtag.Name, "err", err)
+				slog.Error("couldn't serialize status hashtag as JSON (should never happen)", "status", status.URI, "hashtag", hashtag.Name, "error", err)
 				return err
 			}
 			object.RawTags = append(object.RawTags, rawTag)
@@ -242,7 +242,7 @@ StatusesLoop:
 				)
 				if err != nil {
 					// TODO: (Vyr) DownloadAttachment has detailed error messages already, but they all say "attachment" instead of "emoji". lol. refactor.
-					slog.Error("couldn't download an emoji, skipping emoji and continuing anyway", "status", status.URI, "emoji", emoji.Shortcode, "err", err)
+					slog.Error("couldn't download an emoji, skipping emoji and continuing anyway", "status", status.URI, "emoji", emoji.Shortcode, "error", err)
 					continue
 				}
 
@@ -250,7 +250,7 @@ StatusesLoop:
 				var relPath string
 				relPath, err = filepath.Rel(emojisFolder, localPath)
 				if err != nil {
-					slog.Error("couldn't derive emoji folder relative path for emoji (should never happen)", "status", status.URI, "emoji", emoji.Shortcode, "path", localPath, "err", err)
+					slog.Error("couldn't derive emoji folder relative path for emoji (should never happen)", "status", status.URI, "emoji", emoji.Shortcode, "path", localPath, "error", err)
 					return err
 				}
 
@@ -273,7 +273,7 @@ StatusesLoop:
 			var rawTag json.RawMessage
 			rawTag, err = json.MarshalIndent(tag, "          ", "  ")
 			if err != nil {
-				slog.Error("couldn't serialize status emoji as JSON (should never happen)", "status", status.URI, "emoji", emoji.Shortcode, "err", err)
+				slog.Error("couldn't serialize status emoji as JSON (should never happen)", "status", status.URI, "emoji", emoji.Shortcode, "error", err)
 				return err
 			}
 			object.RawTags = append(object.RawTags, rawTag)
@@ -283,7 +283,7 @@ StatusesLoop:
 		statusAttachmentsFolder := path.Join(attachmentsFolder, status.ID)
 		if len(status.MediaAttachments) > 0 {
 			if err = os.MkdirAll(statusAttachmentsFolder, 0755); err != nil {
-				slog.Error("couldn't create status attachment folder", "status", status.URI, "path", statusAttachmentsFolder, "err", err)
+				slog.Error("couldn't create status attachment folder", "status", status.URI, "path", statusAttachmentsFolder, "error", err)
 				return err
 			}
 		}
@@ -298,7 +298,7 @@ StatusesLoop:
 				attachment.URL,
 			)
 			if err != nil {
-				slog.Error("couldn't download an attachment, skipping attachment and continuing anyway", "status", status.URI, "attachment", attachment.URL, "err", err)
+				slog.Error("couldn't download an attachment, skipping attachment and continuing anyway", "status", status.URI, "attachment", attachment.URL, "error", err)
 				continue
 			}
 
@@ -306,7 +306,7 @@ StatusesLoop:
 			var relPath string
 			relPath, err = filepath.Rel(archiveFolderPath, localPath)
 			if err != nil {
-				slog.Error("couldn't derive archive folder relative path for attachment (should never happen)", "status", status.URI, "attachment", attachment.URL, "path", localPath, "err", err)
+				slog.Error("couldn't derive archive folder relative path for attachment (should never happen)", "status", status.URI, "attachment", attachment.URL, "path", localPath, "error", err)
 				return err
 			}
 
@@ -335,7 +335,7 @@ StatusesLoop:
 		}
 		activity.RawObject, err = json.MarshalIndent(object, "        ", "  ")
 		if err != nil {
-			slog.Error("couldn't serialize AP object for status as JSON (should never happen)", "status", status.URI, "err", err)
+			slog.Error("couldn't serialize AP object for status as JSON (should never happen)", "status", status.URI, "error", err)
 			return err
 		}
 		outbox.OrderedItems = append(outbox.OrderedItems, activity)

@@ -158,7 +158,7 @@ func Import(authClient *auth.Client, file string) error {
 			},
 		)
 		if err != nil {
-			slog.Error("couldn't create emoji", "shortcode", emoji.Shortcode, "err", err)
+			slog.Error("couldn't create emoji", "shortcode", emoji.Shortcode, "error", err)
 			return errors.WithStack(err)
 		}
 		apiEmoji := response.GetPayload()

@@ -42,11 +42,11 @@ func DownloadAttachment(
 	localPath := path.Join(localDir, path.Base(url))
 	localFile, err := os.Create(localPath)
 	if err != nil {
-		slog.Error("Error creating local attachment file", "status", statusURI, "attachment", url, "localPath", localPath, "err", err)
+		slog.Error("Error creating local attachment file", "status", statusURI, "attachment", url, "localPath", localPath, "error", err)
 	}
 	defer func() {
 		if err = localFile.Close(); err != nil {
-			slog.Error("Error closing local attachment file", "status", statusURI, "attachment", url, "localPath", localPath, "err", err)
+			slog.Error("Error closing local attachment file", "status", statusURI, "attachment", url, "localPath", localPath, "error", err)
 		}
 	}()
 
@@ -58,12 +58,12 @@ func DownloadAttachment(
 	// Download the attachment from the original server.
 	resp, err := mediaDownloadClient.Get(url)
 	if err != nil {
-		slog.Error("Error downloading attachment", "status", statusURI, "attachment", url, "err", err)
+		slog.Error("Error downloading attachment", "status", statusURI, "attachment", url, "error", err)
 		return "", "", err
 	}
 	defer func() {
 		if err := resp.Body.Close(); err != nil {
-			slog.Error("Error closing attachment response body", "status", statusURI, "attachment", url, "err", err)
+			slog.Error("Error closing attachment response body", "status", statusURI, "attachment", url, "error", err)
 		}
 	}()
 	contentType := resp.Header.Get("Content-Type")
@@ -72,7 +72,7 @@ func DownloadAttachment(
 	}
 
 	if _, err = io.Copy(localFile, resp.Body); err != nil {
-		slog.Error("Error copying response to local file", "status", statusURI, "attachment", url, "localPath", localPath, "err", err)
+		slog.Error("Error copying response to local file", "status", statusURI, "attachment", url, "localPath", localPath, "error", err)
 		return "", "", err
 	}
 

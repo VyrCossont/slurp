@@ -32,11 +32,11 @@ func CheckArchiveFolder(archiveFolderPath string) error {
 		if errors.Is(err, os.ErrNotExist) {
 			err = os.MkdirAll(archiveFolderPath, 0755)
 			if err != nil {
-				slog.Error("archive folder didn't exist, failed to create it", "path", archiveFolderPath, "err", err)
+				slog.Error("archive folder didn't exist, failed to create it", "path", archiveFolderPath, "error", err)
 				return err
 			}
 		} else {
-			slog.Error("couldn't get archive info from filesystem", "path", archiveFolderPath, "err", err)
+			slog.Error("couldn't get archive info from filesystem", "path", archiveFolderPath, "error", err)
 			return err
 		}
 	} else if !stat.IsDir() {
@@ -46,7 +46,7 @@ func CheckArchiveFolder(archiveFolderPath string) error {
 	// Check that it's empty.
 	empty, err := IsEmpty(archiveFolderPath)
 	if err != nil {
-		slog.Error("couldn't check whether archive folder is empty", "path", archiveFolderPath, "err", err)
+		slog.Error("couldn't check whether archive folder is empty", "path", archiveFolderPath, "error", err)
 		return err
 	}
 	if !empty {
@@ -60,13 +60,13 @@ func CheckArchiveFolder(archiveFolderPath string) error {
 func IsEmpty(folderPath string) (bool, error) {
 	archiveFolder, err := os.Open(folderPath)
 	if err != nil {
-		slog.Error("couldn't open folder to list it", "path", folderPath, "err", err)
+		slog.Error("couldn't open folder to list it", "path", folderPath, "error", err)
 		return false, err
 	}
 	defer func() {
 		err = archiveFolder.Close()
 		if err != nil {
-			slog.Error("couldn't close folder", "path", folderPath, "err", err)
+			slog.Error("couldn't close folder", "path", folderPath, "error", err)
 		}
 	}()
 	_, err = archiveFolder.Readdirnames(1)
@@ -74,7 +74,7 @@ func IsEmpty(folderPath string) (bool, error) {
 		if errors.Is(err, io.EOF) {
 			return true, nil
 		}
-		slog.Error("couldn't list folder", "path", folderPath, "err", err)
+		slog.Error("couldn't list folder", "path", folderPath, "error", err)
 		return false, err
 	}
 	return false, nil
@@ -83,19 +83,19 @@ func IsEmpty(folderPath string) (bool, error) {
 func LoadJSON[T any](path string) (*T, error) {
 	f, err := os.Open(path)
 	if err != nil {
-		slog.Error("couldn't open input file", "path", path, "err", err)
+		slog.Error("couldn't open input file", "path", path, "error", err)
 		return nil, err
 	}
 	defer func() {
 		err := f.Close()
 		if err != nil {
-			slog.Error("couldn't close input file", "path", path, "err", err)
+			slog.Error("couldn't close input file", "path", path, "error", err)
 		}
 	}()
 
 	var doc T
 	if err := json.NewDecoder(f).Decode(&doc); err != nil {
-		slog.Error("couldn't read data as JSON from input file", "path", path, "err", err)
+		slog.Error("couldn't read data as JSON from input file", "path", path, "error", err)
 		return nil, err
 	}
 	return &doc, nil
@@ -104,13 +104,13 @@ func LoadJSON[T any](path string) (*T, error) {
 func SaveJSON(path string, data any) error {
 	f, err := os.Create(path)
 	if err != nil {
-		slog.Error("couldn't create output file", "path", path, "err", err)
+		slog.Error("couldn't create output file", "path", path, "error", err)
 		return err
 	}
 	defer func() {
 		err := f.Close()
 		if err != nil {
-			slog.Error("couldn't close output file", "path", path, "err", err)
+			slog.Error("couldn't close output file", "path", path, "error", err)
 		}
 	}()
 
@@ -118,7 +118,7 @@ func SaveJSON(path string, data any) error {
 	encoder.SetEscapeHTML(false)
 	encoder.SetIndent("", "  ")
 	if err = encoder.Encode(data); err != nil {
-		slog.Error("couldn't write data as JSON to output file", "path", path, "data", data, "err", err)
+		slog.Error("couldn't write data as JSON to output file", "path", path, "data", data, "error", err)
 		return err
 	}
 	return nil
