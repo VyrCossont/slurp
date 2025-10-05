@@ -288,14 +288,14 @@ NotesLoop:
 		}
 		status := response.GetPayload()
 
+		slog.Info("imported status", "status", note.Id, "url", status.URL)
+
 		// Save the API ID of the status we just imported for future imports.
 		archiveIdToImportedApiId[note.Id] = status.ID
 		if err := writeMapFile(statusMapFile, archiveIdToImportedApiId); err != nil {
 			slog.Error("Couldn't write status map file", "path", statusMapFile, "error", err)
 			return err
 		}
-
-		slog.Info("Imported status", "status", note.Id, "url", status.URL)
 	}
 
 	return nil

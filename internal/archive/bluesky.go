@@ -20,7 +20,6 @@ package archive
 import (
 	"bytes"
 	"context"
-	"crypto/rand"
 	"errors"
 	"log/slog"
 	"os"
@@ -29,11 +28,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/VyrCossont/slurp/models"
+	"github.com/VyrCossont/slurp/client/media"
+	"github.com/VyrCossont/slurp/client/statuses"
+	"github.com/VyrCossont/slurp/internal/util"
 	"github.com/bluesky-social/indigo/api/bsky"
 	"github.com/bluesky-social/indigo/atproto/syntax"
 	bskyrepo "github.com/bluesky-social/indigo/repo"
 	"github.com/docker/go-units"
+	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	gocid "github.com/ipfs/go-cid"
 
 	"github.com/VyrCossont/slurp/internal/auth"
@@ -225,17 +228,51 @@ func importPost(
 	if post.parentCID != nil {
 		inReplyToID, found := postCIDToImportedApiId[post.parentCID.String()]
 		if !found {
-			slog.Info("skipping reply post because we did not import the post is replying to", "cid", cidString)
+			slog.Info("skipping reply post because we did not import the post is replying to", "cid", cidString,
+				"text", post.post.Text)
 			return skipPost
 		}
 		optionalInReplyToID = &inReplyToID
 	}
 
-	// Check for self-applied labels.
-	if post.post.Labels != nil && len(post.post.Labels.LabelDefs_SelfLabels.Values) > 0 {
-		// TODO: these should be translated into CW text and/or the post sensitive media flag.
-		slog.Info("skipping reply post because it has self-applied labels", "cid", cidString)
-		return skipPost
+	// Check for content labels.
+	visibility := VisibilityPublic
+	var sensitiveMedia *bool
+	var cwText *string
+	if post.post.Labels != nil {
+		labels := post.post.Labels.LabelDefs_SelfLabels.Values
+		cwTextParts := make([]string, 0, len(labels))
+		for _, label := range labels {
+			l := blueskySelfLabel(label.Val)
+			switch l {
+			case blueskySelfLabelNoUnauthenticated:
+				// TODO: this label may be intended for *accounts*, not posts,
+				//	in which case this will do effectively nothing.
+				visibility = VisibilityPrivate
+			case blueskySelfLabelPorn,
+				blueskySelfLabelSexual,
+				blueskySelfLabelNudity,
+				blueskySelfLabelGraphicMedia:
+				sensitiveMedia = util.Ptr(true)
+				cwTextPart := l.CWText()
+				if cwTextPart != "" {
+					cwTextParts = append(cwTextParts, cwTextPart)
+				}
+			default:
+				slog.Info("unknown Bluesky self label", "label", l)
+			}
+		}
+		if len(cwTextParts) > 0 {
+			cwText = util.Ptr("CW: " + strings.Join(cwTextParts, ", "))
+		}
+	}
+
+	// Guess language.
+	var language *string
+	if len(post.post.Langs) == 1 {
+		language = &post.post.Langs[0]
+	} else if len(post.post.Langs) > 1 {
+		language = util.Ptr("mul")
 	}
 
 	// Apply rich text facets to reconstruct post source.
@@ -243,20 +280,39 @@ func importPost(
 	if err != nil {
 		return err
 	}
+	// Use the plain text type.
+	// TODO: users may well want to override this if they post in Markdown on Bluesky.
+	contentType := "text/plain"
+	// Note: we don't have a way to prevent emoji processing in the destination server.
 
 	// Import a post's attachments.
-	attachmentIDs, err := importPostMedia(authClient, archiveFolderPath, attachmentMapFile, blobCIDToImportedApiId, post)
+	mediaIDs, err := importPostMedia(authClient, archiveFolderPath, attachmentMapFile, blobCIDToImportedApiId, post)
 	if err != nil {
 		return err
 	}
 
-	// TODO: actually post
-	slog.Info("importing post", "cid", cidString, "numAttachments", len(attachmentIDs), "inReplyToID", optionalInReplyToID)
-	println(text)
-	println()
-	status := &models.Status{
-		ID: rand.Text(),
+	response, err := authClient.Client.Statuses.StatusCreate(
+		&statuses.StatusCreateParams{
+			ContentType: &contentType,
+			InReplyToID: optionalInReplyToID,
+			Language:    language,
+			MediaIDs:    mediaIDs,
+			ScheduledAt: util.Ptr(strfmt.DateTime(post.createdAt)),
+			Sensitive:   sensitiveMedia,
+			SpoilerText: cwText,
+			Status:      &text,
+			Visibility:  util.Ptr(string(visibility)),
+		},
+		authClient.Auth,
+		func(op *runtime.ClientOperation) {
+			op.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
+		},
+	)
+	if err != nil {
+		slog.Error("failed to post converted post", "cid", cidString, "error", err)
+		return err
 	}
+	status := response.GetPayload()
 
 	postCIDToImportedApiId[cidString] = status.ID
 	if err := writeMapFile(statusMapFile, postCIDToImportedApiId); err != nil {
@@ -264,12 +320,44 @@ func importPost(
 		return err
 	}
 
+	slog.Info("imported post", "cid", cidString, "url", status.URL)
+
 	return nil
+}
+
+// blueskySelfLabel is one of the known self-label values for sensitive content.
+// https://docs.bsky.app/docs/advanced-guides/moderation#self-labels
+type blueskySelfLabel string
+
+const (
+	// blueskySelfLabelNoUnauthenticated is a request not to show this post to unauthenticated users.
+	blueskySelfLabelNoUnauthenticated blueskySelfLabel = "!no-unauthenticated"
+	blueskySelfLabelPorn              blueskySelfLabel = "porn"
+	blueskySelfLabelSexual            blueskySelfLabel = "sexual"
+	blueskySelfLabelNudity            blueskySelfLabel = "nudity"
+	blueskySelfLabelGraphicMedia      blueskySelfLabel = "graphic-media"
+)
+
+// CWText returns the content warning text for that label.
+// TODO: localize these and match to post language.
+func (l blueskySelfLabel) CWText() string {
+	switch l {
+	case blueskySelfLabelNoUnauthenticated:
+		// Does not appear in CWs.
+		return ""
+	case blueskySelfLabelPorn, blueskySelfLabelSexual, blueskySelfLabelNudity:
+		return string(l)
+	case blueskySelfLabelGraphicMedia:
+		return "graphic media"
+	default:
+		return ""
+	}
 }
 
 // skipPost marks a post that we are skipping but one that should not stop the whole process.
 var skipPost = errors.New("skipping post")
 
+// resolveFacets turns Bluesky special text spans corresponding to mentions, hashtags, or links into appropriate formatting.
 func resolveFacets(post *sortablePost) (string, error) {
 	builder := strings.Builder{}
 
@@ -378,29 +466,51 @@ func importMedia(
 	blobCIDToImportedApiId map[string]string,
 	attachable attachableMedia,
 ) (string, error) {
+	cidString := attachable.cidString()
+
 	// Check the attachment map file for a previously uploaded copy.
-	if attachmentID, previouslyUploaded := blobCIDToImportedApiId[attachable.cidString()]; previouslyUploaded {
+	if attachmentID, previouslyUploaded := blobCIDToImportedApiId[cidString]; previouslyUploaded {
 		return attachmentID, nil
 	}
 
-	blobPath := path.Join(archiveFolderPath, bluesky.BlobsFolder, attachable.cidString())
-
+	blobPath := path.Join(archiveFolderPath, bluesky.BlobsFolder, cidString)
 	stat, err := os.Stat(blobPath)
 	if err != nil {
-		slog.Error("couldn't upload media attachment", "path", blobPath, "error", err)
+		slog.Error("couldn't find blob", "cid", cidString, "path", blobPath, "error", err)
+		return "", err
+	}
+	file, err := os.Open(blobPath)
+	if err != nil {
+		slog.Error("couldn't open blob", "cid", cidString, "path", blobPath, "error", err)
 		return "", err
 	}
 	slog.Info(
-		"found media blob",
+		"found blob",
+		"cid", cidString,
 		"path", blobPath,
 		"size", units.BytesSize(float64(stat.Size())),
 		"contentType", attachable.mimeString(),
 	)
 
-	// TODO: actually post
-	attachment := &models.Attachment{
-		ID: rand.Text(),
+	response, err := authClient.Client.Media.MediaCreate(
+		&media.MediaCreateParams{
+			APIVersion:  "v2",
+			Description: attachable.altText(),
+			File: typedNamedReadCloser{
+				NamedReadCloser: runtime.NamedReader(cidString, file),
+				contentType:     attachable.mimeString(),
+			},
+		},
+		authClient.Auth,
+		func(op *runtime.ClientOperation) {
+			op.ConsumesMediaTypes = []string{"multipart/form-data"}
+		},
+	)
+	if err != nil {
+		slog.Error("couldn't upload attachment", "cid", cidString, "path", blobPath, "error", err)
+		return "", err
 	}
+	attachment := response.GetPayload()
 
 	blobCIDToImportedApiId[attachable.cidString()] = attachment.ID
 	if err := writeMapFile(attachmentMapFile, blobCIDToImportedApiId); err != nil {
@@ -408,7 +518,7 @@ func importMedia(
 		return "", err
 	}
 
-	slog.Info("uploaded attachment", "path", blobPath, "url", attachment.TextURL)
+	slog.Info("uploaded attachment", "cid", cidString, "path", blobPath, "url", attachment.TextURL)
 	return attachment.ID, nil
 }
 
@@ -452,4 +562,13 @@ func (a attachableVideo) mimeString() string {
 
 func (a attachableVideo) altText() *string {
 	return a.video.Alt
+}
+
+type typedNamedReadCloser struct {
+	runtime.NamedReadCloser
+	contentType string
+}
+
+func (t typedNamedReadCloser) ContentType() string {
+	return t.contentType
 }

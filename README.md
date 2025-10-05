@@ -12,6 +12,7 @@ A tool for exporting data from and importing data to [Fediverse](https://en.wiki
 * [run](#run)
     * [importing a Mastodon archive](#importing-a-mastodon-archive)
     * [importing a Pixelfed archive](#importing-a-pixelfed-archive)
+    * [downloading and importing a Bluesky archive](#downloading-and-importing-a-bluesky-archive)
     * [prefs](#prefs)
         * [rate limits](#rate-limits)
 * [troubleshooting](#troubleshooting)
@@ -127,6 +128,35 @@ Assuming you've downloaded your `pixelfed-statuses.json` to a folder called `pix
 After the process finishes, `pixelfed-archive/media_attachments` will contain your photos.
 
 ⚠️ Currently, `slurp` only downloads photos for statuses that it imports. Photos from public and unlisted statuses will be downloaded, but photos in private or direct messages and/or replies to other accounts will be skipped.
+
+### downloading and importing a Bluesky archive
+
+Bluesky allows exporting your ~~skeets~~ posts from the Bluesky app, but the exported [`.car` file](https://docs.bsky.app/blog/repo-export) only contains their text and metadata, without image or video attachments. `slurp` can download your attachments for you.
+
+⚠️ However, it can only do this if your [PDS](https://atproto.com/guides/self-hosting) is still up and your account hasn't been deleted. Do not delete your account or blow up your PDS before importing your posts.
+
+To download your posts and attachments to a folder called `bluesky-archive` (must be empty, will be created for you if necessary):
+
+```bash
+./slurp --user yourname.bsky.social bluesky download \
+  --file bluesky-archive \
+  --attachment-map-file bluesky-archive/attachment-map.json \
+  --status-map-file bluesky-archive/status-map.json
+```
+
+The username specified with `--user` must not have a leading `@` and must include the entire username, including the `.bsky.social` part if you are using the default handle scheme.
+
+You do not need to authenticate, since [all ATProto data is public](https://atproto.com/specs/atp#protocol-structure) as of the time of writing. (In fact, you can download anyone's posts this way.)
+
+Once you've downloaded your posts and attachments, here's how you import them:
+
+```bash
+./slurp --user user@instance.tld archive import \
+  --format bluesky \
+  --file bluesky-archive \
+  --attachment-map-file bluesky-archive/attachment-map.json \
+  --status-map-file bluesky-archive/status-map.json
+```
 
 ### prefs
 
