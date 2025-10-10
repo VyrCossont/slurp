@@ -101,8 +101,8 @@ func init() {
 
 	archiveImportCmd.PersistentFlags().StringVarP(&File, "file", "f", "", "path to import archive from (this must be an uncompressed folder for Mastodon)")
 	archiveImportCmd.PersistentFlags().StringVarP(&Format, "format", "t", "", "archive format can be one of: mastodon, pixelfed (default is mastodon)")
-	archiveImportCmd.PersistentFlags().StringVarP(&StatusMapFile, "status-map-file", "m", "", "JSON file to store mapping of archive status IDs to imported status IDs")
-	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentMapFile, "attachment-map-file", "a", "", "JSON file to store mapping of archive media attachment paths IDs to media attachment IDs")
+	archiveImportCmd.PersistentFlags().StringVarP(&StatusMapFile, "status-map-file", "m", "", "path to write new JSON file to store mapping of archive status IDs to imported status IDs")
+	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentMapFile, "attachment-map-file", "a", "", "path to write new JSON file to store mapping of archive media attachment paths IDs to media attachment IDs")
 	archiveImportCmd.PersistentFlags().StringVarP(&AttachmentDirectory, "attachment-directory", "d", "", "folder to store media downloaded from Pixelfed")
 	archiveImportCmd.PersistentFlags().BoolVarP(&AllowMissingCustomEmojis, "allow-missing-custom-emojis", "e", false, "import statuses for which the instance doesn't have all of the custom emojis")
 	archiveCmd.AddCommand(archiveImportCmd)
