@@ -410,7 +410,7 @@ func InteractiveAuthorizer(oauthAuthorizeURL string) (code string, err error) {
 	err = browser.OpenURL(oauthAuthorizeURL)
 	if err != nil {
 		slog.Warn("couldn't open browser to authorize", "error", err)
-		print("Please open this URL in your browser:", oauthAuthorizeURL)
+		println("Please open this URL in your browser:", oauthAuthorizeURL)
 	}
 
 	print("Enter authorization code: ")
