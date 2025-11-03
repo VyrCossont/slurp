@@ -1,4 +1,4 @@
-module github.com/VyrCossont/slurp
+module catgirl.codes/slurp
 
 go 1.24
 

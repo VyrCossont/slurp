@@ -25,7 +25,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/VyrCossont/slurp/internal/util"
+	"catgirl.codes/slurp/internal/util"
 )
 
 // prefsCmd represents the auth command

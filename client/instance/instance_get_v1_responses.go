@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/models"
 )
 
 // InstanceGetV1Reader is a Reader for the InstanceGetV1 structure.

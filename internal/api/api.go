@@ -23,9 +23,9 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/VyrCossont/slurp/client/accounts"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/client/accounts"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/models"
 )
 
 type PagedRequester[Response PagedResponse[Element], Element any] interface {

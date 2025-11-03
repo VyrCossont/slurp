@@ -29,13 +29,13 @@ import (
 
 	"golang.org/x/time/rate"
 
-	"github.com/VyrCossont/slurp/client/accounts"
-	"github.com/VyrCossont/slurp/client/statuses"
-	"github.com/VyrCossont/slurp/internal/api"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/own"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/client/accounts"
+	"catgirl.codes/slurp/client/statuses"
+	"catgirl.codes/slurp/internal/api"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/own"
+	"catgirl.codes/slurp/internal/util"
+	"catgirl.codes/slurp/models"
 )
 
 // Export exports a vaguely Mastodon-compatible archive to file (actually a folder path).

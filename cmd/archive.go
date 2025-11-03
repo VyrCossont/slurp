@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/VyrCossont/slurp/internal/archive"
-	"github.com/VyrCossont/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/archive"
+	"catgirl.codes/slurp/internal/auth"
 )
 
 // archiveCmd represents the archive command

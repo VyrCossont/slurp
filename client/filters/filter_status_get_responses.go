@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/models"
 )
 
 // FilterStatusGetReader is a Reader for the FilterStatusGet structure.

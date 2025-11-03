@@ -32,10 +32,10 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/time/rate"
 
-	"github.com/VyrCossont/slurp/client/statuses"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/client/statuses"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/util"
+	"catgirl.codes/slurp/models"
 )
 
 func PixelfedImport(

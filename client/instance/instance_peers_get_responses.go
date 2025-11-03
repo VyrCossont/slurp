@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/models"
 )
 
 // InstancePeersGetReader is a Reader for the InstancePeersGet structure.

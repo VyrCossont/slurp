@@ -18,7 +18,7 @@
 package cmd
 
 import (
-	"github.com/VyrCossont/slurp/internal/bluesky"
+	"catgirl.codes/slurp/internal/bluesky"
 	"github.com/spf13/cobra"
 )
 

@@ -20,8 +20,8 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/mutes"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/mutes"
 )
 
 // mutesCmd represents the mutes command

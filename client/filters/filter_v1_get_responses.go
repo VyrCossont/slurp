@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/models"
 )
 
 // FilterV1GetReader is a Reader for the FilterV1Get structure.

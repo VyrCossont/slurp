@@ -35,11 +35,11 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/VyrCossont/slurp/client/media"
-	"github.com/VyrCossont/slurp/client/statuses"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/own"
-	"github.com/VyrCossont/slurp/internal/util"
+	"catgirl.codes/slurp/client/media"
+	"catgirl.codes/slurp/client/statuses"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/own"
+	"catgirl.codes/slurp/internal/util"
 )
 
 var mentionPattern = regexp.MustCompile(`@\w+`)

@@ -23,13 +23,13 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/pkg/errors"
 
-	"github.com/VyrCossont/slurp/client/bookmarks"
-	"github.com/VyrCossont/slurp/client/statuses"
-	"github.com/VyrCossont/slurp/internal/api"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/resolve"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/client/bookmarks"
+	"catgirl.codes/slurp/client/statuses"
+	"catgirl.codes/slurp/internal/api"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/resolve"
+	"catgirl.codes/slurp/internal/util"
+	"catgirl.codes/slurp/models"
 )
 
 // Note: Mastodon's bookmark list exports currently don't have a CSV header.

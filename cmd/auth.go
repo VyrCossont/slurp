@@ -22,7 +22,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/VyrCossont/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/auth"
 )
 
 // authCmd represents the auth command

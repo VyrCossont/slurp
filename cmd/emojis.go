@@ -18,8 +18,8 @@
 package cmd
 
 import (
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/emojis"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/emojis"
 	"github.com/spf13/cobra"
 )
 

@@ -20,10 +20,10 @@ package resolve
 import (
 	"errors"
 
-	"github.com/VyrCossont/slurp/client/search"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/client/search"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/util"
+	"catgirl.codes/slurp/models"
 )
 
 // NoResults indicated we didn't find anything.

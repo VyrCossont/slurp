@@ -20,8 +20,8 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/follows"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/follows"
 )
 
 // followsCmd represents the follows command

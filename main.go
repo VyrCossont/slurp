@@ -17,7 +17,7 @@
 
 package main
 
-import "github.com/VyrCossont/slurp/cmd"
+import "catgirl.codes/slurp/cmd"
 
 func main() {
 	cmd.Execute()

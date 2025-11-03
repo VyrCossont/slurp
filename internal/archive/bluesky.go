@@ -28,9 +28,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/VyrCossont/slurp/client/media"
-	"github.com/VyrCossont/slurp/client/statuses"
-	"github.com/VyrCossont/slurp/internal/util"
+	"catgirl.codes/slurp/client/media"
+	"catgirl.codes/slurp/client/statuses"
+	"catgirl.codes/slurp/internal/util"
 	"github.com/bluesky-social/indigo/api/bsky"
 	"github.com/bluesky-social/indigo/atproto/syntax"
 	bskyrepo "github.com/bluesky-social/indigo/repo"
@@ -39,8 +39,8 @@ import (
 	"github.com/go-openapi/strfmt"
 	gocid "github.com/ipfs/go-cid"
 
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/bluesky"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/bluesky"
 )
 
 func BlueskyImport(

@@ -25,7 +25,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/VyrCossont/slurp/internal/util"
+	"catgirl.codes/slurp/internal/util"
 	"github.com/bluesky-social/indigo/api/atproto"
 	"github.com/bluesky-social/indigo/atproto/identity"
 	"github.com/bluesky-social/indigo/atproto/syntax"

@@ -27,10 +27,10 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/pkg/errors"
 
-	"github.com/VyrCossont/slurp/client/filters"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/client/filters"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/util"
+	"catgirl.codes/slurp/models"
 )
 
 // Note: Mastodon has no filter export format, so we made up our own,

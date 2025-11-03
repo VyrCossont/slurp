@@ -3,12 +3,12 @@ package followers
 import (
 	"strings"
 
-	"github.com/VyrCossont/slurp/client/accounts"
-	"github.com/VyrCossont/slurp/internal/api"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/own"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/client/accounts"
+	"catgirl.codes/slurp/internal/api"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/own"
+	"catgirl.codes/slurp/internal/util"
+	"catgirl.codes/slurp/models"
 )
 
 func Export(authClient *auth.Client, file string) error {

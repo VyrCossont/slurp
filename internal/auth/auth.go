@@ -37,10 +37,10 @@ import (
 	"golang.org/x/time/rate"
 	"webfinger.net/go/webfinger"
 
-	apiclient "github.com/VyrCossont/slurp/client"
-	"github.com/VyrCossont/slurp/client/apps"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
+	apiclient "catgirl.codes/slurp/client"
+	"catgirl.codes/slurp/client/apps"
+	"catgirl.codes/slurp/internal/util"
+	"catgirl.codes/slurp/models"
 )
 
 // Client is a GtS API client with attached authentication credentials and rate limiter.

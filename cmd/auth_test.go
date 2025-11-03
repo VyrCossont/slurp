@@ -27,8 +27,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/util"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/util"
 	gokeyring "github.com/zalando/go-keyring"
 	"golang.org/x/net/publicsuffix"
 )

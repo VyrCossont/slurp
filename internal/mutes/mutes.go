@@ -27,14 +27,14 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/pkg/errors"
 
-	"github.com/VyrCossont/slurp/client/accounts"
-	"github.com/VyrCossont/slurp/client/mutes"
-	"github.com/VyrCossont/slurp/internal/api"
-	"github.com/VyrCossont/slurp/internal/auth"
-	"github.com/VyrCossont/slurp/internal/own"
-	"github.com/VyrCossont/slurp/internal/resolve"
-	"github.com/VyrCossont/slurp/internal/util"
-	"github.com/VyrCossont/slurp/models"
+	"catgirl.codes/slurp/client/accounts"
+	"catgirl.codes/slurp/client/mutes"
+	"catgirl.codes/slurp/internal/api"
+	"catgirl.codes/slurp/internal/auth"
+	"catgirl.codes/slurp/internal/own"
+	"catgirl.codes/slurp/internal/resolve"
+	"catgirl.codes/slurp/internal/util"
+	"catgirl.codes/slurp/models"
 )
 
 // Note: Mastodon's mute list exports currently don't include the expiration time.
