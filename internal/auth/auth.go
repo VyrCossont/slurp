@@ -91,6 +91,25 @@ func NewAuthClient(user string, keyring gokeyring.Keyring) (*Client, error) {
 		return nil, err
 	}
 
+	scopes, err := util.GetInstanceClientScopes(instance)
+	if err != nil {
+		slog.Error("couldn't get client scopes for user's instance (did you log in first?)", "user", user)
+		return nil, err
+	}
+	if scopes != oauthScopes {
+		if scopes == "" {
+			// This was the original default.
+			scopes = "read write"
+		}
+		slog.Error(
+			"slurp's required OAuth2 scopes have changed since you last used it; please log in again to create a new client with correct scopes",
+			"user", user,
+			"current_scopes", scopes,
+			"required_scopes", oauthScopes,
+		)
+		return nil, errScopesChanged
+	}
+
 	accessToken, err := keyring.Get(keyringServiceAccessToken, user)
 	if err != nil {
 		slog.Error("couldn't find user's access token (did you log in first?)", "user", user, "instance", instance)
@@ -124,8 +143,11 @@ const (
 
 const (
 	oauthRedirect = "urn:ietf:wg:oauth:2.0:oob"
-	oauthScopes   = "read write"
+	oauthScopes   = "read write admin:write:custom_emojis"
 )
+
+// errScopesChanged indicates oauthScopes has changed since the last time slurp was used, and the user needs to log in again.
+var errScopesChanged = errors.New("required scopes changed")
 
 // LoginKeyring sets the keyring pref and returns the appropriate keyring (system or file).
 func LoginKeyring(useCleartextFileKeyring bool) (keyring gokeyring.Keyring, err error) {
@@ -349,6 +371,16 @@ func ensureAppCredentials(instance string, keyring gokeyring.Keyring, client *ap
 		return "", "", err
 	}
 
+	scopes, err := util.GetInstanceClientScopes(instance)
+	if scopes != oauthScopes || errors.Is(err, gokeyring.ErrNotFound) {
+		shouldCreateNewApp = true
+		// It's possible to revoke an access token but not to delete a previously registered app,
+		// so no cleanup is possible here. We'll just overwrite the old app in our prefs.
+	} else if err != nil {
+		slog.Error("couldn't get client scopes from prefs", "instance", instance, "error", err)
+		return "", "", err
+	}
+
 	clientSecret, err := keyring.Get(keyringServiceClientSecret, instance)
 	if clientSecret == "" || errors.Is(err, gokeyring.ErrNotFound) {
 		shouldCreateNewApp = true
@@ -513,6 +545,11 @@ func exchangeCodeForToken(instance string, clientID string, clientSecret string,
 	if payload.Scope != oauthScopes {
 		err = errors.WithStack(errors.New("scopes are not what we asked for"))
 		slog.Error("unexpected response from OAuth2 token endpoint", "instance", instance, "scopes", payload.Scope)
+		return "", err
+	}
+	err = util.SetInstanceClientScopes(instance, oauthScopes)
+	if err != nil {
+		slog.Error("couldn't set client scopes in prefs", "instance", instance, "error", err)
 		return "", err
 	}
 

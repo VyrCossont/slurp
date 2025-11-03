@@ -46,6 +46,11 @@ type PrefsInstance struct {
 	// ClientID is the OAuth2 client ID for slurp on this instance.
 	ClientID string `json:"client_id,omitempty"`
 
+	// Scopes is the OAuth2 scopes this client was created with,
+	// corresponding to the string oauthScopes in internal/auth/auth.go.
+	// We use this to check if a previously created client has the right scopes for the current version of slurp.
+	Scopes string `json:"scopes,omitempty"`
+
 	// Scheme is the URL scheme for this instance.
 	Scheme string `json:"scheme,omitempty"`
 
@@ -235,6 +240,24 @@ func SetInstanceClientID(instance string, clientID string) error {
 	return setPrefValue(func(prefs *Prefs) {
 		prefsInstance := prefs.Instances[instance]
 		prefsInstance.ClientID = clientID
+		prefs.Instances[instance] = prefsInstance
+	})
+}
+
+func GetInstanceClientScopes(instance string) (string, error) {
+	return getPrefValue(func(prefs *Prefs) (string, bool) {
+		prefsInstance, exists := prefs.Instances[instance]
+		if !exists {
+			return "", false
+		}
+		return prefsInstance.Scopes, true
+	})
+}
+
+func SetInstanceClientScopes(instance string, scopes string) error {
+	return setPrefValue(func(prefs *Prefs) {
+		prefsInstance := prefs.Instances[instance]
+		prefsInstance.Scopes = scopes
 		prefs.Instances[instance] = prefsInstance
 	})
 }
